@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+# Rules:
+- Trabajar siempre sobre ramas y pedir pull request.
+- usar snake_case para el uso de variables
+- nombres de variables en inglés
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
