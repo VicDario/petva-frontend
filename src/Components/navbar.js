@@ -5,7 +5,7 @@ import logo from "../images/logo_pata.jpg"
 const Navbar = ()=>{
     return(
         <> 
-            <nav className="navbar navbar-expand-lg navbar-light bg-light ">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
                 <div className="container-fluid ">
                     <Link className="text-decoration-none" to="/">
                     <img className="img-fluid logo" src={logo} alt="logo" /></Link>
@@ -23,10 +23,10 @@ const Navbar = ()=>{
                     <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
                            <div className="text-end">
-                                <Link className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Registrarse</Link>
+                                <Link to="/register" className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Registrarse</Link>
                            </div>
                            <div className="text-end">
-                                <Link className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Iniciar Sesión</Link>
+                                <Link to="/login" className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Iniciar Sesión</Link>
                            </div>
                             
                         </div>
