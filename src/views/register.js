@@ -1,9 +1,10 @@
-import { createRef, useState } from "react"
+import { createRef, useContext, useState } from "react"
 import { FaEye } from "react-icons/fa"
+import { Context } from "../store/appContext";
 
 
 const Register = () => {
-
+    const {actions} = useContext(Context);
     const [user, setUser] = useState("");//aca se guarda el tipo de usuario
     const [name, setName] = useState(""); //
     let nameForm = createRef();
@@ -24,6 +25,10 @@ const Register = () => {
             nameForm.classList.remove("is-invalid")
             nameForm.classList.add("is-valid")
         }
+        actions.registerClinica()
+    }
+    const loginClinic = ()=>{
+        actions.loginClinica();
     }
 
     return (
@@ -103,6 +108,12 @@ const Register = () => {
 
                         </form>
                     </div>
+                </div>
+                <div>
+                    <button onClick={loginClinic}>
+
+                        precionar para probar login
+                    </button>
                 </div>
             </div>
 

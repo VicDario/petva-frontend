@@ -5,6 +5,7 @@ import Login from './views/login';
 import Custom404 from './views/404';
 import Navbar from './Components/navbar';
 import Register from './views/register';
+import injectContext from './store/appContext';
 
 function App() {
   return (
@@ -22,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default injectContext(App);
