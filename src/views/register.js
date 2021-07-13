@@ -1,13 +1,30 @@
-import { useState } from "react"
+import { createRef, useState } from "react"
 import { FaEye } from "react-icons/fa"
 
 
 const Register = () => {
 
-    const [user, setUser] = useState("");
+    const [user, setUser] = useState("");//aca se guarda el tipo de usuario
+    const [name, setName] = useState(""); //
+    let nameForm = createRef();
 
     const [isRevealPwd, setIsRevealPwd] = useState(false);
     const [isRevealPwdC, setIsRevealPwdC] = useState(false);
+
+    const validarRegistro = (e)=>{
+        if(user === ""){
+            alert("Debe seleccionar tipo de Usuario")
+            e.preventDefault()
+        }
+        if(name === ""){
+            nameForm.classList.add("is-invalid")
+            nameForm.classList.remove("is-valid")
+
+        }else{
+            nameForm.classList.remove("is-invalid")
+            nameForm.classList.add("is-valid")
+        }
+    }
 
     return (
 
@@ -40,45 +57,51 @@ const Register = () => {
                     </div>
                     <div className="col-12 col-md-7 text-center">
                         <h2 className="display-5">Registro como {user}</h2>
+                        <form action="" className="needs-validation" >
                         <div className="border border-secondary p-1 rounded">
                             <div className="text-start">
                                 <span className="input-group-text d-block text-start fs-4" htmlFor="tipo">Tipo de Usuario </span>
-                                <input className="form-control fs-5 text-center" type="text" id="tipo" disabled value={user}/>
+                                <input  className="form-control fs-5 text-center" type="text" id="tipo" required readOnly value={user}/>
                             </div>
                             <div className="text-start">
                                 <span className="input-group-text d-block text-start fs-4" htmlFor="name">Nombre </span>
-                                <input className="form-control fs-5" type="text" id="name" />
+                                <input ref={
+                                    t => nameForm = t
+                                } className="form-control fs-5" type="text" id="name" required 
+                                        onChange={(e) => { setName(e.target.value) }}/>
                             </div>
                             <div className="text-start">
                                 <span className="input-group-text d-block text-start fs-4" htmlFor="lastname">Apellido </span>
-                                <input className="form-control fs-5" type="text" id="lastname" />
+                                <input className="form-control fs-5" type="text" id="lastname" required/>
                             </div>
                             <div className="text-start">
                                 <span className="input-group-text d-block text-start fs-4" htmlFor="email">Email </span>
-                                <input className="form-control fs-5" type="email" id="email" />
+                                <input className="form-control fs-5" type="email" id="email" required/>
                             </div>
                             <div className="text-start">
                                 <label className="input-group-text d-block text-start fs-4" htmlFor="password">Contraseña <FaEye title={isRevealPwd ? "Hide password" : "Show password"} onClick={() => setIsRevealPwd(prevState => !prevState)} /></label>
-                                <input className="form-control fs-5" type={isRevealPwd ? "text" : "password"} id="id_password" placeholder="Ingrese Contraseña" />
+                                <input className="form-control fs-5" type={isRevealPwd ? "text" : "password"} id="id_password" placeholder="Ingrese Contraseña" required/>
                             </div>
                             <div className="text-start">
                                 <label className="input-group-text d-block text-start fs-4" htmlFor="password">Confirmar Contraseña <FaEye title={isRevealPwdC ? "Hide password" : "Show password"} onClick={() => setIsRevealPwdC(prevState => !prevState)} /></label>
-                                <input className="form-control fs-5" type={isRevealPwdC ? "text" : "password"} id="id_password" placeholder="Confirme Contraseña" />
+                                <input className="form-control fs-5" type={isRevealPwdC ? "text" : "password"} id="id_password" placeholder="Confirme Contraseña" required/>
                             </div>
                             <div className="text-start">
                                 <span className="input-group-text d-block text-start fs-4" htmlFor="email">Dirección </span>
-                                <input className="form-control fs-5" type="text" id="direccion" name="direccion"/>
+                                <input className="form-control fs-5" type="text" id="direccion" name="direccion" required/>
                             </div>
                             <div className="text-start">
                                 <span className="input-group-text d-block text-start fs-4" htmlFor="email">Teléfono </span>
-                                <input className="form-control fs-5" type="tel" id="telefono" name="telefono" />
+                                <input className="form-control fs-5" type="tel" id="telefono" name="telefono" required/>
                             </div>
                             <div className="text-center">
-                                <button className="btn btn-success mt-3 p-2 fs-4">
+                                <button onClick={validarRegistro} type="submit" className="btn btn-success mt-3 p-2 fs-4">
                                     Registrar
                                 </button>
                             </div>
                         </div>
+
+                        </form>
                     </div>
                 </div>
             </div>
