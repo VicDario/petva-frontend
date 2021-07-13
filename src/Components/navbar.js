@@ -26,7 +26,7 @@ const Navbar = ()=>{
                                 <Link className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Registrarse</Link>
                            </div>
                            <div className="text-end">
-                                <Link className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Iniciar Sesión</Link>
+                                <Link className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" to="/login">Iniciar Sesión</Link>
                            </div>
                             
                         </div>
