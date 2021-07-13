@@ -5,15 +5,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         },
         actions: {
-           registerClinica : ()=>{
+           registerClinica : (email,name,address,phone,password)=>{
             const opt ={
                 method: "POST",
                 body: JSON.stringify({
-                    email: "d.jacobpulgar@gmail.com",
-                    name: "Diego Jacob",
-                    address: "Los Andes, 182",
-                    phone:"57292232",
-                    password: "qwerty123"
+                    email: email,
+                    name: name,
+                    address: address,
+                    phone:phone,
+                    password: password
                 }),
                 headers:{
                     "Content-Type": "application/json"
