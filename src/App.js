@@ -6,6 +6,7 @@ import Custom404 from './views/404';
 import Navbar from './Components/navbar';
 import Register from './views/register';
 import injectContext from './store/appContext';
+import Userperfil from './views/userperfil';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/" component={Home}/>
           <Route exact path="/register" component={Register}/>
           <Route exact path="/login" component={Login}/>
+          <Route exact path="/user" component={Userperfil}/>
           <Route component={Custom404}/>
         </Switch>
       </BrowserRouter>

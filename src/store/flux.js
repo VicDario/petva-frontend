@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
-           
+           token : "sdfsdfsdfsdf"
 
         },
         actions: {
@@ -69,12 +69,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .catch(error => console.log("Error from loading message from backend", error))
             },
 
-           loginClinica : ()=>{
+           loginClinica : (email,password)=>{
                const opt = {
                    method: "POST",
                    body: JSON.stringify({
-                       email: "d.jacobpulgar@gmail.com",
-                       password: "qwerty123"
+                       email: email,
+                       password: password
                    }),
                    headers: {
                        "Content-Type": "application/json"
