@@ -62,6 +62,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 .then(resp => resp.json())
                 .then(data => {
                     console.log(data);
+                    localStorage.setItem("access_token", data.access_token);
                 })
                 .catch(error => console.log("Error from loading message from backend", error))
             },
