@@ -1,12 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 const Userpets = () => {
-    const {actions} = useContext(Context);
-    const obtenermascotas = ()=>{
+    const {actions,store} = useContext(Context);
+    /* const obtenermascotas = ()=>{
         actions.getMascotasUser()
-    }
+    } */
+    let {pets} = store;
+
+    useEffect(()=>{
+        actions.getMascotasUser()
+    },[])
 
     return (
         <>
@@ -17,10 +22,11 @@ const Userpets = () => {
                             <h2 className="display-1">Mis Mascotas</h2>
                         </div>
                         <div>
-                            <p>No tienes mascotas registradas aún....</p>
-                            <button onClick={obtenermascotas}>
-                                obtener amscotas
-                            </button>
+                            
+                                <h1>{pets.name}</h1>
+                            
+                            
+                            
                         </div>
                         <div>
                             <Link to="/addpetuser" className="text-decoration-none badge rounded-pill bg-success p-3 m-1 fs-4">

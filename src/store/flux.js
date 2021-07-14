@@ -1,7 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
-            token: ""
+            token: "",
+            pets : null
 
         },
         actions: {
@@ -102,7 +103,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log("There has been some error")
                     }
                     const data = await response.json();
-                    console.log({ data })
+                    console.log( data[0] )
+                    setStore({pets: data[0]})
+                    
                 } catch (error)
                 {
                     console.log("There has been an error in get pets")
