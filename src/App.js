@@ -4,6 +4,8 @@ import Home from './views/home';
 import Login from './views/login';
 import Custom404 from './views/404';
 import Navbar from './Components/navbar';
+import Register from './views/register';
+import injectContext from './store/appContext';
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
       <Navbar/>
         <Switch>
           <Route exact path="/" component={Home}/>
+          <Route exact path="/register" component={Register}/>
           <Route exact path="/login" component={Login}/>
           <Route component={Custom404}/>
         </Switch>
@@ -20,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default injectContext(App);
