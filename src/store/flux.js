@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
-           token : "asdasdasd"
+            token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYyNjI5MTI4NywianRpIjoiMWE3NjE1ODgtMDNlNS00NjhkLWI4NTgtMmNhMzc4ZTdlZGVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRhcmlvY29udHJlZmFzY0BnbWFpbC5jb20iLCJuYmYiOjE2MjYyOTEyODcsImV4cCI6MTYyNjI5NDg4N30.aXnVekb-VBi9e8ib4o57bzB3QUVEhqr_tBArjASnMg4"
 
         },
         actions: {
@@ -86,6 +86,25 @@ const getState = ({ getStore, getActions, setStore }) => {
                        console.log(data)
                    })
                    .catch(error => console.log("Error from loading message from backend", error))
+           },
+           getMascotasUser : async()=>{
+               const store = getStore();
+                const opt ={
+                   headers :{
+                        "Authorization": "Bearer " + store.token
+                   }
+               }
+               try{
+                   const response = await fetch("https://petva-backend-dev.herokuapp.com/api/user/pets",opt)
+                   if(response.status !== 200){
+                       console.log("There has been some error")
+                   }
+                   const data = await response.json();
+                   console.log({data})
+               }catch(error){
+                    console.log("There has been an error in get pets")
+               }
+               
            }
         }
 
