@@ -11,13 +11,15 @@ const Register = () => {
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordConfirmed, setPasswordConfirmed] = useState("");
     let nameForm = createRef();
 
     const [isRevealPwd, setIsRevealPwd] = useState(false);
     const [isRevealPwdC, setIsRevealPwdC] = useState(false);
 
     const validarRegistro = (e)=>{
-        if(user === ""){
+        e.preventDefault()
+        if(user === "" ){
             alert("Debe seleccionar tipo de Usuario")
             e.preventDefault()
         }
@@ -29,7 +31,19 @@ const Register = () => {
             }
         }
         if(user ==="CLINICA"){
-            actions.registerClinica(email,name,address,phone,password)
+            if (user === "" || name === "" || email === "" || password ==="")
+            {
+                alert("Debe rellenar todos los campos")
+                e.preventDefault()
+            }else{
+                if(password === passwordConfirmed){
+
+                    actions.registerClinica(email,name,address,phone,password)
+                    setUser("")
+                }else{
+                    alert("Revise contraseñas")
+                }
+            }
         }
         /* if(name === ""){
             nameForm.classList.add("is-invalid")
@@ -162,7 +176,7 @@ const Register = () => {
                                     </div>
                                     <div className="text-start">
                                         <label className="input-group-text d-block text-start fs-4" htmlFor="password">Confirmar Contraseña <FaEye title={isRevealPwdC ? "Hide password" : "Show password"} onClick={() => setIsRevealPwdC(prevState => !prevState)} /></label>
-                                        <input className="form-control fs-5" type={isRevealPwdC ? "text" : "password"} id="id_password" placeholder="Confirme Contraseña" required />
+                                        <input className="form-control fs-5" type={isRevealPwdC ? "text" : "password"} id="id_passwordC" placeholder="Confirme Contraseña" required onChange={(e) => { setPasswordConfirmed(e.target.value) }} />
                                     </div>
                                     
                                     <div className="text-center">

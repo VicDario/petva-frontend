@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     "Content-Type": "application/json"
                 }
             }
-                fetch("https://petva-backend-dev.herokuapp.com//api/clinic/register",opt)
+                fetch("https://petva-backend-dev.herokuapp.com/api/clinic/register",opt)
                .then(resp =>resp.json())
                .then(data =>{
                    console.log(data)
@@ -37,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                        "Content-Type": "application/json"
                    }
                }
-               fetch("https://petva-backend-dev.herokuapp.com//api/clinic/login", opt)
+               fetch("https://petva-backend-dev.herokuapp.com/api/clinic/login", opt)
                    .then(resp => resp.json())
                    .then(data => {
                        console.log(data)
