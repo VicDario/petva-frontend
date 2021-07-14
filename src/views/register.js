@@ -1,18 +1,24 @@
 import { createRef, useContext, useState } from "react"
 import { FaEye } from "react-icons/fa"
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 
 const Register = () => {
     const {actions} = useContext(Context);
     const [user, setUser] = useState("");//aca se guarda el tipo de usuario
     const [name, setName] = useState(""); //
+    const [lastname, setLastname] = useState(""); //
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmed, setPasswordConfirmed] = useState("");
     let nameForm = createRef();
+    const [datos, setDatos] = useState({
+        password : "",
+        passwordC : ""
+    })
 
     const [isRevealPwd, setIsRevealPwd] = useState(false);
     const [isRevealPwdC, setIsRevealPwdC] = useState(false);
@@ -23,24 +29,55 @@ const Register = () => {
             alert("Debe seleccionar tipo de Usuario")
             e.preventDefault()
         }
-        if(user === "NORMAL"){
-            console.log("soy un normal user")
-            if(name===""){
+        if (user === "NORMAL")
+        {
+            if (user === "" || name === "" || email === "" || datos.password === "")
+            {
+                alert("Debe rellenar todos los campos")
                 e.preventDefault()
-                console.log("No se envía")
+            } else
+            {
+                if (datos.password === datos.passwordC)
+                {
+
+                    actions.registerUser(email, name, lastname, datos.password)
+                    setUser("REGISTRADO")
+                } else
+                {
+                    alert("Revise contraseñas")
+                }
             }
         }
         if(user ==="CLINICA"){
-            if (user === "" || name === "" || email === "" || password ==="")
+            if (user === "" || name === "" || email === "" || datos.password ==="")
             {
                 alert("Debe rellenar todos los campos")
                 e.preventDefault()
             }else{
-                if(password === passwordConfirmed){
+                if(datos.password === datos.passwordC){
 
-                    actions.registerClinica(email,name,address,phone,password)
-                    setUser("")
+                    actions.registerClinica(email,name,address,phone,datos.password)
+                    setUser("REGISTRADO")
                 }else{
+                    alert("Revise contraseñas")
+                }
+            }
+        }
+        if (user === "FUNDACION")
+        {
+            if (user === "" || name === "" || email === "" || datos.password === "")
+            {
+                alert("Debe rellenar todos los campos")
+                e.preventDefault()
+            } else
+            {
+                if (datos.password === datos.passwordC)
+                {
+
+                    actions.registerClinica(email, name, address, phone, datos.password)
+                    setUser("REGISTRADO")
+                } else
+                {
                     alert("Revise contraseñas")
                 }
             }
@@ -86,10 +123,15 @@ const Register = () => {
                                 <input onChange={(e) => setUser(e.target.value)} className="form-check-input" type="radio" name="tipoUsuario" id="optFundacion" value="FUNDACION" />
                                 <label className="form-check-label" htmlFor="optFundacion">Fundación</label>
                             </div>
+                            {/* Este de aca es para ir probando */}
+                            <div className="form-check form-check-inline d-block fs-3">
+                                <input onChange={(e) => setUser(e.target.value)} className="form-check-input" type="radio" name="tipoUsuario" id="optRegistrado" value="REGISTRADO" />
+                                <label className="form-check-label" htmlFor="optRegistrado">REGISTRADO</label>
+                            </div>
                         </div>
                     </div>
                     <div className="col-12 col-md-7 text-center">
-                        <h2 className="display-5">Registro como {user}</h2>
+                        <h2 className="display-5">Registro</h2>
                         { //renderizado como user normal
                         user === "NORMAL" &&
 
@@ -108,7 +150,7 @@ const Register = () => {
                             </div>
                             <div className="text-start">
                                 <span className="input-group-text d-block text-start fs-4" htmlFor="lastname">Apellido </span>
-                                <input className="form-control fs-5" type="text" id="lastname" required/>
+                                <input onChange={(e)=>{setLastname(e.target.value)}} className="form-control fs-5" type="text" id="lastname" required/>
                             </div>
                             <div className="text-start">
                                 <span className="input-group-text d-block text-start fs-4" htmlFor="email">Email </span>
@@ -117,11 +159,12 @@ const Register = () => {
                             <div className="text-start">
                                 <label className="input-group-text d-block text-start fs-4" htmlFor="password">Contraseña <FaEye title={isRevealPwd ? "Hide password" : "Show password"} onClick={() => setIsRevealPwd(prevState => !prevState)} /></label>
                                 <input className="form-control fs-5" type={isRevealPwd ? "text" : "password"} id="id_password" placeholder="Ingrese Contraseña" required
-                                            onChange={(e) => { setPassword(e.target.value) }}/>
+                                            onChange={(e) => { setDatos({...datos,
+                                            password : e.target.value}) }}/>
                             </div>
                             <div className="text-start">
                                 <label className="input-group-text d-block text-start fs-4" htmlFor="password">Confirmar Contraseña <FaEye title={isRevealPwdC ? "Hide password" : "Show password"} onClick={() => setIsRevealPwdC(prevState => !prevState)} /></label>
-                                <input className="form-control fs-5" type={isRevealPwdC ? "text" : "password"} id="id_password" placeholder="Confirme Contraseña" required/>
+                                <input onChange={(e)=>{setDatos({...datos, passwordC:e.target.value})}} className="form-control fs-5" type={isRevealPwdC ? "text" : "password"} id="id_password" placeholder="Confirme Contraseña" required/>
                             </div>
                             {/* <div className="text-start">
                                 <span className="input-group-text d-block text-start fs-4" htmlFor="email">Dirección </span>
@@ -172,11 +215,11 @@ const Register = () => {
                                     <div className="text-start">
                                         <label className="input-group-text d-block text-start fs-4" htmlFor="password">Contraseña <FaEye title={isRevealPwd ? "Hide password" : "Show password"} onClick={() => setIsRevealPwd(prevState => !prevState)} /></label>
                                         <input className="form-control fs-5" type={isRevealPwd ? "text" : "password"} id="id_password" placeholder="Ingrese Contraseña" required
-                                        onChange={(e)=>{setPassword(e.target.value)}} />
+                                        onChange={(e)=>{setDatos({...datos, password:e.target.value})}} />
                                     </div>
                                     <div className="text-start">
                                         <label className="input-group-text d-block text-start fs-4" htmlFor="password">Confirmar Contraseña <FaEye title={isRevealPwdC ? "Hide password" : "Show password"} onClick={() => setIsRevealPwdC(prevState => !prevState)} /></label>
-                                        <input className="form-control fs-5" type={isRevealPwdC ? "text" : "password"} id="id_passwordC" placeholder="Confirme Contraseña" required onChange={(e) => { setPasswordConfirmed(e.target.value) }} />
+                                        <input className="form-control fs-5" type={isRevealPwdC ? "text" : "password"} id="id_passwordC" placeholder="Confirme Contraseña" required onChange={(e) => { setDatos({...datos, passwordC:e.target.value}) }} />
                                     </div>
                                     
                                     <div className="text-center">
@@ -235,6 +278,16 @@ const Register = () => {
                                 </div>
 
                             </form>
+                        }
+                        {
+                            user === "REGISTRADO" &&
+                            <div>
+                                <h1>Usuario Registrado</h1>
+                                <p>Ve a iniciar sesión</p>
+                                <Link className="btn btn-dark" to="/login">
+                                    Iniciar Sesisón
+                                </Link>
+                            </div>
                         }
                     </div>
                 </div>
