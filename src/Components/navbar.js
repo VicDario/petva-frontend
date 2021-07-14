@@ -35,7 +35,36 @@ const Navbar = ()=>{
                                 <Link to="/register" className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Registrarse</Link>
                            </div>
                            <div className="text-end">
-                                <Link className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" to="/login">Iniciar Sesión</Link>
+                                        <div className="dropdown">
+                                            <button
+                                                className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4 dropdown-toggle"
+                                                
+                                                
+                                                id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false"
+                                            >
+                                                Iniciar sesión como
+                                            </button>
+                                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li>
+                                                    <Link className="dropdown-item" to="/login">
+                                                        Usuario Normal
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link className="dropdown-item" to="/login">
+                                                        Fundación
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link className="dropdown-item" to="/login">
+                                                        Clínica
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </div>
+
                            </div>
                             
                         </div>

@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
-           token : "sdfsdfsdfsdf"
+           token : ""
 
         },
         actions: {
