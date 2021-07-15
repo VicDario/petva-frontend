@@ -24,7 +24,7 @@ const Login = () => {
         }
     }
     const validatePassword = (e) => {
-        e.preventDefault();
+        
         let password_regex = new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
         if (inputPassword.current.value.trim() === '')
         {
@@ -55,7 +55,7 @@ const Login = () => {
             <div className="row">
                 <div className="col-md-6 col-sm-10 mx-auto my-3 text-center">
                     <main className="form-sigin bg-white rounded-3 p-4">
-                        <form className="px-3" onSubmit={(e) => handleSubmit(e)}>
+                        <form className="px-3" onSubmit={(e) => handleSubmit(e)?e.preventDefault():e.preventDefault()}>
                             <h1 className="h2 mb-4">Inicio de Sesión</h1>
                             <div className="form-floating my-3 w-80">
                                 <input type="email" ref={inputEmail} onChange={(e) => validateEmail(e)} className="form-control" id="email" placeholder="name@example.com" />
