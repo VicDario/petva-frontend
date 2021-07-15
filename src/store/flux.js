@@ -2,8 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
             token: null,
-            pets: null
-
+            pets: null,
+            auxPicture: null,
         },
         actions: {
             registerClinica: (email, name, address, phone, password) => {
@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
                         if (data.access_token) localStorage.setItem("token", data.access_token)
                         if (data.access_token) localStorage.setItem("usertype", "normal")
-                         if (data.access_token) setStore({ token: data.access_token }) 
+                        if (data.access_token) setStore({ token: data.access_token })
                         if (data.access_token) history.push("/user")
                     })
                     .catch(error => console.log("Error from loading message from backend", error))
@@ -97,7 +97,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .catch(error => console.log("Error from loading message from backend", error))
             },
             getMascotasUser: async () => {
-                
+
                 const opt = {
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("token")
@@ -120,28 +120,35 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
-            registerPet : async (name,birth_date,specie)=>{
+            registerPet: async (name, chip_code, birth_date, specie, breed, picture) => {
                 const store = getStore();
-                const opt ={
+
+                const opt = {
                     method: "POST",
                     body: JSON.stringify({
                         name: name,
+                        chip_code: chip_code,
                         birth_date: birth_date,
-                        specie:specie
+                        specie: specie,
+                        breed: breed,
+                        picture: picture
                     }),
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try{
-                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/user/pets/add",opt)
-                    if(response.status !== 201){
+                try
+                {
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/user/pets/add", opt)
+                    if (response.status !== 201)
+                    {
                         console.log("there is some error in registerPet")
                     }
                     const data = await response.json();
                     console.log(data)
-                }catch(error){
+                } catch (error)
+                {
                     console.log("the has been some error in register pet")
                 }
             },
@@ -173,10 +180,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log("the has been some error in register pet")
                 }
             },
-            
+
             syncTokenFromSessionStore: () => {
                 const token = sessionStorage.getItem("token");
-                if (token  && token !== undefined) setStore({ token: token });
+                if (token && token !== undefined) setStore({ token: token });
             },
             registerFundation: (email, name, address, phone, password) => {
                 const opt = {
@@ -199,22 +206,25 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
                     .catch(error => console.log("Error from loading message from backend", error))
             },
-            logOut : ()=>{
+            logOut: () => {
                 const store = getStore()
-                setStore({...store,token : null})
+                setStore({ ...store, token: null })
             },
-            getUserDetail : ()=>{
-                
+            convertImgToBase64: (file) => {
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                    setStore({ auxPicture: reader.result })
+                };
+            },
+            getUserDetail: () => {
+
+            },
+            resetAuxPicture: () => {
+                setStore({ auxPicture: null })
             }
-            
-
-
         }
-    }
+    };
 
-
-
-
-};
-
-export default getState;
+   }
+      export default getState;

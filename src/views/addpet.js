@@ -1,23 +1,19 @@
 import { useContext, useState } from "react"
 import { Context } from "../store/appContext"
 
-
 const Addpet = () => {
-    const { actions } = useContext(Context);
+    const { actions, store } = useContext(Context);
     const [pet, setPet] = useState({
         name: "",
         chip_code: null,
         breed: null,
-        picture: null,
         birth_date: "",
         specie: ""
-    })
-    
+    });
 
     const formatDate = (date) => {
         let newdate = date.split("-")
 
-        console.log(newdate)
         newdate = newdate.reverse()
         newdate = newdate.join("/")
         console.log(newdate)
@@ -36,7 +32,15 @@ const Addpet = () => {
         }
 
 
+        actions.registerPet(pet.name, pet.chip_code, formatDate(pet.birth_date), pet.specie, pet.breed, store.auxPicture);
+        actions.resetAuxPicture(); // reset aux picture to null
     }
+
+    const handleLoad = (e) =>{
+        let file = e.target.files[0]; // load the picture (just one file)
+        actions.convertImgToBase64(file); //Save picture in base64 format at store in auxPicture
+    }
+
     return (
         <>
             <div className="container">
@@ -59,7 +63,7 @@ const Addpet = () => {
                             <div className="mb-3 row">
                                 <label className="col-sm-3 col-form-label fs-4" htmlFor="chip_code">Codigo Chip</label>
                                 <div className="col-sm-9">
-                                    <input type="text" className="form-control fs-4" id="chip_code" />
+                                    <input type="text" onChange={(e) => { setPet({ ...pet, chip_code: e.target.value }) }} className="form-control fs-4" id="chip_code" />
                                 </div>
                             </div>
                             <div className="mb-3 row">
@@ -71,26 +75,24 @@ const Addpet = () => {
                                         <option value="cat">Gato</option>
 
                                     </select>
-                                    {pet.specie}
                                 </div>
                             </div>
                             <div className="mb-3 row">
                                 <label className="col-sm-3 col-form-label fs-4" htmlFor="breed">Raza</label>
                                 <div className="col-sm-9">
-                                    <input type="text" className="form-control fs-4" id="breed" />
+                                    <input type="text" onChange={(e) => { setPet({ ...pet, breed: e.target.value })}} className="form-control fs-4" id="breed" />
                                 </div>
                             </div>
                             <div className="mb-3 row">
                                 <label className="col-sm-3 col-form-label fs-4" htmlFor="picture">Imagen</label>
                                 <div className="col-sm-9">
-                                    <input type="file" className="form-control fs-5" id="picture" />
+                                    <input type="file" onChange={e => handleLoad(e)} className="form-control fs-5" id="picture" />
                                 </div>
                             </div>
                             <div className="mb-3 row">
                                 <label className="col-sm-3 col-form-label fs-4" htmlFor="birth">Fecha Nacimiento</label>
                                 <div className="col-sm-9">
                                     <input onChange={(e) => { setPet({ ...pet, birth_date: e.target.value }) }} type="date" className="form-control fs-4" id="birth" />
-                                    {pet.birth_date}
                                 </div>
                             </div>
                             <div className="d-flex justify-content-end">
