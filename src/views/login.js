@@ -1,5 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import { Context } from "../store/appContext";
+import { useHistory } from "react-router";
 
 const Login = () => {
     const { actions } = useContext(Context);
@@ -7,13 +8,16 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const inputPassword = useRef();
     const inputEmail = useRef();
+    const history = useHistory();
 
     const validateEmail = (e) => {
-        
-        if (inputEmail.current.value.trim() === '') {
+        e.preventDefault();
+        if (inputEmail.current.value.trim() === '')
+        {
             console.error("Email empty");
             return false;
-        } else {
+        } else
+        {
             console.log(email);
             setEmail(inputEmail.current.value);
             return true;
@@ -22,28 +26,29 @@ const Login = () => {
     const validatePassword = (e) => {
         
         let password_regex = new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
-        if (inputPassword.current.value.trim() === '') {
+        if (inputPassword.current.value.trim() === '')
+        {
             console.error("password empty");
             return false;
-        } else if (inputPassword.current.value.length < 8) {
+        } else if (inputPassword.current.value.length < 8)
+        {
             console.error("password too short");
             return false;
-        } else if (!password_regex.test(inputPassword.current.value)) {
+        } else if (!password_regex.test(inputPassword.current.value))
+        {
             console.error("password may contain at least one mayus letter, one minus letter, one number and one special character.")
             return false;
-        } else {
+        } else
+        {
             console.log(password);
             setPassword(inputPassword.current.value);
             return true;
         }
     }
     const handleSubmit = (e) => {
-        if (validatePassword(e) && validateEmail(e)) {
-            actions.loginUser(email, password);
-            return true;
-        } else {
-            return false;
-        }
+        e.preventDefault()
+        actions.loginUser(inputEmail.current.value, inputPassword.current.value,history);
+
     }
     return (
         <div className="container">

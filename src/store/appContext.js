@@ -18,7 +18,7 @@ const injectContext = (PassedComponent) => {
         );
 
         useEffect(() => {
-            
+           
         }, [])
 
         return (

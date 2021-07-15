@@ -1,7 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
-
+            token: null,
+            pets: null
 
         },
         actions: {
@@ -47,35 +48,35 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
                     .catch(error => console.log("Error from loading message from backend", error))
             },
-            loginUser: async (email,password) => {
+
+            loginUser: (email, password, history) => {
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
-                        email: email,
-                        password: password
+                        email,
+                        password
                     }),
                     headers: {
                         "Content-Type": "application/json"
                     }
                 }
-                try {
-                    const response = await (await fetch("https://petva-backend-dev.herokuapp.com/api/user/login",opt));
-                    //if (response.status!==200) throw new Error("Error login user");
-                    const data = await response.json();
-                    
-                    localStorage.setItem("access_token", data.access_token);
-                } catch (error) {
-                    console.log("Error from loading message from backend", error);
-                }
-                
-                
+                fetch("https://petva-backend-dev.herokuapp.com/api/user/login", opt)
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data.access_token);
+                        /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
+                        if (data.access_token) localStorage.setItem("token", data.access_token)
+                         if (data.access_token) setStore({ token: data.access_token }) 
+                        if (data.access_token) history.push("/user")
+                    })
+                    .catch(error => console.log("Error from loading message from backend", error))
             },
-            loginClinica: () => {
+            loginClinica: (email, password) => {
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
-                        email: "d.jacobpulgar@gmail.com",
-                        password: "qwerty123"
+                        email: email,
+                        password: password
                     }),
                     headers: {
                         "Content-Type": "application/json"
@@ -87,12 +88,70 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log(data)
                     })
                     .catch(error => console.log("Error from loading message from backend", error))
-            }
+            },
+            getMascotasUser: async () => {
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                }
+                try
+                {
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/user/pets", opt)
+                    if (response.status !== 200)
+                    {
+                        console.log("There has been some error")
+                    }
+                    const data = await response.json();
+                    console.log(data)
+                    setStore({ pets: data })
+
+                } catch (error)
+                {
+                    console.log("There has been an error in get pets")
+                }
+
+            },
+            registerPet : async (name,birth_date,specie)=>{
+                const store = getStore();
+                const opt ={
+                    method: "POST",
+                    body: JSON.stringify({
+                        name: name,
+                        birth_date: birth_date,
+                        specie:specie
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try{
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/user/pets/add",opt)
+                    if(response.status !== 201){
+                        console.log("there is some error in registerPet")
+                    }
+                    const data = await response.json();
+                    console.log(data)
+                }catch(error){
+                    console.log("the has been some error in register pet")
+                }
+            },
+            
+            syncTokenFromSessionStore: () => {
+                const token = sessionStorage.getItem("token");
+                if (token  && token !== undefined) setStore({ token: token });
+            },
+            
+
+
         }
+    }
 
 
 
-    };
+
 };
 
 export default getState;
