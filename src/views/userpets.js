@@ -18,7 +18,7 @@ const Userpets = () => {
     return (
         <>
         {
-            store.token && store.token !== "" ?
+            token &&
 
             <div className="container">
                 <div className="row my-4">
@@ -28,7 +28,7 @@ const Userpets = () => {
                         </div>
                             
                                 {
-                                    !!store.pets && 
+                                    !!store.pets && store.pets.length >0 &&
                                     store.pets.map((pet, index) => {
                                         return (
                                             <>
@@ -49,8 +49,11 @@ const Userpets = () => {
                         </div>
                     </div>
                 </div>
-            </div>:
-            history.push("/login")
+            </div>}
+            {
+                !token &&
+            /* history.push("/login") */
+            <h1>Seras direccionado a login</h1>
         }
         </>
     )

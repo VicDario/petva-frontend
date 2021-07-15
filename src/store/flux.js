@@ -93,7 +93,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const store = getStore();
                 const opt = {
                     headers: {
-                        "Authorization": "Bearer " + store.token
+                        "Authorization": "Bearer " + localStorage.getItem("token")
                     }
                 }
                 try
