@@ -2,8 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
             token: null,
-            pets: null
-
+            pets: null,
+            auxPicture: null,
         },
         actions: {
             registerClinica: (email, name, address, phone, password) => {
@@ -113,14 +113,18 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
-            registerPet : async (name,birth_date,specie)=>{
+            registerPet : async (name, chip_code, birth_date, specie, breed, picture) => {
                 const store = getStore();
-                const opt ={
+                
+                const opt = {
                     method: "POST",
                     body: JSON.stringify({
                         name: name,
+                        chip_code: chip_code,
                         birth_date: birth_date,
-                        specie:specie
+                        specie: specie,
+                        breed: breed,
+                        picture: picture
                     }),
                     headers: {
                         "Content-Type": "application/json",
@@ -143,7 +147,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const token = sessionStorage.getItem("token");
                 if (token  && token !== undefined) setStore({ token: token });
             },
-            
+            convertImgToBase64: (file) =>{
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function() {
+                    setStore({ auxPicture: reader.result })
+                };
+            },
+            resetAuxPicture: () => {
+                setStore({ auxPicture: null })
+            }
 
 
         }
