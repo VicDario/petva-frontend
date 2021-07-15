@@ -145,6 +145,34 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log("the has been some error in register pet")
                 }
             },
+            registerPetFundation: async (name, birth_date, specie) => {
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        name: name,
+                        birth_date: birth_date,
+                        specie: specie
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/fundation/pets/add", opt)
+                    if (response.status !== 201)
+                    {
+                        console.log("there is some error in registerPet")
+                    }
+                    const data = await response.json();
+                    console.log(data)
+                } catch (error)
+                {
+                    console.log("the has been some error in register pet")
+                }
+            },
             
             syncTokenFromSessionStore: () => {
                 const token = sessionStorage.getItem("token");
@@ -174,6 +202,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             logOut : ()=>{
                 const store = getStore()
                 setStore({...store,token : null})
+            },
+            getUserDetail : ()=>{
+                
             }
             
 
