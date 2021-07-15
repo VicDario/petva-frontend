@@ -66,6 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log(data.access_token);
                         /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
                         if (data.access_token) localStorage.setItem("token", data.access_token)
+                        if (data.access_token) localStorage.setItem("usertype", "normal")
                          if (data.access_token) setStore({ token: data.access_token }) 
                         if (data.access_token) history.push("/user")
                     })
@@ -87,6 +88,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then(data => {
                         console.log(data)
                         if (data.access_token) localStorage.setItem("token", data.access_token)
+                        if (data.access_token) localStorage.setItem("usertype", "fundation")
+
                         if (data.access_token) setStore({ token: data.access_token })
                         if (data.access_token) console.log("fundacion iniciada sesion ")
                         /* if (data.access_token) history.push("/user") */

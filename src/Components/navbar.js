@@ -18,6 +18,7 @@ const Navbar = () => {
     const logout = () => {
         actions.logOut()
         localStorage.removeItem("token");
+        localStorage.removeItem("usertype");
         history.push("/");
     }
 
@@ -82,7 +83,7 @@ const Navbar = () => {
                             <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                                 <div className="navbar-nav">
                                     <div className="text-end">
-                                        <Link to={store.token?"/user":""} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Mi Perfil</Link>
+                                        <Link to={localStorage.getItem("usertype")==="normal"?"/user":"/fundation"} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Mi Perfil</Link>
                                     </div>
                                     <div className="text-end">
                                         <Link onClick={logout} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" >Cerrar Sesión</Link>

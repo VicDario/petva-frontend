@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import { Context } from "../store/appContext";
-//import { useHistory } from "react-router";
+import { useHistory } from "react-router";
 
 const Loginfundation = () => {
     const { actions } = useContext(Context);
@@ -8,7 +8,7 @@ const Loginfundation = () => {
     const [email, setEmail] = useState("");
     const inputPassword = useRef();
     const inputEmail = useRef();
-    //const history = useHistory();
+    const history = useHistory();
 
     const validateEmail = (e) => {
         e.preventDefault();
