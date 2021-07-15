@@ -46,9 +46,9 @@ const Loginfundation = () => {
         }
     }
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         actions.loginFundation(inputEmail.current.value, inputPassword.current.value);
-
+        history.push("/fundation");
     }
     return (
         <div className="container">
