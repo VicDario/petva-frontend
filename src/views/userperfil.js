@@ -11,7 +11,7 @@ const Userperfil = () => {
     return (
 
         <>
-            {token}
+            
             {
                 token !== "" ?
                     <div className="container">

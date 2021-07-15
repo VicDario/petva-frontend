@@ -66,6 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log(data.access_token);
                         /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
                         if (data.access_token) localStorage.setItem("token", data.access_token)
+                        if (data.access_token) localStorage.setItem("usertype", "normal")
                          if (data.access_token) setStore({ token: data.access_token }) 
                         if (data.access_token) history.push("/user")
                     })
@@ -87,6 +88,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then(data => {
                         console.log(data)
                         if (data.access_token) localStorage.setItem("token", data.access_token)
+                        if (data.access_token) localStorage.setItem("usertype", "fundation")
+
                         if (data.access_token) setStore({ token: data.access_token })
                         if (data.access_token) console.log("fundacion iniciada sesion ")
                         /* if (data.access_token) history.push("/user") */
@@ -94,7 +97,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .catch(error => console.log("Error from loading message from backend", error))
             },
             getMascotasUser: async () => {
-                const store = getStore();
+                
                 const opt = {
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("token")
@@ -172,22 +175,22 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
                     .catch(error => console.log("Error from loading message from backend", error))
             },
-            convertImgToBase64: (file) =>{
+            logOut : ()=>{
+                const store = getStore()
+                setStore({...store,token : null})
+            },
+              convertImgToBase64: (file) =>{
                 let reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onload = function() {
                     setStore({ auxPicture: reader.result })
                 };
             },
-            resetAuxPicture: () => {
+              resetAuxPicture: () => {
                 setStore({ auxPicture: null })
             }
         }
     }
-
-
-
-
 };
 
 export default getState;

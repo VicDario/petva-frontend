@@ -1,14 +1,14 @@
 import { useContext, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 const Userpets = () => {
     const {actions,store} = useContext(Context);
-    const history = useHistory()
+    /* const history = useHistory() */
     /* const obtenermascotas = ()=>{
         actions.getMascotasUser()
     } */
-    let {pets} = store;
+    
     let token = localStorage.getItem("token")
 
     useEffect(()=>{

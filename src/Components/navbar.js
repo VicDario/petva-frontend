@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+
 import { Link } from "react-router-dom"
 import logo from "../images/logo_pata.jpg"
 import { useContext } from "react";
@@ -12,12 +12,13 @@ const Navbar = () => {
     /*  let { token } = store; */
     /* let token = sessionStorage.getItem("token") */
 
-
-    const token = localStorage.getItem("token")
+    
+    //const token = localStorage.getItem("token")
     const history = useHistory();
     const logout = () => {
-
+        actions.logOut()
         localStorage.removeItem("token");
+        localStorage.removeItem("usertype");
         history.push("/");
     }
 
@@ -39,13 +40,13 @@ const Navbar = () => {
                         <span className="navbar-toggler-icon" />
                     </button>
                     {
-                        !token ?
-                            <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
-                                <div className="navbar-nav">
-                                    <div className="text-end">
-                                        <Link to="/register" className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Registrarse</Link>
-                                    </div>
-                                    <div className="text-end">
+                        !store.token   ?
+                    <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
+                        <div className="navbar-nav">
+                           <div className="text-end">
+                                <Link to="/register" className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Registrarse</Link>
+                           </div>
+                           <div className="text-end">
                                         <div className="dropdown">
                                             <button
                                                 className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4 dropdown-toggle"
@@ -82,7 +83,7 @@ const Navbar = () => {
                             <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                                 <div className="navbar-nav">
                                     <div className="text-end">
-                                        <Link to="/user" className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Mi Perfil</Link>
+                                        <Link to={localStorage.getItem("usertype")==="normal"?"/user":"/fundation"} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Mi Perfil</Link>
                                     </div>
                                     <div className="text-end">
                                         <Link onClick={logout} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" >Cerrar Sesión</Link>
