@@ -9,6 +9,7 @@ import injectContext from './store/appContext';
 import Userperfil from './views/userperfil';
 import Userpets from './views/userpets';
 import Addpet from './views/addpet';
+import Loginfundation from './views/loginfundation';
 
 function App() {
   return (
@@ -16,13 +17,14 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/user/login" component={Login} />
-          <Route exact path="/user" component={Userperfil} />
-          <Route exact path="/userpets" component={Userpets} />
-          <Route exact path="/addpetuser" component={Addpet} />
-          <Route component={Custom404} />
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/register" component={Register}/>
+          <Route exact path="/user/login" component={Login}/>
+          <Route exact path="/user" component={Userperfil}/>
+          <Route exact path="/userpets" component={Userpets}/>
+          <Route exact path="/addpetuser" component={Addpet}/>
+          <Route exact path="/fundation/login" component={Loginfundation}/>
+          <Route component={Custom404}/>
         </Switch>
       </BrowserRouter>
     </>
