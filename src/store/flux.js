@@ -128,7 +128,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 try{
                     const response = await fetch("https://petva-backend-dev.herokuapp.com/api/user/pets/add",opt)
-                    if(response.status !== 200){
+                    if(response.status !== 201){
                         console.log("there is some error in registerPet")
                     }
                     const data = await response.json();
@@ -136,6 +136,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }catch(error){
                     console.log("the has been some error in register pet")
                 }
+            },
+            
+            syncTokenFromSessionStore: () => {
+                const token = sessionStorage.getItem("token");
+                if (token  && token !== undefined) setStore({ token: token });
             }
 
 

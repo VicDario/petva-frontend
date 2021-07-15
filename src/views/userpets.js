@@ -17,7 +17,7 @@ const Userpets = () => {
     return (
         <>
         {
-            store.token !== "" ?
+            store.token && store.token !== "" ?
 
             <div className="container">
                 <div className="row my-4">
@@ -31,10 +31,12 @@ const Userpets = () => {
                                 store.pets.map((pet,index)=>{
                                     return(
                                         <>
-                                            <p>{pet.name}</p>
-                                            <p>{pet.birth_date}</p>
-                                            <p>{pet.specie}</p>
-                                            <p>{pet.state}</p>
+                                        <ul className="list-group my-2">
+                                            <li className="list-group-item">Nombre: {pet.name}</li>
+                                            <li className="list-group-item">Fecha Nacimiento: {pet.birth_date}</li>
+                                            <li className="list-group-item">Especie: {pet.specie}</li>
+                                            <li className="list-group-item">Estado: {pet.state}</li>
+                                        </ul>
                                         </>
                                     )
                                 })

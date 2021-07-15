@@ -3,12 +3,20 @@ import { Link } from "react-router-dom"
 import logo from "../images/logo_pata.jpg"
 import { useContext } from "react";
 import { Context } from "../store/appContext";
+import { useHistory } from "react-router";
 
 
 const Navbar = ()=>{
 
-    const { store } = useContext(Context);
-    let { token } = store;
+    const { store,actions } = useContext(Context);
+   /*  let { token } = store; */
+   let token = sessionStorage.getItem("token")
+    const history = useHistory();
+    const logout = () => {
+        sessionStorage.setItem("token","")
+        
+        history.push("/")
+    }
 
     return(
         <> 
@@ -76,7 +84,7 @@ const Navbar = ()=>{
                                         <Link to="/user" className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Mi Perfil</Link>
                                     </div>
                                     <div className="text-end">
-                                        <Link  className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" to="/login">Cerrar Sesión</Link>
+                                        <Link onClick={logout}  className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" >Cerrar Sesión</Link>
                                     </div>
 
                                 </div>
