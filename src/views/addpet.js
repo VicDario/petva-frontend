@@ -10,9 +10,9 @@ const Addpet = () => {
         breed: null,
         picture: null,
         birth_date: "",
-        specie: ""
+        specie: "",
+        picture: null
     })
-    
 
     const formatDate = (date) => {
         let newdate = date.split("-")
@@ -28,9 +28,26 @@ const Addpet = () => {
         e.preventDefault();
 
         actions.registerPet(pet.name, formatDate(pet.birth_date), pet.specie);
-
-
     }
+
+    const convertImgToBase64 = (e) =>{
+        let reader = new FileReader();
+        console.log(pictureRef)
+        console.log(e.target.files)
+        let file = e.target.files[0]
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            let fileInfo = {
+              name: file.name,
+              type: file.type,
+              size: Math.round(file.size / 1000) + ' kB',
+              base64: reader.result,
+              file: file,
+            };
+            setPet(Object.assign({}, pet, {picture: fileInfo.base64 }))
+        }
+    }
+
     return (
         <>
             <div className="container">
@@ -77,7 +94,7 @@ const Addpet = () => {
                             <div className="mb-3 row">
                                 <label className="col-sm-3 col-form-label fs-4" htmlFor="picture">Imagen</label>
                                 <div className="col-sm-9">
-                                    <input type="file" className="form-control fs-5" id="picture" />
+                                    <input type="file" onChange={e => convertImgToBase64(e)} className="form-control fs-5" id="picture" />
                                 </div>
                             </div>
                             <div className="mb-3 row">
