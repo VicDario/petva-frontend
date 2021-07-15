@@ -47,7 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
                     .catch(error => console.log("Error from loading message from backend", error))
             },
-            loginUser: (email,password) => {
+            loginUser: async (email,password) => {
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -58,12 +58,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Content-Type": "application/json"
                     }
                 }
-                fetch("https://petva-backend-dev.herokuapp.com/api/user/login",opt)
-                .then(resp => resp.json())
-                .then(data => {
-                    console.log(data);
-                })
-                .catch(error => console.log("Error from loading message from backend", error))
+                try {
+                    const response = await (await fetch("https://petva-backend-dev.herokuapp.com/api/user/login",opt));
+                    //if (response.status!==200) throw new Error("Error login user");
+                    const data = await response.json();
+                    
+                    localStorage.setItem("access_token", data.access_token);
+                } catch (error) {
+                    console.log("Error from loading message from backend", error);
+                }
+                
+                
             },
             loginClinica: () => {
                 const opt = {
