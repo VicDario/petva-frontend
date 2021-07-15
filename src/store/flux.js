@@ -120,6 +120,28 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
+            getPetsFundation: async () => {
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                }
+                try
+                {
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/fundation/pets", opt)
+                    if (response.status !== 200)
+                    {
+                        console.log("There has been some error")
+                    }
+                    const data = await response.json();
+                    console.log(data)
+                    setStore({ pets: data })
+
+                } catch (error)
+                {
+                    console.log("There has been an error in get pets")
+                }
+            },
             registerPet : async (name, chip_code, birth_date, specie, breed, picture) => {
                 const store = getStore();
                 
