@@ -22,6 +22,16 @@ const Addpet = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        if(localStorage.getItem("usertype")==="normal"){
+
+            actions.registerPet(pet.name, formatDate(pet.birth_date), pet.specie);
+        }
+        if(localStorage.getItem("usertype")==="fundation"){
+            console.log("Agrega la mascota como fundación")
+            actions.registerPetFundation(pet.name, formatDate(pet.birth_date), pet.specie)
+        }
+
+
         actions.registerPet(pet.name, pet.chip_code, formatDate(pet.birth_date), pet.specie, pet.breed, store.auxPicture);
         actions.resetAuxPicture(); // reset aux picture to null
     }
