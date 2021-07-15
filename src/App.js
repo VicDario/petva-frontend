@@ -11,6 +11,7 @@ import Userpets from './views/userpets';
 import Addpet from './views/addpet';
 import Loginfundation from './views/loginfundation';
 import FundationProfile from './views/fundationprofile';
+import Fundationpets from './views/fundationpets';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="/addpetuser" component={Addpet}/>
           <Route exact path="/fundation/login" component={Loginfundation}/>
           <Route exact path="/fundation" component={FundationProfile}/>
+          <Route exact path="/fundation/pets" component={Fundationpets}/>
           <Route component={Custom404}/>
         </Switch>
       </BrowserRouter>
