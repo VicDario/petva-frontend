@@ -1,7 +1,7 @@
 const Custom404 = () => {
     return (
         <>
-            <h1>Page not found (404)</h1>
+            <h1 className="h1">Page not found (404)</h1>
         </>
     )
 }

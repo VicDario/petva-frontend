@@ -1,4 +1,4 @@
-import { BrowserRouter, Route,Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './views/home';
 import Login from './views/login';
@@ -10,12 +10,13 @@ import Userperfil from './views/userperfil';
 import Userpets from './views/userpets';
 import Addpet from './views/addpet';
 import Loginfundation from './views/loginfundation';
+import FundationProfile from './views/fundationprofile';
 
 function App() {
   return (
     <>
       <BrowserRouter>
-      <Navbar/>
+        <Navbar />
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/register" component={Register}/>
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/userpets" component={Userpets}/>
           <Route exact path="/addpetuser" component={Addpet}/>
           <Route exact path="/fundation/login" component={Loginfundation}/>
+          <Route exact path="/fundation" component={FundationProfile}/>
           <Route component={Custom404}/>
         </Switch>
       </BrowserRouter>
