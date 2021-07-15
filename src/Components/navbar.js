@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+
 import { Link } from "react-router-dom"
 import logo from "../images/logo_pata.jpg"
 import { useContext } from "react";
@@ -13,10 +13,10 @@ const Navbar = ()=>{
     /* let token = sessionStorage.getItem("token") */
 
     
-    const token = localStorage.getItem("token")
+    //const token = localStorage.getItem("token")
     const history = useHistory();
     const logout = () => {
-        
+        actions.logOut()
         localStorage.removeItem("token");
          history.push("/");
     }
@@ -39,7 +39,7 @@ const Navbar = ()=>{
                         <span className="navbar-toggler-icon" />
                     </button>
                     {
-                        !token   ?
+                        !store.token   ?
                     <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
                            <div className="text-end">
@@ -84,7 +84,7 @@ const Navbar = ()=>{
                             <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                                 <div className="navbar-nav">
                                     <div className="text-end">
-                                        <Link to="/user" className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Mi Perfil</Link>
+                                        <Link to={store.token?"/user":""} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Mi Perfil</Link>
                                     </div>
                                     <div className="text-end">
                                         <Link onClick={logout}  className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" >Cerrar Sesión</Link>

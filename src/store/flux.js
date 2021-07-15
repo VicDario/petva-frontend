@@ -94,7 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .catch(error => console.log("Error from loading message from backend", error))
             },
             getMascotasUser: async () => {
-                const store = getStore();
+                
                 const opt = {
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("token")
@@ -167,6 +167,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log(data)
                     })
                     .catch(error => console.log("Error from loading message from backend", error))
+            },
+            logOut : ()=>{
+                const store = getStore()
+                setStore({...store,token : null})
             }
             
 
