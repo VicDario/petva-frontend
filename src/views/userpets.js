@@ -9,6 +9,7 @@ const Userpets = () => {
         actions.getMascotasUser()
     } */
     let {pets} = store;
+    let token = localStorage.getItem("token")
 
     useEffect(()=>{
         actions.getMascotasUser()
@@ -26,21 +27,21 @@ const Userpets = () => {
                             <h2 className="display-1">Mis Mascotas</h2>
                         </div>
                             
-                            {
-                                !!store.pets &&
-                                store.pets.map((pet,index)=>{
-                                    return(
-                                        <>
-                                        <ul className="list-group my-2">
-                                            <li className="list-group-item">Nombre: {pet.name}</li>
-                                            <li className="list-group-item">Fecha Nacimiento: {pet.birth_date}</li>
-                                            <li className="list-group-item">Especie: {pet.specie}</li>
-                                            <li className="list-group-item">Estado: {pet.state}</li>
-                                        </ul>
-                                        </>
-                                    )
-                                })
-                            }
+                                {
+                                    !!store.pets && 
+                                    store.pets.map((pet, index) => {
+                                        return (
+                                            <>
+                                                <ul className="list-group my-2">
+                                                    <li className="list-group-item">Nombre: {pet.name}</li>
+                                                    <li className="list-group-item">Fecha Nacimiento: {pet.birth_date}</li>
+                                                    <li className="list-group-item">Especie: {pet.specie}</li>
+                                                    <li className="list-group-item">Estado: {pet.state}</li>
+                                                </ul>
+                                            </>
+                                        )
+                                    })
+                                }
                         <div>
                             <Link to="/addpetuser" className="text-decoration-none badge rounded-pill bg-success p-3 m-1 fs-4">
                                 Agregar Mascota

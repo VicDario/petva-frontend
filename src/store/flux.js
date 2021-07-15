@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
-            token: "",
+            token: null,
             pets: null
 
         },
@@ -64,8 +64,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then(resp => resp.json())
                     .then(data => {
                         console.log(data.access_token);
-                        if (data.access_token) sessionStorage.setItem("token", data.access_token)
-                        if (data.access_token) setStore({ token: data.access_token })
+                        /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
+                        if (data.access_token) localStorage.setItem("token", data.access_token)
+                         if (data.access_token) setStore({ token: data.access_token }) 
                         if (data.access_token) history.push("/user")
                     })
                     .catch(error => console.log("Error from loading message from backend", error))
@@ -141,7 +142,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             syncTokenFromSessionStore: () => {
                 const token = sessionStorage.getItem("token");
                 if (token  && token !== undefined) setStore({ token: token });
-            }
+            },
+            
 
 
         }

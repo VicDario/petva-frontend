@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import logo from "../images/logo_pata.jpg"
 import { useContext } from "react";
@@ -10,12 +10,15 @@ const Navbar = ()=>{
 
     const { store,actions } = useContext(Context);
    /*  let { token } = store; */
-   let token = sessionStorage.getItem("token")
+    /* let token = sessionStorage.getItem("token") */
+
+    
+    const token = localStorage.getItem("token")
     const history = useHistory();
     const logout = () => {
-        sessionStorage.setItem("token","")
         
-        history.push("/")
+        localStorage.removeItem("token");
+         history.push("/");
     }
 
     return(
@@ -36,7 +39,7 @@ const Navbar = ()=>{
                         <span className="navbar-toggler-icon" />
                     </button>
                     {
-                        token ==="" ?
+                        !token   ?
                     <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
                            <div className="text-end">
