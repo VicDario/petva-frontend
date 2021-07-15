@@ -71,7 +71,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
                     .catch(error => console.log("Error from loading message from backend", error))
             },
-            loginClinica: (email, password) => {
+            loginFundation: (email, password) => {
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -82,10 +82,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Content-Type": "application/json"
                     }
                 }
-                fetch("https://petva-backend-dev.herokuapp.com/api/clinic/login", opt)
+                fetch("https://petva-backend-dev.herokuapp.com/api/fundation/login", opt)
                     .then(resp => resp.json())
                     .then(data => {
                         console.log(data)
+                        if (data.access_token) localStorage.setItem("token", data.access_token)
+                        if (data.access_token) setStore({ token: data.access_token })
+                        if (data.access_token) console.log("fundacion iniciada sesion ")
+                        /* if (data.access_token) history.push("/user") */
                     })
                     .catch(error => console.log("Error from loading message from backend", error))
             },
@@ -143,6 +147,27 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const token = sessionStorage.getItem("token");
                 if (token  && token !== undefined) setStore({ token: token });
             },
+            registerFundation: (email, name, address, phone, password) => {
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        email: email,
+                        name: name,
+                        address: address,
+                        phone: phone,
+                        password: password
+                    }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+                fetch("https://petva-backend-dev.herokuapp.com/api/fundation/register", opt)
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data)
+                    })
+                    .catch(error => console.log("Error from loading message from backend", error))
+            }
             
 
 
