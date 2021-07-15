@@ -4,6 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             token: null,
             pets: null,
             auxPicture: null,
+            userDetail : null,
+            fundationDetail: null
         },
         actions: {
             registerClinica: (email, name, address, phone, password) => {
@@ -217,8 +219,44 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ auxPicture: reader.result })
                 };
             },
-            getUserDetail: () => {
-
+            getUserDetail: async () => {
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                }
+                try{
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/user/info",opt)
+                    if(response.status !== 200){
+                        console.log("There is a some error in get user detail")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    if(data) setStore({userDetail:data})
+                }catch(error){
+                    console.log("Error in get detail user")
+                }
+            },
+            getFundationDetail: async () => {
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                }
+                try
+                {
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/fundation/info", opt)
+                    if (response.status !== 200)
+                    {
+                        console.log("There is a some error in get user detail")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    if (data) setStore({ fundationDetail: data })
+                } catch (error)
+                {
+                    console.log("Error in get detail user")
+                }
             },
             resetAuxPicture: () => {
                 setStore({ auxPicture: null })
