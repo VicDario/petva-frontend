@@ -39,7 +39,7 @@ const Navbar = ()=>{
                         <span className="navbar-toggler-icon" />
                     </button>
                     {
-                        !!token   ?
+                        !token   ?
                     <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
                            <div className="text-end">
