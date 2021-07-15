@@ -1,4 +1,4 @@
-import { BrowserRouter, Route,Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './views/home';
 import Login from './views/login';
@@ -14,15 +14,15 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      <Navbar/>
+        <Navbar />
         <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/register" component={Register}/>
-          <Route exact path="/user/login" component={Login}/>
-          <Route exact path="/user" component={Userperfil}/>
-          <Route exact path="/userpets" component={Userpets}/>
-          <Route exact path="/addpetuser" component={Addpet}/>
-          <Route component={Custom404}/>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/user/login" component={Login} />
+          <Route exact path="/user" component={Userperfil} />
+          <Route exact path="/userpets" component={Userpets} />
+          <Route exact path="/addpetuser" component={Addpet} />
+          <Route component={Custom404} />
         </Switch>
       </BrowserRouter>
     </>

@@ -6,27 +6,27 @@ import { Context } from "../store/appContext";
 import { useHistory } from "react-router";
 
 
-const Navbar = ()=>{
+const Navbar = () => {
 
-    const { store,actions } = useContext(Context);
-   /*  let { token } = store; */
+    const { store, actions } = useContext(Context);
+    /*  let { token } = store; */
     /* let token = sessionStorage.getItem("token") */
 
-    
+
     const token = localStorage.getItem("token")
     const history = useHistory();
     const logout = () => {
-        
+
         localStorage.removeItem("token");
-         history.push("/");
+        history.push("/");
     }
 
-    return(
-        <> 
+    return (
+        <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
                 <div className="container-fluid ">
                     <Link className="text-decoration-none" to="/">
-                    <img className="img-fluid logo" src={logo} alt="logo" /></Link>
+                        <img className="img-fluid logo" src={logo} alt="logo" /></Link>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -39,18 +39,16 @@ const Navbar = ()=>{
                         <span className="navbar-toggler-icon" />
                     </button>
                     {
-                        !token   ?
-                    <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
-                        <div className="navbar-nav">
-                           <div className="text-end">
-                                <Link to="/register" className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Registrarse</Link>
-                           </div>
-                           <div className="text-end">
+                        !token ?
+                            <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
+                                <div className="navbar-nav">
+                                    <div className="text-end">
+                                        <Link to="/register" className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Registrarse</Link>
+                                    </div>
+                                    <div className="text-end">
                                         <div className="dropdown">
                                             <button
                                                 className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4 dropdown-toggle"
-                                                
-                                                
                                                 id="dropdownMenuLink"
                                                 data-bs-toggle="dropdown"
                                                 aria-expanded="false"
@@ -76,20 +74,19 @@ const Navbar = ()=>{
                                             </ul>
                                         </div>
 
-                           </div>
-                            
-                        </div>
-                    </div>
-                    :
+                                    </div>
+
+                                </div>
+                            </div>
+                            :
                             <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                                 <div className="navbar-nav">
                                     <div className="text-end">
                                         <Link to="/user" className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Mi Perfil</Link>
                                     </div>
                                     <div className="text-end">
-                                        <Link onClick={logout}  className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" >Cerrar Sesión</Link>
+                                        <Link onClick={logout} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" >Cerrar Sesión</Link>
                                     </div>
-
                                 </div>
                             </div>
                     }
