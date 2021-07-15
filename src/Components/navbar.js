@@ -59,17 +59,17 @@ const Navbar = ()=>{
                                             </button>
                                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <li>
-                                                    <Link className="dropdown-item" to="/login">
+                                                    <Link className="dropdown-item" to="/user/login">
                                                         Usuario Normal
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <Link className="dropdown-item" to="/login">
+                                                    <Link className="dropdown-item" to="/fundacion/login">
                                                         Fundación
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <Link className="dropdown-item" to="/login">
+                                                    <Link className="dropdown-item" to="/clinica/login">
                                                         Clínica
                                                     </Link>
                                                 </li>
