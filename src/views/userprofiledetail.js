@@ -6,7 +6,7 @@ const Userprofiledetail = ()=>{
     const {actions,store} = useContext(Context);
     
     useEffect(() => {
-        actions.getMascotasUser()
+        
         actions.getUserDetail();
     }, [])
     const lengthPets = store.pets.length
