@@ -1,24 +1,36 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { Context } from "../store/appContext"
 
 
 const Addpet = () => {
-
+    const { actions } = useContext(Context);
     const [pet, setPet] = useState({
         name: "",
         chip_code: null,
         breed: null,
         picture: null,
-        birth_date: null,
+        birth_date: "",
         specie: ""
     })
+    
+
+    const formatDate = (date) => {
+        let newdate = date.split("-")
+
+        console.log(newdate)
+        newdate = newdate.reverse()
+        newdate = newdate.join("/")
+        console.log(newdate)
+
+        return newdate
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
-    }
 
-    const formatDate = (date)=>{
-        
-    }
+        actions.registerPet(pet.name, formatDate(pet.birth_date), pet.specie);
 
+
+    }
     return (
         <>
             <div className="container">
@@ -34,7 +46,7 @@ const Addpet = () => {
                             <div className="mb-3 row">
                                 <label className="col-sm-3 col-form-label fs-4" htmlFor="petname">Nombre</label>
                                 <div className="col-sm-9">
-                                    <input onChange={(e)=>{setPet({...pet, name:e.target.value})}} type="text" className="form-control fs-4" id="petname" />
+                                    <input onChange={(e) => { setPet({ ...pet, name: e.target.value }) }} type="text" className="form-control fs-4" id="petname" />
                                     {pet.name}
                                 </div>
                             </div>
@@ -47,12 +59,13 @@ const Addpet = () => {
                             <div className="mb-3 row">
                                 <label className="col-sm-3 col-form-label fs-4" htmlFor="">Especie</label>
                                 <div className="col-sm-9">
-                                    <select className="form-select" aria-label="Default select example">
-                                        <option selected>Seleccione una Especie</option>
+                                    <select className="form-select" onChange={(e) => { setPet({ ...pet, specie: e.target.value }) }}>
+                                        <option selected value="">Seleccione una Especie</option>
                                         <option value="dog">Perro</option>
                                         <option value="cat">Gato</option>
-                                        
+
                                     </select>
+                                    {pet.specie}
                                 </div>
                             </div>
                             <div className="mb-3 row">
@@ -70,14 +83,14 @@ const Addpet = () => {
                             <div className="mb-3 row">
                                 <label className="col-sm-3 col-form-label fs-4" htmlFor="birth">Fecha Nacimiento</label>
                                 <div className="col-sm-9">
-                                    <input onChange={(e)=>{setPet({...pet,birth_date: e.target.value})}} type="date" className="form-control fs-4" id="birth" />
+                                    <input onChange={(e) => { setPet({ ...pet, birth_date: e.target.value }) }} type="date" className="form-control fs-4" id="birth" />
                                     {pet.birth_date}
                                 </div>
                             </div>
                             <div className="d-flex justify-content-end">
-                            <button className="btn btn-success btn-lg mb-3 ">
-                                Agregar Mascota
-                            </button>
+                                <button type="submit" className="btn btn-success btn-lg mb-3 ">
+                                    Agregar Mascota
+                                </button>
 
                             </div>
                         </form>

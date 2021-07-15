@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
             token: "",
-            pets : null
+            pets: null
 
         },
         actions: {
@@ -49,11 +49,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .catch(error => console.log("Error from loading message from backend", error))
             },
 
-            loginUser: (email, password,history) => {
+            loginUser: (email, password, history) => {
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
-                         email,
+                        email,
                         password
                     }),
                     headers: {
@@ -64,9 +64,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then(resp => resp.json())
                     .then(data => {
                         console.log(data.access_token);
-                        if(data.access_token) sessionStorage.setItem("token", data.access_token)
-                        if(data.access_token) setStore({token: data.access_token})
-                        if(data.access_token) history.push("/user")
+                        if (data.access_token) sessionStorage.setItem("token", data.access_token)
+                        if (data.access_token) setStore({ token: data.access_token })
+                        if (data.access_token) history.push("/user")
                     })
                     .catch(error => console.log("Error from loading message from backend", error))
             },
@@ -103,15 +103,42 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log("There has been some error")
                     }
                     const data = await response.json();
-                    console.log( data )
-                    setStore({pets: data})
-                    
+                    console.log(data)
+                    setStore({ pets: data })
+
                 } catch (error)
                 {
                     console.log("There has been an error in get pets")
                 }
 
+            },
+            registerPet : async (name,birth_date,specie)=>{
+                const store = getStore();
+                const opt ={
+                    method: "POST",
+                    body: JSON.stringify({
+                        name: name,
+                        birth_date: birth_date,
+                        specie:specie
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try{
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/user/pets/add",opt)
+                    if(response.status !== 200){
+                        console.log("there is some error in registerPet")
+                    }
+                    const data = await response.json();
+                    console.log(data)
+                }catch(error){
+                    console.log("the has been some error in register pet")
+                }
             }
+
+
         }
     }
 

@@ -1,9 +1,10 @@
 import { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 const Userpets = () => {
     const {actions,store} = useContext(Context);
+    const history = useHistory()
     /* const obtenermascotas = ()=>{
         actions.getMascotasUser()
     } */
@@ -15,15 +16,16 @@ const Userpets = () => {
 
     return (
         <>
+        {
+            store.token !== "" ?
+
             <div className="container">
                 <div className="row my-4">
                     <div className="col-12 text-center">
                         <div>
                             <h2 className="display-1">Mis Mascotas</h2>
                         </div>
-                            <div>
-                             {/*  {console.log(pets[0].name)} */}
-                            </div>
+                            
                             {
                                 !!store.pets &&
                                 store.pets.map((pet,index)=>{
@@ -44,7 +46,9 @@ const Userpets = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>:
+            history.push("/login")
+        }
         </>
     )
 }
