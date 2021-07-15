@@ -35,7 +35,7 @@ const Userpets = () => {
                                                 <div className="col-12 col-md-4">
 
                                                     <div className="card" style={{ width: "18rem" }}>
-                                                        <img src="..." className="card-img-top" alt="imagen mascota" />
+                                                        <img src={pet.picture} className="card-img-top" alt="imagen mascota" />
                                                         <div className="card-body">
                                                             <h5 className="card-title">{pet.name}</h5>
                                                             <p className="card-text">
