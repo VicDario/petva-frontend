@@ -18,7 +18,12 @@ const injectContext = (PassedComponent) => {
         );
 
         useEffect(() => {
+<<<<<<< HEAD
             state.actions.getMascotasUser()
+=======
+            state.store.token = localStorage.getItem("petvaToken")
+            state.store.userType = localStorage.getItem("petvaUser")
+>>>>>>> 99431939b2f9c145a22832bc3681d8cf52b02d1c
         }, [])
 
         return (
