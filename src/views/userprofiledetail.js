@@ -9,7 +9,7 @@ const Userprofiledetail = ()=>{
         
         actions.getUserDetail();
     }, [])
-    const lengthPets = store.pets.length
+    
     
 
     return(
@@ -22,7 +22,7 @@ const Userprofiledetail = ()=>{
                     <div>
 
                         {
-                            !!store.userDetail && !!store.pets &&
+                            !!store.userDetail && 
 
                         <div className="card mb-3" style={{ maxWidth: 540 }}>
                             <div className="row g-0">
@@ -38,9 +38,7 @@ const Userprofiledetail = ()=>{
                                             <p className="card-text">
                                                 {store.userDetail.phone}
                                             </p>
-                                        <p className="card-text">
-                                            <small className="text-muted">Numero de Mascotas actuales: {lengthPets}</small>
-                                        </p>
+                                        
                                     </div>
                                 </div>
                             </div>

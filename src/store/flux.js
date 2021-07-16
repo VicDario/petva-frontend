@@ -75,7 +75,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                         /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
                         if (data.access_token){
                             localStorage.setItem("petvaToken", data.access_token)
-                            localStorage.setItem("petvaUser", "normal")
+                            /* localStorage.setItem("petvaUser", "normal") */
+                            setStore({userType:"normal"})
                             setStore({ token: data.access_token })
                             history.push("/user")
                         }
@@ -99,7 +100,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then(data => {
                         console.log(data)
                         if (data.access_token) localStorage.setItem("petvaToken", data.access_token)
-                        if (data.access_token) localStorage.setItem("petvaUser", "foundation")
+                        if (data.access_token) setStore({userType: "foundation"})
 
                         if (data.access_token) setStore({ token: data.access_token })
                         if (data.access_token) console.log("Iniciada sesion de fundacion")
@@ -130,6 +131,29 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log("There has been an error in get pets")
                 }
 
+            },
+            getPetsFundation: async () => {
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/fundation/pets", opt)
+                    if (response.status !== 200)
+                    {
+                        console.log("There has been some error")
+                    }
+                    const data = await response.json();
+                    console.log(data)
+                    setStore({ pets: data })
+
+                } catch (error)
+                {
+                    console.log("There has been an error in get pets")
+                }
             },
             registerPet: async (name, chip_code, birth_date, specie, breed, picture) => {
                 const store = getStore();
@@ -218,9 +242,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             logOut: () => {
                 const store = getStore()
-                setStore({ ...store, token: null })
+                setStore({ ...store, token: null, userType:null, userDetail:null, pets:null })
                 localStorage.setItem("petvaToken", null)
                 localStorage.setItem("petvaUser", null)
+                
                 
             },
             convertImgToBase64: (file) => {
@@ -231,9 +256,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                 };
             },
             getUserDetail: async () => {
+                const store = getStore()
                 const opt = {
                     headers: {
-                        "Authorization": "Bearer " + localStorage.getItem("token")
+                        "Authorization": "Bearer " + store.token
                     }
                 }
                 try{
@@ -249,9 +275,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
             getFundationDetail: async () => {
+                const store = getStore();
                 const opt = {
                     headers: {
-                        "Authorization": "Bearer " + localStorage.getItem("token")
+                        "Authorization": "Bearer " + store.token
                     }
                 }
                 try
@@ -263,7 +290,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                     const data = await response.json();
                     console.log(data);
-                    if (data) setStore({ fundationDetail: data })
+                     setStore({ fundationDetail: data })
                 } catch (error)
                 {
                     console.log("Error in get detail user")

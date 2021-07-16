@@ -13,6 +13,7 @@ import Loginfundation from './views/loginfundation';
 import FundationProfile from './views/fundationprofile';
 import Userprofiledetail from './views/userprofiledetail';
 import Fundationprofiledetail from './views/fundationprofiledetail';
+import Fundationpets from './views/fundationpets';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/fundation" component={FundationProfile}/>
           <Route exact path="/user/profile" component={Userprofiledetail} />
           <Route exact path="/fundation/profile" component={Fundationprofiledetail} />
+          <Route exact path="/foundation/pets" component={Fundationpets}/>
           <Route component={Custom404}/>
         </Switch>
       </BrowserRouter>
