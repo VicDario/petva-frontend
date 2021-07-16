@@ -5,8 +5,7 @@ import LoadingSpiner from '../Components/LoadingSpinner';
 
 const Userpets = ({history}) => {
     const { actions, store } = useContext(Context);
-    let token = localStorage.getItem("token")
-
+    
     useEffect(() => {
         actions.getMascotasUser()
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -15,7 +14,7 @@ const Userpets = ({history}) => {
     return (
         <>
         {
-            !!token &&
+            !!store.token &&
             <div className="container">
                 <div className="row my-4">
                     <div className="col-12 text-center">
@@ -59,7 +58,7 @@ const Userpets = ({history}) => {
                 </div>
             </div>
         }{
-            !token &&
+            !store.token &&
             history.push("/")
         }
         </>
