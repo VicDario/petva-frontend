@@ -80,7 +80,7 @@ const Addpet = () => {
                         <div className="mb-3 row">
                             <label className="col-sm-3 col-form-label fs-4" htmlFor="picture">Imagen</label>
                             <div className="col-sm-9">
-                                <input type="file" onChange={e => handleLoad(e)} className="form-control fs-5" id="picture" />
+                                <input type="file" onChange={e => handleLoad(e)} accept="image/png, .jpg, .jpeg" className="form-control fs-5" id="picture" />
                             </div>
                         </div>
                         <div className="mb-3 row">
