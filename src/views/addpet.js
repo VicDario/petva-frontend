@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { Context } from "../store/appContext"
 
-const Addpet = () => {
+const Addpet = ({ history }) => {
     const { actions, store } = useContext(Context);
     const [pet, setPet] = useState({
         name: "",
@@ -21,16 +21,15 @@ const Addpet = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(localStorage.getItem("usertype")==="normal"){
-
-            actions.registerPet(pet.name, formatDate(pet.birth_date), pet.specie);
+        if(store.userType==="normal"){
+            actions.registerPet(pet.name, pet.chip_code, formatDate(pet.birth_date), pet.specie, pet.breed, store.auxPicture);
+            history.push("/userpets");
         }
-        if(localStorage.getItem("usertype")==="fundation"){
+        if(store.userType==="foundation"){
             console.log("Agrega la mascota como fundación")
             actions.registerPetFundation(pet.name, formatDate(pet.birth_date), pet.specie)
+            history.push("/foundation/pets");
         }
-
-        actions.registerPet(pet.name, pet.chip_code, formatDate(pet.birth_date), pet.specie, pet.breed, store.auxPicture);
         actions.resetAuxPicture(); // reset aux picture to null
     }
 
@@ -44,7 +43,7 @@ const Addpet = () => {
             <div className="row my-4 border border-dark">
                 <div className="col-12 text-center">
                     <div className="mb-3">
-                        <h1>Agregar Mascota</h1>
+                        <h1>Agregar Mascota como {store.userType}</h1>
                     </div>
                 </div>
                 <div className="col-12 col-md-6 mx-auto">

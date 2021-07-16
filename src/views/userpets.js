@@ -5,20 +5,16 @@ import LoadingSpiner from '../Components/LoadingSpinner';
 
 const Userpets = ({history}) => {
     const { actions, store } = useContext(Context);
-    /* const obtenermascotas = ()=>{
-        actions.getMascotasUser()
-    } */
-
-    let token = localStorage.getItem("token")
-
+    
     useEffect(() => {
         actions.getMascotasUser()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <>
         {
-            !!token &&
+            !!store.token &&
             <div className="container">
                 <div className="row my-4">
                     <div className="col-12 text-center">
@@ -34,12 +30,13 @@ const Userpets = ({history}) => {
                                             <div className="col-sm-6 col-md-4">
                                                 <div class="card mb-3">
                                                     <img src={!!pet.picture ? pet.picture : "/images/default.jpg"} className="card-img-top" alt={pet.name} />
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">{pet.name}</h5>
+                                                    <div className="card-body">
+                                                        <h5 className="card-title">{pet.name}</h5>
                                                     <p class="card-text">{pet.specie==='cat' ? "Gato" : "Perro"}</p>
                                                     <p class="card-text">{!!pet.birth_date ? pet.birth_date : "No registra fecha de nacimiento"}</p>
                                                     <p class="card-text">{!!pet.chip_code ? pet.chip_code : "No registra codigo de chip"}</p>
-                                                    <Link href="/infomascota" class="btn btn-primary">Detalles</Link>
+                                                        <Link href="/infomascota" class="btn btn-primary">Detalles</Link>
+                                                        
                                                     </div>
                                                 </div> 
                                             </div>
@@ -62,7 +59,7 @@ const Userpets = ({history}) => {
                 </div>
             </div>
         }{
-            !token &&
+            !store.token &&
             history.push("/")
         }
         </>
