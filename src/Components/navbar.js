@@ -24,7 +24,7 @@ const Navbar = () => {
         <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
             <div className="container-fluid ">
                 <Link className="text-decoration-none" to="/">
-                <img className="img-fluid logo" src="/images/logo_cat_medium.png" alt="logo" /></Link>
+                <img className="img-fluid logo" src="/images/logo_cat_small.png" alt="logo" /></Link>
                 <button
                     className="navbar-toggler"
                     type="button"
