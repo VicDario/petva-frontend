@@ -12,8 +12,6 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
-    /* const [password, setPassword] = useState("");
-    const [passwordConfirmed, setPasswordConfirmed] = useState(""); */
 
     const [datos, setDatos] = useState({
         password: "",
@@ -30,7 +28,7 @@ const Register = () => {
             alert("Debe seleccionar tipo de Usuario")
             e.preventDefault()
         }
-        if (user === "NORMAL")
+        if (user === "USUARIO")
         {
             if (user === "" || name === "" || email === "" || datos.password === "")
             {
@@ -61,7 +59,6 @@ const Register = () => {
             {
                 if (datos.password === datos.passwordC)
                 {
-
                     actions.registerClinica(email, name, address, phone, datos.password)
                     setUser("REGISTRADO")
                 } else
@@ -89,20 +86,30 @@ const Register = () => {
                 }
             }
         }
-        /* if(name === ""){
-            nameForm.classList.add("is-invalid")
-            nameForm.classList.remove("is-valid")
-
-        }else{
-            nameForm.classList.remove("is-invalid")
-            nameForm.classList.add("is-valid")
-        } */
-        // actions.registerClinica()
     }
 
+    const validatePassword = (e) => {
+        
+        let password_regex = new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
+        if (datos.password.trim() === '')
+        {
+            console.error("password empty");
+            return false;
+        } else if (datos.password < 8)
+        {
+            console.error("password too short");
+            return false;
+        } else if (!password_regex.test(datos.password))
+        {
+            console.error("password may contain at least one mayus letter, one minus letter, one number and one special character.")
+            return false;
+        } else
+        {
+            return true;
+        }
+    }
 
     return (
-
         <>
             <div className="container">
                 <div className="text-center my-3">
@@ -117,8 +124,8 @@ const Register = () => {
                         <div >
 
                             <div className="form-check form-check-inline d-block fs-3">
-                                <input onChange={(e) => setUser(e.target.value)} className="form-check-input" type="radio" name="tipoUsuario" id="optNormal" value="NORMAL" />
-                                <label className="form-check-label" htmlFor="optNormal">Usuario Común</label>
+                                <input onChange={(e) => setUser(e.target.value)} className="form-check-input" type="radio" name="tipoUsuario" id="optNormal" value="USUARIO" />
+                                <label className="form-check-label" htmlFor="optNormal">Usuario</label>
                             </div>
                             <div className="form-check form-check-inline d-block fs-3">
                                 <input onChange={(e) => setUser(e.target.value)} className="form-check-input" type="radio" name="tipoUsuario" id="optClinica" value="CLINICA" />
