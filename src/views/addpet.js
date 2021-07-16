@@ -27,7 +27,7 @@ const Addpet = ({ history }) => {
         }
         if(store.userType==="foundation"){
             console.log("Agrega la mascota como fundación")
-            actions.registerPetFundation(pet.name, formatDate(pet.birth_date), pet.specie)
+            actions.registerPetFundation(pet.name, pet.chip_code, formatDate(pet.birth_date), pet.specie, pet.breed, store.auxPicture)
             history.push("/foundation/pets");
         }
         actions.resetAuxPicture(); // reset aux picture to null
