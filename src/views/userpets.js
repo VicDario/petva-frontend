@@ -35,7 +35,8 @@ const Userpets = ({history}) => {
                                                     <p class="card-text">{pet.specie==='cat' ? "Gato" : "Perro"}</p>
                                                     <p class="card-text">{!!pet.birth_date ? pet.birth_date : "No registra fecha de nacimiento"}</p>
                                                     <p class="card-text">{!!pet.chip_code ? pet.chip_code : "No registra codigo de chip"}</p>
-                                                    <Link href="/infomascota" class="btn btn-primary">Detalles</Link>
+                                                        <Link href="/infomascota" class="btn btn-primary">Detalles</Link>
+                                                        
                                                     </div>
                                                 </div> 
                                             </div>
