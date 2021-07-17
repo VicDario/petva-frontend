@@ -352,7 +352,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 try
                 {
-                    const response = await fetch(`${store.baseUrl}api/user/pet/${pet_id}/history`, opt)
+                    const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}/history`, opt)
                     if (response.status !== 200)
                     {
                         console.log("There is a some error in get history of pet")
@@ -387,8 +387,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log("Error in get info pet")
                 }
             },
-            addVaccinetoPetUser : async (date,lot,name,laboratory,pet_id,history)=>{
+            addVaccinetoPetUser : async (date,lot,name,laboratory,pet_id)=>{
                 const store = getStore();
+                const actions = getActions();
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -404,17 +405,52 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 try
                 {
-                    const response = await fetch(`${store.baseUrl}api/user/pet/${pet_id}/history/vaccine/add`, opt)
+                    const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}/history/vaccine/add`, opt)
                     if (response.status !== 200)
                     {
                         console.log("there is some error in post vaccine pet")
                     }
                     const data = await response.json();
                     console.log(data)
+                    actions.getHistoryUserPet(pet_id);
+
                    
                 } catch (error)
                 {
                     console.log("the has been some error in post vaccine")
+                }
+            },
+            addDiagnostictoPetUser: async (date, diagnostic, doctor_name, pet_id) => {
+                const store = getStore();
+                const actions = getActions();
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        date: date,
+                        diagnostic: diagnostic,
+                        doctor_name: doctor_name
+                        
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}/history/diagnostic/add`, opt)
+                    if (response.status !== 201)
+                    {
+                        console.log("there is some error in post diagnostic pet")
+                    }
+                    const data = await response.json();
+                    console.log(data)
+                    actions.getHistoryUserPet(pet_id);
+
+
+                } catch (error)
+                {
+                    console.log("the has been some error in post diagnostic")
                 }
             }
 
