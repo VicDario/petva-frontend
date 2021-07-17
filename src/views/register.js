@@ -18,8 +18,6 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const MySwal = withReactContent(Swal)
-
     const validarRegistro = (e) => {
         e.preventDefault()
         if (!user)
@@ -44,7 +42,8 @@ const Register = () => {
                     setIsRegister(true)
                 } else
                 {
-                    alert("Contraseña no concide")
+                    Swal.fire("Error!", "Contraseña no coincide!", "error");
+                    //alert("Contraseña no concide")
                 }
             }
         }
@@ -59,13 +58,13 @@ const Register = () => {
                 if(!validatePassword(password)) return
                 if(!validateEmail(email)) return
                 if (password === confirmPassword)
-                {
-                    setIsRegister(true)
+                { 
                     if(user === "Clinica"){
                         actions.registerClinica(email, name, address, phone, password)
                     }else{
                         actions.registerFundation(email, name, address, phone, password)
                     } 
+                    setIsRegister(true)
                 } else
                 {
                     Swal.fire("Error!", "Contraseña no coincide!", "error");
@@ -76,10 +75,10 @@ const Register = () => {
     }
 
     const validatePassword = (password) => {
-        let passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        let passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.¡¿]).{8,}$/;
         if (!passwordRegex.test(password))
         {
-            Swal.fire("Error!", "La contraseña debe contener al menos un número, una letra mayuscula y una letra minuscula y una longitud de minimo 8 caracteres", "error");
+            Swal.fire("Error!", "La contraseña debe contener al menos:<br/>Un número.<br/>Una letra mayúscula.<br/>Una letra minúscula.<br/>Una longitud de 8 caracteres o más.", "error");
             //alert("La contraseña debe contener al menos un número, una letra mayuscula y una letra minuscula y una longitud de minimo 8 caracteres")
             return false;
         }
