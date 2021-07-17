@@ -63,8 +63,8 @@ const Addpet = ({ history }) => {
                         <div className="mb-3 row">
                             <label className="col-sm-3 col-form-label fs-4" htmlFor="">Especie</label>
                             <div className="col-sm-9">
-                                <select className="form-select" onChange={(e) => { setPet({ ...pet, specie: e.target.value }) }}>
-                                    <option selected value="">Seleccione una Especie</option>
+                                <select defaultValue="" className="form-select" onChange={(e) => { setPet({ ...pet, specie: e.target.value }) }}>
+                                    <option value="">Seleccione una Especie</option>
                                     <option value="dog">Perro</option>
                                     <option value="cat">Gato</option>
                                 </select>

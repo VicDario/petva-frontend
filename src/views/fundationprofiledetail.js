@@ -8,8 +8,9 @@ const Fundationprofiledetail = () => {
     useEffect(() => {
         //deberia estar el get mascotas fundation
         actions.getFundationDetail();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    
+
     return (
         <>
             <div className="container">
@@ -20,7 +21,7 @@ const Fundationprofiledetail = () => {
                     <div>
 
                         {
-                            !!store.fundationDetail && 
+                            !!store.fundationDetail &&
 
                             <div className="card mb-3" style={{ maxWidth: 540 }}>
                                 <div className="row g-0">

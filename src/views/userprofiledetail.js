@@ -2,17 +2,17 @@ import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useEffect } from "react";
 
-const Userprofiledetail = ()=>{
-    const {actions,store} = useContext(Context);
-    
-    useEffect(() => {
-        
-        actions.getUserDetail();
-    }, [])
-    
-    
+const Userprofiledetail = () => {
+    const { actions, store } = useContext(Context);
 
-    return(
+    useEffect(() => {
+        actions.getUserDetail();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+
+
+    return (
         <>
             <div className="container">
                 <div className="row">
@@ -22,30 +22,30 @@ const Userprofiledetail = ()=>{
                     <div>
 
                         {
-                            !!store.userDetail && 
+                            !!store.userDetail &&
 
-                        <div className="card mb-3" style={{ maxWidth: 540 }}>
-                            <div className="row g-0">
-                                <div className="col-md-4">
+                            <div className="card mb-3" style={{ maxWidth: 540 }}>
+                                <div className="row g-0">
+                                    <div className="col-md-4">
                                         <img src={store.userDetail.picture} className="img-fluid rounded-start" alt="Imagen Perfil" />
-                                </div>
-                                <div className="col-md-8">
-                                    <div className="card-body">
+                                    </div>
+                                    <div className="col-md-8">
+                                        <div className="card-body">
                                             <h5 className="card-title">{store.userDetail.name} {store.userDetail.lastname}</h5>
-                                        <p className="card-text">
+                                            <p className="card-text">
                                                 {store.userDetail.email}
-                                        </p>
+                                            </p>
                                             <p className="card-text">
                                                 {store.userDetail.phone}
                                             </p>
-                                        
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         }
                     </div>
-                   
+
                 </div>
             </div>
         </>

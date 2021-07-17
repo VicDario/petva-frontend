@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 
 const TransferPetFromFoundation = () => {
-    const { actions,store } = useContext(Context);
+    const { actions, store } = useContext(Context);
     const [mailUser, setMailUser] = useState();
     const { pet_id } = useParams()
     console.log(pet_id);
@@ -14,10 +14,11 @@ const TransferPetFromFoundation = () => {
 
     useEffect(() => {
         actions.getSinglePetFromFundation(pet_id);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const makeTransfer = ()=>{
-        actions.transferPetFromFundation(mailUser,pet_id,history);
+    const makeTransfer = () => {
+        actions.transferPetFromFundation(mailUser, pet_id, history);
     }
     return (
         <>
@@ -31,18 +32,18 @@ const TransferPetFromFoundation = () => {
                     <div className="col-12 col-md-5">
                         {
                             !!store.foundationPet &&
-                        <div className="card mb-3">
-                            <img src={!!store.foundationPet.picture ? store.foundationPett.picture : "/images/default.jpg"} className="card-img-top" alt={store.foundationPet.name} />
-                            <div className="card-body">
-                                <h5 className="card-title">{store.foundationPet.name}</h5>
-                                <p class="card-text">{store.foundationPet.specie === 'cat' ? "Gato" : "Perro"}</p>
-                                <p class="card-text">{!!store.foundationPet.birth_date ? store.foundationPet.birth_date : "No registra fecha de nacimiento"}</p>
-                                <p class="card-text">{!!store.foundationPet.chip_code ? store.foundationPet.chip_code : "No registra codigo de chip"}</p>
-                                
+                            <div className="card mb-3">
+                                <img src={!!store.foundationPet.picture ? store.foundationPett.picture : "/images/default.jpg"} className="card-img-top" alt={store.foundationPet.name} />
+                                <div className="card-body">
+                                    <h5 className="card-title">{store.foundationPet.name}</h5>
+                                    <p className="card-text">{store.foundationPet.specie === 'cat' ? "Gato" : "Perro"}</p>
+                                    <p className="card-text">{!!store.foundationPet.birth_date ? store.foundationPet.birth_date : "No registra fecha de nacimiento"}</p>
+                                    <p className="card-text">{!!store.foundationPet.chip_code ? store.foundationPet.chip_code : "No registra codigo de chip"}</p>
+
+                                </div>
+
+
                             </div>
-
-
-                        </div>
                         }
                     </div>
                     <div className="col-12 col-md-5">
@@ -50,15 +51,15 @@ const TransferPetFromFoundation = () => {
                             <h2>Ingrese Email de Usuario a Tranferir</h2>
                         </div>
                         <div>
-                            <input className="form-control mt-3" id="mail-user" onChange={(e) => { setMailUser(e.target.value) }} type="text" 
-                            placeholder="Ingrese email de usuario a transferir mascota"/>
+                            <input className="form-control mt-3" id="mail-user" onChange={(e) => { setMailUser(e.target.value) }} type="text"
+                                placeholder="Ingrese email de usuario a transferir mascota" />
                         </div>
                         <div className="text-center my-5">
                             <button onClick={makeTransfer} className="btn btn-success btn-lg">TRANSFERIR</button>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </>
 
