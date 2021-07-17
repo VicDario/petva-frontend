@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const Home = () => {
     return (
         <>
@@ -8,7 +10,7 @@ const Home = () => {
                 <div className="row d-flex align-items-center">
                     
                     <div className="col-4 col-md-2" >
-                        <img className="imgRedonda img-fluid" src="https://picsum.photos/id/237/200/300" alt="imagen adoptaar" />
+                        <img className="imgRedonda img-fluid" src="/images/adoptar mascota.jpg" alt="imagen adoptaar" />
                     </div>
                     <div className="col-8 col-md-6 text-center">
                         <div >
@@ -38,7 +40,9 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="col-4 col-md-2" >
-                        <img className="imgRedonda img-fluid" src="https://picsum.photos/id/237/200/300" alt="imagen adoptaar" />
+                        <Link to="/services">
+                        <img className="imgRedonda img-fluid" src="/images/adiestramiento-de-perros-a-domicilio.jpg" alt="Servicios" />
+                        </Link>
                     </div>
                 </div>
                 <div className="row d-flex align-items-center">

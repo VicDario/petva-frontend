@@ -163,7 +163,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     method: 'POST',
                     body: JSON.stringify({
                         name: name,
-                        chip_code: chip_code,
+                        code_chip: chip_code,
                         birth_date: birth_date,
                         specie: specie,
                         breed: breed,
@@ -188,14 +188,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log(`Register pet error ${error}`)
                 }
             },
-            registerPetFundation: async (name, birth_date, specie) => {
+            registerPetFundation: async (name,chip_code, birth_date, specie, breed,picture) => {
                 const store = getStore();
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
                         name: name,
+                        code_chip: chip_code,
                         birth_date: birth_date,
-                        specie: specie
+                        specie: specie,
+                        breed: breed,
+                        picture: picture
                     }),
                     headers: {
                         "Content-Type": "application/json",

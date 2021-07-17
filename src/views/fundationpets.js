@@ -36,8 +36,8 @@ const Fundationpets = () => {
                                                     <h5 className="card-title">{pet.name}</h5>
                                                     <p class="card-text">{pet.specie === 'cat' ? "Gato" : "Perro"}</p>
                                                     <p class="card-text">{!!pet.birth_date ? pet.birth_date : "No registra fecha de nacimiento"}</p>
-                                                    <p class="card-text">{!!pet.chip_code ? pet.chip_code : "No registra codigo de chip"}</p>
-                                                    <p class="card-text badge rounded-pill bg-success">{pet.state}</p>
+                                                    <p class="card-text">{!!pet.chip_code ? pet.code_chip : "No registra codigo de chip"}</p>
+                                                    <p class="card-text badge rounded-pill bg-success fs-3">{pet.state==="owned"?"Con Dueño":"En adopción"}</p>
                                                     
                                                     <div className="d-flex justify-content-around">
                                                     <Link href="/infomascota" class="btn btn-primary">Detalles</Link>
