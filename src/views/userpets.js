@@ -27,15 +27,15 @@ const Userpets = ({history}) => {
                                 store.pets.length > 0 ?
                                     store.pets.map((pet, index) => {
                                         return (
-                                            <div className="col-sm-6 col-md-4">
-                                                <div class="card mb-3">
+                                            <div className="col-sm-6 col-md-4" key={index}>
+                                                <div className="card mb-3">
                                                     <img src={!!pet.picture ? pet.picture : "/images/default.jpg"} className="card-img-top" alt={pet.name} />
                                                     <div className="card-body">
                                                         <h5 className="card-title">{pet.name}</h5>
                                                     <p className="card-text">{pet.specie==='cat' ? "Gato" : "Perro"}</p>
                                                     <p className="card-text">{!!pet.birth_date ? pet.birth_date : "No registra fecha de nacimiento"}</p>
                                                     <p className="card-text">{!!pet.chip_code ? pet.chip_code : "No registra codigo de chip"}</p>
-                                                    <Link href="/infomascota" class="btn btn-primary">Detalles</Link>
+                                                    <Link href="/infomascota" className="btn btn-primary">Detalles</Link>
                                                     </div>
                                                 </div> 
                                             </div>
