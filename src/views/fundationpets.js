@@ -30,18 +30,18 @@ const Fundationpets = () => {
                                 store.pets.map((pet, index) => {
                                     return (
                                         <div className="col-sm-6 col-md-4">
-                                            <div class="card mb-3">
+                                            <div className="card mb-3">
                                                 <img src={!!pet.picture ? pet.picture : "/images/default.jpg"} className="card-img-top" alt={pet.name} />
                                                 <div className="card-body">
                                                     <h5 className="card-title">{pet.name}</h5>
-                                                    <p class="card-text">{pet.specie === 'cat' ? "Gato" : "Perro"}</p>
-                                                    <p class="card-text">{!!pet.birth_date ? pet.birth_date : "No registra fecha de nacimiento"}</p>
-                                                    <p class="card-text">{!!pet.chip_code ? pet.code_chip : "No registra codigo de chip"}</p>
-                                                    <p class="card-text badge rounded-pill bg-success fs-3">{pet.state==="owned"?"Con Dueño":"En adopción"}</p>
+                                                    <p className="card-text">{pet.specie === 'cat' ? "Gato" : "Perro"}</p>
+                                                    <p className="card-text">{!!pet.birth_date ? pet.birth_date : "No registra fecha de nacimiento"}</p>
+                                                    <p className="card-text">{!!pet.chip_code ? pet.code_chip : "No registra codigo de chip"}</p>
+                                                    <p className="card-text badge rounded-pill bg-success fs-3">{pet.state==="owned"?"Con Dueño":"En adopción"}</p>
                                                     
                                                     <div className="d-flex justify-content-around">
-                                                    <Link href="/infomascota" class="btn btn-primary">Detalles</Link>
-                                                    <Link to={"/foundation/transfer/" +pet.id} class="btn btn-danger">Transferir</Link>
+                                                    <Link href="/infomascota" className="btn btn-primary">Detalles</Link>
+                                                    <Link to={"/foundation/transfer/" +pet.id} className="btn btn-danger">Transferir</Link>
                                                     </div>
                                                 </div>
                                             </div>

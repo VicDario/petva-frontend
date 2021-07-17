@@ -35,9 +35,9 @@ const TransferPetFromFoundation = () => {
                             <img src={!!store.foundationPet.picture ? store.foundationPett.picture : "/images/default.jpg"} className="card-img-top" alt={store.foundationPet.name} />
                             <div className="card-body">
                                 <h5 className="card-title">{store.foundationPet.name}</h5>
-                                <p class="card-text">{store.foundationPet.specie === 'cat' ? "Gato" : "Perro"}</p>
-                                <p class="card-text">{!!store.foundationPet.birth_date ? store.foundationPet.birth_date : "No registra fecha de nacimiento"}</p>
-                                <p class="card-text">{!!store.foundationPet.chip_code ? store.foundationPet.chip_code : "No registra codigo de chip"}</p>
+                                <p className="card-text">{store.foundationPet.specie === 'cat' ? "Gato" : "Perro"}</p>
+                                <p className="card-text">{!!store.foundationPet.birth_date ? store.foundationPet.birth_date : "No registra fecha de nacimiento"}</p>
+                                <p className="card-text">{!!store.foundationPet.chip_code ? store.foundationPet.chip_code : "No registra codigo de chip"}</p>
                                 
                             </div>
 
