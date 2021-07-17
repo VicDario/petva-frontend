@@ -6,7 +6,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             pets: null,
             user: null,
             auxPicture: null,
+            userDetail: null,
+            fundationDetail: null,
             baseUrl: 'https://petva-backend-dev.herokuapp.com/', //https://petva-backend-dev.herokuapp.com/
+            foundationPet : null
         },
         actions: {
             registerClinica: (email, name, address, phone, password) => {
@@ -71,9 +74,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then(data => {
                         console.log(data.access_token);
                         /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
-                        if (data.access_token){
+                        if (data.access_token)
+                        {
                             localStorage.setItem("petvaToken", data.access_token)
-                            localStorage.setItem("petvaUser", "normal")
+                            /* localStorage.setItem("petvaUser", "normal") */
+                            setStore({ userType: "normal" })
                             setStore({ token: data.access_token })
                             history.push("/user")
                         }
@@ -97,7 +102,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then(data => {
                         console.log(data)
                         if (data.access_token) localStorage.setItem("petvaToken", data.access_token)
-                        if (data.access_token) localStorage.setItem("petvaUser", "foundation")
+                        if (data.access_token) setStore({ userType: "foundation" })
 
                         if (data.access_token) setStore({ token: data.access_token })
                         if (data.access_token) console.log("Iniciada sesion de fundacion")
@@ -129,13 +134,36 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
+            getPetsFundation: async () => {
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/fundation/pets", opt)
+                    if (response.status !== 200)
+                    {
+                        console.log("There has been some error")
+                    }
+                    const data = await response.json();
+                    console.log(data)
+                    setStore({ pets: data })
+
+                } catch (error)
+                {
+                    console.log("There has been an error in get pets")
+                }
+            },
             registerPet: async (name, chip_code, birth_date, specie, breed, picture) => {
                 const store = getStore();
                 const opt = {
                     method: 'POST',
                     body: JSON.stringify({
                         name: name,
-                        chip_code: chip_code,
+                        code_chip: chip_code,
                         birth_date: birth_date,
                         specie: specie,
                         breed: breed,
@@ -160,14 +188,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log(`Register pet error ${error}`)
                 }
             },
-            registerPetFundation: async (name, birth_date, specie) => {
+            registerPetFundation: async (name,chip_code, birth_date, specie, breed,picture) => {
                 const store = getStore();
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
                         name: name,
+                        code_chip: chip_code,
                         birth_date: birth_date,
-                        specie: specie
+                        specie: specie,
+                        breed: breed,
+                        picture: picture
                     }),
                     headers: {
                         "Content-Type": "application/json",
@@ -216,10 +247,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             logOut: () => {
                 const store = getStore()
-                setStore({ ...store, token: null })
+                setStore({ ...store, token: null, userType: null, userDetail: null, pets: null })
                 localStorage.setItem("petvaToken", null)
                 localStorage.setItem("petvaUser", null)
-                
+
+
             },
             convertImgToBase64: (file) => {
                 let reader = new FileReader();
@@ -228,11 +260,102 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ auxPicture: reader.result })
                 };
             },
-            getUserDetail: () => {
-
+            getUserDetail: async () => {
+                const store = getStore()
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/user/info", opt)
+                    if (response.status !== 200)
+                    {
+                        console.log("There is a some error in get user detail")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    if (data) setStore({ userDetail: data })
+                } catch (error)
+                {
+                    console.log("Error in get detail user")
+                }
+            },
+            getFundationDetail: async () => {
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/fundation/info", opt)
+                    if (response.status !== 200)
+                    {
+                        console.log("There is a some error in get user detail")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    setStore({ fundationDetail: data })
+                } catch (error)
+                {
+                    console.log("Error in get detail user")
+                }
             },
             resetAuxPicture: () => {
                 setStore({ auxPicture: null })
+            },
+            getSinglePetFromFundation: async (pet_id) => {
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}/api/fundation/pets/${pet_id}`, opt)
+                    if (response.status !== 200)
+                    {
+                        console.log("There is a some error in pet of foundation")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    setStore({ foundationPet: data })
+                } catch (error)
+                {
+                    console.log("Error in get info pet")
+                }
+            },
+            transferPetFromFundation : async (user_email,pet_id,history)=>{
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        email_user:user_email,
+                        id_pet : pet_id
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/fundation/transfer`, opt)
+                    if (response.status !== 201)
+                    {
+                        console.log("there is some error in transfer a pet")
+                    }
+                    const data = await response.json();
+                    console.log(data)
+                    history.push("/foundation/pets")
+                } catch (error)
+                {
+                    console.log("the has been some error in transfer")
+                }
             }
         }
     };
