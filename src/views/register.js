@@ -2,8 +2,8 @@ import { useContext, useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const Register = () => {
     const { actions } = useContext(Context);
@@ -17,7 +17,6 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    let link = ""
 
     const MySwal = withReactContent(Swal)
 
@@ -27,7 +26,6 @@ const Register = () => {
         {
             Swal.fire("Error!", "Debe seleccionar tipo de Usuario!", "error");
             //alert("Debe seleccionar tipo de Usuario")
-            e.preventDefault()
         }
         if (user === "Usuario")
         {
@@ -36,7 +34,6 @@ const Register = () => {
                 Swal.fire("Error!", "Debe rellenar todos los campos!", "error");
                 console.log(`${name} ${lastname} ${email} ${password}`)
                 //alert("Debe rellenar todos los campos")
-                e.preventDefault()
             } else
             {
                 if(!validatePassword(password)) return
@@ -45,7 +42,6 @@ const Register = () => {
                 {
                     actions.registerUser(email, name, lastname, password)
                     setIsRegister(true)
-                    link = "/user/login"
                 } else
                 {
                     alert("Contraseña no concide")
@@ -58,7 +54,6 @@ const Register = () => {
             {
                 Swal.fire("Error!", "Debe rellenar todos los campos!", "error");
                 //alert("Debe rellenar todos los campos")
-                e.preventDefault()
             } else
             {
                 if(!validatePassword(password)) return
@@ -68,12 +63,9 @@ const Register = () => {
                     setIsRegister(true)
                     if(user === "Clinica"){
                         actions.registerClinica(email, name, address, phone, password)
-                        link = "/clinic/login"
                     }else{
                         actions.registerFundation(email, name, address, phone, password)
-                        link = "/foundation/login"
-                    }
-                   
+                    } 
                 } else
                 {
                     Swal.fire("Error!", "Contraseña no coincide!", "error");
@@ -204,9 +196,22 @@ const Register = () => {
                             <div>
                                 <h1>Usuario Registrado</h1>
                                 <p>Ve a iniciar sesión</p>
-                                <Link className="btn btn-dark" to={link}>
-                                    Iniciar Sesión
-                                </Link>
+                                {
+                                    user === 'Usuario' &&
+                                    <Link className="btn btn-dark" to="/user/login">
+                                        Iniciar Sesión
+                                    </Link>
+                                }{
+                                    user === 'Fundación' &&
+                                    <Link className="btn btn-dark" to="/foundation/login">
+                                        Iniciar Sesión
+                                    </Link>
+                                }{
+                                    user === 'Clinica' &&
+                                    <Link className="btn btn-dark" to="/clinic/login">
+                                        Iniciar Sesión
+                                    </Link>
+                                }
                             </div>
                         }
                     </div>
