@@ -16,7 +16,7 @@ const Userperfil = () => {
                 token !== "" ?
                     <div className="container">
                         <div className="text-center my-4">
-                            <h2 className="display-1">Bienvenido User</h2>
+                            <h2 className="display-1">Bienvenido Usuario</h2>
                         </div>
                         <div className="row">
                             <div className="col-12 col-md-6 d-flex justify-content-center">
@@ -30,7 +30,7 @@ const Userperfil = () => {
                                 </button>
                             </div>
                             <div className="col-12 col-md-6 d-flex justify-content-center">
-                                <Link to="/userpets" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
+                                <Link to="/user/pets" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
                                     Mis Mascotas
                                 </Link >
                             </div>

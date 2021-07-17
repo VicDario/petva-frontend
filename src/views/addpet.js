@@ -23,7 +23,7 @@ const Addpet = ({ history }) => {
         e.preventDefault();
         if(store.userType==="normal"){
             actions.registerPet(pet.name, pet.chip_code, formatDate(pet.birth_date), pet.specie, pet.breed, store.auxPicture);
-            history.push("/userpets");
+            history.push("/user/pets");
         }
         if(store.userType==="foundation"){
             console.log("Agrega la mascota como fundación")

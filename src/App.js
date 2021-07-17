@@ -28,13 +28,14 @@ function App() {
           <Route exact path="/register" component={Register}/>
           <Route exact path="/user/login" component={Login}/>
           <Route exact path="/user" component={Userperfil}/>
-          <Route exact path="/userpets" component={Userpets}/>
-          <Route exact path="/addpetuser" component={Addpet}/>
-          <Route exact path="/fundation/login" component={Loginfundation}/>
-          <Route exact path="/fundation" component={FundationProfile}/>
+          <Route exact path="/user/pets" component={Userpets}/>
+          <Route exact path="/user/pets/add" component={Addpet}/>
+          <Route exact path="/foundation/login" component={Loginfundation}/>
+          <Route exact path="/foundation" component={FundationProfile}/>
           <Route exact path="/user/profile" component={Userprofiledetail} />
-          <Route exact path="/fundation/profile" component={Fundationprofiledetail} />
+          <Route exact path="/foundation/profile" component={Fundationprofiledetail} />
           <Route exact path="/foundation/pets" component={Fundationpets} />
+          <Route exact path="/foundation/pets/add" component={Addpet} />
           <Route exact path="/foundation/transfer/:pet_id" component={TransferPetFromFoundation} />
           <Route exact path="/services" component={Services}/>
           <Route component={Custom404}/>
