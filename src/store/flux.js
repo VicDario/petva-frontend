@@ -73,7 +73,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 try {
                     const response = await fetch(`${store.baseUrl}api/user/login`, opt);
-                    if (response.status !== 200) throw new Error(response.status, "error");
+                    //if (response.status !== 201) throw new Error(response.status, "error");
                     const data = await response.json();
                     console.log(data.access_token);
                     /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
@@ -102,7 +102,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 try {
                     const response = await fetch(`${store.baseUrl}api/fundation/login`, opt);
-                    if (response.status !== 200) throw new Error(response.status, "error");
+                    //if (response.status !== 200) throw new Error(response.status, "error");
                     const data = await response.json();
                     console.log(data);
                     if (data.access_token) {
@@ -234,7 +234,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 try {
                     const response = await fetch(`${store.baseUrl}api/fundation/register`, opt);
-                    if (response.status !== 201) throw new Error(response.status, "error");
+                    //if (response.status !== 201) throw new Error(response.status, "error");
                     const data = await response.json();
                     console.log(data);
                 } catch (error) {
