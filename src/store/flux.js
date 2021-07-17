@@ -386,6 +386,36 @@ const getState = ({ getStore, getActions, setStore }) => {
                 {
                     console.log("Error in get info pet")
                 }
+            },
+            addVaccinetoPetUser : async (date,lot,name,laboratory,pet_id,history)=>{
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        date:date,
+                        lot:lot,
+                        name:name,
+                        laboratory:laboratory
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/user/pet/${pet_id}/history/vaccine/add`, opt)
+                    if (response.status !== 200)
+                    {
+                        console.log("there is some error in post vaccine pet")
+                    }
+                    const data = await response.json();
+                    console.log(data)
+                   
+                } catch (error)
+                {
+                    console.log("the has been some error in post vaccine")
+                }
             }
 
         }
