@@ -29,7 +29,7 @@ const Fundationpets = () => {
                                  store.pets.length > 0 ?
                                 store.pets.map((pet, index) => {
                                     return (
-                                        <div className="col-sm-6 col-md-4">
+                                        <div className="col-sm-6 col-md-4" key={index}>
                                             <div className="card mb-3">
                                                 <img src={!!pet.picture ? pet.picture : "/images/default.jpg"} className="card-img-top" alt={pet.name} />
                                                 <div className="card-body">
