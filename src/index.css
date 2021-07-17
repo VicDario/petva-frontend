@@ -1,22 +1,3 @@
-.imgRedonda {  
-  border-radius:150px;
-}
-
-.logo{
-  width: 75px;
-  height: 75px;
-}
-
-.fondopata{
-  background-image: url("./images/fondopatas.jpg");
-}
-.item{
-  height: 200px;
-  width: 300px;
-  background-image: url("./images/fondopatas.jpg");
-}
-
-.texto-borde {
-  -webkit-text-stroke: 2px black;
-  color: white;
-}
+@import url("./styles/navbar.css"); /* estilos asociados al navbar*/
+@import url("./styles/home.css"); /* estilos asociados al home*/
+@import url("./styles/profiles.css"); /* estilos asociados al perfil*/
