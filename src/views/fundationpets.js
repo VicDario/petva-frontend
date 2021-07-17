@@ -58,7 +58,7 @@ const Fundationpets = () => {
                                 }
                             </div>
                             <div>
-                                <Link to="/addpetuser" className="text-decoration-none badge rounded-pill bg-success p-3 m-1 fs-4">
+                                <Link to="/foundation/pets/add" className="text-decoration-none badge rounded-pill bg-success p-3 m-1 fs-4">
                                     Agregar Mascota
                                 </Link>
                             </div>

@@ -80,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (data.access_token) {
                         localStorage.setItem("petvaToken", data.access_token);
                         /* localStorage.setItem("petvaUser", "normal") */
-                        setStore({ userType: "nomal" });
+                        setStore({ userType: "normal" });
                         setStore({ token: data.access_token });
                         history.push("/user");
                     }
