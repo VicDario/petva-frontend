@@ -19,10 +19,10 @@ const Userperfil = () => {
                             <h2 className="display-1">Bienvenido User</h2>
                         </div>
                         <div className="row">
-                            <div className="col-12 col-md-6 text-center">
-                                <button className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold">
+                            <div className="col-12 col-md-6 d-flex justify-content-center">
+                                <Link to="/user/profile" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
                                     Mis Datos
-                                </button>
+                                </Link >
                             </div>
                             <div className="col-12 col-md-6 text-center">
                                 <button className="btn btn-secondary btn-lg fs-2 my-3  item texto-borde fw-bold ">
@@ -34,10 +34,10 @@ const Userperfil = () => {
                                     Mis Mascotas
                                 </Link >
                             </div>
-                            <div className="col-12 col-md-6 text-center">
-                                <button className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold">
+                            <div className="col-12 col-md-6 d-flex justify-content-center">
+                                <Link to="/services" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
                                     Servicios
-                                </button>
+                                </Link >
                             </div>
                         </div>
                     </div>

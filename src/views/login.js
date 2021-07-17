@@ -4,10 +4,8 @@ import { useHistory } from "react-router";
 
 const Login = () => {
     const { actions } = useContext(Context);
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const inputPassword = useRef();
     const inputEmail = useRef();
+    const inputPassword = useRef();
     const history = useHistory();
 
     const validateEmail = (e) => {
@@ -18,37 +16,13 @@ const Login = () => {
             return false;
         } else
         {
-            console.log(email);
-            setEmail(inputEmail.current.value);
-            return true;
-        }
-    }
-    const validatePassword = (e) => {
-        
-        let password_regex = new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
-        if (inputPassword.current.value.trim() === '')
-        {
-            console.error("password empty");
-            return false;
-        } else if (inputPassword.current.value.length < 8)
-        {
-            console.error("password too short");
-            return false;
-        } else if (!password_regex.test(inputPassword.current.value))
-        {
-            console.error("password may contain at least one mayus letter, one minus letter, one number and one special character.")
-            return false;
-        } else
-        {
-            console.log(password);
-            setPassword(inputPassword.current.value);
+            console.log(inputEmail.current.value);
             return true;
         }
     }
     const handleSubmit = (e) => {
-        e.preventDefault()
-        actions.loginUser(inputEmail.current.value, inputPassword.current.value,history);
-
+        e.preventDefault();
+        actions.loginUser(inputEmail.current.value, inputPassword.current.value, history);
     }
     return (
         <div className="container">
@@ -62,7 +36,7 @@ const Login = () => {
                                 <label htmlFor="email">Email</label>
                             </div>
                             <div className="form-floating mt-3 mb-2">
-                                <input type="password" ref={inputPassword} onChange={(e) => validatePassword(e)} className="form-control" placeholder="********" id="password" />
+                                <input type="password" ref={inputPassword} className="form-control" placeholder="********" id="password" />
                                 <label htmlFor="password">Password</label>
                             </div>
                             <div className="checkbox mb-2">
