@@ -20,10 +20,8 @@ const Userprofiledetail = () => {
                         <h1>Mis Datos</h1>
                     </div>
                     <div>
-
                         {
                             !!store.userDetail &&
-
                             <div className="card mb-3" style={{ maxWidth: 540 }}>
                                 <div className="row g-0">
                                     <div className="col-md-4">
@@ -33,12 +31,21 @@ const Userprofiledetail = () => {
                                         <div className="card-body">
                                             <h5 className="card-title">{store.userDetail.name} {store.userDetail.lastname}</h5>
                                             <p className="card-text">
-                                                {store.userDetail.email}
+                                                <span className="me-1">Tu nombre: </span>
+                                                <span className="ms-1">{store.userDetail.name}</span>
                                             </p>
                                             <p className="card-text">
-                                                {store.userDetail.phone}
+                                                <span className="me-1">Tu apellido: </span>
+                                                <span className="ms-1">{store.userDetail.lastname}</span>
                                             </p>
-
+                                            <p className="card-text">
+                                                <span className="me-1">Tu correo: </span>
+                                                <span className="ms-1">{store.userDetail.email}</span>
+                                            </p>
+                                            <p className="card-text">
+                                                <span className="me-1">Tu telefono: </span>
+                                                <span className="ms-1">{store.userDetail.phone}</span>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

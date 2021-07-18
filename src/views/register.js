@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
@@ -10,64 +10,58 @@ const Register = () => {
     const [user, setUser] = useState(null);//aca se guarda el tipo de usuario
     const [isRegister, setIsRegister] = useState(false);
     const [isRevealPwd, setIsRevealPwd] = useState(false);
-    const [name, setName ]= useState("");
+    const [name, setName] = useState("");
     const [lastname, setLastname] = useState("");
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const history = useHistory();
 
     const MySwal = withReactContent(Swal)
 
     const validarRegistro = (e) => {
         e.preventDefault()
-        if (!user)
-        {
+        if (!user) {
             Swal.fire("Error!", "Debe seleccionar tipo de Usuario!", "error");
             //alert("Debe seleccionar tipo de Usuario")
         }
-        if (user === "Usuario")
-        {
-            if ( name === "" || lastname === "" || email === "" || password === "")
-            {
+        if (user === "Usuario") {
+            if (name === "" || lastname === "" || email === "" || password === "") {
                 Swal.fire("Error!", "Debe rellenar todos los campos!", "error");
                 console.log(`${name} ${lastname} ${email} ${password}`)
                 //alert("Debe rellenar todos los campos")
-            } else
-            {
-                if(!validatePassword(password)) return
-                if(!validateEmail(email)) return
-                if (password === confirmPassword)
-                {
+            } else {
+                if (!validatePassword(password)) return
+                if (!validateEmail(email)) return
+                if (password === confirmPassword) {
                     actions.registerUser(email, name, lastname, password)
-                    setIsRegister(true)
-                } else
-                {
-                    alert("Contraseña no concide")
+                    .then(response => setIsRegister(true))
+                    .catch(error=>Swal.fire("Error!", "Ya existe un usuario registrado con ese email", "error"))
+                } else {
+                    Swal.fire("Error!", "Contraseña no coincide!", "error");
                 }
             }
         }
-        if (user === "Clinica" || user === "Fundación")
-        {
-            if (name === "" || email === "" || password === "" || address === "" || phone === "")
-            {
+        if (user === "Clinica" || user === "Fundación") {
+            if (name === "" || email === "" || password === "" || address === "" || phone === "") {
                 Swal.fire("Error!", "Debe rellenar todos los campos!", "error");
                 //alert("Debe rellenar todos los campos")
-            } else
-            {
-                if(!validatePassword(password)) return
-                if(!validateEmail(email)) return
-                if (password === confirmPassword)
-                {
-                    setIsRegister(true)
-                    if(user === "Clinica"){
+            } else {
+                if (!validatePassword(password)) return
+                if (!validateEmail(email)) return
+                if (password === confirmPassword) {
+                    if (user === "Clinica") {
                         actions.registerClinica(email, name, address, phone, password)
-                    }else{
-                        actions.registerFundation(email, name, address, phone, password)
-                    } 
-                } else
-                {
+                        .then(response=>setIsRegister(true))
+                        .catch(err=>Swal.fire("Error!","Ya existe una fundacion registrada con ese email","error"))
+                    } else {
+                        actions.registerFoundation(email, name, address, phone, password)
+                        .then(response=>setIsRegister(true))
+                        .catch(error =>Swal.fire("Error!","Ya existe una fundacion registrada con ese email","error"))
+                    }
+                } else {
                     Swal.fire("Error!", "Contraseña no coincide!", "error");
                     //alert("Contraseña no coincide")
                 }
@@ -77,8 +71,7 @@ const Register = () => {
 
     const validatePassword = (password) => {
         let passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-        if (!passwordRegex.test(password))
-        {
+        if (!passwordRegex.test(password)) {
             Swal.fire("Error!", "La contraseña debe contener al menos un número, una letra mayuscula y una letra minuscula y una longitud de minimo 8 caracteres", "error");
             //alert("La contraseña debe contener al menos un número, una letra mayuscula y una letra minuscula y una longitud de minimo 8 caracteres")
             return false;
@@ -88,7 +81,7 @@ const Register = () => {
 
     const validateEmail = (email) => {
         let emailRegex = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
-        if (!emailRegex.test(email)){
+        if (!emailRegex.test(email)) {
             Swal.fire("Error!", "El email no es valido!", "error");
             //alert("El email no es valido")
             return false;
@@ -122,7 +115,7 @@ const Register = () => {
                     </div>
                     <div className="col-12 col-md-7 text-center">
                         <h2 className="display-5">Registro</h2>
-                        {  !!user && !isRegister &&
+                        {!!user && !isRegister &&
                             <form action="" className="needs-validation" >
                                 <div className="border border-secondary p-1 rounded">
                                     <div className="text-start">
@@ -131,7 +124,7 @@ const Register = () => {
                                     </div>
                                     <div className="text-start">
                                         <span className="input-group-text d-block text-start fs-4" htmlFor="name">Nombre </span>
-                                        <input className="form-control fs-5" type="text" id="name" onChange={e => setName(e.target.value)} required/>
+                                        <input className="form-control fs-5" type="text" id="name" onChange={e => setName(e.target.value)} required />
                                     </div>
                                     {
                                         user === 'Usuario' &&
@@ -147,41 +140,41 @@ const Register = () => {
                                     {
                                         user === 'Fundación' &&
                                         <>
-                                        <div className="text-start">
-                                            <span className="input-group-text d-block text-start fs-4" htmlFor="email">Dirección </span>
-                                            <input className="form-control fs-5" type="text" id="direccion" name="direccion" onChange={e => setAddress(e.target.value)} required />
-                                        </div>
-                                        <div className="text-start">
-                                            <span className="input-group-text d-block text-start fs-4" htmlFor="phone">Número de Telefono </span>
-                                            <input className="form-control fs-5" type="text" id="phone" onChange={e => setPhone(e.target.value)} required />
-                                        </div>
+                                            <div className="text-start">
+                                                <span className="input-group-text d-block text-start fs-4" htmlFor="email">Dirección </span>
+                                                <input className="form-control fs-5" type="text" id="direccion" name="direccion" onChange={e => setAddress(e.target.value)} required />
+                                            </div>
+                                            <div className="text-start">
+                                                <span className="input-group-text d-block text-start fs-4" htmlFor="phone">Número de Telefono </span>
+                                                <input className="form-control fs-5" type="text" id="phone" onChange={e => setPhone(e.target.value)} required />
+                                            </div>
                                         </>
                                     }{
                                         user === 'Clinica' &&
-                                        <> 
-                                        <div className="text-start">
-                                            <span className="input-group-text d-block text-start fs-4" htmlFor="email">Dirección </span>
-                                            <input className="form-control fs-5" type="text" id="direccion" name="direccion" onChange={e => setAddress(e.target.value)} required />
-                                        </div>
-                                        <div className="text-start">
-                                            <span className="input-group-text d-block text-start fs-4" htmlFor="phone">Número de Telefono </span>
-                                            <input className="form-control fs-5" type="text" id="phone" onChange={e => setPhone(e.target.value)} required />
-                                        </div>
+                                        <>
+                                            <div className="text-start">
+                                                <span className="input-group-text d-block text-start fs-4" htmlFor="email">Dirección </span>
+                                                <input className="form-control fs-5" type="text" id="direccion" name="direccion" onChange={e => setAddress(e.target.value)} required />
+                                            </div>
+                                            <div className="text-start">
+                                                <span className="input-group-text d-block text-start fs-4" htmlFor="phone">Número de Telefono </span>
+                                                <input className="form-control fs-5" type="text" id="phone" onChange={e => setPhone(e.target.value)} required />
+                                            </div>
                                         </>
                                     }
                                     <div className="text-start">
-                                        <label className="input-group-text d-block text-start fs-4" htmlFor="password">Contraseña 
-                                        {isRevealPwd ? <FaEyeSlash className="ms-2" title="Show password" onClick={changeVisibilityPassword} /> : 
-                                        <FaEye className="ms-2" title="Hide password" onClick={changeVisibilityPassword} />}</label>
-                                        <input className="form-control fs-5" type={isRevealPwd ? "text" : "password"} id="id_password" 
-                                        placeholder="Ingrese Contraseña" required title="Contraseña" onChange={e => setPassword(e.target.value)} />
+                                        <label className="input-group-text d-block text-start fs-4" htmlFor="password">Contraseña
+                                            {isRevealPwd ? <FaEyeSlash className="ms-2" title="Show password" onClick={changeVisibilityPassword} /> :
+                                                <FaEye className="ms-2" title="Hide password" onClick={changeVisibilityPassword} />}</label>
+                                        <input className="form-control fs-5" type={isRevealPwd ? "text" : "password"} id="id_password"
+                                            placeholder="Ingrese Contraseña" required title="Contraseña" onChange={e => setPassword(e.target.value)} />
                                     </div>
                                     <div className="text-start">
                                         <label className="input-group-text d-block text-start fs-4" htmlFor="password">Confirmar Contraseña
-                                        {isRevealPwd ? <FaEyeSlash className="ms-2" title="Show password" onClick={changeVisibilityPassword} /> : 
-                                        <FaEye className="ms-2" title="Hide password" onClick={changeVisibilityPassword} />}</label>
-                                        <input className="form-control fs-5" type={isRevealPwd ? "text" : "password"} id="id_passwordC" 
-                                        placeholder="Confirme Contraseña" required onChange={e => setConfirmPassword(e.target.value)} />
+                                            {isRevealPwd ? <FaEyeSlash className="ms-2" title="Show password" onClick={changeVisibilityPassword} /> :
+                                                <FaEye className="ms-2" title="Hide password" onClick={changeVisibilityPassword} />}</label>
+                                        <input className="form-control fs-5" type={isRevealPwd ? "text" : "password"} id="id_passwordC"
+                                            placeholder="Confirme Contraseña" required onChange={e => setConfirmPassword(e.target.value)} />
                                     </div>
                                     <div className="text-center">
                                         <button onClick={validarRegistro} type="submit" className="btn btn-success mt-3 p-2 fs-4">
@@ -195,22 +188,17 @@ const Register = () => {
                             isRegister &&
                             <div>
                                 <h1>Usuario Registrado</h1>
-                                <p>Ve a iniciar sesión</p>
+                                <p>Serás redirigido para que inicies sesión.</p>
                                 {
-                                    user === 'Usuario' &&
-                                    <Link className="btn btn-dark" to="/user/login">
-                                        Iniciar Sesión
-                                    </Link>
+                                    user === 'Usuario' ?
+                                        history.push("/user/login") : ""
+                                }
+                                {
+                                    user === 'Fundación' ?
+                                        history.push("/foundation/login") : ""
                                 }{
-                                    user === 'Fundación' &&
-                                    <Link className="btn btn-dark" to="/foundation/login">
-                                        Iniciar Sesión
-                                    </Link>
-                                }{
-                                    user === 'Clinica' &&
-                                    <Link className="btn btn-dark" to="/clinic/login">
-                                        Iniciar Sesión
-                                    </Link>
+                                    user === 'Clinica' ?
+                                        history.push("/clinic/login") : ""
                                 }
                             </div>
                         }

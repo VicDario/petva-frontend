@@ -3,20 +3,18 @@ import { Link, useHistory } from "react-router-dom";
 import LoadingSpiner from "../Components/LoadingSpinner";
 import { Context } from "../store/appContext";
 
-const Fundationpets = () => {
+const Foundationpets = () => {
     const { actions, store } = useContext(Context);
     const history = useHistory();
     //let {pets} =store;
-    let token = localStorage.getItem('token');
     useEffect(() => {
-        actions.getPetsFundation();
+        actions.getPetsFoundation();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
         <>
             {
                 !!store.token &&
-
                 <div className="container">
                     <div className="row my-4">
                         <div className="col-12 text-center">
@@ -24,7 +22,6 @@ const Fundationpets = () => {
                                 <h2 className="display-1">Mascotas de la Fundación</h2>
                             </div>
                             <div className="row justify-content-center">
-
                                 {
                                     !!store.pets ?
                                         store.pets.length > 0 ?
@@ -73,4 +70,4 @@ const Fundationpets = () => {
         </>
     );
 }
-export default Fundationpets;
+export default Foundationpets;
