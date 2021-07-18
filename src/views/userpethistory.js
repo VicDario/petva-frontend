@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa"
 
@@ -10,7 +9,6 @@ const Userpethistory = () => {
 
     const { actions, store } = useContext(Context);
     const { pet_id } = useParams();
-    const { history } = useHistory();
     const { userPet } = store;
 
     const [newVaccine, setNewVaccine] = useState({
@@ -106,26 +104,36 @@ const Userpethistory = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-3">
-                        <h1>
-                            Pet_id: {pet_id}
-                        </h1>
+                        
+                            {
+                                !!userPet&&
+                                <h1>
+                                    Nombre : {userPet.name}
+                                </h1>
+                            }
+                        
+                            {
+                                !!userPet &&
                         <div className="card mb-3">
-                            <img src={/* !!pet.picture ? pet.picture :  */"/images/default.jpg"} className="card-img-top" alt="petname" />
-                            <div className="card-body">
-                                <h5 className="card-title">name</h5>
-                                <p className="card-text">{/* { userPet.specie === 'cat' ? "Gato" : "Perro" } */} especie</p>
-                                <p className="card-text">{/* {!!pet.birth_date ? pet.birth_date : "No registra fecha de nacimiento"} */}fecha</p>
-                                <p className="card-text">{/* {!!pet.chip_code ? pet.chip_code : "No registra codigo de chip"} */}chip</p>
-                                <div>
-                                    <Link to="/userpets">
-                                        <button className="btn btn-success">
-                                            Volver a Mis Mascotas
-                                        </button>
-                                    </Link>
+                            <img src={ !!userPet.picture ? userPet.picture :  "/images/default.jpg"} className="card-img-top" alt="petname" />
 
+                                <div className="card-body">
+                                    {/* <h5 className="card-title">{userPet.name}</h5> */}
+                                    <p className="card-text">Especie: {userPet.specie === 'cat' ? "Gato" : "Perro"}</p>
+                                    <p className="card-text">Fecha Nacimiento: {!!userPet.birth_date ? userPet.birth_date : "No registra fecha de nacimiento"}</p>
+                                    <p className="card-text">N°Chip: {!!userPet.code_chip ? userPet.code_chip : "No registra codigo de chip"} </p>
+
+                                    <div>
+                                        <Link to="/user/pets">
+                                            <button className="btn btn-success">
+                                                Volver a Mis Mascotas
+                                            </button>
+                                        </Link>
+
+                                    </div>
                                 </div>
-                            </div>
                         </div>
+                            }
 
                     </div>
 

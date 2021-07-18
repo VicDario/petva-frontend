@@ -105,6 +105,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log(data);
                     if (data.access_token) {
                         localStorage.setItem("petvaToken", data.access_token);
+                        localStorage.setItem("petvaUser", "foundation")
+
                         setStore({ userType: "foundation" });
                         setStore({ token: data.access_token });
                         console.log("Iniciada sesion de fundacion");
@@ -143,7 +145,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch(`${store.baseUrl}/api/foundation/pets`, opt)
+                    const response = await fetch(`${store.baseUrl}api/foundation/pets/in_adoption`, opt)
                     if (response.status !== 200) {
                         console.log("There has been some error")
                     }
@@ -300,7 +302,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch(`${store.baseUrl}/api/foundation/pets/${pet_id}`, opt)
+                    const response = await fetch(`${store.baseUrl}api/foundation/pets/${pet_id}`, opt)
                     if (response.status !== 200) {
                         console.log("There is a some error in pet of foundation")
                     }
@@ -325,7 +327,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch(`${store.baseUrl}api/fundation/transfer`, opt)
+                    const response = await fetch(`${store.baseUrl}api/foundation/transfer`, opt)
                     if (response.status !== 201) {
                         console.log("there is some error in transfer a pet")
                     }
