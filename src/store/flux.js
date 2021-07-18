@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             user: null,
             auxPicture: null,
             userDetail: null,
-            fundationDetail: null,
+            foundationDetail: null,
             baseUrl: 'https://petva-backend-dev.herokuapp.com/', //https://petva-backend-dev.herokuapp.com/
             foundationPet: null,
             historyUserPet : null,
@@ -52,14 +52,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Content-Type": "application/json"
                     }
                 }
-                try {
-                    const response = await fetch(`${store.baseUrl}api/user/register`, opt);
-                    if (response.status !== 201) throw new Error(response.status, "error");
-                    const data = await response.json();
-                    console.log(data);
-                } catch (error) {
-                    console.error("Error from loading message from backend", error);
-                }
+                const response = await fetch(`${store.baseUrl}api/user/register`, opt);
+                if (response.status !== 201) throw new Error(response.status, "error");
+                const data = await response.json();
+                return data;
             },
             loginUser: async (email, password, history) => {
                 const store = getStore();
@@ -103,7 +99,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch(`${store.baseUrl}api/fundation/login`, opt);
+                    const response = await fetch(`${store.baseUrl}api/foundation/login`, opt);
                     //if (response.status !== 200) throw new Error(response.status, "error");
                     const data = await response.json();
                     console.log(data);
@@ -139,7 +135,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
-            getPetsFundation: async () => {
+            getPetsFoundation: async () => {
                 const store = getStore();
                 const opt = {
                     headers: {
@@ -147,12 +143,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/fundation/pets", opt)
+                    const response = await fetch(`${store.baseUrl}/api/foundation/pets`, opt)
                     if (response.status !== 200) {
                         console.log("There has been some error")
                     }
                     const data = await response.json();
-                    console.log(data)
+                    console.log(data);
                     setStore({ pets: data })
 
                 } catch (error) {
@@ -205,7 +201,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch(`${store.baseUrl}api/fundation/pets/add`, opt)
+                    const response = await fetch(`${store.baseUrl}api/foundation/pets/add`, opt)
                     if (response.status !== 201) {
                         console.log("there is some error in registerPet")
                     }
@@ -219,7 +215,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const token = sessionStorage.getItem("token");
                 if (token && token !== undefined) setStore({ token: token });
             },
-            registerFundation: async (email, name, address, phone, password) => {
+            registerFoundation: async (email, name, address, phone, password) => {
                 const store = getStore();
                 const opt = {
                     method: "POST",
@@ -234,14 +230,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Content-Type": "application/json"
                     }
                 }
-                try {
-                    const response = await fetch(`${store.baseUrl}api/fundation/register`, opt);
-                    //if (response.status !== 201) throw new Error(response.status, "error");
-                    const data = await response.json();
-                    console.log(data);
-                } catch (error) {
-                    console.log("Error from loading message from backend", error);
-                }
+                const response = await fetch(`${store.baseUrl}api/foundation/register`, opt);
+                if (response.status !== 201) throw new Error(response.status, "error");
+                const data = await response.json();
+                return data;
             },
             logOut: () => {
                 const store = getStore()
@@ -277,7 +269,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log("Error in get detail user")
                 }
             },
-            getFundationDetail: async () => {
+            getFoundationDetail: async () => {
                 const store = getStore();
                 const opt = {
                     headers: {
@@ -285,13 +277,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/fundation/info", opt)
+                    const response = await fetch(`${store.baseUrl}api/foundation/info`, opt)
                     if (response.status !== 200) {
                         console.log("There is a some error in get user detail")
                     }
                     const data = await response.json();
                     console.log(data);
-                    setStore({ fundationDetail: data })
+                    setStore({ foundationDetail: data })
                 } catch (error) {
                     console.log("Error in get detail user")
                 }
@@ -299,7 +291,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             resetAuxPicture: () => {
                 setStore({ auxPicture: null })
             },
-            getSinglePetFromFundation: async (pet_id) => {
+            getSinglePetFromFoundation: async (pet_id) => {
                 const store = getStore();
                 const opt = {
                     headers: {
@@ -307,7 +299,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch(`${store.baseUrl}/api/fundation/pets/${pet_id}`, opt)
+                    const response = await fetch(`${store.baseUrl}/api/foundation/pets/${pet_id}`, opt)
                     if (response.status !== 200) {
                         console.log("There is a some error in pet of foundation")
                     }

@@ -17,7 +17,7 @@ const FundationProfile = () => {
                         </div>
                         <div className="row">
                             <div className="col-12 col-md-6 d-flex justify-content-center">
-                                <Link to="/fundation/profile" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
+                                <Link to="/foundation/profile" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
                                     Mis Datos
                                 </Link >
                             </div>
