@@ -77,7 +77,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
                     if (data.access_token) {
                         localStorage.setItem("petvaToken", data.access_token);
-                        /* localStorage.setItem("petvaUser", "normal") */
+                         localStorage.setItem("petvaUser", "normal") 
                         setStore({ userType: "normal" });
                         setStore({ token: data.access_token });
                         history.push("/user");
@@ -212,8 +212,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
             syncTokenFromSessionStore: () => {
-                const token = sessionStorage.getItem("token");
-                if (token && token !== undefined) setStore({ token: token });
+                const store = getStore();
+                store.token = localStorage.getItem("petvaToken")
+                store.userType = localStorage.getItem("petvaUser")
             },
             registerFoundation: async (email, name, address, phone, password) => {
                 const store = getStore();
@@ -443,6 +444,39 @@ const getState = ({ getStore, getActions, setStore }) => {
                 } catch (error)
                 {
                     console.log("the has been some error in post diagnostic")
+                }
+            },
+            addSurgerytoPetUser: async (date, description, doctor_name, pet_id) => {
+                const store = getStore();
+                const actions = getActions();
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        date: date,
+                        description: description,
+                        doctor_name: doctor_name
+
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}/history/surgery/add`, opt)
+                    if (response.status !== 201)
+                    {
+                        console.log("there is some error in post surgery pet")
+                    }
+                    const data = await response.json();
+                    console.log(data)
+                    actions.getHistoryUserPet(pet_id);
+
+
+                } catch (error)
+                {
+                    console.log("the has been some error in post surgery")
                 }
             }
 

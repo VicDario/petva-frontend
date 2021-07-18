@@ -11,7 +11,7 @@ const Userpethistory = () => {
     const { actions, store } = useContext(Context);
     const { pet_id } = useParams();
     const { history } = useHistory();
-    const {userPet} = store;
+    const { userPet } = store;
 
     const [newVaccine, setNewVaccine] = useState({
         date: null,
@@ -22,6 +22,11 @@ const Userpethistory = () => {
     const [newDiagnostic, setNewDiagnostic] = useState({
         date: null,
         diagnostic: null,
+        doctor_name: null
+    })
+    const [newSurgery, setNewSurgery] = useState({
+        date: null,
+        description: null,
         doctor_name: null
     })
     const formatDate = (date) => {
@@ -73,6 +78,23 @@ const Userpethistory = () => {
         {
             console.log("diagnóstico no agregado");
             alert("Debes llenar todos los campos para agregar diagnóstico");
+        }
+    }
+
+    const addSurgery = () => {
+        if (newSurgery.date !== null && newSurgery.description !== null && newSurgery.doctor_name !== null)
+        {
+            actions.addSurgerytoPetUser(formatDate(newSurgery.date), newSurgery.description, newSurgery.doctor_name, pet_id)
+            console.log("Cirugia agregada");
+            setNewSurgery({
+                date: null,
+                description: null,
+                doctor_name: null
+            })
+        } else
+        {
+            console.log("cirugía no agregada");
+            alert("Debes llenar todos los campos para agregar cirugía");
         }
     }
 
@@ -212,6 +234,59 @@ const Userpethistory = () => {
                             })
                         }
                     </div>
+                    <div className="col-12 col-md-3">
+                        <div className="text-center">
+                            <h2>Cirugías <span title="Agregar Cirugía" className="text-success" type="button" data-bs-toggle="modal" data-bs-target="#cirugia"><FaPlusCircle /></span></h2>
+                        </div>
+                        {
+                            !!store.historyUserPet &&
+                            store.historyUserPet.History.surgeries.map((cirugia, index) => {
+                                return (
+                                    <>
+                                        <div className="accordion" id="Cirugia">
+
+                                            <div className="accordion-item mb-4"
+                                                key={index}>
+                                                <h2 className="accordion-header" id="cirugiaOne">
+                                                    <button
+                                                        className="accordion-button collapsed fs-5"
+                                                        type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target={"#cir" + index}
+                                                        aria-expanded="true"
+                                                        aria-controls="collapseOne"
+                                                    >
+                                                        Cirugía N°: {index + 1}
+                                                    </button>
+                                                </h2>
+                                                <div
+                                                    id={"cir" + index}
+                                                    className="accordion-collapse collapse"
+                                                    aria-labelledby="cirugiaOne"
+                                                    data-bs-parent="#Cirugia"
+                                                >
+                                                    <div className="accordion-body">
+                                                        <div className="row">
+
+                                                            <div className="col-12">
+                                                                <ul className="list-group mt-1">
+                                                                    <li className="list-group-item"><strong>Fecha:</strong> {cirugia.date}</li>
+                                                                    <li className="list-group-item"><strong>Laboratorio:</strong> {cirugia.description}</li>
+                                                                    <li className="list-group-item"><strong>Nombre Doctor:</strong> {cirugia.doctor_name}</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
                 {/* Modal  agregar Vacuna*/}
                 <div
@@ -312,6 +387,57 @@ const Userpethistory = () => {
                                     Cancelar
                                 </button>
                                 <button onClick={addDiagnostic} type="button" className="btn btn-primary" data-bs-dismiss={newDiagnostic.date !== null && newDiagnostic.diagnostic !== null && newDiagnostic.doctor_name !== null ? "modal" : ""}>
+                                    Agregar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* Modal agregar Cirugía */}
+                <div
+                    className="modal fade"
+                    id="cirugia"
+                    tabIndex={-1}
+                    aria-labelledby="cirugiaLabel"
+                    aria-hidden="true"
+                >
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="cirugiaLabel">
+                                    Agregar Cirugía
+                                </h5>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                />
+                            </div>
+                            <div className="modal-body">
+                                <div>
+                                    <label className="form-label" htmlFor="dateC">Fecha Cirugía: </label>
+                                    <input className="form-control" id="dateC" type="date" onChange={(e) => { setNewSurgery({ ...newSurgery, date: e.target.value }) }} />
+                                </div>
+                                <div>
+                                    <label className="form-label" htmlFor="cirD">Descripción: </label>
+                                    <input className="form-control" id="cirD" type="text" onChange={(e) => { setNewSurgery({ ...newSurgery, description: e.target.value }) }} />
+                                </div>
+
+                                <div>
+                                    <label className="form-label" htmlFor="cirDn">Nombre Doctor: </label>
+                                    <input className="form-control" id="cirDn" type="text" onChange={(e) => { setNewSurgery({ ...newSurgery, doctor_name: e.target.value }) }} />
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                >
+                                    Cancelar
+                                </button>
+                                <button onClick={addSurgery} type="button" className="btn btn-primary" data-bs-dismiss={newSurgery.date !== null && newSurgery.description !== null && newSurgery.doctor_name !== null ? "modal" : ""}>
                                     Agregar
                                 </button>
                             </div>

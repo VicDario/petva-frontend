@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom"
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router";
 
@@ -12,6 +12,9 @@ const Navbar = () => {
     /* let token = sessionStorage.getItem("token") */
 
     //const token = localStorage.getItem("token")
+    useEffect(()=>{
+        actions.syncTokenFromSessionStore();
+    },[]);
     const history = useHistory();
     const logout = () => {
         actions.logOut()
@@ -78,7 +81,7 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
                         <div className="text-end">
-                            <Link to={store.userType==="normal"?"/user":"/foundation"} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Mi Perfil</Link>
+                            <Link to={store.userType==="normal"?"/user": store.userType==="foundation"?"/foundation":history.push("/")} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Mi Perfil</Link>
                         </div>
                         <div className="text-end">
                             <Link onClick={logout} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" >Cerrar Sesión</Link>
