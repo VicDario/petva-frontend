@@ -141,7 +141,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch(`${store.baseUrl}/api/foundation/pets`, opt)
+                    const response = await fetch(`${store.baseUrl}api/foundation/pets`, opt)
+                    console.error(response);
                     if (response.status !== 200) {
                         console.log("There has been some error")
                     }
@@ -150,7 +151,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ pets: data })
 
                 } catch (error) {
-                    console.log("There has been an error in get pets")
+                    console.log("There has been an error in get pets"+error)
                 }
             },
             registerPet: async (name, chip_code, birth_date, specie, breed, picture) => {
@@ -297,7 +298,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch(`${store.baseUrl}/api/foundation/pets/${pet_id}`, opt)
+                    const response = await fetch(`${store.baseUrl}api/foundation/pets/${pet_id}`, opt)
                     if (response.status !== 200) {
                         console.log("There is a some error in pet of foundation")
                     }
