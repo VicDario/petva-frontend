@@ -12,10 +12,10 @@ const TransferPetFromFoundation = () => {
     console.log(pet_id);
     const history = useHistory();
 
-    useEffect(() => {
-        actions.getSinglePetFromFundation(pet_id);
+     useEffect(() => {
+        actions.getSinglePetFromFoundation(pet_id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, []) 
 
     const makeTransfer = () => {
         actions.transferPetFromFundation(mailUser, pet_id, history);
@@ -33,7 +33,7 @@ const TransferPetFromFoundation = () => {
                         {
                             !!store.foundationPet &&
                             <div className="card mb-3">
-                                <img src={!!store.foundationPet.picture ? store.foundationPett.picture : "/images/default.jpg"} className="card-img-top" alt={store.foundationPet.name} />
+                                <img src={!!store.foundationPet.picture ? store.foundationPet.picture : "/images/default.jpg"} className="card-img-top" alt={store.foundationPet.name} />
                                 <div className="card-body">
                                     <h5 className="card-title">{store.foundationPet.name}</h5>
                                     <p className="card-text">{store.foundationPet.specie === 'cat' ? "Gato" : "Perro"}</p>

@@ -1,9 +1,8 @@
 import { useContext, useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { Context } from "../store/appContext";
-import { Link, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 
 const Register = () => {
     const { actions } = useContext(Context);
@@ -18,8 +17,6 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const history = useHistory();
-
-    const MySwal = withReactContent(Swal)
 
     const validarRegistro = (e) => {
         e.preventDefault()
