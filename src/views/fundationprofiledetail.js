@@ -32,13 +32,18 @@ const Foundationprofiledetail = () => {
                                         <div className="card-body">
                                             <h5 className="card-title">{store.foundationDetail.name}</h5>
                                             <p className="card-text">
-                                                {store.foundationDetail.email}
+                                                <span className="me-1">Correo de contacto:</span>
+                                                <span className="ms-1">{store.foundationDetail.email}</span>
                                             </p>
                                             <p className="card-text">
-                                                {store.foundationDetail.phone}
+                                                <span className="me-1">Detalles de la fundación:</span>
+                                                <span className="ms-1">{store.foundationDetail.phone}</span>
+
                                             </p>
                                             <p className="card-text">
-                                                {store.foundationDetail.address}
+                                                <span className="me-1">Dirección de la fundación:</span>
+                                                <span className="ms-1">{store.foundationDetail.address}</span>
+
                                             </p>
                                             <p className="card-text">
                                                 <small className="text-muted">Numero de Mascotas actuales: </small>
