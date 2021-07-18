@@ -14,9 +14,12 @@ const Home = () => {
                     </div>
                     <div className="col-8 col-md-6 text-center">
                         <div >
+                            <Link to="/inAdoption">
                             <h2 className="display-3" >
                                 Adoptar
                             </h2>
+                            
+                            </Link>
                         </div>
                         <div>
                             <p>
