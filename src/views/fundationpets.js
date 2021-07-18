@@ -34,7 +34,7 @@ const Foundationpets = () => {
                                                                 <h5 className="card-title">{pet.name}</h5>
                                                                 <p className="card-text">{pet.specie === 'cat' ? "Gato" : "Perro"}</p>
                                                                 <p className="card-text">{!!pet.birth_date ? pet.birth_date : "No registra fecha de nacimiento"}</p>
-                                                                <p className="card-text">{!!pet.chip_code ? pet.code_chip : "No registra codigo de chip"}</p>
+                                                                <p className="card-text">{!!pet.code_chip ? pet.code_chip : "No registra codigo de chip"}</p>
                                                                 <p className="card-text badge rounded-pill bg-success fs-3">{pet.state === "owned" ? "Con Dueño" : "En adopción"}</p>
 
                                                                 <div className="d-flex justify-content-around">

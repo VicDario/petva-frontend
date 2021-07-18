@@ -32,7 +32,10 @@ const Petsinadoption = ({ history }) => {
                                                                 <h5 className="card-title">{pet.name}</h5>
                                                                 <p className="card-text">{pet.specie === 'cat' ? "Gato" : "Perro"}</p>
                                                                 <p className="card-text">{!!pet.birth_date ? pet.birth_date : "No registra fecha de nacimiento"}</p>
-                                                                <p className="card-text">{!!pet.chip_code ? pet.chip_code : "No registra codigo de chip"}</p>
+                                                                <p className="card-text fw-bold">{pet.contact_name}</p>
+                                                                <p className="card-text">Teléfono fundación: {pet.phone}</p>
+                                                                <p className="card-text">Email fundación: {pet.email}</p>
+                                                                <p className="card-text">Dirección fundación: {pet.address}</p>
                                                             </div>
                                                         </div>
                                                     </div>
