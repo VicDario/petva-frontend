@@ -11,7 +11,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             baseUrl: 'https://petva-backend-dev.herokuapp.com/', //https://petva-backend-dev.herokuapp.com/
             foundationPet: null,
             historyUserPet : null,
-            userPet : null
+            userPet : null,
+            petsWithOwner: null
         },
         actions: {
             registerClinica: async (email, name, address, phone, password) => {
@@ -479,6 +480,29 @@ const getState = ({ getStore, getActions, setStore }) => {
                 } catch (error)
                 {
                     console.log("the has been some error in post surgery")
+                }
+            },
+            getPetsFoundationWithOwner : async ()=>{
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/foundation/pets/owned`, opt)
+                    if (response.status !== 200)
+                    {
+                        console.log("There has been some error in pets with owned")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    setStore({ petsWithOwner: data })
+
+                } catch (error)
+                {
+                    console.log("There has been an error in get pets WO")
                 }
             }
 
