@@ -189,6 +189,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             registerPetFundation: async (name, chip_code, birth_date, specie, breed, picture) => {
                 const store = getStore();
+                const actions = getActions();
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -211,6 +212,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                     const data = await response.json();
                     console.log(data)
+                    actions.getPetsFoundation();
+
                 } catch (error) {
                     console.log("the has been some error in register pet")
                 }
@@ -245,6 +248,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ ...store, token: null, userType: null, userDetail: null, pets: null })
                 localStorage.setItem("petvaToken", null)
                 localStorage.setItem("petvaUser", null)
+                localStorage.removeItem("token");
+                localStorage.removeItem("usertype");
 
 
             },
