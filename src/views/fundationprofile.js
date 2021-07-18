@@ -28,7 +28,7 @@ const FundationProfile = () => {
                             </div>
                             <div className="col-12 col-md-6 d-flex justify-content-center">
                                 <Link to="/foundation/pets" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                    Mis Mascotas
+                                    Mascotas en Adopción
                                 </Link >
                             </div>
                             <div className="col-12 col-md-6 d-flex justify-content-center">

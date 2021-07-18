@@ -16,6 +16,7 @@ import Fundationprofiledetail from './views/fundationprofiledetail';
 import Fundationpets from './views/fundationpets';
 import TransferPetFromFoundation from './views/transferPetFromFoundation';
 import Services from './views/services';
+import Userpethistory from './views/userpethistory';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route exact path="/foundation/pets/add" component={Addpet} />
           <Route exact path="/foundation/transfer/:pet_id" component={TransferPetFromFoundation} />
           <Route exact path="/services" component={Services}/>
+          <Route exact path="/user/pet/history/:pet_id" component={Userpethistory}/>
           <Route component={Custom404}/>
         </Switch>
       </BrowserRouter>
