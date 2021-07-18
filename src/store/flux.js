@@ -133,7 +133,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
-            getPetsFundation: async () => {
+            getPetsFoundation: async () => {
                 const store = getStore();
                 const opt = {
                     headers: {
@@ -141,12 +141,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/foundation/pets", opt)
+                    const response = await fetch(`${store.baseUrl}/api/foundation/pets`, opt)
                     if (response.status !== 200) {
                         console.log("There has been some error")
                     }
                     const data = await response.json();
-                    console.log(data)
+                    console.log(data);
                     setStore({ pets: data })
 
                 } catch (error) {
