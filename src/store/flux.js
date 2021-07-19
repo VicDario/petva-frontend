@@ -33,14 +33,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Content-Type": "application/json"
                     }
                 }
-                try {
                     const response = await fetch(`${store.baseUrl}api/clinic/register`, opt);
                     if (response.status !== 201) throw new Error(response.status, "error");
                     const data = await response.json();
-                    console.log(data);
-                } catch (error) {
-                    console.error("Error from loading message from backend", error);
-                }
+                    //console.log(data);
+                    return data;
             },
             registerUser: async (email, name, lastname, password) => {
                 const store = getStore();
