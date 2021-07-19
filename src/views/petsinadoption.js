@@ -12,7 +12,7 @@ const Petsinadoption = ({ history }) => {
     return (
         <>
             {
-                !!store.petsInAdoption &&
+                !!store.petsInAdoption  &&
                 <div className="container">
                     <div className="row my-4">
                         <div className="col-12 text-center">
@@ -21,7 +21,7 @@ const Petsinadoption = ({ history }) => {
                             </div>
                             <div className="row justify-content-center">
                                 {
-                                    !!store.petsInAdoption ?
+                                    !!store.petsInAdoption  ?
                                         
                                             store.petsInAdoption.map((pet, index) => {
                                                 return (

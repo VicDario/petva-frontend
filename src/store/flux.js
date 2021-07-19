@@ -614,13 +614,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             getPetsInAdoption :async ()=>{
                 try{
-                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/in_adoption")
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/in_adoption/1")
                     if (response.status !== 200){
                         console.log("Error in get pets in adoption")
                     }
                     const data = await response.json();
-                    console.log(data)
-                    setStore({petsInAdoption:data})
+                    console.log(data[0])
+                    setStore({petsInAdoption:data[0]})
                 }catch (error){
                     console.log("Error "+ error )
                 }
@@ -648,11 +648,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log("There has been an error in get history")
                 }
             },
-            userReportPetLost : async (pet_id)=>{
+            userReportPetLost : async (pet_id,last_location)=>{
                 const actions = getActions();
                 const store = getStore();
                 const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        last_location: last_location
+
+                    }),
                     headers: {
+                        "Content-Type": "application/json",
                         "Authorization": "Bearer " + store.token
                     }
                 }
@@ -678,14 +684,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             getLostPets: async () => {
                 try
                 {
-                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/lost")
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/lost/1")
                     if (response.status !== 200)
                     {
                         console.log("Error in get pets in adoption")
                     }
                     const data = await response.json();
-                    console.log(data)
-                    setStore({ LostPets: data })
+                    console.log(data[0])
+                    setStore({ LostPets: data[0] })
                 } catch (error)
                 {
                     console.log("Error " + error)

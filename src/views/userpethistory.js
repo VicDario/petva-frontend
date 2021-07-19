@@ -10,6 +10,7 @@ const Userpethistory = () => {
     const { actions, store } = useContext(Context);
     const { pet_id } = useParams();
     const { userPet } = store;
+    const [last_location, setLastLocation] = useState();
 
     const [newVaccine, setNewVaccine] = useState({
         date: null,
@@ -96,7 +97,8 @@ const Userpethistory = () => {
         }
     }
     const reportLost = () => {
-        actions.userReportPetLost(pet_id);
+        actions.userReportPetLost(pet_id,last_location);
+        console.log(last_location)
         actions.getHistoryUserPet(pet_id);
         actions.getSinglePetFromUser(pet_id);
 
@@ -509,7 +511,17 @@ const Userpethistory = () => {
                                     data-bs-dismiss="modal"
                                     aria-label="Close"
                                 />
-                            </div>
+                                </div>
+                                <div className="modal-body">
+                                    <div>
+                                    <label className="form-label" htmlFor="">Indica la última ubicacón donde fue vista</label>
+
+                                    </div>
+                                    <div>
+                                    <input className="form-control" onChange={(e) => { setLastLocation(e.target.value)}} type="text" />
+
+                                    </div>
+                                </div>
 
                             <div className="modal-footer">
                                 <button

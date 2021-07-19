@@ -44,7 +44,7 @@ const Lostpets = ()=>{
                                         })
                                         :
                                         <div className="col-sm-12 pt-4">
-                                            <h3 className="text-center">No Hay mascotas en Adopción</h3>
+                                            <h3 className="text-center">No Hay mascotas Perdidas</h3>
                                         </div>
 
                                 }
