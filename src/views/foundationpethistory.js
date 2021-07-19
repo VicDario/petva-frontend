@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa"
+
 
 
 const Foundationpethistory = () => {
@@ -10,6 +11,9 @@ const Foundationpethistory = () => {
     const { actions, store } = useContext(Context);
     const { pet_id } = useParams();
     const { foundationPet } = store;
+    const location = useLocation();
+    console.log(location.pathname);
+    const history = useHistory();
 
     const [newVaccine, setNewVaccine] = useState({
         date: null,
@@ -37,14 +41,14 @@ const Foundationpethistory = () => {
     }
     useEffect(() => {
         actions.getSinglePetFromFoundation(pet_id);
-        actions.getHistoryUserPet(pet_id);
+        actions.getHistoryPetFoundation(pet_id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const addVaccine = () => {
 
         if (newVaccine.date !== null && newVaccine.lot !== null && newVaccine.name !== null && newVaccine.laboratory !== null)
         {
-            actions.addVaccinetoPetUser(formatDate(newVaccine.date), newVaccine.lot, newVaccine.name, newVaccine.laboratory, pet_id)
+            actions.addVaccinetoPetFoundation(formatDate(newVaccine.date), newVaccine.lot, newVaccine.name, newVaccine.laboratory, pet_id)
             console.log("Vacuna agregada");
             setNewVaccine({
                 date: null,
@@ -65,7 +69,7 @@ const Foundationpethistory = () => {
     const addDiagnostic = () => {
         if (newDiagnostic.date !== null && newDiagnostic.diagnostic !== null && newDiagnostic.doctor_name !== null)
         {
-            actions.addDiagnostictoPetUser(formatDate(newDiagnostic.date), newDiagnostic.diagnostic, newDiagnostic.doctor_name, pet_id)
+            actions.addDiagnostictoPetFoundation(formatDate(newDiagnostic.date), newDiagnostic.diagnostic, newDiagnostic.doctor_name, pet_id)
             console.log("Diagnóstico agregado");
             setNewDiagnostic({
                 date: null,
@@ -82,7 +86,7 @@ const Foundationpethistory = () => {
     const addSurgery = () => {
         if (newSurgery.date !== null && newSurgery.description !== null && newSurgery.doctor_name !== null)
         {
-            actions.addSurgerytoPetUser(formatDate(newSurgery.date), newSurgery.description, newSurgery.doctor_name, pet_id)
+            actions.addSurgerytoPetFoundation(formatDate(newSurgery.date), newSurgery.description, newSurgery.doctor_name, pet_id)
             console.log("Cirugia agregada");
             setNewSurgery({
                 date: null,
@@ -124,11 +128,11 @@ const Foundationpethistory = () => {
                                     <p className="card-text">N°Chip: {!!foundationPet.code_chip ? foundationPet.code_chip : "No registra codigo de chip"} </p>
 
                                     <div>
-                                        <Link to="/foundation/petsWithOwned">
-                                            <button className="btn btn-success">
-                                                Volver a Mascotas con Dueño
+                                        
+                                            <button onClick={history.goBack} className="btn btn-success">
+                                                Volver a Mascotas 
                                             </button>
-                                        </Link>
+                                      
 
                                     </div>
                                 </div>
@@ -142,8 +146,8 @@ const Foundationpethistory = () => {
                             <h2>Vacunas <span title="Agregar Vacuna" className="text-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><FaPlusCircle /></span></h2>
                         </div>
                         {
-                            !!store.historyUserPet &&
-                            store.historyUserPet.History.vaccines.map((vacuna, index) => {
+                            !!store.historyFoundationPet &&
+                            store.historyFoundationPet.History.vaccines.map((vacuna, index) => {
                                 return (
                                     <>
                                         <div className="accordion" id="Vacuna">
@@ -194,8 +198,8 @@ const Foundationpethistory = () => {
                             <h2>Consultas <span title="Agregar consulta" className="text-success" type="button" data-bs-toggle="modal" data-bs-target="#diagnostico"><FaPlusCircle /></span></h2>
                         </div>
                         {
-                            !!store.historyUserPet &&
-                            store.historyUserPet.History.diagnostics.map((diag, index) => {
+                            !!store.historyFoundationPet &&
+                            store.historyFoundationPet.History.diagnostics.map((diag, index) => {
                                 return (
                                     <>
                                         <div className="accordion" id="accordionExample">
@@ -247,8 +251,8 @@ const Foundationpethistory = () => {
                             <h2>Cirugías <span title="Agregar Cirugía" className="text-success" type="button" data-bs-toggle="modal" data-bs-target="#cirugia"><FaPlusCircle /></span></h2>
                         </div>
                         {
-                            !!store.historyUserPet &&
-                            store.historyUserPet.History.surgeries.map((cirugia, index) => {
+                            !!store.historyFoundationPet &&
+                            store.historyFoundationPet.History.surgeries.map((cirugia, index) => {
                                 return (
                                     <>
                                         <div className="accordion" id="Cirugia">
