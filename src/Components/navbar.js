@@ -1,26 +1,23 @@
 
 import { Link } from "react-router-dom"
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router";
-
+import { AiOutlineHome } from 'react-icons/ai';
+import { IoLogOutOutline, IoLogInOutline } from 'react-icons/io5';
+import { MdPets } from "react-icons/md";
 
 const Navbar = () => {
 
     const { store, actions } = useContext(Context);
-    /*  let { token } = store; */
-    /* let token = sessionStorage.getItem("token") */
 
-    //const token = localStorage.getItem("token")
-    useEffect(()=>{
-        actions.syncTokenFromSessionStore();
-    },[]);
     const history = useHistory();
-    const logout = () => {
-        actions.logOut()
-        
-        history.push("/");
-    }
+    useEffect(()=>{
+        if(localStorage.getItem("petvaToken") !== null)   store.token = localStorage.getItem("petvaToken");
+        else    store.token = false;
+        store.userType = localStorage.getItem("petvaUser")
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]); //Si exite token recupera la sesion
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
@@ -39,26 +36,28 @@ const Navbar = () => {
                     <span className="navbar-toggler-icon" />
                 </button>
                 {
-                !store.token  ?
+                localStorage.getItem("petvaToken") === null ?
                 <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
                         <div className="text-end">
-                            <Link to="/register" className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Registrarse</Link>
+                            <Link to="/register" className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">
+                                Registrarse <MdPets className="navbar__button--icon" />
+                            </Link>
                         </div>
                         <div className="text-end">
                             <div className="dropdown">
                                 <button
-                                    className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4 dropdown-toggle"
+                                    className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4 dropdown-toggle"
                                     id="dropdownMenuLink"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                 >
-                                    Iniciar sesión como
+                                    Iniciar sesión <IoLogInOutline className="navbar__button--icon" />
                                 </button>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li>
                                         <Link className="dropdown-item" to="/user/login">
-                                            Usuario Normal
+                                            Usuario
                                         </Link>
                                     </li>
                                     <li>
@@ -80,10 +79,22 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
                         <div className="text-end">
-                            <Link to={store.userType==="normal"?"/user": store.userType==="foundation"?"/foundation":history.push("/")} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Mi Perfil</Link>
+                            {
+                            localStorage.getItem("petvaUser")==="normal" &&
+                            <Link to="/user" className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">
+                                Home <AiOutlineHome className="navbar__button--icon" />
+                            </Link>
+                            }{
+                            localStorage.getItem("petvaUser")==="foundation" &&
+                            <Link to="/foundation" className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">
+                                Home <AiOutlineHome className="navbar__button--icon" />
+                            </Link>
+                            }
                         </div>
                         <div className="text-end">
-                            <Link onClick={logout} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" >Cerrar Sesión</Link>
+                            <Link to="/" onClick={actions.logOut} className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" >
+                                Cerrar Sesión <IoLogOutOutline className="navbar__button--icon" />
+                            </Link>
                         </div>
                     </div>
                 </div>
