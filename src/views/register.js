@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { Context } from "../store/appContext";
-import {  useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 const Register = () => {
@@ -34,8 +34,11 @@ const Register = () => {
                 if (!validateEmail(email)) return
                 if (password === confirmPassword) {
                     actions.registerUser(email, name, lastname, password)
-                    .then(response => setIsRegister(true))
-                    .catch(error=>Swal.fire("Error!", "Ya existe un usuario registrado con ese email", "error"))
+                        .then(response => {
+                            Swal.fire("Bienvenido!", "Te has registrado! Ahora solo te falta iniciar sesión.", "success");
+                            setIsRegister(true);
+                        })
+                        .catch(error => Swal.fire("Error!", "Ya existe un usuario registrado con ese email", "error"))
                 } else {
                     Swal.fire("Error!", "Contraseña no coincide!", "error");
                 }
@@ -51,12 +54,18 @@ const Register = () => {
                 if (password === confirmPassword) {
                     if (user === "Clinica") {
                         actions.registerClinica(email, name, address, phone, password)
-                        .then(response=>setIsRegister(true))
-                        .catch(err=>Swal.fire("Error!","Ya existe una fundacion registrada con ese email","error"))
+                            .then(response => {
+                                Swal.fire("Bienvenido!", "Te has registrado! Ahora solo te falta iniciar sesión.", "success");
+                                setIsRegister(true);
+                            })
+                            .catch(err => Swal.fire("Error!", "Ya existe una fundacion registrada con ese email", "error"))
                     } else {
                         actions.registerFoundation(email, name, address, phone, password)
-                        .then(response=>setIsRegister(true))
-                        .catch(error =>Swal.fire("Error!","Ya existe una fundacion registrada con ese email","error"))
+                            .then(response => {
+                                Swal.fire("Bienvenido!", "Te has registrado! Ahora solo te falta iniciar sesión.", "success");
+                                setIsRegister(true);
+                            })
+                            .catch(error => Swal.fire("Error!", "Ya existe una fundacion registrada con ese email", "error"))
                     }
                 } else {
                     Swal.fire("Error!", "Contraseña no coincide!", "error");
@@ -184,8 +193,6 @@ const Register = () => {
                         {
                             isRegister &&
                             <div>
-                                <h1>Usuario Registrado</h1>
-                                <p>Serás redirigido para que inicies sesión.</p>
                                 {
                                     user === 'Usuario' ?
                                         history.push("/user/login") : ""
