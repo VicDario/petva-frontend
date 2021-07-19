@@ -95,6 +95,9 @@ const Userpethistory = () => {
             alert("Debes llenar todos los campos para agregar cirugía");
         }
     }
+    const reportLost = () => {
+        actions.userReportPetLost(pet_id);
+    }
 
 
 
@@ -121,14 +124,39 @@ const Userpethistory = () => {
                                     {/* <h5 className="card-title">{userPet.name}</h5> */}
                                     <p className="card-text">Especie: {userPet.specie === 'cat' ? "Gato" : "Perro"}</p>
                                     <p className="card-text">Fecha Nacimiento: {!!userPet.birth_date ? userPet.birth_date : "No registra fecha de nacimiento"}</p>
+                                    {
+                                        userPet.state === "lost" &&
+                                        <p className="card-text badge rounded-pill bg-danger fs-3">Perdida</p>
+                                    }
                                     <p className="card-text">N°Chip: {!!userPet.code_chip ? userPet.code_chip : "No registra codigo de chip"} </p>
 
                                     <div>
                                         <Link to="/user/pets">
-                                            <button className="btn btn-success">
+                                            <button className="btn btn-success my-3">
                                                 Volver a Mis Mascotas
                                             </button>
                                         </Link>
+                                        {
+                                            userPet.state !== "lost" &&
+
+                                        <button
+
+                                            type="button"
+                                            className="btn btn-danger"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#perdida"
+                                        >Reportar Perdida</button>
+                                        }
+                                        {
+                                            userPet.state === "lost" &&
+                                            <button
+
+                                                type="button"
+                                                className="btn btn-primary"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#encontrada"
+                                            >¡LA ENCONTRÉ!</button>
+                                        }
 
                                     </div>
                                 </div>
@@ -447,6 +475,80 @@ const Userpethistory = () => {
                                 </button>
                                 <button onClick={addSurgery} type="button" className="btn btn-primary" data-bs-dismiss={newSurgery.date !== null && newSurgery.description !== null && newSurgery.doctor_name !== null ? "modal" : ""}>
                                     Agregar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* Modal Para mascota perdida */}
+                <div
+                    className="modal fade"
+                    id="perdida"
+                    tabIndex={-1}
+                    aria-labelledby="perdidaLabel"
+                    aria-hidden="true"
+                >
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title text-center" id="perdidaLabel">
+                                    ¿Estás Seguro que quieres Reportar Tú Mascota como PERDIDA?
+                                </h5>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                />
+                            </div>
+
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                >
+                                    Cancelar
+                                </button>
+                                <button onClick={reportLost} type="button" className="btn btn-danger">
+                                    Reportar como Perdida
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* Modal Para mascota encontrada */}
+                <div
+                    className="modal fade"
+                    id="encontrada"
+                    tabIndex={-1}
+                    aria-labelledby="encontradaLabel"
+                    aria-hidden="true"
+                >
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title text-center" id="encontradaLabel">
+                                    ¡ENHORABUENA! Has encontrado tu mascota pulsa cambiar estado para notificar que la has encontrado
+                                </h5>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                />
+                            </div>
+
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                >
+                                    Cancelar
+                                </button>
+                                <button onClick={reportLost} type="button" className="btn btn-primary">
+                                    Cambiar estado
                                 </button>
                             </div>
                         </div>
