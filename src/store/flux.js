@@ -70,8 +70,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Content-Type": "application/json"
                     }
                 }
-                try {
+               
                     const response = await fetch(`${store.baseUrl}api/user/login`, opt);
+                    console.log(response.status);
+                    if (response.status === 401){
+                        return response;
+                    } 
                     //if (response.status !== 201) throw new Error(response.status, "error");
                     const data = await response.json();
                     console.log(data.access_token);
@@ -83,9 +87,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         setStore({ token: data.access_token });
                         history.push("/user");
                     }
-                } catch (error) {
-                    console.error("Error from loading message from backend", error);
-                }
+               
             },
             loginFundation: async (email, password) => {
                 const store = getStore();
