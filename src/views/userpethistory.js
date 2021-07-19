@@ -97,6 +97,15 @@ const Userpethistory = () => {
     }
     const reportLost = () => {
         actions.userReportPetLost(pet_id);
+        actions.getHistoryUserPet(pet_id);
+        actions.getSinglePetFromUser(pet_id);
+
+    }
+    const reportFounded = ()=>{
+        actions.userReportPetFounded(pet_id);
+        actions.getHistoryUserPet(pet_id);
+        actions.getSinglePetFromUser(pet_id);
+
     }
 
 
@@ -510,7 +519,10 @@ const Userpethistory = () => {
                                 >
                                     Cancelar
                                 </button>
-                                <button onClick={reportLost} type="button" className="btn btn-danger">
+                                <button onClick={reportLost} type="button" className="btn btn-danger"
+                                    data-bs-dismiss="modal"
+
+                                >
                                     Reportar como Perdida
                                 </button>
                             </div>
@@ -547,7 +559,9 @@ const Userpethistory = () => {
                                 >
                                     Cancelar
                                 </button>
-                                <button onClick={reportLost} type="button" className="btn btn-primary">
+                                <button onClick={reportFounded} type="button" className="btn btn-primary"
+                                data-bs-dismiss="modal"
+                                >
                                     Cambiar estado
                                 </button>
                             </div>

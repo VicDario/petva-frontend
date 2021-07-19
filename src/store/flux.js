@@ -667,6 +667,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log(data);
                     //aqií cargar lista de mascotas perdidas
                     actions.getMascotasUser();
+                    actions.getHistoryUserPet(pet_id);
 
 
                 } catch (error)
@@ -688,6 +689,34 @@ const getState = ({ getStore, getActions, setStore }) => {
                 } catch (error)
                 {
                     console.log("Error " + error)
+                }
+            },
+            userReportPetFounded: async (pet_id) => {
+                const actions = getActions();
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}/report/founded`, opt)
+                    if (response.status !== 200)
+                    {
+                        console.log("There has been some error in report founded pet")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    //aqií cargar lista de mascotas perdidas
+                    actions.getMascotasUser();
+                    actions.getLostPets();
+                    actions.getHistoryUserPet(pet_id);
+
+
+                } catch (error)
+                {
+                    console.log("There has been an error in report founded")
                 }
             }
 
