@@ -10,12 +10,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             foundationDetail: null,
             baseUrl: 'https://petva-backend-dev.herokuapp.com/', //https://petva-backend-dev.herokuapp.com/
             foundationPet: null,
-            historyUserPet : null,
-            userPet : null,
+            historyUserPet: null,
+            userPet: null,
             petsWithOwner: null,
-            petsInAdoption : null,
-            historyFoundationPet : null,
-            LostPets : null
+            petsInAdoption: null,
+            historyFoundationPet: null,
+            LostPets: null
         },
         actions: {
             registerClinica: async (email, name, address, phone, password) => {
@@ -33,11 +33,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Content-Type": "application/json"
                     }
                 }
-                    const response = await fetch(`${store.baseUrl}api/clinic/register`, opt);
-                    if (response.status !== 201) throw new Error(response.status, "error");
-                    const data = await response.json();
-                    //console.log(data);
-                    return data;
+                const response = await fetch(`${store.baseUrl}api/clinic/register`, opt);
+                if (response.status !== 201) throw new Error(response.status, "error");
+                const data = await response.json();
+                //console.log(data);
+                return data;
             },
             registerUser: async (email, name, lastname, password) => {
                 const store = getStore();
@@ -78,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
                     if (data.access_token) {
                         localStorage.setItem("petvaToken", data.access_token);
-                         localStorage.setItem("petvaUser", "normal") 
+                        localStorage.setItem("petvaUser", "normal")
                         setStore({ userType: "normal" });
                         setStore({ token: data.access_token });
                         history.push("/user");
@@ -155,7 +155,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ pets: data })
 
                 } catch (error) {
-                    console.log("There has been an error in get pets"+error)
+                    console.log("There has been an error in get pets" + error)
                 }
             },
             registerPet: async (name, chip_code, birth_date, specie, breed, picture) => {
@@ -344,25 +344,22 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log("the has been some error in transfer")
                 }
             },
-            getHistoryUserPet : async (pet_id)=>{
+            getHistoryUserPet: async (pet_id) => {
                 const store = getStore();
                 const opt = {
                     headers: {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}/history`, opt)
-                    if (response.status !== 200)
-                    {
+                    if (response.status !== 200) {
                         console.log("There is a some error in get history of pet")
                     }
                     const data = await response.json();
                     console.log(data);
                     setStore({ historyUserPet: data })
-                } catch (error)
-                {
+                } catch (error) {
                     console.log("Error in get info pet")
                 }
             },
@@ -373,51 +370,45 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}`, opt)
-                    if (response.status !== 200)
-                    {
+                    if (response.status !== 200) {
                         console.log("There is a some error in pet of user")
                     }
                     const data = await response.json();
                     console.log(data);
                     setStore({ userPet: data })
-                } catch (error)
-                {
+                } catch (error) {
                     console.log("Error in get info pet")
                 }
             },
-            addVaccinetoPetUser : async (date,lot,name,laboratory,pet_id)=>{
+            addVaccinetoPetUser: async (date, lot, name, laboratory, pet_id) => {
                 const store = getStore();
                 const actions = getActions();
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
-                        date:date,
-                        lot:lot,
-                        name:name,
-                        laboratory:laboratory
+                        date: date,
+                        lot: lot,
+                        name: name,
+                        laboratory: laboratory
                     }),
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}/history/vaccine/add`, opt)
-                    if (response.status !== 200)
-                    {
+                    if (response.status !== 200) {
                         console.log("there is some error in post vaccine pet")
                     }
                     const data = await response.json();
                     console.log(data)
                     actions.getHistoryUserPet(pet_id);
 
-                   
-                } catch (error)
-                {
+
+                } catch (error) {
                     console.log("the has been some error in post vaccine")
                 }
             },
@@ -437,11 +428,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/foundation/pets/${pet_id}/history/vaccine/add`, opt)
-                    if (response.status !== 200)
-                    {
+                    if (response.status !== 200) {
                         console.log("there is some error in post vaccine pet")
                     }
                     const data = await response.json();
@@ -449,8 +438,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     actions.getHistoryPetFoundation(pet_id);
 
 
-                } catch (error)
-                {
+                } catch (error) {
                     console.log("the has been some error in post vaccine")
                 }
             },
@@ -463,18 +451,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                         date: date,
                         diagnostic: diagnostic,
                         doctor_name: doctor_name
-                        
+
                     }),
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}/history/diagnostic/add`, opt)
-                    if (response.status !== 201)
-                    {
+                    if (response.status !== 201) {
                         console.log("there is some error in post diagnostic pet")
                     }
                     const data = await response.json();
@@ -482,8 +468,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     actions.getHistoryUserPet(pet_id);
 
 
-                } catch (error)
-                {
+                } catch (error) {
                     console.log("the has been some error in post diagnostic")
                 }
             },
@@ -503,11 +488,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/foundation/pets/${pet_id}/history/diagnostic/add`, opt)
-                    if (response.status !== 201)
-                    {
+                    if (response.status !== 201) {
                         console.log("there is some error in post diagnostic pet")
                     }
                     const data = await response.json();
@@ -515,8 +498,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     actions.getHistoryPetFoundation(pet_id);
 
 
-                } catch (error)
-                {
+                } catch (error) {
                     console.log("the has been some error in post diagnostic")
                 }
             },
@@ -536,11 +518,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}/history/surgery/add`, opt)
-                    if (response.status !== 201)
-                    {
+                    if (response.status !== 201) {
                         console.log("there is some error in post surgery pet")
                     }
                     const data = await response.json();
@@ -548,8 +528,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     actions.getHistoryUserPet(pet_id);
 
 
-                } catch (error)
-                {
+                } catch (error) {
                     console.log("the has been some error in post surgery")
                 }
             },
@@ -569,11 +548,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/foundation/pets/${pet_id}/history/surgery/add`, opt)
-                    if (response.status !== 201)
-                    {
+                    if (response.status !== 201) {
                         console.log("there is some error in post surgery pet")
                     }
                     const data = await response.json();
@@ -581,71 +558,64 @@ const getState = ({ getStore, getActions, setStore }) => {
                     actions.getHistoryPetFoundation(pet_id);
 
 
-                } catch (error)
-                {
+                } catch (error) {
                     console.log("the has been some error in post surgery")
                 }
             },
-            getPetsFoundationWithOwner : async ()=>{
+            getPetsFoundationWithOwner: async () => {
                 const store = getStore();
                 const opt = {
                     headers: {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/foundation/pets/owned`, opt)
-                    if (response.status !== 200)
-                    {
+                    if (response.status !== 200) {
                         console.log("There has been some error in pets with owned")
                     }
                     const data = await response.json();
                     console.log(data);
                     setStore({ petsWithOwner: data })
 
-                } catch (error)
-                {
+                } catch (error) {
                     console.log("There has been an error in get pets WO")
                 }
             },
-            getPetsInAdoption :async ()=>{
-                try{
+            getPetsInAdoption: async () => {
+                try {
                     const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/in_adoption")
-                    if (response.status !== 200){
+                    if (response.status !== 200) {
                         console.log("Error in get pets in adoption")
                     }
                     const data = await response.json();
                     console.log(data)
-                    setStore({petsInAdoption:data})
-                }catch (error){
-                    console.log("Error "+ error )
+                    setStore({ petsInAdoption: data })
+                } catch (error) {
+                    console.log("Error " + error)
                 }
             },
-            getHistoryPetFoundation : async (pet_id)=>{
+            getHistoryPetFoundation: async (pet_id) => {
                 const store = getStore();
                 const opt = {
                     headers: {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/foundation/pets/${pet_id}/history`, opt)
-                    if (response.status !== 200)
-                    {
+                    if (response.status !== 200) {
                         console.log("There has been some error in het history PF")
                     }
                     const data = await response.json();
                     console.log(data);
                     setStore({ historyFoundationPet: data })
 
-                } catch (error)
-                {
+                } catch (error) {
                     console.log("There has been an error in get history")
                 }
             },
-            userReportPetLost : async (pet_id)=>{
+            userReportPetLost: async (pet_id) => {
                 const actions = getActions();
                 const store = getStore();
                 const opt = {
@@ -653,11 +623,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}/report/lost`, opt)
-                    if (response.status !== 200)
-                    {
+                    if (response.status !== 200) {
                         console.log("There has been some error in report lost pet")
                     }
                     const data = await response.json();
@@ -667,24 +635,20 @@ const getState = ({ getStore, getActions, setStore }) => {
                     actions.getHistoryUserPet(pet_id);
 
 
-                } catch (error)
-                {
+                } catch (error) {
                     console.log("There has been an error in report lost")
                 }
             },
             getLostPets: async () => {
-                try
-                {
+                try {
                     const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/lost")
-                    if (response.status !== 200)
-                    {
+                    if (response.status !== 200) {
                         console.log("Error in get pets in adoption")
                     }
                     const data = await response.json();
                     console.log(data)
                     setStore({ LostPets: data })
-                } catch (error)
-                {
+                } catch (error) {
                     console.log("Error " + error)
                 }
             },
@@ -696,11 +660,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}/report/founded`, opt)
-                    if (response.status !== 200)
-                    {
+                    if (response.status !== 200) {
                         console.log("There has been some error in report founded pet")
                     }
                     const data = await response.json();
@@ -711,8 +673,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     actions.getHistoryUserPet(pet_id);
 
 
-                } catch (error)
-                {
+                } catch (error) {
                     console.log("There has been an error in report founded")
                 }
             }

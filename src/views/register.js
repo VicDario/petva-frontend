@@ -36,7 +36,8 @@ const Register = () => {
                     actions.registerUser(email, name, lastname, password)
                         .then(response => {
                             Swal.fire("Bienvenido!", "Te has registrado! Ahora solo te falta iniciar sesión.", "success");
-                            setIsRegister(true);})
+                            setIsRegister(true);
+                        })
                         .catch(error => Swal.fire("Error!", "Ya existe un usuario registrado con ese email", "error"))
                 } else {
                     Swal.fire("Error!", "Contraseña no coincide!", "error");
@@ -55,7 +56,8 @@ const Register = () => {
                         actions.registerClinica(email, name, address, phone, password)
                             .then(response => {
                                 Swal.fire("Bienvenido!", "Te has registrado! Ahora solo te falta iniciar sesión.", "success");
-                                setIsRegister(true);})
+                                setIsRegister(true);
+                            })
                             .catch(err => Swal.fire("Error!", "Ya existe una fundacion registrada con ese email", "error"))
                     } else {
                         actions.registerFoundation(email, name, address, phone, password)
