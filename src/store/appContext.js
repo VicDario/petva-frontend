@@ -18,9 +18,8 @@ const injectContext = (PassedComponent) => {
         );
 
         useEffect(() => {
-            state.store.token = localStorage.getItem("petvaToken")
-            state.store.userType = localStorage.getItem("petvaUser")
-            state.actions.syncTokenFromSessionStore();
+            
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
 
         return (
