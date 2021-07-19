@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import { Context } from "../store/appContext"
+import Swal from "sweetalert2";
 
 const Addpet = ({ history }) => {
     const { actions, store } = useContext(Context);
@@ -23,11 +24,23 @@ const Addpet = ({ history }) => {
         e.preventDefault();
         if(store.userType==="normal"){
             actions.registerPet(pet.name, pet.chip_code, formatDate(pet.birth_date), pet.specie, pet.breed, store.auxPicture);
+            Swal.fire({
+                icon: "success",
+                title: "Mascota agregada.",
+                showConfirmButton: false,
+                timer: 1500
+            })
             history.push("/user/pets");
         }
         if(store.userType==="foundation"){
             console.log("Agrega la mascota como fundación")
             actions.registerPetFundation(pet.name, pet.chip_code, formatDate(pet.birth_date), pet.specie, pet.breed, store.auxPicture)
+            Swal.fire({
+                icon: "success",
+                title: "Mascota agregada.",
+                showConfirmButton: false,
+                timer: 1500
+            })
             history.push("/foundation/pets");
         }
         actions.resetAuxPicture(); // reset aux picture to null
