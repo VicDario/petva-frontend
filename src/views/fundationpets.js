@@ -19,7 +19,7 @@ const Foundationpets = () => {
                     <div className="row my-4">
                         <div className="col-12 text-center">
                             <div>
-                                <h2 className="display-1">Mascotas de la Fundación</h2>
+                                <h2 className="display-1">Mascotas en Adopción</h2>
                             </div>
                             <div className="row justify-content-center">
                                 {
@@ -34,11 +34,11 @@ const Foundationpets = () => {
                                                                 <h5 className="card-title">{pet.name}</h5>
                                                                 <p className="card-text">{pet.specie === 'cat' ? "Gato" : "Perro"}</p>
                                                                 <p className="card-text">{!!pet.birth_date ? pet.birth_date : "No registra fecha de nacimiento"}</p>
-                                                                <p className="card-text">{!!pet.chip_code ? pet.code_chip : "No registra codigo de chip"}</p>
+                                                                <p className="card-text">{!!pet.code_chip ? pet.code_chip : "No registra codigo de chip"}</p>
                                                                 <p className="card-text badge rounded-pill bg-success fs-3">{pet.state === "owned" ? "Con Dueño" : "En adopción"}</p>
 
                                                                 <div className="d-flex justify-content-around">
-                                                                    <Link href="/infomascota" className="btn btn-primary">Detalles</Link>
+                                                                    <Link to={"/foundation/pet/history/" + pet.id} className="btn btn-primary">Historial</Link>
                                                                     <Link to={"/foundation/transfer/" + pet.id} className="btn btn-danger">Transferir</Link>
                                                                 </div>
                                                             </div>

@@ -1,15 +1,19 @@
-import { useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa"
 
 
-const Userpethistory = () => {
+
+const Foundationpethistory = () => {
 
     const { actions, store } = useContext(Context);
     const { pet_id } = useParams();
-    const { userPet } = store;
+    const { foundationPet } = store;
+    const location = useLocation();
+    console.log(location.pathname);
+    const history = useHistory();
 
     const [newVaccine, setNewVaccine] = useState({
         date: null,
@@ -36,15 +40,15 @@ const Userpethistory = () => {
         return newdate
     }
     useEffect(() => {
-        actions.getSinglePetFromUser(pet_id);
-        actions.getHistoryUserPet(pet_id);
+        actions.getSinglePetFromFoundation(pet_id);
+        actions.getHistoryPetFoundation(pet_id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const addVaccine = () => {
 
         if (newVaccine.date !== null && newVaccine.lot !== null && newVaccine.name !== null && newVaccine.laboratory !== null)
         {
-            actions.addVaccinetoPetUser(formatDate(newVaccine.date), newVaccine.lot, newVaccine.name, newVaccine.laboratory, pet_id)
+            actions.addVaccinetoPetFoundation(formatDate(newVaccine.date), newVaccine.lot, newVaccine.name, newVaccine.laboratory, pet_id)
             console.log("Vacuna agregada");
             setNewVaccine({
                 date: null,
@@ -65,7 +69,7 @@ const Userpethistory = () => {
     const addDiagnostic = () => {
         if (newDiagnostic.date !== null && newDiagnostic.diagnostic !== null && newDiagnostic.doctor_name !== null)
         {
-            actions.addDiagnostictoPetUser(formatDate(newDiagnostic.date), newDiagnostic.diagnostic, newDiagnostic.doctor_name, pet_id)
+            actions.addDiagnostictoPetFoundation(formatDate(newDiagnostic.date), newDiagnostic.diagnostic, newDiagnostic.doctor_name, pet_id)
             console.log("Diagnóstico agregado");
             setNewDiagnostic({
                 date: null,
@@ -82,7 +86,7 @@ const Userpethistory = () => {
     const addSurgery = () => {
         if (newSurgery.date !== null && newSurgery.description !== null && newSurgery.doctor_name !== null)
         {
-            actions.addSurgerytoPetUser(formatDate(newSurgery.date), newSurgery.description, newSurgery.doctor_name, pet_id)
+            actions.addSurgerytoPetFoundation(formatDate(newSurgery.date), newSurgery.description, newSurgery.doctor_name, pet_id)
             console.log("Cirugia agregada");
             setNewSurgery({
                 date: null,
@@ -95,18 +99,6 @@ const Userpethistory = () => {
             alert("Debes llenar todos los campos para agregar cirugía");
         }
     }
-    const reportLost = () => {
-        actions.userReportPetLost(pet_id);
-        actions.getHistoryUserPet(pet_id);
-        actions.getSinglePetFromUser(pet_id);
-
-    }
-    const reportFounded = ()=>{
-        actions.userReportPetFounded(pet_id);
-        actions.getHistoryUserPet(pet_id);
-        actions.getSinglePetFromUser(pet_id);
-
-    }
 
 
 
@@ -116,61 +108,36 @@ const Userpethistory = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-3">
-                        
-                            {
-                                !!userPet&&
-                                <h1>
-                                    Nombre : {userPet.name}
-                                </h1>
-                            }
-                        
-                            {
-                                !!userPet &&
-                        <div className="card mb-3">
-                            <img src={ !!userPet.picture ? userPet.picture :  "/images/default.jpg"} className="card-img-top" alt="petname" />
+
+                        {
+                            !!foundationPet &&
+                            <h1>
+                                Nombre : {foundationPet.name}
+                            </h1>
+                        }
+
+                        {
+                            !!foundationPet &&
+                            <div className="card mb-3">
+                                <img src={!!foundationPet.picture ? foundationPet.picture : "/images/default.jpg"} className="card-img-top" alt="petname" />
 
                                 <div className="card-body">
-                                    {/* <h5 className="card-title">{userPet.name}</h5> */}
-                                    <p className="card-text">Especie: {userPet.specie === 'cat' ? "Gato" : "Perro"}</p>
-                                    <p className="card-text">Fecha Nacimiento: {!!userPet.birth_date ? userPet.birth_date : "No registra fecha de nacimiento"}</p>
-                                    {
-                                        userPet.state === "lost" &&
-                                        <p className="card-text badge rounded-pill bg-danger fs-3">Perdida</p>
-                                    }
-                                    <p className="card-text">N°Chip: {!!userPet.code_chip ? userPet.code_chip : "No registra codigo de chip"} </p>
+                                    {/* <h5 className="card-title">{foundationPet.name}</h5> */}
+                                    <p className="card-text">Especie: {foundationPet.specie === 'cat' ? "Gato" : "Perro"}</p>
+                                    <p className="card-text">Fecha Nacimiento: {!!foundationPet.birth_date ? foundationPet.birth_date : "No registra fecha de nacimiento"}</p>
+                                    <p className="card-text">N°Chip: {!!foundationPet.code_chip ? foundationPet.code_chip : "No registra codigo de chip"} </p>
 
                                     <div>
-                                        <Link to="/user/pets">
-                                            <button className="btn btn-success my-3">
-                                                Volver a Mis Mascotas
+                                        
+                                            <button onClick={history.goBack} className="btn btn-success">
+                                                Volver a Mascotas 
                                             </button>
-                                        </Link>
-                                        {
-                                            userPet.state !== "lost" &&
-
-                                        <button
-
-                                            type="button"
-                                            className="btn btn-danger"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#perdida"
-                                        >Reportar Perdida</button>
-                                        }
-                                        {
-                                            userPet.state === "lost" &&
-                                            <button
-
-                                                type="button"
-                                                className="btn btn-primary"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#encontrada"
-                                            >¡LA ENCONTRÉ!</button>
-                                        }
+                                      
 
                                     </div>
                                 </div>
-                        </div>
-                            }
+                            </div>
+                        }
 
                     </div>
 
@@ -179,8 +146,8 @@ const Userpethistory = () => {
                             <h2>Vacunas <span title="Agregar Vacuna" className="text-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><FaPlusCircle /></span></h2>
                         </div>
                         {
-                            !!store.historyUserPet &&
-                            store.historyUserPet.History.vaccines.map((vacuna, index) => {
+                            !!store.historyFoundationPet &&
+                            store.historyFoundationPet.History.vaccines.map((vacuna, index) => {
                                 return (
                                     <>
                                         <div className="accordion" id="Vacuna">
@@ -231,8 +198,8 @@ const Userpethistory = () => {
                             <h2>Consultas <span title="Agregar consulta" className="text-success" type="button" data-bs-toggle="modal" data-bs-target="#diagnostico"><FaPlusCircle /></span></h2>
                         </div>
                         {
-                            !!store.historyUserPet &&
-                            store.historyUserPet.History.diagnostics.map((diag, index) => {
+                            !!store.historyFoundationPet &&
+                            store.historyFoundationPet.History.diagnostics.map((diag, index) => {
                                 return (
                                     <>
                                         <div className="accordion" id="accordionExample">
@@ -284,8 +251,8 @@ const Userpethistory = () => {
                             <h2>Cirugías <span title="Agregar Cirugía" className="text-success" type="button" data-bs-toggle="modal" data-bs-target="#cirugia"><FaPlusCircle /></span></h2>
                         </div>
                         {
-                            !!store.historyUserPet &&
-                            store.historyUserPet.History.surgeries.map((cirugia, index) => {
+                            !!store.historyFoundationPet &&
+                            store.historyFoundationPet.History.surgeries.map((cirugia, index) => {
                                 return (
                                     <>
                                         <div className="accordion" id="Cirugia">
@@ -489,85 +456,6 @@ const Userpethistory = () => {
                         </div>
                     </div>
                 </div>
-                {/* Modal Para mascota perdida */}
-                <div
-                    className="modal fade"
-                    id="perdida"
-                    tabIndex={-1}
-                    aria-labelledby="perdidaLabel"
-                    aria-hidden="true"
-                >
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title text-center" id="perdidaLabel">
-                                    ¿Estás Seguro que quieres Reportar Tú Mascota como PERDIDA?
-                                </h5>
-                                <button
-                                    type="button"
-                                    className="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                />
-                            </div>
-
-                            <div className="modal-footer">
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    data-bs-dismiss="modal"
-                                >
-                                    Cancelar
-                                </button>
-                                <button onClick={reportLost} type="button" className="btn btn-danger"
-                                    data-bs-dismiss="modal"
-
-                                >
-                                    Reportar como Perdida
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/* Modal Para mascota encontrada */}
-                <div
-                    className="modal fade"
-                    id="encontrada"
-                    tabIndex={-1}
-                    aria-labelledby="encontradaLabel"
-                    aria-hidden="true"
-                >
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title text-center" id="encontradaLabel">
-                                    ¡ENHORABUENA! Has encontrado tu mascota pulsa cambiar estado para notificar que la has encontrado
-                                </h5>
-                                <button
-                                    type="button"
-                                    className="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                />
-                            </div>
-
-                            <div className="modal-footer">
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    data-bs-dismiss="modal"
-                                >
-                                    Cancelar
-                                </button>
-                                <button onClick={reportFounded} type="button" className="btn btn-primary"
-                                data-bs-dismiss="modal"
-                                >
-                                    Cambiar estado
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </>
@@ -575,4 +463,4 @@ const Userpethistory = () => {
     )
 }
 
-export default Userpethistory;
+export default Foundationpethistory;

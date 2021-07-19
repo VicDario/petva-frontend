@@ -14,9 +14,12 @@ const Home = () => {
                     </div>
                     <div className="col-8 col-md-6 text-center">
                         <div >
+                            <Link to="/inAdoption">
                             <h2 className="display-3" >
                                 Adoptar
                             </h2>
+                            
+                            </Link>
                         </div>
                         <div>
                             <p>
@@ -68,7 +71,7 @@ const Home = () => {
                     <div className="col-8 col-md-6 text-center">
                         <div >
                             <h2 className="display-3" >
-                                Reportar mascota perdida
+                                Mascotas Perdidas
                             </h2>
                         </div>
                         <div>
@@ -78,7 +81,9 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="col-4 col-md-2" >
+                        <Link to="/lostPets">
                         <img className="imgRedonda img-fluid" src="https://picsum.photos/id/237/200/300" alt="imagen adoptaar" />
+                        </Link>
                     </div>
                 </div>
             </div>
