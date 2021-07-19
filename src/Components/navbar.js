@@ -83,7 +83,7 @@ const Navbar = () => {
                             <Link to={store.userType==="normal"?"/user": store.userType==="foundation"?"/foundation":history.push("/")} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">Mi Perfil</Link>
                         </div>
                         <div className="text-end">
-                            <Link onClick={logout} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" >Cerrar Sesión</Link>
+                            <Link to="/" onClick={logout} className="text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" >Cerrar Sesión</Link>
                         </div>
                     </div>
                 </div>

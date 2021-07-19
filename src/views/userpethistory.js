@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa"
+import { FaCat, FaDog } from "react-icons/fa";
+
 
 
 const Userpethistory = () => {
@@ -122,7 +124,8 @@ const Userpethistory = () => {
                             {
                                 !!userPet&&
                                 <h1>
-                                    Nombre : {userPet.name}
+                                    {userPet.name}
+                                
                                 </h1>
                             }
                         
@@ -133,8 +136,8 @@ const Userpethistory = () => {
 
                                 <div className="card-body">
                                     {/* <h5 className="card-title">{userPet.name}</h5> */}
-                                    <p className="card-text">Especie: {userPet.specie === 'cat' ? "Gato" : "Perro"}</p>
-                                    <p className="card-text">Fecha Nacimiento: {!!userPet.birth_date ? userPet.birth_date : "No registra fecha de nacimiento"}</p>
+                                    <span className="card-title fs-3 ">{userPet.specie === 'cat' ? <FaCat className="align-middle ms-1" /> : <FaDog className="align-middle ms-1" />}   </span>
+                                    <p className="card-text">{!!userPet.birth_date ? actions.getEdad(userPet.birth_date) : "No registra fecha de nacimiento"}</p>
                                     {
                                         userPet.state === "lost" &&
                                         <p className="card-text badge rounded-pill bg-danger fs-3">Perdida</p>
@@ -290,7 +293,7 @@ const Userpethistory = () => {
                             store.historyUserPet.History.surgeries.map((cirugia, index) => {
                                 return (
                                     <>
-                                        <div className="accordion" id="Cirugia">
+                                        <div key={index} className="accordion" id="Cirugia">
 
                                             <div className="accordion-item mb-4"
                                                 key={index}>
@@ -514,7 +517,7 @@ const Userpethistory = () => {
                                 </div>
                                 <div className="modal-body">
                                     <div>
-                                    <label className="form-label" htmlFor="">Indica la última ubicacón donde fue vista</label>
+                                    <label className="form-label" htmlFor="">Indica la última ubicación donde viste tu mascota, la fecha y alguna descripción</label>
 
                                     </div>
                                     <div>

@@ -676,15 +676,30 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                     const data = await response.json();
                     console.log(data);
-                    //aqií cargar lista de mascotas perdidas
                     actions.getMascotasUser();
-                    actions.getLostPets();
                     actions.getHistoryUserPet(pet_id);
 
 
                 } catch (error) {
                     console.log("There has been an error in report founded")
                 }
+            },
+            getEdad : (dateString)=>{
+                let hoy = new Date()
+                let fechaNacimiento = new Date(dateString)
+                let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
+                let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
+                if (
+                    diferenciaMeses < 0 ||
+                    (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
+
+                )
+                {
+                    edad--
+                    diferenciaMeses = 12 + diferenciaMeses;
+                }
+
+                return "Años: " + edad + "  Meses: " + diferenciaMeses
             }
 
         }
