@@ -112,6 +112,32 @@ const getState = ({ getStore, getActions, setStore }) => {
                     history.push("/foundation");
                 }
             },
+            loginClinic: async (email, password, history) => {
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+                const response = await fetch(`${store.baseUrl}api/clinic/login`, opt);
+                //if (response.status !== 200) throw new Error(response.status, "error");
+                if (response.status == 401) {
+                    return response;
+                }
+                const data = await response.json();
+                if (data.access_token) {
+                    localStorage.setItem("petvaToken", data.access_token);
+                    localStorage.setItem("petvaUser", "clinic")
+                    setStore({ userType: "clinic" });
+                    setStore({ token: data.access_token });
+                    history.push("/clinic");
+                }
+            },
             getMascotasUser: async () => {
                 const store = getStore();
                 const opt = {
