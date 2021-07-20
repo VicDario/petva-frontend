@@ -9,11 +9,11 @@ import injectContext from './store/appContext';
 import Userperfil from './views/userperfil';
 import Userpets from './views/userpets';
 import Addpet from './views/addpet';
-import Loginfundation from './views/loginfundation';
-import FundationProfile from './views/fundationprofile';
+import Loginfoundation from './views/loginfoundation';
+import FoundationProfile from './views/foundationprofile';
 import Userprofiledetail from './views/userprofiledetail';
-import Fundationprofiledetail from './views/fundationprofiledetail';
-import Fundationpets from './views/fundationpets';
+import Foundationprofiledetail from './views/foundationprofiledetail';
+import Foundationpets from './views/foundationpets';
 import TransferPetFromFoundation from './views/transferPetFromFoundation';
 import Services from './views/services';
 import Userpethistory from './views/userpethistory';
@@ -35,11 +35,11 @@ function App() {
           <Route exact path="/user" component={Userperfil}/>
           <Route exact path="/user/pets" component={Userpets}/>
           <Route exact path="/user/pets/add" component={Addpet}/>
-          <Route exact path="/foundation/login" component={Loginfundation}/>
-          <Route exact path="/foundation" component={FundationProfile}/>
+          <Route exact path="/foundation/login" component={Loginfoundation}/>
+          <Route exact path="/foundation" component={FoundationProfile}/>
           <Route exact path="/user/profile" component={Userprofiledetail} />
-          <Route exact path="/foundation/profile" component={Fundationprofiledetail} />
-          <Route exact path="/foundation/pets" component={Fundationpets} />
+          <Route exact path="/foundation/profile" component={Foundationprofiledetail} />
+          <Route exact path="/foundation/pets" component={Foundationpets} />
           <Route exact path="/foundation/petsWithOwned" component={FoundationpetsWO} />
           <Route exact path="/foundation/pet/history/:pet_id" component={Foundationpethistory} />
           <Route exact path="/foundation/pets/add" component={Addpet} />
