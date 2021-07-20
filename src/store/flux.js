@@ -202,6 +202,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("there is some error in registerPet")
                     }
                     const data = await response.json();
+                    console.log(data);
                     actions.getPetsFoundation();
 
                 } catch (error) {
@@ -316,7 +317,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in transfer a pet")
                     }
-                    const data = await response.json();
+                    
                     history.push("/foundation/pets")
                 } catch (error) {
                     console.error("the has been some error in transfer")
@@ -379,7 +380,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 200) {
                         console.error("there is some error in post vaccine pet")
                     }
-                    const data = await response.json();
+                    
                     actions.getHistoryUserPet(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post vaccine")
@@ -406,7 +407,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 200) {
                         console.error("there is some error in post vaccine pet")
                     }
-                    const data = await response.json();
+                    
                     actions.getHistoryPetFoundation(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post vaccine")
@@ -433,7 +434,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in post diagnostic pet")
                     }
-                    const data = await response.json();
+                    
                     actions.getHistoryUserPet(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post diagnostic")
@@ -460,7 +461,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in post diagnostic pet")
                     }
-                    const data = await response.json();
+                    
                     actions.getHistoryPetFoundation(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post diagnostic")
@@ -487,7 +488,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in post surgery pet")
                     }
-                    const data = await response.json();
+                    
                     actions.getHistoryUserPet(pet_id);
 
 
@@ -516,7 +517,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in post surgery pet")
                     }
-                    const data = await response.json();
+                    
                     actions.getHistoryPetFoundation(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post surgery")
@@ -540,16 +541,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("There has been an error in get pets WO")
                 }
             },
-            getPetsInAdoption: async () => {
-                try {
-                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/in_adoption")
-                    if (response.status !== 200) {
-                        console.error("Error in get pets in adoption")
+            getPetsInAdoption :async ()=>{
+                try{
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/in_adoption/1")
+                    if (response.status !== 200){
+                        console.log("Error in get pets in adoption")
                     }
                     const data = await response.json();
-                    setStore({ petsInAdoption: data })
-                } catch (error) {
-                    console.error("Error " + error)
+                    
+                    setStore({petsInAdoption:data[0]})
+                }catch (error){
+                    console.log("Error "+ error )
                 }
             },
             getHistoryPetFoundation: async (pet_id) => {
@@ -571,11 +573,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("There has been an error in get history")
                 }
             },
-            userReportPetLost: async (pet_id) => {
+            userReportPetLost : async (pet_id,last_location)=>{
                 const actions = getActions();
                 const store = getStore();
                 const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        last_location: last_location
+
+                    }),
                     headers: {
+                        "Content-Type": "application/json",
                         "Authorization": "Bearer " + store.token
                     }
                 }
@@ -584,24 +592,29 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 200) {
                         console.error("There has been some error in report lost pet")
                     }
-                    const data = await response.json();
+                    /* const data = await response.json(); */
                     //aqií cargar lista de mascotas perdidas
                     actions.getMascotasUser();
                     actions.getHistoryUserPet(pet_id);
+                    actions.getLostPets();
                 } catch (error) {
                     console.error("There has been an error in report lost")
                 }
             },
             getLostPets: async () => {
-                try {
-                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/lost")
-                    if (response.status !== 200) {
-                        console.error("Error in get pets in adoption")
+                try
+                {
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/lost/1")
+                    if (response.status !== 200)
+                    {
+                        console.log("Error in get pets in adoption")
                     }
                     const data = await response.json();
-                    setStore({ LostPets: data })
-                } catch (error) {
-                    console.error("Error " + error)
+                    
+                    setStore({ LostPets: data[0] })
+                } catch (error)
+                {
+                    console.log("Error " + error)
                 }
             },
             userReportPetFounded: async (pet_id) => {
@@ -618,15 +631,33 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("There has been some error in report founded pet")
                     }
                     const data = await response.json();
+                    console.log(data);
                     //aqií cargar lista de mascotas perdidas
                     actions.getMascotasUser();
-                    actions.getLostPets();
                     actions.getHistoryUserPet(pet_id);
+                    actions.getLostPets();
 
 
                 } catch (error) {
                     console.error("There has been an error in report founded")
                 }
+            },
+            getEdad : (dateString)=>{
+                let hoy = new Date()
+                let fechaNacimiento = new Date(dateString)
+                let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
+                let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
+                if (
+                    diferenciaMeses < 0 ||
+                    (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
+
+                )
+                {
+                    edad--
+                    diferenciaMeses = 12 + diferenciaMeses;
+                }
+
+                return "Años: " + edad + "  Meses: " + diferenciaMeses
             }
 
         }

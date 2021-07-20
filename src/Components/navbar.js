@@ -1,8 +1,8 @@
 
 import { Link } from "react-router-dom"
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { useHistory } from "react-router";
+
 import { AiOutlineHome } from 'react-icons/ai';
 import { IoLogOutOutline, IoLogInOutline } from 'react-icons/io5';
 import { MdPets } from "react-icons/md";
@@ -11,7 +11,7 @@ const Navbar = () => {
 
     const { store, actions } = useContext(Context);
 
-    const history = useHistory();
+    
     useEffect(()=>{
         if(localStorage.getItem("petvaToken") !== null)   store.token = localStorage.getItem("petvaToken");
         else    store.token = false;

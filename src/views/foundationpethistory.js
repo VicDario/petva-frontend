@@ -1,15 +1,21 @@
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory,  useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { FaPlusCircle } from "react-icons/fa";
+import { FaPlusCircle } from "react-icons/fa"
+import { FaCat, FaDog } from "react-icons/fa";
+
+
+
+
+
 
 const Foundationpethistory = () => {
 
     const { actions, store } = useContext(Context);
     const { pet_id } = useParams();
     const { foundationPet } = store;
-    const location = useLocation();
-    console.log(location.pathname);
+    
+    
     const history = useHistory();
 
     const [newVaccine, setNewVaccine] = useState({
@@ -32,7 +38,7 @@ const Foundationpethistory = () => {
         let newdate = date.split("-")
         newdate = newdate.reverse()
         newdate = newdate.join("/")
-        console.log(newdate)
+        
 
         return newdate
     }
@@ -109,7 +115,7 @@ const Foundationpethistory = () => {
                         {
                             !!foundationPet &&
                             <h1>
-                                Nombre : {foundationPet.name}
+                                {foundationPet.name}
                             </h1>
                         }
 
@@ -120,8 +126,8 @@ const Foundationpethistory = () => {
 
                                 <div className="card-body">
                                     {/* <h5 className="card-title">{foundationPet.name}</h5> */}
-                                    <p className="card-text">Especie: {foundationPet.specie === 'cat' ? "Gato" : "Perro"}</p>
-                                    <p className="card-text">Fecha Nacimiento: {!!foundationPet.birth_date ? foundationPet.birth_date : "No registra fecha de nacimiento"}</p>
+                                    <span className="card-title fs-3 ">{foundationPet.specie === 'cat' ? <FaCat className="align-top ms-1" /> : <FaDog className="align-top ms-1" />}   </span>
+                                    <p className="card-text">Fecha Nacimiento: {!!foundationPet.birth_date ? actions.getEdad(foundationPet.birth_date) : "No registra fecha de nacimiento"}</p>
                                     <p className="card-text">N°Chip: {!!foundationPet.code_chip ? foundationPet.code_chip : "No registra codigo de chip"} </p>
 
                                     <div>

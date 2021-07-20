@@ -48,7 +48,7 @@ const FoundationpetsWO = () => {
                                             })
                                             :
                                             <div className="col-sm-12 pt-4">
-                                                <h3 className="text-center">La fundación no posee mascotas en adopción</h3>
+                                                <h3 className="text-center">La fundación no posee mascotas con dueño para seguimiento</h3>
                                             </div>
                                         :
                                         <LoadingSpiner />

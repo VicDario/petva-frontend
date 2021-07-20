@@ -3,6 +3,8 @@ import { useParams } from "react-router";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router";
+import { FaCat, FaDog } from "react-icons/fa";
+
 
 const TransferPetFromFoundation = () => {
     const { actions, store } = useContext(Context);
@@ -34,10 +36,9 @@ const TransferPetFromFoundation = () => {
                             <div className="card mb-3">
                                 <img src={!!store.foundationPet.picture ? store.foundationPet.picture : "/images/default.jpg"} className="card-img-top" alt={store.foundationPet.name} />
                                 <div className="card-body">
-                                    <h5 className="card-title">{store.foundationPet.name}</h5>
-                                    <p className="card-text">{store.foundationPet.specie === 'cat' ? "Gato" : "Perro"}</p>
-                                    <p className="card-text">{!!store.foundationPet.birth_date ? store.foundationPet.birth_date : "No registra fecha de nacimiento"}</p>
-                                    <p className="card-text">{!!store.foundationPet.chip_code ? store.foundationPet.chip_code : "No registra codigo de chip"}</p>
+                                    <h5 className="card-title">{store.foundationPet.name}<span className="card-title fs-3 ">{store.foundationPet.specie === 'cat' ? <FaCat className="align-top ms-1" /> : <FaDog className="align-top ms-1" />}   </span></h5>
+                                    <p className="card-text">{!!store.foundationPet.birth_date ? actions.getEdad(store.foundationPet.birth_date) : "No registra fecha de nacimiento"}</p>
+                                    <p className="card-text">{!!store.foundationPet.code_chip ? "Codigo Chip: "+store.foundationPet.code_chip : "No registra codigo de chip"}</p>
 
                                 </div>
 
