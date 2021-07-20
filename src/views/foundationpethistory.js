@@ -1,7 +1,6 @@
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory,  useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa"
 import { FaCat, FaDog } from "react-icons/fa";
 
@@ -15,8 +14,8 @@ const Foundationpethistory = () => {
     const { actions, store } = useContext(Context);
     const { pet_id } = useParams();
     const { foundationPet } = store;
-    const location = useLocation();
-    console.log(location.pathname);
+    
+    
     const history = useHistory();
 
     const [newVaccine, setNewVaccine] = useState({
@@ -39,7 +38,7 @@ const Foundationpethistory = () => {
         let newdate = date.split("-")
         newdate = newdate.reverse()
         newdate = newdate.join("/")
-        console.log(newdate)
+        
 
         return newdate
     }

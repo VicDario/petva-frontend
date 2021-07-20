@@ -202,6 +202,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("there is some error in registerPet")
                     }
                     const data = await response.json();
+                    console.log(data);
                     actions.getPetsFoundation();
 
                 } catch (error) {
@@ -316,7 +317,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in transfer a pet")
                     }
-                    const data = await response.json();
+                    
                     history.push("/foundation/pets")
                 } catch (error) {
                     console.error("the has been some error in transfer")
@@ -379,7 +380,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 200) {
                         console.error("there is some error in post vaccine pet")
                     }
-                    const data = await response.json();
+                    
                     actions.getHistoryUserPet(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post vaccine")
@@ -406,7 +407,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 200) {
                         console.error("there is some error in post vaccine pet")
                     }
-                    const data = await response.json();
+                    
                     actions.getHistoryPetFoundation(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post vaccine")
@@ -433,7 +434,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in post diagnostic pet")
                     }
-                    const data = await response.json();
+                    
                     actions.getHistoryUserPet(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post diagnostic")
@@ -460,7 +461,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in post diagnostic pet")
                     }
-                    const data = await response.json();
+                    
                     actions.getHistoryPetFoundation(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post diagnostic")
@@ -487,7 +488,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in post surgery pet")
                     }
-                    const data = await response.json();
+                    
                     actions.getHistoryUserPet(pet_id);
 
 
@@ -516,7 +517,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in post surgery pet")
                     }
-                    const data = await response.json();
+                    
                     actions.getHistoryPetFoundation(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post surgery")
@@ -547,7 +548,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log("Error in get pets in adoption")
                     }
                     const data = await response.json();
-                    console.log(data[0])
+                    
                     setStore({petsInAdoption:data[0]})
                 }catch (error){
                     console.log("Error "+ error )
@@ -591,10 +592,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 200) {
                         console.error("There has been some error in report lost pet")
                     }
-                    const data = await response.json();
+                    /* const data = await response.json(); */
                     //aqií cargar lista de mascotas perdidas
                     actions.getMascotasUser();
                     actions.getHistoryUserPet(pet_id);
+                    actions.getLostPets();
                 } catch (error) {
                     console.error("There has been an error in report lost")
                 }
@@ -608,7 +610,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log("Error in get pets in adoption")
                     }
                     const data = await response.json();
-                    console.log(data[0])
+                    
                     setStore({ LostPets: data[0] })
                 } catch (error)
                 {
@@ -633,6 +635,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     //aqií cargar lista de mascotas perdidas
                     actions.getMascotasUser();
                     actions.getHistoryUserPet(pet_id);
+                    actions.getLostPets();
 
 
                 } catch (error) {
