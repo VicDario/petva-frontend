@@ -82,7 +82,7 @@ const Home = () => {
                     </div>
                     <div className="col-4 col-md-2" >
                         <Link to="/lostPets">
-                        <img className="imgRedonda img-fluid" src="https://picsum.photos/id/237/200/300" alt="imagen adoptaar" />
+                        <img className="imgRedonda img-fluid" src="/images/sebuscapet.png" alt="imagen adoptaar" />
                         </Link>
                     </div>
                 </div>
