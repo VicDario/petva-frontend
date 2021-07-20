@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { FaPlusCircle, FaTrash } from "react-icons/fa"
 import { FaCat, FaDog } from "react-icons/fa";
+import { FiEdit } from "react-icons/fi"
 
 
 
@@ -130,6 +131,7 @@ const Userpethistory = () => {
                                 <h1>
                                     {userPet.name}
                                 </h1>
+                                <span className="text-primary fs-3" type="button" title="Editar Mascota"><FiEdit/></span>
                                 <span onClick={deletePet} className="text-danger fs-3" type="button" title="Eliminar Mascota"><FaTrash /></span>
 
                             </div>
