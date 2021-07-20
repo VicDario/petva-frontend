@@ -153,6 +153,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             registerPet: async (name, chip_code, birth_date, specie, breed, picture) => {
                 const store = getStore();
+                const actions = getActions();
                 const opt = {
                     method: 'POST',
                     body: JSON.stringify({
@@ -174,6 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         throw new Error(`Status: ${response.status}`);
                     }
                     //const data = await response.json();
+                    actions.getMascotasUser();
                 } catch (error) {
                     console.error(`Register pet error ${error}`)
                 }
@@ -204,6 +206,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
                     console.log(data);
                     actions.getPetsFoundation();
+                    actions.getPetsInAdoption();
 
                 } catch (error) {
                     console.error("the has been some error in register pet")
