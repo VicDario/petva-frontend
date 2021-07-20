@@ -69,23 +69,24 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Content-Type": "application/json"
                     }
                 }
-                try {
-                    const response = await fetch(`${store.baseUrl}api/user/login`, opt);
-                    //if (response.status !== 201) throw new Error(response.status, "error");
-                    const data = await response.json();
-                    /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
-                    if (data.access_token) {
-                        localStorage.setItem("petvaToken", data.access_token);
-                        localStorage.setItem("petvaUser", "normal")
-                        setStore({ userType: "normal" });
-                        setStore({ token: data.access_token });
-                        history.push("/user");
-                    }
-                } catch (error) {
-                    console.error("Error from loading message from backend", error);
+                const response = await fetch(`${store.baseUrl}api/user/login`, opt);
+                console.log(response.status);
+                if (response.status === 401) {
+                    return response;
                 }
+                //if (response.status !== 201) throw new Error(response.status, "error");
+                const data = await response.json();
+                /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
+                if (data.access_token) {
+                    localStorage.setItem("petvaToken", data.access_token);
+                    localStorage.setItem("petvaUser", "normal")
+                    setStore({ userType: "normal" });
+                    setStore({ token: data.access_token });
+                    history.push("/user");
+                }
+
             },
-            loginFundation: async (email, password) => {
+            loginFundation: async (email, password, history) => {
                 const store = getStore();
                 const opt = {
                     method: "POST",
@@ -97,19 +98,18 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Content-Type": "application/json"
                     }
                 }
-                try {
-                    const response = await fetch(`${store.baseUrl}api/foundation/login`, opt);
-                    //if (response.status !== 200) throw new Error(response.status, "error");
-                    const data = await response.json();
-                    if (data.access_token) {
-                        localStorage.setItem("petvaToken", data.access_token);
-                        localStorage.setItem("petvaUser", "foundation")
-
-                        setStore({ userType: "foundation" });
-                        setStore({ token: data.access_token });
-                    }
-                } catch (error) {
-                    console.error("Error from loading message from backend", error);
+                const response = await fetch(`${store.baseUrl}api/foundation/login`, opt);
+                //if (response.status !== 200) throw new Error(response.status, "error");
+                if (response.status == 401) {
+                    return response;
+                }
+                const data = await response.json();
+                if (data.access_token) {
+                    localStorage.setItem("petvaToken", data.access_token);
+                    localStorage.setItem("petvaUser", "foundation")
+                    setStore({ userType: "foundation" });
+                    setStore({ token: data.access_token });
+                    history.push("/foundation");
                 }
             },
             getMascotasUser: async () => {
@@ -317,7 +317,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in transfer a pet")
                     }
-                    
+
                     history.push("/foundation/pets")
                 } catch (error) {
                     console.error("the has been some error in transfer")
@@ -380,7 +380,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 200) {
                         console.error("there is some error in post vaccine pet")
                     }
-                    
+
                     actions.getHistoryUserPet(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post vaccine")
@@ -407,7 +407,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 200) {
                         console.error("there is some error in post vaccine pet")
                     }
-                    
+
                     actions.getHistoryPetFoundation(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post vaccine")
@@ -434,7 +434,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in post diagnostic pet")
                     }
-                    
+
                     actions.getHistoryUserPet(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post diagnostic")
@@ -461,7 +461,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in post diagnostic pet")
                     }
-                    
+
                     actions.getHistoryPetFoundation(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post diagnostic")
@@ -488,7 +488,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in post surgery pet")
                     }
-                    
+
                     actions.getHistoryUserPet(pet_id);
 
 
@@ -517,7 +517,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in post surgery pet")
                     }
-                    
+
                     actions.getHistoryPetFoundation(pet_id);
                 } catch (error) {
                     console.error("the has been some error in post surgery")
@@ -541,17 +541,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("There has been an error in get pets WO")
                 }
             },
-            getPetsInAdoption :async ()=>{
-                try{
+            getPetsInAdoption: async () => {
+                try {
                     const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/in_adoption/1")
-                    if (response.status !== 200){
+                    if (response.status !== 200) {
                         console.log("Error in get pets in adoption")
                     }
                     const data = await response.json();
-                    
-                    setStore({petsInAdoption:data[0]})
-                }catch (error){
-                    console.log("Error "+ error )
+
+                    setStore({ petsInAdoption: data[0] })
+                } catch (error) {
+                    console.log("Error " + error)
                 }
             },
             getHistoryPetFoundation: async (pet_id) => {
@@ -573,7 +573,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("There has been an error in get history")
                 }
             },
-            userReportPetLost : async (pet_id,last_location)=>{
+            userReportPetLost: async (pet_id, last_location) => {
                 const actions = getActions();
                 const store = getStore();
                 const opt = {
@@ -602,18 +602,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
             getLostPets: async () => {
-                try
-                {
+                try {
                     const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/lost/1")
-                    if (response.status !== 200)
-                    {
+                    if (response.status !== 200) {
                         console.log("Error in get pets in adoption")
                     }
                     const data = await response.json();
-                    
+
                     setStore({ LostPets: data[0] })
-                } catch (error)
-                {
+                } catch (error) {
                     console.log("Error " + error)
                 }
             },
@@ -642,7 +639,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("There has been an error in report founded")
                 }
             },
-            getEdad : (dateString)=>{
+            getEdad: (dateString) => {
                 let hoy = new Date()
                 let fechaNacimiento = new Date(dateString)
                 let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
@@ -651,8 +648,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     diferenciaMeses < 0 ||
                     (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
 
-                )
-                {
+                ) {
                     edad--
                     diferenciaMeses = 12 + diferenciaMeses;
                 }

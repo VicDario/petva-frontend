@@ -1,7 +1,7 @@
 import { useContext, useRef } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router";
-
+import Swal from "sweetalert2";
 const Login = () => {
     const { actions } = useContext(Context);
     const inputEmail = useRef();
@@ -19,9 +19,23 @@ const Login = () => {
             return true;
         }
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        actions.loginUser(inputEmail.current.value, inputPassword.current.value, history);
+        try{
+        let res = await actions.loginUser(inputEmail.current.value, inputPassword.current.value, history);
+        console.log(res);
+        if (res.status===401){
+        Swal.fire({
+            icon: "error",
+            title: "Revisa tus datos!",
+            text: "El correo no coincide con la contraseña.",
+            showConfirmButton: false,
+            timer: 1800
+        })
+        }
+        }catch(error){
+            console.error(error);
+        }
     }
     return (
         <div className="container">
