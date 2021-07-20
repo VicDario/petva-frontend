@@ -14,9 +14,6 @@ const Userpets = ({ history }) => {
     
     
 
-    
-    
-
     return (
         <>
             {
@@ -56,15 +53,16 @@ const Userpets = ({ history }) => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                )
-                                            })
-                                            :
-                                            <div className="col-sm-12 pt-4">
-                                                <h3 className="text-center">No tienes Mascotas registradas</h3>
-                                            </div>
-                                        :
-                                        <LoadingSpiner />
-                                }
+                                         
+                                    )
+                                })
+                            :
+                            <div className="col-sm-12 pt-4">
+                                <h3 className="text-center">No tienes Mascotas registradas</h3>
+                            </div>
+                        :
+                            <LoadingSpiner />
+                        }
                             </div>
                             <div className="my-5">
                                 <Link to="/user/pets/add" className="text-decoration-none badge rounded-pill bg-success p-3 m-1 fs-4">
@@ -73,13 +71,12 @@ const Userpets = ({ history }) => {
                             </div>
                         </div>
                     </div>
-                </div>
-
+            </div>
+            
             }{
                 !store.token &&
                 history.push("/")
             }
-            
         </>
     )
 }

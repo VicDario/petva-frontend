@@ -2,3 +2,11 @@
     width: 75px;
     height: 75px;
   }
+
+.navbar__button--icon {
+  width: 20px;
+  height: 20px;
+}
+.navbar__button {
+  height: 60px
+}
