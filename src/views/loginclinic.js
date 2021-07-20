@@ -32,7 +32,7 @@ const validatePassword=(e)=>{
 const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        let res = await actions.loginClinic(email,password);
+        let res = await actions.loginClinic(email,password,history);
         console.log(res);
         if(res.status===401){
             Swal.fire({
