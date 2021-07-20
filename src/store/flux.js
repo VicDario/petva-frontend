@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             auxPicture: null,
             userDetail: null,
             foundationDetail: null,
+            clinicDetail: null,
             baseUrl: 'https://petva-backend-dev.herokuapp.com/', //https://petva-backend-dev.herokuapp.com/
             foundationPet: null,
             historyUserPet: null,
@@ -304,6 +305,24 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error in get detail user")
                 }
             },
+            getClinicDetail: async () => {
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try {
+                    const response = await fetch(`${store.baseUrl}api/clinic/info`, opt)
+                    if (response.status !== 200) {
+                        console.error("There is a some error in get clinic detail")
+                    }
+                    const data = await response.json();
+                    setStore({ clinicDetail: data })
+                } catch (error) {
+                    console.error(error);
+                }
+            },
             resetAuxPicture: () => {
                 setStore({ auxPicture: null })
             },
@@ -314,6 +333,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     }
                 }
+
                 try {
                     const response = await fetch(`${store.baseUrl}api/foundation/pets/${pet_id}`, opt)
                     if (response.status !== 200) {
