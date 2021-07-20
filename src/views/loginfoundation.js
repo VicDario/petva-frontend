@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { useHistory } from "react-router";
 import Swal from "sweetalert2";
 
-const Loginfundation = () => {
+const Loginfoundation = () => {
     const { actions } = useContext(Context);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -43,7 +43,7 @@ const Loginfundation = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         try {
-            let res = await actions.loginFundation(inputEmail.current.value, inputPassword.current.value,history);
+            let res = await actions.loginFoundation(inputEmail.current.value, inputPassword.current.value,history);
             console.log(res);
             if (res.status === 401) {
                 Swal.fire({
@@ -91,4 +91,4 @@ const Loginfundation = () => {
         </div>
     )
 }
-export default Loginfundation;
+export default Loginfoundation;

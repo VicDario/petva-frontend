@@ -86,7 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
             },
-            loginFundation: async (email, password, history) => {
+            loginFoundation: async (email, password, history) => {
                 const store = getStore();
                 const opt = {
                     method: "POST",
