@@ -1,7 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import LoadingSpiner from '../Components/LoadingSpinner';
+import { FaCat, FaDog } from "react-icons/fa";
 
 const Userpets = ({ history }) => {
     const { actions, store } = useContext(Context);
@@ -10,7 +11,6 @@ const Userpets = ({ history }) => {
         actions.getMascotasUser()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
     
     
 
@@ -34,10 +34,13 @@ const Userpets = ({ history }) => {
                                                         <div className="card mb-3">
                                                             <img src={!!pet.picture ? pet.picture : "/images/default.jpg"} className="card-img-top" alt={pet.name} />
                                                             <div className="card-body">
-                                                                <h5 className="card-title">{pet.name}</h5>
-                                                                <p className="card-text">{pet.specie === 'cat' ? "Gato" : "Perro"}</p>
-                                                                <p className="card-text">{!!pet.birth_date ? pet.birth_date : "No registra fecha de nacimiento"}</p>
-                                                                <p className="card-text">{!!pet.chip_code ? pet.chip_code : "No registra codigo de chip"}</p>
+                                                                <div className="d-flex justify-content-center">
+                                                                    <h2> {pet.name}</h2>
+                                                                    <span className="card-title fs-3 ">{pet.specie === 'cat' ? <FaCat className="align-top ms-1" /> : <FaDog className="align-top ms-1"/>}   </span>
+                                                                </div>
+                                                                
+                                                                <p className="card-text">{!!pet.birth_date ? actions.getEdad(pet.birth_date) : "No registra fecha de nacimiento"}</p>
+                                                                <p className="card-text">{!!pet.code_chip ? "Codigo Chip: "+pet.code_chip : "No registra codigo de chip"}</p>
                                                                 {
                                                                     pet.state==="lost" &&
                                                                     <p className="card-text badge rounded-pill bg-danger fs-3">Perdida</p>
@@ -50,15 +53,16 @@ const Userpets = ({ history }) => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                )
-                                            })
-                                            :
-                                            <div className="col-sm-12 pt-4">
-                                                <h3 className="text-center">No tienes Mascotas registradas</h3>
-                                            </div>
-                                        :
-                                        <LoadingSpiner />
-                                }
+                                         
+                                    )
+                                })
+                            :
+                            <div className="col-sm-12 pt-4">
+                                <h3 className="text-center">No tienes Mascotas registradas</h3>
+                            </div>
+                        :
+                            <LoadingSpiner />
+                        }
                             </div>
                             <div className="my-5">
                                 <Link to="/user/pets/add" className="text-decoration-none badge rounded-pill bg-success p-3 m-1 fs-4">
@@ -67,13 +71,12 @@ const Userpets = ({ history }) => {
                             </div>
                         </div>
                     </div>
-                </div>
-
+            </div>
+            
             }{
                 !store.token &&
                 history.push("/")
             }
-            
         </>
     )
 }

@@ -2,6 +2,8 @@ import { useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import LoadingSpiner from "../Components/LoadingSpinner";
 import { Context } from "../store/appContext";
+import { FaCat, FaDog } from "react-icons/fa";
+
 
 const Foundationpets = () => {
     const { actions, store } = useContext(Context);
@@ -31,9 +33,8 @@ const Foundationpets = () => {
                                                         <div className="card mb-3">
                                                             <img src={!!pet.picture ? pet.picture : "/images/default.jpg"} className="card-img-top" alt={pet.name} />
                                                             <div className="card-body">
-                                                                <h5 className="card-title">{pet.name}</h5>
-                                                                <p className="card-text">{pet.specie === 'cat' ? "Gato" : "Perro"}</p>
-                                                                <p className="card-text">{!!pet.birth_date ? pet.birth_date : "No registra fecha de nacimiento"}</p>
+                                                                <h5 className="card-title">{pet.name}<span className="card-title fs-3 ">{pet.specie === 'cat' ? <FaCat className="align-top ms-1" /> : <FaDog className="align-top ms-1" />}   </span></h5>
+                                                                <p className="card-text">{!!pet.birth_date ? actions.getEdad(pet.birth_date) : "No registra fecha de nacimiento"}</p>
                                                                 <p className="card-text">{!!pet.code_chip ? pet.code_chip : "No registra codigo de chip"}</p>
                                                                 <p className="card-text badge rounded-pill bg-success fs-3">{pet.state === "owned" ? "Con Dueño" : "En adopción"}</p>
 

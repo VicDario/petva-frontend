@@ -1,18 +1,20 @@
 import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { FaCat, FaDog } from "react-icons/fa";
 
-const Petsinadoption = ({ history }) => {
+
+const Petsinadoption = () => {
     const { actions, store } = useContext(Context);
 
-    useEffect(() => {
-        actions.getPetsInAdoption() 
+    /* useEffect(() => {
+        actions.getPetsInAdoption(); 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, []) */
 
     return (
         <>
             {
-                !!store.petsInAdoption &&
+                !!store.petsInAdoption  &&
                 <div className="container">
                     <div className="row my-4">
                         <div className="col-12 text-center">
@@ -21,7 +23,7 @@ const Petsinadoption = ({ history }) => {
                             </div>
                             <div className="row justify-content-center">
                                 {
-                                    !!store.petsInAdoption ?
+                                    !!store.petsInAdoption  && store.petsInAdoption.length >0 ?
                                         
                                             store.petsInAdoption.map((pet, index) => {
                                                 return (
@@ -29,13 +31,13 @@ const Petsinadoption = ({ history }) => {
                                                         <div className="card mb-3">
                                                             <img src={!!pet.picture ? pet.picture : "/images/default.jpg"} className="card-img-top" alt={pet.name} />
                                                             <div className="card-body">
-                                                                <h5 className="card-title">{pet.name}</h5>
-                                                                <p className="card-text">{pet.specie === 'cat' ? "Gato" : "Perro"}</p>
-                                                                <p className="card-text">{!!pet.birth_date ? pet.birth_date : "No registra fecha de nacimiento"}</p>
-                                                                <p className="card-text fw-bold">{pet.contact_name}</p>
-                                                                <p className="card-text">Teléfono fundación: {pet.phone}</p>
-                                                                <p className="card-text">Email fundación: {pet.email}</p>
-                                                                <p className="card-text">Dirección fundación: {pet.address}</p>
+                                                                <h5 className="card-title">{pet.name}<span className="card-title fs-3 ">{pet.specie === 'cat' ? <FaCat className="align-top ms-1" /> : <FaDog className="align-top ms-1" />}   </span></h5>
+                                                                
+                                                                <p className="card-text">{!!pet.birth_date ? actions.getEdad(pet.birth_date) : "No registra fecha de nacimiento"}</p>
+                                                                <p className="card-text fw-bold">Fundación: {pet.name_foundation}</p>
+                                                                <p className="card-text">Teléfono fundación: {pet.phone_foundation}</p>
+                                                                <p className="card-text">Email fundación: {pet.email_foundation}</p>
+                                                                <p className="card-text">Dirección fundación: {pet.address_foundation}</p>
                                                             </div>
                                                         </div>
                                                     </div>
