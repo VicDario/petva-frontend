@@ -58,7 +58,7 @@ const Register = () => {
                                 Swal.fire("Bienvenido!", "Te has registrado! Ahora solo te falta iniciar sesión.", "success");
                                 setIsRegister(true);
                             })
-                            .catch(err => Swal.fire("Error!", "Ya existe una fundacion registrada con ese email", "error"))
+                            .catch(err => Swal.fire("Error!", "Ya existe una clinica registrada con ese email", "error"))
                     } else {
                         actions.registerFoundation(email, name, address, phone, password)
                             .then(response => {
