@@ -21,6 +21,7 @@ import FoundationpetsWO from './views/foundationpetsWO';
 import Foundationpethistory from './views/foundationpethistory';
 import Petsinadoption from './views/petsinadoption';
 import Lostpets from './views/lostpets';
+import LoginClinic from './views/loginclinic';
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
           <Route exact path="/inAdoption" component={Petsinadoption}/>
           <Route exact path="/lostPets" component={Lostpets}/>
           <Route exact path="/user/pet/history/:pet_id" component={Userpethistory}/>
+          <Route exact path="/clinic/login" component={LoginClinic}/>
           <Route component={Custom404}/>
         </Switch>
       </BrowserRouter>
