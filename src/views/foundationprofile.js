@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-const FundationProfile = () => {
+const FoundationProfile = () => {
     const { store } = useContext(Context);
     let { token } = store;
     const history = useHistory();
@@ -50,4 +50,4 @@ const FundationProfile = () => {
         </>
     );
 }
-export default FundationProfile;
+export default FoundationProfile;
