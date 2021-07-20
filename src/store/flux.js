@@ -15,7 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             petsWithOwner: null,
             petsInAdoption: null,
             historyFoundationPet: null,
-            LostPets: null
+            lostPets: null
         },
         actions: {
             registerClinica: async (email, name, address, phone, password) => {
@@ -551,8 +551,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log("Error in get pets in adoption")
                     }
                     const data = await response.json();
-
-                    setStore({ petsInAdoption: data[0] })
+                    console.log(data);
+                    setStore({ petsInAdoption: data })
                 } catch (error) {
                     console.log("Error " + error)
                 }
@@ -611,8 +611,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log("Error in get pets in adoption")
                     }
                     const data = await response.json();
-
-                    setStore({ LostPets: data[0] })
+                    console.log(data)
+                    setStore({ lostPets: data })
                 } catch (error) {
                     console.log("Error " + error)
                 }

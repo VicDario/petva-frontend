@@ -6,10 +6,7 @@ import { FaCat, FaDog } from "react-icons/fa";
 const Petsinadoption = () => {
     const { actions, store } = useContext(Context);
 
-    /* useEffect(() => {
-        actions.getPetsInAdoption(); 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []) */
+   
 
     return (
         <>
@@ -23,9 +20,9 @@ const Petsinadoption = () => {
                             </div>
                             <div className="row justify-content-center">
                                 {
-                                    !!store.petsInAdoption  && store.petsInAdoption.length >0 ?
+                                    !!store.petsInAdoption  && store.petsInAdoption[0].length >0 ?
                                         
-                                            store.petsInAdoption.map((pet, index) => {
+                                            store.petsInAdoption[0].map((pet, index) => {
                                                 return (
                                                     <div className="col-sm-6 col-md-4" key={index}>
                                                         <div className="card mb-3">
