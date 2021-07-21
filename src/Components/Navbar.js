@@ -112,7 +112,7 @@ const Navbar = () => {
                                 to="/user" 
                                 className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4"
                             >
-                                Home 
+                                 
                                 <AiOutlineHome className="navbar__button--icon" />
                             </Link>
                             }{

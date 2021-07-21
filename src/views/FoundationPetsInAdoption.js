@@ -31,16 +31,46 @@ const FoundationPetsInAdoption = () => {
                                                 return (
                                                     <div className="col-sm-6 col-md-4" key={index}>
                                                         <div className="card mb-3">
-                                                            <img src={!!pet.picture ? pet.picture : "/images/default.jpg"} className="card-img-top" alt={pet.name} style={{ height: "30vh" }} />
-                                                            <div className="card-body">
-                                                                <h5 className="card-title">{pet.name}<span className="card-title fs-3 ">{pet.specie === 'cat' ? <FaCat className="align-top ms-1" /> : <FaDog className="align-top ms-1" />}   </span></h5>
-                                                                <p className="card-text">{!!pet.birth_date ? actions.getEdad(pet.birth_date) : "No registra fecha de nacimiento"}</p>
-                                                                <p className="card-text">{!!pet.code_chip ? pet.code_chip : "No registra codigo de chip"}</p>
-                                                                <p className="card-text badge rounded-pill bg-success fs-3">{pet.state === "owned" ? "Con Dueño" : "En adopción"}</p>
+                                                            <img
+                                                                src={!!pet.picture ? pet.picture : "/images/default.jpg"}
+                                                                className="card-img-top" alt={pet.name}
+                                                                style={{ height: "50vh" }}
+                                                            />
+                                                            <div
+                                                                className="card-body">
+                                                                <h5
+                                                                    className="card-title">
+                                                                    {pet.name}
+                                                                    <span
+                                                                        className="card-title fs-3 ">
+                                                                        {pet.specie === 'cat' ?
+                                                                            <FaCat className="align-top ms-1" /> :
+                                                                            <FaDog className="align-top ms-1" />}
+                                                                    </span>
+                                                                </h5>
+                                                                <p
+                                                                    className="card-text">{!!pet.birth_date ?
+                                                                        actions.getEdad(pet.birth_date)
+                                                                        : "No registra fecha de nacimiento"}</p>
+                                                                <p
+                                                                    className="card-text">{!!pet.code_chip ? pet.code_chip :
+                                                                        "No registra codigo de chip"}</p>
+                                                                <p
+                                                                    className="card-text badge rounded-pill bg-success fs-3">
+                                                                    {pet.state === "owned" ? "Con Dueño" : "En adopción"}
+                                                                </p>
 
-                                                                <div className="d-flex justify-content-around">
-                                                                    <Link to={"/foundation/pet/history/" + pet.id} className="btn btn-primary">Historial</Link>
-                                                                    <Link to={"/foundation/transfer/" + pet.id} className="btn btn-danger">Transferir</Link>
+                                                                <div
+                                                                    className="d-flex justify-content-around">
+                                                                    <Link
+                                                                        to={"/foundation/pet/history/" + pet.id}
+                                                                        className="btn btn-primary">
+                                                                        Historial
+                                                                    </Link>
+                                                                    <Link
+                                                                        to={"/foundation/transfer/" + pet.id} className="btn btn-danger">
+                                                                        Transferir
+                                                                    </Link>
                                                                 </div>
                                                             </div>
                                                         </div>
