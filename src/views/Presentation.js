@@ -1,6 +1,7 @@
+  
 import { Link } from "react-router-dom"
 
-const Home = () => {
+const Presentation = () => {
     return (
         <div className="container">
             <div className="mb-3">
@@ -12,7 +13,7 @@ const Home = () => {
                 </div>
                 <div className="col-8 col-md-6 text-center">
                     <div >
-                        <Link to="/inAdoption">
+                        <Link to="/adoption">
                             <h2 className="display-3" >
                                 Adoptar
                             </h2>
@@ -20,7 +21,8 @@ const Home = () => {
                     </div>
                     <div>
                         <p>
-                            Adoptar y darle una oportunidad a un amigo que te sabra devolver ese amor es una de mas mejores cosas que puedes hacer.
+                            Adoptar y darle una oportunidad a un amigo que te sabra devolver ese 
+                            amor es una de mas mejores cosas que puedes hacer.
                         </p>
                     </div>
                 </div>
@@ -34,7 +36,8 @@ const Home = () => {
                     </div>
                     <div>
                         <p>
-                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident illo eaque iusto veniam nobis unde recusandae fuga voluptatumculpa impedit?
+                             Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                             Provident illo eaque iusto veniam nobis unde recusandae fuga voluptatumculpa impedit?
                         </p>
                     </div>
                 </div>
@@ -56,7 +59,8 @@ const Home = () => {
                     </div>
                     <div>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident illo eaque iusto veniam nobis unde recusandae fuga voluptatumculpa impedit?
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Provident illo eaque iusto veniam nobis unde recusandae fuga voluptatumculpa impedit?
                         </p>
                     </div>
                 </div>
@@ -68,14 +72,15 @@ const Home = () => {
                             Mascotas Perdidas
                         </h2>
                     </div>
-                    <div className="col-4 col-md-2" >
-                        <Link to="/lostPets">
-                        <img className="imgRedonda img-fluid" src="/images/sebuscapet.png" alt="imagen adoptaar" />
-                        </Link>
+                    <div>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Provident illo eaque iusto veniam nobis unde recusandae fuga voluptatumculpa impedit?
+                        </p>
                     </div>
                 </div>
                 <div className="col-4 col-md-2" >
-                    <Link to="/lostPets">
+                    <Link to="/lost">
                         <img className="imgRedonda img-fluid" src="https://picsum.photos/id/237/200/300" alt="imagen adoptaar" />
                     </Link>
                 </div>
@@ -83,4 +88,4 @@ const Home = () => {
         </div>
     )
 }
-export default Home
+export default Presentation

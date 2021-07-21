@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom"
 import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
@@ -12,11 +11,9 @@ const Navbar = () => {
 
     const { store, actions } = useContext(Context);
 
-
-
-    useEffect(() => {
-        if (localStorage.getItem("petvaToken") !== null) store.token = localStorage.getItem("petvaToken");
-        else store.token = false;
+    useEffect(()=>{
+        if(localStorage.getItem("petvaToken") !== null)   store.token = localStorage.getItem("petvaToken");
+        else    store.token = false;
         store.userType = localStorage.getItem("petvaUser")
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); //Si exite token recupera la sesion
@@ -103,6 +100,44 @@ const Navbar = () => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                :
+                <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
+                    <div className="navbar-nav">
+                        <div className="text-end">
+                            {
+                            localStorage.getItem("petvaUser")==="normal" &&
+                            <Link 
+                                to="/user" 
+                                className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4"
+                            >
+                                 
+                                <AiOutlineHome className="navbar__button--icon" />
+                            </Link>
+                            }{
+                            localStorage.getItem("petvaUser")==="foundation" &&
+                            <Link 
+                                to="/foundation" 
+                                className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4"
+                            >
+                                Home 
+                                <AiOutlineHome className="navbar__button--icon" />
+                            </Link>
+                            }
+                        </div>
+                        <div className="text-end">
+                            <Link 
+                                to="/" 
+                                onClick={actions.logOut} 
+                                className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4" 
+                            >
+                                Cerrar Sesión 
+                                <IoLogOutOutline className="navbar__button--icon" />
+                            </Link>
+                        </div>
+                    </div>
+                </div>
                 }
             </div>
         </nav>

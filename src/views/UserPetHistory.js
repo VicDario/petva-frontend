@@ -113,26 +113,9 @@ const Userpethistory = () => {
                 <div className="col-12 col-md-3">
                     {
                         !!userPet &&
-                        <div className="d-flex justify-content-around">
-                            <h1>
-                                {userPet.name}
-                            </h1>
-                            <span 
-                                className="text-primary fs-3" 
-                                type="button" 
-                                title="Editar Mascota"
-                            >
-                                <FiEdit/>
-                            </span>
-                            <span 
-                                onClick={deletePet} 
-                                className="text-danger fs-3" 
-                                type="button" 
-                                title="Eliminar Mascota"
-                            >
-                                <FaTrash />
-                            </span>
-                        </div>
+                        <h1>
+                            {userPet.name}
+                        </h1>
                     }
                     {
                         !!userPet &&

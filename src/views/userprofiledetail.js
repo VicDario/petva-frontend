@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { MdPets } from "react-icons/md"
 import { FaCat, FaDog, FaUser } from "react-icons/fa";
 
-const Userprofiledetail = () => {
+const UserProfileDetail = () => {
     const { actions, store } = useContext(Context);
     const [save, setSave] = useState("off");
 
@@ -140,4 +140,4 @@ const Userprofiledetail = () => {
     )
 }
 
-export default Userprofiledetail;
+export default UserProfileDetail;

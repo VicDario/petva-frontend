@@ -2,23 +2,24 @@ import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-const FoundationProfile = () => {
+const ClinicProfile = ()=>{
     const { store } = useContext(Context);
     let { token } = store;
     const history = useHistory();
 
     return (
         <>
-            {
-                token !== "" ? (
+        {
+            token !=="" ?
+                (
                     <div className="container">
                         <div className="text-center my-4">
-                            <h2 className="display-1">Bienvenido Fundación</h2>
+                            <h2 className="display-1">Bienvenido Clinica</h2>
                         </div>
                         <div className="row">
                             <div className="col-12 col-md-6 d-flex justify-content-center">
-                                <Link to="/foundation/profile" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                    Mis Datos
+                                <Link to="/clinic/profile" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
+                                    Datos de mi clinica
                                 </Link >
                             </div>
                             <div className="col-12 col-md-6 text-center">
@@ -27,13 +28,13 @@ const FoundationProfile = () => {
                                 </button>
                             </div>
                             <div className="col-12 col-md-6 d-flex justify-content-center">
-                                <Link to="/foundation/pets" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                    Mascotas en Adopción
+                                <Link to="/clinic" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
+                                Lorem ipsum dolor sit amet
                                 </Link >
                             </div>
                             <div className="col-12 col-md-6 d-flex justify-content-center">
-                                <Link to="/foundation/petsWithOwned" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                    Mascotas Adoptadas o con dueño
+                                <Link to="/clinic" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
+                                    Lorem ipsum dolor sit amet
                                 </Link >
                             </div>
                             <div className="col-12 col-md-6 d-flex justify-content-center">
@@ -43,11 +44,11 @@ const FoundationProfile = () => {
                             </div>
                         </div>
                     </div>
-                ) : (
-                    history.push("/fundation/login")
                 )
-            }
+            :
+                history.push("/clinic/login")
+        }
         </>
     );
 }
-export default FoundationProfile;
+export default ClinicProfile;

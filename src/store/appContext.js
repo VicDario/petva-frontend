@@ -18,7 +18,6 @@ const injectContext = (PassedComponent) => {
         );
 
         useEffect(() => {
-         
             state.actions.getPetsInAdoption();
             state.actions.getLostPets();
    

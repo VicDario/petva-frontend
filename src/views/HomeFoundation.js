@@ -2,25 +2,23 @@ import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-
-const Userperfil = () => {
+const HomeFoundation = () => {
     const { store } = useContext(Context);
     let { token } = store;
-    const history = useHistory()
+    const history = useHistory();
 
     return (
-
         <>
-            
-            {
-                token !== "" ?
+        {
+            token !== "" ? 
+                (
                     <div className="container">
                         <div className="text-center my-4">
-                            <h2 className="display-1">Bienvenido Usuario</h2>
+                            <h2 className="display-1">Bienvenido Fundación</h2>
                         </div>
                         <div className="row">
                             <div className="col-12 col-md-6 d-flex justify-content-center">
-                                <Link to="/user/profile" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
+                                <Link to="/foundation/profile" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
                                     Mis Datos
                                 </Link >
                             </div>
@@ -30,8 +28,13 @@ const Userperfil = () => {
                                 </button>
                             </div>
                             <div className="col-12 col-md-6 d-flex justify-content-center">
-                                <Link to="/user/pets" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                    Mis Mascotas
+                                <Link to="/foundation/pets/adoption" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
+                                    Mascotas en Adopción
+                                </Link >
+                            </div>
+                            <div className="col-12 col-md-6 d-flex justify-content-center">
+                                <Link to="/foundation/pets/tracking" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
+                                    Mascotas Adoptadas o con dueño
                                 </Link >
                             </div>
                             <div className="col-12 col-md-6 d-flex justify-content-center">
@@ -41,11 +44,11 @@ const Userperfil = () => {
                             </div>
                         </div>
                     </div>
-                    :
-                    history.push("/user/login")
+                ) 
+            : 
+                history.push("/fundation/login")
             }
         </>
-    )
+    );
 }
-
-export default Userperfil;
+export default HomeFoundation;

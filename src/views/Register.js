@@ -159,28 +159,84 @@ const Register = () => {
                                         user === 'Clinica' &&
                                         <>
                                             <div className="text-start">
-                                                <span className="input-group-text d-block text-start fs-4" htmlFor="email">Dirección </span>
-                                                <input className="form-control fs-5" type="text" id="direccion" name="direccion" onChange={e => setAddress(e.target.value)} required />
+                                                <span 
+                                                    className="input-group-text d-block text-start fs-4" 
+                                                    htmlFor="email"
+                                                >
+                                                    Dirección 
+                                                </span>
+                                                <input 
+                                                    className="form-control fs-5" 
+                                                    type="text" 
+                                                    id="direccion" 
+                                                    name="direccion" 
+                                                    onChange={e => setAddress(e.target.value)} 
+                                                    required 
+                                                />
                                             </div>
                                             <div className="text-start">
-                                                <span className="input-group-text d-block text-start fs-4" htmlFor="phone">Número de Telefono </span>
-                                                <input className="form-control fs-5" type="text" id="phone" onChange={e => setPhone(e.target.value)} required />
+                                                <span 
+                                                    className="input-group-text d-block text-start fs-4" 
+                                                    htmlFor="phone"
+                                                >
+                                                    Número de Telefono
+                                                </span>
+                                                <input 
+                                                    className="form-control fs-5" 
+                                                    type="text" 
+                                                    id="phone" 
+                                                    onChange={e => setPhone(e.target.value)} 
+                                                    required 
+                                                />
                                             </div>
                                         </>
                                     }
                                     <div className="text-start">
-                                        <label className="input-group-text d-block text-start fs-4" htmlFor="password">Contraseña
-                                            {isRevealPwd ? <FaEyeSlash className="ms-2" title="Show password" onClick={changeVisibilityPassword} /> :
-                                                <FaEye className="ms-2" title="Hide password" onClick={changeVisibilityPassword} />}</label>
-                                        <input className="form-control fs-5" type={isRevealPwd ? "text" : "password"} id="id_password"
-                                            placeholder="Ingrese Contraseña" required title="Contraseña" onChange={e => setPassword(e.target.value)} />
+                                        <label className="input-group-text d-block text-start fs-4" htmlFor="password">
+                                            Contraseña
+                                            {
+                                            isRevealPwd ? 
+                                                <FaEyeSlash className="ms-2" title="Show password" 
+                                                onClick={changeVisibilityPassword} 
+                                                /> 
+                                            :
+                                                <FaEye className="ms-2" title="Hide password" 
+                                                onClick={changeVisibilityPassword} 
+                                                />
+                                            }
+                                        </label>
+                                        <input 
+                                            className="form-control fs-5" 
+                                            type={isRevealPwd ? "text" : "password"} 
+                                            id="id_password"
+                                            placeholder="Ingrese Contraseña" 
+                                            required 
+                                            title="Contraseña" 
+                                            onChange={e => setPassword(e.target.value)} 
+                                        />
                                     </div>
                                     <div className="text-start">
-                                        <label className="input-group-text d-block text-start fs-4" htmlFor="password">Confirmar Contraseña
-                                            {isRevealPwd ? <FaEyeSlash className="ms-2" title="Show password" onClick={changeVisibilityPassword} /> :
-                                                <FaEye className="ms-2" title="Hide password" onClick={changeVisibilityPassword} />}</label>
-                                        <input className="form-control fs-5" type={isRevealPwd ? "text" : "password"} id="id_passwordC"
-                                            placeholder="Confirme Contraseña" required onChange={e => setConfirmPassword(e.target.value)} />
+                                        <label className="input-group-text d-block text-start fs-4" htmlFor="password">
+                                            Confirmar Contraseña
+                                            {
+                                            isRevealPwd ? 
+                                                <FaEyeSlash className="ms-2" title="Show password" 
+                                                onClick={changeVisibilityPassword} 
+                                                /> 
+                                            :
+                                                <FaEye className="ms-2" title="Hide password" 
+                                                onClick={changeVisibilityPassword} 
+                                                />
+                                            }
+                                        </label>
+                                        <input 
+                                            className="form-control fs-5" 
+                                            type={isRevealPwd ? "text" : "password"} 
+                                            id="id_passwordC"
+                                            placeholder="Confirme Contraseña" 
+                                            required 
+                                            onChange={e => setConfirmPassword(e.target.value)} 
+                                        />
                                     </div>
                                     <div className="text-center">
                                         <button onClick={validarRegistro} type="submit" className="btn btn-success mt-3 p-2 fs-4">
