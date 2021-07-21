@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 
 import { AiOutlineHome } from 'react-icons/ai';
-import {  IoLogInOutline } from 'react-icons/io5';
+import { IoLogInOutline } from 'react-icons/io5';
 import { MdPets } from "react-icons/md";
 import { Avatar } from "@material-ui/core";
 
@@ -14,21 +14,37 @@ const Navbar = () => {
     const history = useHistory();
 
     useEffect(() => {
-        
-        
+
+
         if (localStorage.getItem("petvaToken") !== null) store.token = localStorage.getItem("petvaToken");
         else store.token = false;
         store.userType = localStorage.getItem("petvaUser")
-        if (store.userType==="normal"){
+        if (store.userType === "normal")
+        {
             actions.getUserDetail();
-        } else if (store.userType === "foundation"){
+        } else if (store.userType === "foundation")
+        {
             actions.getFoundationDetail();
+        } else if (store.userType === "clinic"){
+            actions.getClinicDetail();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); //Si exite token recupera la sesion
 
-    const toUserDetails = ()=>{
-        history.push("/user/profile");
+    const toUserDetails = () => {
+        if (store.userType === "normal")
+        {
+
+            history.push("/user/profile");
+        } else if (store.userType === "foundation")
+        {
+            history.push("/foundation/profile");
+
+        } else if (store.userType === "clinic")
+        {
+            history.push("/clinic/profile");
+
+        }
     }
 
     return (
@@ -108,29 +124,37 @@ const Navbar = () => {
                                         >
                                             <AiOutlineHome className="navbar__button--icon" />
                                         </Link>
+                                    }{
+                                        localStorage.getItem("petvaUser") === "clinic" &&
+                                        <Link
+                                            to="/clinic"
+                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4"
+                                        >
+                                            <AiOutlineHome className="navbar__button--icon" />
+                                        </Link>
                                     }
                                 </div>
-                                
-                                    <div className="dropdown dropstart">
-                                        <span
+
+                                <div className="dropdown dropstart">
+                                    <span
                                         className="dropstart"
-                                            type="button"
-                                            id="dropdownMenuButton1"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
-                                            
-                                            {
+                                        type="button"
+                                        id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+
+                                        {
                                             store.userType === "foundation" &&
-                                             !!store.foundationDetail && 
+                                            !!store.foundationDetail &&
                                             <Avatar
                                                 alt={store.foundationDetail.name}
                                                 src="/static/images/avatar/2.jpg"
                                                 sx={{ width: 60, height: 60 }}
-                                                
+
                                             />
-                                            }
-                                            {
+                                        }
+                                        {
                                             store.userType === "normal" &&
                                             !!store.userDetail &&
                                             <Avatar
@@ -139,49 +163,94 @@ const Navbar = () => {
                                                 sx={{ width: 60, height: 60 }}
 
                                             />
-                                            }{
-                                                        //espacio para clinica
-                                            }
-                                        </span>
+                                        }
+                                        {
+                                            store.userType === "clinic" &&
+                                            !!store.clinicDetail &&
+                                            <Avatar
+                                                alt={store.clinicDetail.name}
+                                                src="/static/images/avatar/2.jpg"
+                                                sx={{ width: 60, height: 60 }}
+
+                                            />
+                                        }
+                                    </span>
                                     <ul className="dropdown-menu dropdown-menu-left " aria-labelledby="dropdownMenuButton1">
-                                            
-                                            <div className="container px-5">
-                                                <div className="d-flex justify-content-center">
+
+                                        <div className="container px-5">
+                                            <div className="d-flex justify-content-center">
                                                 {
-                                                    !!store.userDetail ?
-                                                        <Avatar
-                                                            alt={store.userDetail.name}
-                                                            src="/static/images/avatar/2.jpg"
-                                                            sx={{ width: 45, height: 45 }}
+                                                    store.userType === "foundation" &&
+                                                    !!store.foundationDetail &&
+                                                    <Avatar
+                                                        alt={store.foundationDetail.name}
+                                                        src="/static/images/avatar/2.jpg"
+                                                        sx={{ width: 45, height: 45 }}
 
-                                                        />
-                                                        :
-                                                        <Avatar
-                                                            alt="Usuario"
-                                                            src="/static/images/avatar/2.jpg"
-                                                            sx={{ width: 45, height: 45 }}
+                                                    />
+                                                }{
+                                                    store.userType === "normal" &&
+                                                    !!store.userDetail &&
+                                                    <Avatar
+                                                        alt={store.userDetail.name}
+                                                        src="/static/images/avatar/2.jpg"
+                                                        sx={{ width: 45, height: 45 }}
 
-                                                        />
+                                                    />
+                                                }{
+                                                    store.userType === "clinic" &&
+                                                    !!store.clinicDetail &&
+                                                    <Avatar
+                                                        alt={store.clinicDetail.name}
+                                                        src="/static/images/avatar/2.jpg"
+                                                        sx={{ width: 45, height: 45 }}
+
+                                                    />
                                                 }
-                                                </div>
-                                                <div className="text-center">
-                                                  {
+                                            </div>
+                                            <div className="text-center">
+                                                {//user detalle navbar
+                                                    store.userType === "normal" &&
                                                     !!store.userDetail &&
                                                     <>
-                                                    <h5>
-                                                        {store.userDetail.name} {store.userDetail.lastname}
-                                                    </h5>
-                                                    <span>
-                                                        {store.userDetail.email}
-                                                    </span>
+                                                        <h5>
+                                                            {store.userDetail.name} {store.userDetail.lastname}
+                                                        </h5>
+                                                        <span>
+                                                            {store.userDetail.email}
+                                                        </span>
                                                     </>
-                                                  }
-                                                </div>
-                                                <div className="text-center my-3">
-                                                    <button onClick={toUserDetails} className="badge rounded-pill  text-dark">
-                                                        Gestionar tú cuenta
-                                                    </button>
-                                                </div>
+                                                }
+                                                {
+                                                    //fundacion detalles navbar
+                                                    store.userType === "foundation" &&
+                                                    !!store.foundationDetail &&
+                                                    <>
+                                                        <h5>
+                                                            {store.foundationDetail.name}
+                                                        </h5>
+                                                        <span>
+                                                            {store.foundationDetail.email}
+                                                        </span>
+                                                    </>
+                                                }{
+                                                    store.userType === "clinic" &&
+                                                    !!store.clinicDetail &&
+                                                    <>
+                                                        <h5>
+                                                            {store.clinicDetail.name} 
+                                                        </h5>
+                                                        <span>
+                                                            {store.clinicDetail.email}
+                                                        </span>
+                                                    </>
+                                                }
+                                            </div>
+                                            <div className="text-center my-3">
+                                                <button onClick={toUserDetails} className="badge rounded-pill  text-dark">
+                                                    Gestionar cuenta
+                                                </button>
+                                            </div>
                                             <div className="row border text-center">
                                                 <Link
                                                     to="/"
@@ -189,12 +258,12 @@ const Navbar = () => {
                                                     className=""
                                                 >
                                                     Cerrar Sesión
-                                                    
+
                                                 </Link>
                                             </div>
-                                            </div>
-                                        </ul>
-                                    </div>
+                                        </div>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                 }

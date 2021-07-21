@@ -119,6 +119,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             loginClinic: async (email, password, history) => {
                 const store = getStore();
+                const actions = getActions();
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -140,6 +141,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     localStorage.setItem("petvaUser", "clinic")
                     setStore({ userType: "clinic" });
                     setStore({ token: data.access_token });
+                    actions.getClinicDetail();
                     history.push("/clinic");
                 }
             },

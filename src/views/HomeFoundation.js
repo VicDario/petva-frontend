@@ -10,7 +10,7 @@ const HomeFoundation = () => {
     return (
         <>
         {
-            token !== null ? 
+            !!localStorage.getItem("token") !== null ? 
                 (
                     <div className="container">
                         <div className="text-center my-4">
