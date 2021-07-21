@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { FaPlusCircle } from "react-icons/fa"
+import { FaPlusCircle, FaTrash } from "react-icons/fa"
 import { FaCat, FaDog } from "react-icons/fa";
 
 const UserPetHistory = () => {
@@ -113,9 +113,26 @@ const UserPetHistory = () => {
                 <div className="col-12 col-md-3">
                     {
                         !!userPet &&
-                        <h1>
-                            {userPet.name}
-                        </h1>
+                        <div className="d-flex justify-content-around">
+                            <h1>
+                                {userPet.name}
+                            </h1>
+                            <span 
+                                className="text-primary fs-3" 
+                                type="button" 
+                                title="Editar Mascota"
+                            >
+                                <FiEdit/>
+                            </span>
+                            <span 
+                                onClick={deletePet} 
+                                className="text-danger fs-3" 
+                                type="button" 
+                                title="Eliminar Mascota"
+                            >
+                                <FaTrash />
+                            </span>
+                        </div>
                     }
                     {
                         !!userPet &&
