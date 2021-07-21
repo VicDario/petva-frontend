@@ -11,7 +11,6 @@ const Navbar = () => {
 
     const { store, actions } = useContext(Context);
 
-    
     useEffect(()=>{
         if(localStorage.getItem("petvaToken") !== null)   store.token = localStorage.getItem("petvaToken");
         else    store.token = false;
