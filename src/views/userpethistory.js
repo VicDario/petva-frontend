@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { FaPlusCircle } from "react-icons/fa"
+import { FaPlusCircle, FaTrash } from "react-icons/fa"
 import { FaCat, FaDog } from "react-icons/fa";
 
 const Userpethistory = () => {
