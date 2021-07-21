@@ -6,7 +6,7 @@ import { FaPlusCircle, FaTrash } from "react-icons/fa"
 import { FaCat, FaDog } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi"
 
-const Userpethistory = () => {
+const UserPetHistory = () => {
 
     const { actions, store } = useContext(Context);
     const { pet_id } = useParams();
@@ -574,4 +574,4 @@ const Userpethistory = () => {
     );
 }
 
-export default Userpethistory;
+export default UserPetHistory;
