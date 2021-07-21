@@ -60,6 +60,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             loginUser: async (email, password, history) => {
                 const store = getStore();
+                const actions = getActions();
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -83,12 +84,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                     localStorage.setItem("petvaUser", "normal")
                     setStore({ userType: "normal" });
                     setStore({ token: data.access_token });
+                    actions.getUserDetail();
                     history.push("/user");
                 }
 
             },
             loginFoundation: async (email, password, history) => {
                 const store = getStore();
+                const actions = getActions();
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -110,11 +113,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                     localStorage.setItem("petvaUser", "foundation")
                     setStore({ userType: "foundation" });
                     setStore({ token: data.access_token });
+                    actions.getFoundationDetail();
                     history.push("/foundation");
                 }
             },
             loginClinic: async (email, password, history) => {
                 const store = getStore();
+                const actions = getActions();
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -136,6 +141,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     localStorage.setItem("petvaUser", "clinic")
                     setStore({ userType: "clinic" });
                     setStore({ token: data.access_token });
+                    actions.getClinicDetail();
                     history.push("/clinic");
                 }
             },
@@ -301,12 +307,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                 try {
                     const response = await fetch(`${store.baseUrl}api/foundation/info`, opt)
                     if (response.status !== 200) {
-                        console.error("There is a some error in get user detail")
+                        console.error("There is a some error in get foundation detail")
                     }
                     const data = await response.json();
                     setStore({ foundationDetail: data })
                 } catch (error) {
-                    console.error("Error in get detail user")
+                    console.error("Error in get detail foundation")
                 }
             },
             getClinicDetail: async () => {

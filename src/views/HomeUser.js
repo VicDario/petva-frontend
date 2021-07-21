@@ -11,7 +11,7 @@ const HomeUser = () => {
     return (
         <> 
         {
-            token !== null ?
+            !!token !== null ?
                 <div className="container">
                     <div className="text-center my-4">
                         <h2 className="display-1">Bienvenido Usuario</h2>
