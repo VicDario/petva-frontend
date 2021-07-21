@@ -3,10 +3,8 @@ import { Context } from "../store/appContext";
 import { FaCat, FaDog } from "react-icons/fa";
 
 
-const Lostpets = ()=>{
+const LostPets = ()=>{
     const { store,actions } = useContext(Context);
-
-    
 
     return (
         <>
@@ -26,11 +24,31 @@ const Lostpets = ()=>{
                                             return (
                                                 <div className="col-sm-6 col-md-4" key={index}>
                                                     <div className="card mb-3">
-                                                        <img src={!!pet.picture ? pet.picture : "/images/default.jpg"} className="card-img-top" alt={pet.name} />
+                                                        <img 
+                                                            src={!!pet.picture ? pet.picture : "/images/default.jpg"} 
+                                                            className="card-img-top" 
+                                                            alt={pet.name} 
+                                                        />
                                                         <div className="card-body">
-                                                            <h5 className="card-title">{pet.name}<span className="card-title fs-3 ">{pet.specie === 'cat' ? <FaCat className="align-top ms-1" /> : <FaDog className="align-top ms-1" />}   </span></h5>
-                                                            
-                                                            <p className="card-text">{!!pet.birth_date ? actions.getEdad(pet.birth_date) : "No registra fecha de nacimiento"}</p>
+                                                            <h5 className="card-title">
+                                                                {pet.name}
+                                                                <span className="card-title fs-3 ">
+                                                                    {
+                                                                    pet.specie === 'cat' ?
+                                                                        <FaCat className="align-top ms-1" /> 
+                                                                    : 
+                                                                        <FaDog className="align-top ms-1" />
+                                                                    }   
+                                                                </span>
+                                                            </h5>
+                                                           
+                                                            <p className="card-text">
+                                                                {
+                                                                !!pet.birth_date ? 
+                                                                    actions.getEdad(pet.birth_date) 
+                                                                : 
+                                                                    "No registra fecha de nacimiento"}
+                                                            </p>
                                                             <p className="card-text fw-bold">Dueño: {pet.name_owner}</p>
                                                             <p className="card-text">Teléfono contacto: {pet.phone_owner}</p>
                                                             <p className="card-text">Email contacto: {pet.email_owner}</p>
@@ -56,4 +74,4 @@ const Lostpets = ()=>{
     )
 }
 
-export default Lostpets;
+export default LostPets;
