@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { FaPlusCircle, FaTrash } from "react-icons/fa"
 import { FaCat, FaDog } from "react-icons/fa";
+import { FiEdit } from "react-icons/fi";
 
 const UserPetHistory = () => {
 
@@ -42,7 +43,6 @@ const UserPetHistory = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const addVaccine = () => {
-
         if (newVaccine.date !== null && newVaccine.lot !== null && newVaccine.name !== null && newVaccine.laboratory !== null)
         {
             actions.addVaccinetoPetUser(formatDate(newVaccine.date), newVaccine.lot, newVaccine.name, newVaccine.laboratory, pet_id)
@@ -105,6 +105,9 @@ const UserPetHistory = () => {
         actions.getHistoryUserPet(pet_id);
         actions.getSinglePetFromUser(pet_id);
 
+    }
+    const deletePet = () => {
+        console.log("Hola");
     }
 
     return (

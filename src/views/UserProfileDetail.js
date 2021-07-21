@@ -11,7 +11,7 @@ const Userprofiledetail = () => {
     useEffect(() => {
         actions.getUserDetail();
         actions.getMascotasUser();
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const register = () => {

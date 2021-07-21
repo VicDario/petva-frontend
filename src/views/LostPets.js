@@ -22,8 +22,8 @@ const LostPets = () => {
                             <div
                                 className="row justify-content-center">
                                 {
-                                    !!store.LostPets & store.LostPets[0].length > 0 ?
-                                        store.LostPets[0].map((pet, index) => {
+                                    !!store.lostPets && store.lostPets[0].length > 0 ?
+                                        store.lostPets[0].map((pet, index) => {
                                             return (
                                                 <div
                                                     className="col-sm-6 col-md-4"
