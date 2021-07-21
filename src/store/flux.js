@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             auxPicture: null,
             userDetail: null,
             foundationDetail: null,
+            clinicDetail: null,
             baseUrl: 'https://petva-backend-dev.herokuapp.com/', //https://petva-backend-dev.herokuapp.com/
             foundationPet: null,
             historyUserPet: null,
@@ -110,6 +111,32 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ userType: "foundation" });
                     setStore({ token: data.access_token });
                     history.push("/foundation");
+                }
+            },
+            loginClinic: async (email, password, history) => {
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+                const response = await fetch(`${store.baseUrl}api/clinic/login`, opt);
+                //if (response.status !== 200) throw new Error(response.status, "error");
+                if (response.status == 401) {
+                    return response;
+                }
+                const data = await response.json();
+                if (data.access_token) {
+                    localStorage.setItem("petvaToken", data.access_token);
+                    localStorage.setItem("petvaUser", "clinic")
+                    setStore({ userType: "clinic" });
+                    setStore({ token: data.access_token });
+                    history.push("/clinic");
                 }
             },
             getMascotasUser: async () => {
@@ -282,6 +309,24 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error in get detail user")
                 }
             },
+            getClinicDetail: async () => {
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try {
+                    const response = await fetch(`${store.baseUrl}api/clinic/info`, opt)
+                    if (response.status !== 200) {
+                        console.error("There is a some error in get clinic detail")
+                    }
+                    const data = await response.json();
+                    setStore({ clinicDetail: data })
+                } catch (error) {
+                    console.error(error);
+                }
+            },
             resetAuxPicture: () => {
                 setStore({ auxPicture: null })
             },
@@ -292,6 +337,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     }
                 }
+
                 try {
                     const response = await fetch(`${store.baseUrl}api/foundation/pets/${pet_id}`, opt)
                     if (response.status !== 200) {

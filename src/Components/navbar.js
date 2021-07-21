@@ -71,7 +71,7 @@ const Navbar = () => {
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link className="dropdown-item" to="/clinica/login">
+                                                <Link className="dropdown-item" to="/clinic/login">
                                                     Clínica
                                                 </Link>
                                             </li>
