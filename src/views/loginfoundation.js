@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { useHistory } from "react-router";
 import Swal from "sweetalert2";
 
-const Loginfoundation = () => {
+const LoginFoundation = () => {
     const { actions } = useContext(Context);
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -91,4 +91,4 @@ const Loginfoundation = () => {
         </div>
     )
 }
-export default Loginfoundation;
+export default LoginFoundation;

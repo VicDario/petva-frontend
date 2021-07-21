@@ -3,15 +3,16 @@ import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 const ClinicProfile = ()=>{
-    const {store} = useContext(Context);
-    let {token}= store;
+    const { store } = useContext(Context);
+    let { token } = store;
     const history = useHistory();
 
     return (
         <>
         {
-            token !==""?(
-                <div className="container">
+            token !=="" ?
+                (
+                    <div className="container">
                         <div className="text-center my-4">
                             <h2 className="display-1">Bienvenido Clinica</h2>
                         </div>
@@ -43,7 +44,9 @@ const ClinicProfile = ()=>{
                             </div>
                         </div>
                     </div>
-            ):(history.push("clinic/login"))
+                )
+            :
+                history.push("/clinic/login")
         }
         </>
     );

@@ -2,15 +2,16 @@ import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-const FoundationProfile = () => {
+const HomeFoundation = () => {
     const { store } = useContext(Context);
     let { token } = store;
     const history = useHistory();
 
     return (
         <>
-            {
-                token !== "" ? (
+        {
+            token !== "" ? 
+                (
                     <div className="container">
                         <div className="text-center my-4">
                             <h2 className="display-1">Bienvenido Fundación</h2>
@@ -43,11 +44,11 @@ const FoundationProfile = () => {
                             </div>
                         </div>
                     </div>
-                ) : (
-                    history.push("/fundation/login")
-                )
+                ) 
+            : 
+                history.push("/fundation/login")
             }
         </>
     );
 }
-export default FoundationProfile;
+export default HomeFoundation;

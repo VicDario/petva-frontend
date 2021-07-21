@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import { Context } from "../store/appContext"
 import Swal from "sweetalert2";
 
-const Addpet = ({ history }) => {
+const AddPet = ({ history }) => {
     const { actions, store } = useContext(Context);
     const [pet, setPet] = useState({
         name: "",
@@ -112,4 +112,4 @@ const Addpet = ({ history }) => {
         </div>
     )
 }
-export default Addpet
+export default AddPet

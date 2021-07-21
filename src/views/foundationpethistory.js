@@ -4,12 +4,11 @@ import { Context } from "../store/appContext";
 import { FaPlusCircle } from "react-icons/fa"
 import { FaCat, FaDog } from "react-icons/fa";
 
-const Foundationpethistory = () => {
+const FoundationPetHistory = () => {
 
     const { actions, store } = useContext(Context);
     const { pet_id } = useParams();
     const { foundationPet } = store;
-    
     
     const history = useHistory();
 
@@ -34,7 +33,6 @@ const Foundationpethistory = () => {
         newdate = newdate.reverse()
         newdate = newdate.join("/")
         
-
         return newdate
     }
     useEffect(() => {
@@ -55,13 +53,10 @@ const Foundationpethistory = () => {
                 laboratory: null
             })
             /* actions.getHistoryUserPet(pet_id); */
-
-
         } else
         {
             console.log("Vacuna no agregada");
             alert("Debes llenar todos los campos para agregar vacuna");
-
         }
     }
     const addDiagnostic = () => {
@@ -97,48 +92,36 @@ const Foundationpethistory = () => {
             alert("Debes llenar todos los campos para agregar cirugía");
         }
     }
-
-
-
-
+    
     return (
         <>
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-3">
-
                         {
                             !!foundationPet &&
                             <h1>
                                 {foundationPet.name}
                             </h1>
                         }
-
                         {
                             !!foundationPet &&
                             <div className="card mb-3">
                                 <img src={!!foundationPet.picture ? foundationPet.picture : "/images/default.jpg"} className="card-img-top" alt="petname" />
-
                                 <div className="card-body">
                                     {/* <h5 className="card-title">{foundationPet.name}</h5> */}
                                     <span className="card-title fs-3 ">{foundationPet.specie === 'cat' ? <FaCat className="align-top ms-1" /> : <FaDog className="align-top ms-1" />}   </span>
                                     <p className="card-text">Fecha Nacimiento: {!!foundationPet.birth_date ? actions.getEdad(foundationPet.birth_date) : "No registra fecha de nacimiento"}</p>
                                     <p className="card-text">N°Chip: {!!foundationPet.code_chip ? foundationPet.code_chip : "No registra codigo de chip"} </p>
-
                                     <div>
-                                        
-                                            <button onClick={history.goBack} className="btn btn-success">
-                                                Volver a Mascotas 
-                                            </button>
-                                      
-
+                                        <button onClick={history.goBack} className="btn btn-success">
+                                            Volver a Mascotas 
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         }
-
                     </div>
-
                     <div className="col-12 col-md-3">
                         <div className="text-center">
                             <h2>Vacunas <span title="Agregar Vacuna" className="text-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><FaPlusCircle /></span></h2>
@@ -180,12 +163,10 @@ const Foundationpethistory = () => {
                                                                 </ul>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </>
                                 )
                             })
@@ -455,10 +436,8 @@ const Foundationpethistory = () => {
                     </div>
                 </div>
             </div>
-
         </>
-
     )
 }
 
-export default Foundationpethistory;
+export default FoundationPetHistory;

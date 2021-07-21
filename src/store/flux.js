@@ -101,7 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const response = await fetch(`${store.baseUrl}api/foundation/login`, opt);
                 //if (response.status !== 200) throw new Error(response.status, "error");
-                if (response.status == 401) {
+                if (response.status === 401) {
                     return response;
                 }
                 const data = await response.json();
@@ -127,7 +127,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const response = await fetch(`${store.baseUrl}api/clinic/login`, opt);
                 //if (response.status !== 200) throw new Error(response.status, "error");
-                if (response.status == 401) {
+                if (response.status === 401) {
                     return response;
                 }
                 const data = await response.json();
