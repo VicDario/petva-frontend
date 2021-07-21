@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa"
 import { FaCat, FaDog } from "react-icons/fa";
 
-const Userpethistory = () => {
+const UserPetHistory = () => {
 
     const { actions, store } = useContext(Context);
     const { pet_id } = useParams();
@@ -779,4 +779,4 @@ const Userpethistory = () => {
     );
 }
 
-export default Userpethistory;
+export default UserPetHistory;
