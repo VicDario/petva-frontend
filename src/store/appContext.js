@@ -20,8 +20,7 @@ const injectContext = (PassedComponent) => {
         useEffect(() => {
             state.actions.getPetsInAdoption();
             state.actions.getLostPets();
-            
-            // eslint-disable-next-line react-hooks/exhaustive-deps
+   
         }, [])
 
         return (

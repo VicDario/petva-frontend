@@ -9,7 +9,7 @@ const LostPets = ()=>{
     return (
         <>
             {
-                !!store.LostPets &&
+                !!store.lostPets &&
                 <div className="container">
                     <div className="row my-4">
                         <div className="col-12 text-center">
@@ -18,9 +18,9 @@ const LostPets = ()=>{
                             </div>
                             <div className="row justify-content-center">
                                 {
-                                    !!store.LostPets ?
+                                    !!store.lostPets && store.lostPets[0].length > 0 ?
 
-                                        store.LostPets.map((pet, index) => {
+                                        store.lostPets[0].map((pet, index) => {
                                             return (
                                                 <div className="col-sm-6 col-md-4" key={index}>
                                                     <div className="card mb-3">
