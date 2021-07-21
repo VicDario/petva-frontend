@@ -4,11 +4,6 @@ import { Context } from "../store/appContext";
 import { FaPlusCircle } from "react-icons/fa"
 import { FaCat, FaDog } from "react-icons/fa";
 
-
-
-
-
-
 const Foundationpethistory = () => {
 
     const { actions, store } = useContext(Context);
