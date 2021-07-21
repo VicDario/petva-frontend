@@ -595,7 +595,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                     const data = await response.json();
 
-                    setStore({ petsInAdoption: data[0] })
+                    setStore({ petsInAdoption: data })
                 } catch (error) {
                     console.log("Error " + error)
                 }
@@ -655,7 +655,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                     const data = await response.json();
 
-                    setStore({ LostPets: data[0] })
+                    setStore({ LostPets: data })
                 } catch (error) {
                     console.log("Error " + error)
                 }
