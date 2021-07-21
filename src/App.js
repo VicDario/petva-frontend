@@ -1,29 +1,29 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Presentation from './views/Presentation';
-import Login from './views/Login';
-import Custom404 from './views/404';
 import Navbar from './Components/Navbar';
+import Presentation from './views/Presentation';
+import PetsInAdoption from './views/PetsInAdoption';
+import LostPets from './views/LostPets';
+import Services from './views/Services';
+import Login from './views/Login';
 import Register from './views/Register';
 import injectContext from './store/appContext';
 import HomeUser from './views/HomeUser';
 import UserPets from './views/UserPets';
 import AddPet from './views/AddPet';
+import UserProfileDetail from './views/UserProfileDetail';
+import UserPetHistory from './views/UserPetHistory';
 import LoginFoundation from './views/LoginFoundation';
 import HomeFoundation from './views/HomeFoundation';
-import UserProfileDetail from './views/UserProfileDetail';
 import FoundationProfileDetail from './views/FoundationProfileDetail';
-import FoundationPetsInAdoption from './views/HomeFoundation';
+import FoundationPetsInAdoption from './views/FoundationPetsInAdoption';
 import TransferPetFromFoundation from './views/TransferPetFromFoundation';
-import Services from './views/Services';
-import UserPetHistory from './views/UserPetHistory';
 import FoundationPetsForTracking from './views/FoundationPetsForTracking';
 import FoundationPetHistory from './views/FoundationPetHistory';
-import PetsInAdoption from './views/PetsInAdoption';
-import LostPets from './views/LostPets';
 import LoginClinic from './views/LoginClinic';
 import ClinicProfile from './views/ClinicProfile';
 import ClinicProfileDetail from './views/ClinicProfileDetail';
+import Custom404 from './views/404';
 
 function App() {
   return (

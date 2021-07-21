@@ -1,74 +1,54 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
-import LoadingSpiner from "../Components/LoadingSpinner";
 import { Context } from "../store/appContext";
-import { FaCat, FaDog } from "react-icons/fa";
 
-
-const FoundationPetsInAdoption = () => {
-    const { actions, store } = useContext(Context);
+const HomeFoundation = () => {
+    const { store } = useContext(Context);
+    let { token } = store;
     const history = useHistory();
-    //let {pets} =store;
-    useEffect(() => {
-        actions.getPetsFoundation();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+
     return (
         <>
-            {
-                !!store.token &&
-                <div className="container">
-                    <div className="row my-4">
-                        <div className="col-12 text-center">
-                            <div>
-                                <h2 className="display-1">Mascotas en Adopción</h2>
+        {
+            token !== "" ? 
+                (
+                    <div className="container">
+                        <div className="text-center my-4">
+                            <h2 className="display-1">Bienvenido Fundación</h2>
+                        </div>
+                        <div className="row">
+                            <div className="col-12 col-md-6 d-flex justify-content-center">
+                                <Link to="/foundation/profile" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
+                                    Mis Datos
+                                </Link >
                             </div>
-                            <div className="row justify-content-center">
-                                {
-                                    !!store.pets ?
-                                        store.pets.length > 0 ?
-                                            store.pets.map((pet, index) => {
-                                                return (
-                                                    <div className="col-sm-6 col-md-4" key={index}>
-                                                        <div className="card mb-3">
-                                                            <img src={!!pet.picture ? pet.picture : "/images/default.jpg"} className="card-img-top" alt={pet.name} />
-                                                            <div className="card-body">
-                                                                <h5 className="card-title">{pet.name}<span className="card-title fs-3 ">{pet.specie === 'cat' ? <FaCat className="align-top ms-1" /> : <FaDog className="align-top ms-1" />}   </span></h5>
-                                                                <p className="card-text">{!!pet.birth_date ? actions.getEdad(pet.birth_date) : "No registra fecha de nacimiento"}</p>
-                                                                <p className="card-text">{!!pet.code_chip ? pet.code_chip : "No registra codigo de chip"}</p>
-                                                                <p className="card-text badge rounded-pill bg-success fs-3">{pet.state === "owned" ? "Con Dueño" : "En adopción"}</p>
-
-                                                                <div className="d-flex justify-content-around">
-                                                                    <Link to={"/foundation/pet/history/" + pet.id} className="btn btn-primary">Historial</Link>
-                                                                    <Link to={"/foundation/transfer/" + pet.id} className="btn btn-danger">Transferir</Link>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                )
-                                            })
-                                            :
-                                            <div className="col-sm-12 pt-4">
-                                                <h3 className="text-center">La fundación no posee mascotas en adopción</h3>
-                                            </div>
-                                        :
-                                        <LoadingSpiner />
-                                }
+                            <div className="col-12 col-md-6 text-center">
+                                <button className="btn btn-secondary btn-lg fs-2 my-3  item texto-borde fw-bold ">
+                                    Perdidos y Encontrados
+                                </button>
                             </div>
-                            <div>
-                                <Link to="/foundation/pets/add" className="text-decoration-none badge rounded-pill bg-success p-3 m-1 fs-4">
-                                    Agregar Mascota
-                                </Link>
+                            <div className="col-12 col-md-6 d-flex justify-content-center">
+                                <Link to="/foundation/pets/adoption" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
+                                    Mascotas en Adopción
+                                </Link >
+                            </div>
+                            <div className="col-12 col-md-6 d-flex justify-content-center">
+                                <Link to="/foundation/pets/tracking" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
+                                    Mascotas Adoptadas o con dueño
+                                </Link >
+                            </div>
+                            <div className="col-12 col-md-6 d-flex justify-content-center">
+                                <Link to="/services" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
+                                    Servicios
+                                </Link >
                             </div>
                         </div>
                     </div>
-                </div>
-            }
-            {
-                !store.token &&
-                history.push("/")
+                ) 
+            : 
+                history.push("/fundation/login")
             }
         </>
     );
 }
-export default FoundationPetsInAdoption;
+export default HomeFoundation;
