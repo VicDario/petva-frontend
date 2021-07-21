@@ -105,7 +105,7 @@ const Userprofiledetail = () => {
                                         save === "on" &&
                                         
 
-                                            <div className="col-7 bg-secondary text-white p-3 mx-auto">
+                                            <div className="col-md-7 col-12 bg-secondary text-white p-3 mx-auto">
                                                 <div>
                                                     <label className="form-label" htmlFor="">Nombre</label>
                                                 <input className="form-control text-white bg-dark" type="text" placeholder="Nombre" />
