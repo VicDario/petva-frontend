@@ -32,7 +32,7 @@ const Userpets = ({ history }) => {
                                                 return (
                                                     <div className="col-sm-6 col-md-4" key={index}>
                                                         <div className="card mb-3">
-                                                            <img src={!!pet.picture ? pet.picture : "/images/default.jpg"} className="card-img-top" alt={pet.name} />
+                                                            <img src={!!pet.picture ? pet.picture : "/images/default.jpg"} className="card-img-top" alt={pet.name} style={{ height: "30vh" }} />
                                                             <div className="card-body">
                                                                 <div className="d-flex justify-content-center">
                                                                     <h2> {pet.name}</h2>

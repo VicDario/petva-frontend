@@ -2,8 +2,9 @@ import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { FaPlusCircle } from "react-icons/fa"
+import { FaPlusCircle, FaTrash } from "react-icons/fa"
 import { FaCat, FaDog } from "react-icons/fa";
+import { FiEdit } from "react-icons/fi"
 
 
 
@@ -99,17 +100,20 @@ const Userpethistory = () => {
         }
     }
     const reportLost = () => {
-        actions.userReportPetLost(pet_id,last_location);
+        actions.userReportPetLost(pet_id, last_location);
         console.log(last_location)
         actions.getHistoryUserPet(pet_id);
         actions.getSinglePetFromUser(pet_id);
 
     }
-    const reportFounded = ()=>{
+    const reportFounded = () => {
         actions.userReportPetFounded(pet_id);
         actions.getHistoryUserPet(pet_id);
         actions.getSinglePetFromUser(pet_id);
 
+    }
+    const deletePet = ()=>{
+        console.log("Mascota elminida");
     }
 
 
@@ -120,19 +124,23 @@ const Userpethistory = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-3">
-                        
-                            {
-                                !!userPet&&
+
+                        {
+                            !!userPet &&
+                            <div className="d-flex justify-content-around">
                                 <h1>
                                     {userPet.name}
-                                
                                 </h1>
-                            }
-                        
-                            {
-                                !!userPet &&
-                        <div className="card mb-3">
-                            <img src={ !!userPet.picture ? userPet.picture :  "/images/default.jpg"} className="card-img-top" alt="petname" />
+                                <span className="text-primary fs-3" type="button" title="Editar Mascota"><FiEdit/></span>
+                                <span onClick={deletePet} className="text-danger fs-3" type="button" title="Eliminar Mascota"><FaTrash /></span>
+
+                            </div>
+                        }
+
+                        {
+                            !!userPet &&
+                            <div className="card mb-3">
+                                <img src={!!userPet.picture ? userPet.picture : "/images/default.jpg"} className="card-img-top" alt="petname" />
 
                                 <div className="card-body">
                                     {/* <h5 className="card-title">{userPet.name}</h5> */}
@@ -153,13 +161,13 @@ const Userpethistory = () => {
                                         {
                                             userPet.state !== "lost" &&
 
-                                        <button
+                                            <button
 
-                                            type="button"
-                                            className="btn btn-danger"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#perdida"
-                                        >Reportar Perdida</button>
+                                                type="button"
+                                                className="btn btn-danger"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#perdida"
+                                            >Reportar Perdida</button>
                                         }
                                         {
                                             userPet.state === "lost" &&
@@ -174,8 +182,8 @@ const Userpethistory = () => {
 
                                     </div>
                                 </div>
-                        </div>
-                            }
+                            </div>
+                        }
 
                     </div>
 
@@ -514,17 +522,17 @@ const Userpethistory = () => {
                                     data-bs-dismiss="modal"
                                     aria-label="Close"
                                 />
-                                </div>
-                                <div className="modal-body">
-                                    <div>
+                            </div>
+                            <div className="modal-body">
+                                <div>
                                     <label className="form-label" htmlFor="">Indica la última ubicación donde viste tu mascota, la fecha y alguna descripción</label>
 
-                                    </div>
-                                    <div>
-                                    <input className="form-control" onChange={(e) => { setLastLocation(e.target.value)}} type="text" />
-
-                                    </div>
                                 </div>
+                                <div>
+                                    <input className="form-control" onChange={(e) => { setLastLocation(e.target.value) }} type="text" />
+
+                                </div>
+                            </div>
 
                             <div className="modal-footer">
                                 <button
@@ -575,7 +583,7 @@ const Userpethistory = () => {
                                     Cancelar
                                 </button>
                                 <button onClick={reportFounded} type="button" className="btn btn-primary"
-                                data-bs-dismiss="modal"
+                                    data-bs-dismiss="modal"
                                 >
                                     Cambiar estado
                                 </button>

@@ -18,13 +18,10 @@ const injectContext = (PassedComponent) => {
         );
 
         useEffect(() => {
-            state.store.token = localStorage.getItem("petvaToken")
-            state.store.userType = localStorage.getItem("petvaUser")
-           /*  state.actions.syncTokenFromSessionStore(); */
+         
             state.actions.getPetsInAdoption();
             state.actions.getLostPets();
-            
-            // eslint-disable-next-line react-hooks/exhaustive-deps
+   
         }, [])
 
         return (

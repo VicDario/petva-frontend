@@ -68,10 +68,10 @@ const Home = () => {
                             Mascotas Perdidas
                         </h2>
                     </div>
-                    <div>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident illo eaque iusto veniam nobis unde recusandae fuga voluptatumculpa impedit?
-                        </p>
+                    <div className="col-4 col-md-2" >
+                        <Link to="/lostPets">
+                        <img className="imgRedonda img-fluid" src="/images/sebuscapet.png" alt="imagen adoptaar" />
+                        </Link>
                     </div>
                 </div>
                 <div className="col-4 col-md-2" >

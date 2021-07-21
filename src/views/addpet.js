@@ -98,7 +98,7 @@ const Addpet = ({ history }) => {
                         <div className="mb-3 row">
                             <label className="col-sm-3 col-form-label fs-4" htmlFor="birth">Fecha Nacimiento</label>
                             <div className="col-sm-9">
-                                <input onChange={(e) => { setPet({ ...pet, birth_date: e.target.value }) }} type="date" className="form-control fs-4" id="birth" />
+                                <input  onChange={(e) => { setPet({ ...pet, birth_date: e.target.value }) }} type="date" className="form-control fs-4" id="birth" />
                             </div>
                         </div>
                         <div className="d-flex justify-content-end">
