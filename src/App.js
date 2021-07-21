@@ -21,7 +21,7 @@ import TransferPetFromFoundation from './views/TransferPetFromFoundation';
 import FoundationPetsForTracking from './views/FoundationPetsForTracking';
 import FoundationPetHistory from './views/FoundationPetHistory';
 import LoginClinic from './views/LoginClinic';
-import ClinicProfile from './views/ClinicProfile';
+import HomeClinic from './views/HomeClinic';
 import ClinicProfileDetail from './views/ClinicProfileDetail';
 import Custom404 from './views/404';
 
@@ -51,7 +51,7 @@ function App() {
           <Route exact path="/foundation/pets/add" component={AddPet} />
           <Route exact path="/foundation/transfer/:pet_id" component={TransferPetFromFoundation} />
           <Route exact path="/clinic/login" component={LoginClinic}/>
-          <Route exact path="/clinic" component={ClinicProfile}/>
+          <Route exact path="/clinic" component={HomeClinic}/>
           <Route exact path="/clinic/profile" component={ClinicProfileDetail}/>
           <Route component={Custom404}/>
         </Switch>

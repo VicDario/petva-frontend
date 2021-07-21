@@ -10,7 +10,7 @@ const HomeFoundation = () => {
     return (
         <>
         {
-            token !== "" ? 
+            token !== null ? 
                 (
                     <div className="container">
                         <div className="text-center my-4">
@@ -46,7 +46,7 @@ const HomeFoundation = () => {
                     </div>
                 ) 
             : 
-                history.push("/fundation/login")
+                history.push("/foundation/login")
             }
         </>
     );
