@@ -124,7 +124,18 @@ const FoundationPetHistory = () => {
                     </div>
                     <div className="col-12 col-md-3">
                         <div className="text-center">
-                            <h2>Vacunas <span title="Agregar Vacuna" className="text-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><FaPlusCircle /></span></h2>
+                            <h2>
+                                Vacunas 
+                                <span 
+                                    title="Agregar Vacuna" 
+                                    className="text-success" 
+                                    type="button" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#exampleModal"
+                                >
+                                    <FaPlusCircle />
+                                </span>
+                            </h2>
                         </div>
                         {
                             !!store.historyFoundationPet &&
