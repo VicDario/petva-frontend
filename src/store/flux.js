@@ -125,6 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("There has been some error")
                     }
                     const data = await response.json();
+                    console.log(data);
                     setStore({ pets: data })
 
                 } catch (error) {

@@ -10,7 +10,8 @@ const Userprofiledetail = () => {
 
     useEffect(() => {
         actions.getUserDetail();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        actions.getMascotasUser();
+        
     }, [])
 
     const register = () => {
@@ -34,7 +35,7 @@ const Userprofiledetail = () => {
                     </div>
                     <div>
                         {
-                            !!store.userDetail &&
+                            !!store.userDetail && !!store.pets&&
                             <div className="card mb-3" /* style={{ maxWidth: 540 }} */>
                                 <div className="row g-0">
 
@@ -45,7 +46,7 @@ const Userprofiledetail = () => {
                                         </div>
                                         <div className="my-2">
                                             <span className="text-white me-3">{store.userDetail.name}</span>
-                                            <span className="text-secondary align-top"><MdPets /></span><span className="text-secondary align-middle">5</span>
+                                            <span className="text-secondary align-top"><MdPets /></span><span className="text-secondary align-middle">{!!store.pets.length > 0 ? store.pets.length : "0"}</span>
                                         </div>
                                         <div>
 
@@ -66,9 +67,18 @@ const Userprofiledetail = () => {
                                                 </div>
                                                 <div className="col-8 mx-auto">
                                                     <div className="m-2  p-1 rounded text-center bg-secondary text-white">
-                                                        <h4>Mascotas (N)</h4>
+                                                        <h4>Mascotas ({!!store.pets.length > 0 ? store.pets.length : "0"})</h4>
                                                         <div>
-                                                            <span ><FaCat /> <FaDog /></span>
+                                                            {
+                                                                !!store.pets.length >0 ?
+                                                                    store.pets.map((pet,index)=>{
+                                                                        return(
+                                                                            <span key={index} className="card-title fs-3 ">{pet.specie === 'cat' ? <FaCat className="align-top ms-1" /> : <FaDog className="align-top ms-1" />}</span>
+                                                                        )
+                                                                    })
+                                                                    :
+                                                                    <p>No tienes mascotas inscritas</p>
+                                                            }
                                                         </div>
                                                     </div>
                                                 </div>
