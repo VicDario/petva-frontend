@@ -253,12 +253,19 @@ const Navbar = () => {
                                             </div>
                                             <div className="row border text-center">
                                                 <Link
+                                                    to="/user/pets"
+                                                    className=""
+                                                >
+                                                    Mis Mascotas
+                                                </Link>
+                                            </div>
+                                            <div className="row border text-center my-1">
+                                                <Link
                                                     to="/"
                                                     onClick={actions.logOut}
                                                     className=""
                                                 >
                                                     Cerrar Sesión
-
                                                 </Link>
                                             </div>
                                         </div>
