@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 const Custom404 = () => {
     return (
-        <div className="row error-404 py-5">
+        <div className="row error-404 pb-5 pt-2">
             <div className="col-md-6 mx-auto">
                 <section class="error-container">
                     <span>4</span>

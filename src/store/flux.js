@@ -16,7 +16,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             petsWithOwner: null,
             petsInAdoption: null,
             historyFoundationPet: null,
-            lostPets: null
+            lostPets: null,
+            clinicDoctor:null
         },
         actions: {
             registerClinica: async (email, name, address, phone, password) => {
@@ -710,8 +711,49 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
                 return "Años: " + edad + "  Meses: " + diferenciaMeses
-            }
-
+            },
+            registerDoctor: async (email,name,lastname,specialty,password) =>{
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        email: email,
+                        name: name,
+                        lastname: lastname,
+                        specialty: specialty,
+                        password: password
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                //console.log(opt.body);
+                //console.log(store.token);
+                const response = await fetch(`${store.baseUrl}api/clinic/doctor/register`, opt)
+                if (response.status !== 201) throw new Error(response.status, "error");
+                const data = await response.json();
+                return data;
+            },
+            getClinicDoctor: async()=>{
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try {
+                    const response = await fetch(`${store.baseUrl}api/clinic/doctor/`, opt)
+                    if (response.status !== 200) {
+                        console.error("There has been some error in get clinic doctors")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    setStore({ clinicDoctor: data })
+                } catch (error) {
+                    console.error("There has been an error in get clinic doctors")
+                }
+            },
         }
     };
 }
