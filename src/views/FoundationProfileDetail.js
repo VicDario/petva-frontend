@@ -16,7 +16,7 @@ const FoundationProfileDetail = () => {
 
     return (<>
         {
-            token !== null ? (
+            !!token !== null ? (
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
