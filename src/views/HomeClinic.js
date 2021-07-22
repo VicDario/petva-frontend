@@ -28,7 +28,7 @@ const HomeClinic = ()=>{
                                 </button>
                             </div>
                             <div className="col-12 col-md-6 d-flex justify-content-center">
-                                <Link to="/clinic" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
+                                <Link to="/clinic/doctor/register" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
                                 Registrar un medico
                                 </Link >
                             </div>
