@@ -1,5 +1,6 @@
 
 import { Link, useHistory } from "react-router-dom";
+import UpdatePet from "./UpdatePet";
 
 
 
@@ -11,7 +12,7 @@ const HomeUser = () => {
     return (
         <> 
         {
-            !!localStorage.getItem("token") !== null ?
+            !!localStorage.getItem("petvatoken") !== null ?
                 <div className="container">
                     <div className="text-center my-4">
                         <h2 className="display-1">Bienvenido Usuario</h2>
