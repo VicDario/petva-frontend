@@ -31,11 +31,20 @@ const ClinicDoctor = () => {
                                                         className="card-img-top" alt={doctor.name}
                                                         style={{ height: "50vh" }}
                                                     />
+                                                    <div className="card-title">
+                                                        <div className="d-flex justify-content-center mt-2">
+                                                            <h2 className="h2">{doctor.name}</h2>
+                                                        </div>
+                                                    </div>
                                                     <div className="card-body">
-                                                        <div className="d-flex justify-content-center">
-                                                            <h2>{doctor.name}</h2>
-                                                            <h2>{doctor.lastname}</h2>
-                                                            <h2>{doctor.specialty}</h2>
+                                                        <div className="d-flex justify-content-center mt-2">
+                                                            <span>{doctor.name} {doctor.lastname}</span>
+                                                        </div>
+                                                        <div className="d-flex justify-content-center mt-2">
+                                                            <span>{doctor.email}</span>
+                                                        </div>
+                                                        <div className="d-flex justify-content-center mt-2">
+                                                            <span>{doctor.specialty}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -46,7 +55,7 @@ const ClinicDoctor = () => {
                                             <h3 className="text-center">
                                                 No tienes medicos registrados
                                             </h3>
-                                        </div>): <LoadingSpiner/>
+                                        </div>) : <LoadingSpiner />
                         }
                     </div>
                 </div>
