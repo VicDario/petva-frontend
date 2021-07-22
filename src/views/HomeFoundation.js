@@ -1,10 +1,10 @@
-import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Context } from "../store/appContext";
+/* import { useContext } from "react";
+import { Context } from "../store/appContext"; */
 
 const HomeFoundation = () => {
-    const { store } = useContext(Context);
-    let { token } = store;
+    //const { store } = useContext(Context);
+    //let { token } = store;
     const history = useHistory();
 
     return (
