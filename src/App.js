@@ -24,6 +24,7 @@ import LoginClinic from './views/LoginClinic';
 import HomeClinic from './views/HomeClinic';
 import ClinicProfileDetail from './views/ClinicProfileDetail';
 import Custom404 from './views/404';
+import Reservetime from './views/ReserveTime';
 import DoctorRegister from './views/DoctorRegister';
 import ClinicDoctor from './views/ClinicDoctor';
 
@@ -55,6 +56,7 @@ function App() {
           <Route exact path="/clinic/login" component={LoginClinic}/>
           <Route exact path="/clinic" component={HomeClinic}/>
           <Route exact path="/clinic/profile" component={ClinicProfileDetail}/>
+          <Route exact path="/user/reserve" component={Reservetime}/>
           <Route exact path="/clinic/doctor/register" component={DoctorRegister}/>
           <Route exact path="/clinic/doctor" component={ClinicDoctor}/>
           <Route component={Custom404}/>
