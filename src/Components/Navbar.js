@@ -149,7 +149,7 @@ const Navbar = () => {
                                             !!store.foundationDetail &&
                                             <Avatar
                                                 alt={store.foundationDetail.name}
-                                                src="/static/images/avatar/2.jpg"
+                                                src={store.foundationDetail.picture}
                                                 sx={{ width: 60, height: 60 }}
 
                                             />
@@ -159,7 +159,7 @@ const Navbar = () => {
                                             !!store.userDetail &&
                                             <Avatar
                                                 alt={store.userDetail.name}
-                                                src="/static/images/avatar/2.jpg"
+                                                src={store.userDetail.picture}
                                                 sx={{ width: 60, height: 60 }}
 
                                             />
@@ -169,7 +169,7 @@ const Navbar = () => {
                                             !!store.clinicDetail &&
                                             <Avatar
                                                 alt={store.clinicDetail.name}
-                                                src="/static/images/avatar/2.jpg"
+                                                src={store.clinicDetail.picture}
                                                 sx={{ width: 60, height: 60 }}
 
                                             />
@@ -184,7 +184,7 @@ const Navbar = () => {
                                                     !!store.foundationDetail &&
                                                     <Avatar
                                                         alt={store.foundationDetail.name}
-                                                        src="/static/images/avatar/2.jpg"
+                                                        src={store.foundationDetail.picture}
                                                         sx={{ width: 45, height: 45 }}
 
                                                     />
@@ -193,7 +193,7 @@ const Navbar = () => {
                                                     !!store.userDetail &&
                                                     <Avatar
                                                         alt={store.userDetail.name}
-                                                        src="/static/images/avatar/2.jpg"
+                                                        src={store.userDetail.picture}
                                                         sx={{ width: 45, height: 45 }}
 
                                                     />
@@ -202,7 +202,7 @@ const Navbar = () => {
                                                     !!store.clinicDetail &&
                                                     <Avatar
                                                         alt={store.clinicDetail.name}
-                                                        src="/static/images/avatar/2.jpg"
+                                                        src={store.clinicDetail.picture}
                                                         sx={{ width: 45, height: 45 }}
 
                                                     />

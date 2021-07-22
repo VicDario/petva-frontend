@@ -4,12 +4,20 @@ import { useEffect } from "react";
 import { MdPets } from "react-icons/md"
 import { FaCat, FaDog, FaUser } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Userprofiledetail = () => {
     const { actions, store } = useContext(Context);
     const {token}=store;
     const history = useHistory();
     const [save, setSave] = useState("off");
+    const [updates, setUpdates] = useState({
+        email: null,
+        name: null,
+        lastname: null,
+        phone: null,
+        password: null
+    });
 
     useEffect(() => {
         actions.getUserDetail();
@@ -26,10 +34,29 @@ const Userprofiledetail = () => {
 
         }
     }
+    const update = ()=>{
+        if (updates.name !== "" && updates.name !== null &&
+            updates.lastname !== "" && updates.lastname !== null &&
+            updates.email !== "" && updates.email !== null
+        ){
+            actions.updateUserDetail(updates.email,updates.name,updates.lastname,updates.phone,updates.password,store.auxPicture);
+            Swal.fire({
+                icon: "success",
+                title: "Usuario Actualizado",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            register();
+        }
+    }
+    const handleLoad = (e) => {
+        let file = e.target.files[0]; // load the picture (just one file)
+        actions.convertImgToBase64(file); //Save picture in base64 format at store in auxPicture
+    }
 
     return (<>
         {
-            token !== null ? (
+            !!token !== null ? (
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -75,10 +102,15 @@ const Userprofiledetail = () => {
                                                 <div className="row">
                                                     <div className="col-8 ms-3 text-white">
                                                         <h3>
-                                                            <span>
+                                                            <span className="me-2">
                                                                 <FaUser />
-                                                            </span>{store.userDetail.name}
-                                                            {store.userDetail.lastname}
+                                                            </span>
+                                                            <span className="me-2">
+                                                                {store.userDetail.name}
+                                                            </span>
+                                                            <span>
+                                                                {store.userDetail.lastname}
+                                                            </span>
                                                         </h3>
                                                     </div>
                                                     <div
@@ -150,7 +182,9 @@ const Userprofiledetail = () => {
                                                     </label>
                                                     <input
                                                         className="form-control text-white bg-dark"
-                                                        type="text" placeholder="Nombre" />
+                                                        type="text" placeholder="Nombre" 
+                                                        onChange={(e)=>{setUpdates({...updates,name:e.target.value})}}
+                                                        />
                                                 </div>
                                                 <div className="">
                                                     <label className="form-label" htmlFor="">
@@ -159,7 +193,9 @@ const Userprofiledetail = () => {
                                                     <input
                                                         className="form-control text-white bg-dark"
                                                         type="text"
-                                                        placeholder="Apellido" />
+                                                        placeholder="Apellido" 
+                                                        onChange={(e) => { setUpdates({ ...updates, lastname: e.target.value }) }}
+                                                        />
                                                 </div>
                                                 <div
                                                     className="">
@@ -168,20 +204,45 @@ const Userprofiledetail = () => {
                                                         htmlFor="">Teléfono</label>
                                                     <input
                                                         className="form-control text-white bg-dark"
-                                                        type="text" placeholder="Teléfono" />
+                                                        type="text" placeholder="Teléfono" 
+                                                        onChange={(e) => { setUpdates({ ...updates, phone: e.target.value }) }}
+                                                        />
                                                 </div>
                                                 <div className="">
                                                     <label
                                                         className="form-label"
                                                         htmlFor="">Email</label>
                                                     <input className="form-control text-white bg-dark"
+                                                        type="email"
+                                                        placeholder="Email" 
+                                                        onChange={(e) => { setUpdates({ ...updates, email: e.target.value }) }}
+                                                        />
+                                                </div>
+                                                <div className="">
+                                                    <label
+                                                        className="form-label"
+                                                        htmlFor="">Contraseña</label>
+                                                    <input className="form-control text-white bg-dark"
                                                         type="text"
-                                                        placeholder="Email" />
+                                                        placeholder="Contraseña" 
+                                                        onChange={(e) => { setUpdates({ ...updates, password: e.target.value }) }}
+                                                        />
+                                                </div>
+                                                <div className="">
+                                                    <label
+                                                        className="form-label"
+                                                        htmlFor="">Foto de Perfil</label>
+                                                    <input className="form-control text-white bg-dark"
+                                                        type="file"
+                                                        placeholder="Foto perfil" 
+                                                        onChange={e => handleLoad(e)} accept="image/png, .jpg, .jpeg"
+                                                        />
                                                 </div>
                                                 <div
                                                     className="d-flex justify-content-around my-3">
                                                     <button
-                                                        className="btn btn-success" >
+                                                        className="btn btn-success" 
+                                                        onClick={update} >
                                                         Guardar Cambios
                                                     </button>
                                                     <button

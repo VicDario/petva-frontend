@@ -710,6 +710,39 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
                 return "Años: " + edad + "  Meses: " + diferenciaMeses
+            },
+            updateUserDetail: async (email,name,lastname,phone,picture,password) => {
+                const store = getStore()
+                const actions = getActions();
+                const opt = {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        email: email,
+                        name : name,
+                        lastname : lastname,
+                        phone : phone,
+                        picture : picture,
+                        password : password
+                   }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/user/info", opt)
+                    if (response.status !== 202)
+                    {
+                        console.error("There is a some error in update user")
+                    }
+                    const data = await response.json();
+                    if (data) setStore({ userDetail: data })
+                    actions.getUserDetail();
+                } catch (error)
+                {
+                    console.error("Error in update" + error)
+                }
             }
 
         }
