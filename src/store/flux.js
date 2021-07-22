@@ -16,7 +16,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             petsWithOwner: null,
             petsInAdoption: null,
             historyFoundationPet: null,
-            lostPets: null
+            lostPets: null,
+            clinicsList : null,
+            doctorsList : null
         },
         actions: {
             registerClinica: async (email, name, address, phone, password) => {
@@ -742,6 +744,87 @@ const getState = ({ getStore, getActions, setStore }) => {
                 } catch (error)
                 {
                     console.error("Error in update" + error)
+                }
+            },
+            getClinicsList : async()=>{
+                const actions = getActions();
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/user/clinics/list`, opt)
+                    if (response.status !== 200)
+                    {
+                        console.error("There has been some error in get list of clinics")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    //aquí setear lista de clinicas
+                    setStore({clinicsList : data})
+                    
+
+
+                } catch (error)
+                {
+                    console.error("There has been an error" + error)
+                }
+            },
+            getDoctorsList: async (clinic_id)=>{
+                const actions = getActions();
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/user/clinics/${clinic_id}/doctors`, opt)
+                    if (response.status !== 200)
+                    {
+                        console.error("There has been some error in get list of doctors")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    //aquí setear lista de clinicas
+                     setStore({ doctorsList: data }) 
+
+
+
+                } catch (error)
+                {
+                    console.error("There has been an error" + error)
+                }
+            },
+            getDoctorReservations : async(clinic_id,doctor_id)=>{
+                const actions = getActions();
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/user/clinics/${clinic_id}/doctor/${doctor_id}/reservations`, opt)
+                    if (response.status !== 200)
+                    {
+                        console.error("There has been some error in get list of reservations")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    //aquí setear lista de clinicas
+                    
+
+
+
+                } catch (error)
+                {
+                    console.error("There has been an error" + error)
                 }
             }
 

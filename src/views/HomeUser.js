@@ -1,7 +1,7 @@
 
 import { Link, useHistory } from "react-router-dom";
-import UpdatePet from "./UpdatePet";
-
+import {FcOvertime} from "react-icons/fc"
+ 
 
 
 const HomeUser = () => {
@@ -19,25 +19,14 @@ const HomeUser = () => {
                     </div>
                     <div className="row">
                         <div className="col-12 col-md-6 d-flex justify-content-center">
-                            <Link to="/user/profile" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                Mis Datos
+                            <Link to="/user/reserve" 
+                            className="btn btn-primary fs-2 fw-bold ">
+                                <span className="fs-1 m-0"><FcOvertime/></span>
+                                <p>Reservar</p>
+                                <p>Hora Veterinaria</p>
                             </Link >
                         </div>
-                        <div className="col-12 col-md-6 text-center">
-                            <button className="btn btn-secondary btn-lg fs-2 my-3  item texto-borde fw-bold ">
-                                Perdidos y Encontrados
-                            </button>
-                        </div>
-                        <div className="col-12 col-md-6 d-flex justify-content-center">
-                            <Link to="/user/pets" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                Mis Mascotas
-                            </Link >
-                        </div>
-                        <div className="col-12 col-md-6 d-flex justify-content-center">
-                            <Link to="/services" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                Servicios
-                            </Link >
-                        </div>
+                       
                     </div>
                 </div>
             :
