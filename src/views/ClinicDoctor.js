@@ -47,6 +47,9 @@ const ClinicDoctor = () => {
                                                             <span>{doctor.specialty}</span>
                                                         </div>
                                                     </div>
+                                                    <div className="card-footer d-flex justify-content-center">
+                                                    <button type="button" class="btn btn-outline-danger">Eliminar</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         )
