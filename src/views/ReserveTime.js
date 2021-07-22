@@ -10,6 +10,10 @@ const Reservetime = ()=>{
         name : null,
         id : "0"
     });
+    const [doctor, setDoctor] = useState({
+        
+        id: null
+    });
     
     useEffect(()=>{
         actions.getClinicsList();
@@ -26,8 +30,17 @@ const Reservetime = ()=>{
             actions.getDoctorsList(e.target.value);
         }
     }
-    const getDoctors = ()=>{
-        actions.getDoctorsList(clinic.id);
+    const giveValueDoctor = (e) => {
+        setDoctor({
+            ...doctor,
+            id: e.target.value,
+
+        });
+        
+    }
+    const getReservations = ()=>{
+        actions.getDoctorReservations(clinic.id,doctor.id);
+        console.log(doctor.id);
     }
 
     
@@ -80,10 +93,11 @@ const Reservetime = ()=>{
                                         <select
                                             className="form-select form-select-lg mb-3"
                                             aria-label=".form-select-lg example"
+                                            onChange={(e) => { giveValueDoctor(e)}}
                                     
 
                                         >
-                                            <option value="0">Veterinarios</option>
+                                            <option value="null">Veterinarios</option>
                                             {store.doctorsList.map((doctor, index) => {
                                                 return (
                                                     <option
@@ -105,6 +119,12 @@ const Reservetime = ()=>{
                                 </h3>
                             </div>
                         }
+                </div>
+                <div className="col-md-8 mx-auto col-12">
+                        <button onClick={getReservations}>
+                            reservations
+                        </button>
+                        
                 </div>
             </div>
         </div>
