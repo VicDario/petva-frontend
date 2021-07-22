@@ -704,8 +704,27 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
                 return "Años: " + edad + "  Meses: " + diferenciaMeses
-            }
-
+            },
+            registerDoctor: async (email,name,lastname,specialty,password) =>{
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        email: email,
+                        name: name,
+                        lastname: lastname,
+                        specialty: specialty,
+                        password: password
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                }
+                const response = await fetch(`${store.baseUrl}api/clinic/doctor/register`, opt)
+                if (response.status !== 201) throw new Error(response.status, "error");
+                const data = await response.json();
+                return data;
+            },
         }
     };
 }
