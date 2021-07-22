@@ -871,6 +871,26 @@ const getState = ({ getStore, getActions, setStore }) => {
                 if (response.status !== 201) throw new Error(response.status, "error");
                 const data = await response.json();
                 return data;
+            },
+            bookAppointment : async(pet_id,reservation_id,clinic_id,doctor_id)=>{
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        pet_id:pet_id,
+                        reservation_id:reservation_id
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                
+                const response = await fetch(`${store.baseUrl}api/user/clinics/${clinic_id}/doctor/${doctor_id}/reservation/add`, opt)
+                if (response.status !== 201) throw new Error(response.status, "error");
+                const data = await response.json();
+                console.log(data);
+                return data;
             }
 
         }
