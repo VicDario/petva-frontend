@@ -19,7 +19,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             lostPets: null,
             clinicsList : null,
             doctorsList : null,
-            clinicDoctor: null
+            clinicDoctor: null,
+            doctorReservations : null
         },
         actions: {
             registerClinica: async (email, name, address, phone, password) => {
@@ -801,7 +802,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("There has been an error" + error)
                 }
             },
-            bookAppointment : async(clinic_id,doctor_id)=>{
+            getDoctorReservations : async(clinic_id,doctor_id)=>{
                 const actions = getActions();
                 const store = getStore();
                 const opt = {
@@ -814,14 +815,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const response = await fetch(`${store.baseUrl}api/user/clinics/${clinic_id}/doctor/${doctor_id}/reservations`, opt)
                     if (response.status !== 200)
                     {
-                        console.error("There has been some error in get list of doctors")
+                        console.error("There has been some error in get list of reservations")
                     }
                     const data = await response.json();
                     console.log(data);
-                    //aquí setear lista de clinicas
-                    
-
-
+                    setStore({ doctorReservations:data})
 
                 } catch (error)
                 {
