@@ -718,8 +718,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }),
                     headers: {
                         "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
                     }
                 }
+                //console.log(opt.body);
+                //console.log(store.token);
                 const response = await fetch(`${store.baseUrl}api/clinic/doctor/register`, opt)
                 if (response.status !== 201) throw new Error(response.status, "error");
                 const data = await response.json();
