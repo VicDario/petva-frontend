@@ -122,10 +122,30 @@ const Reservetime = ()=>{
                 </div>
                 <div className="col-md-8 mx-auto col-12">
                         <button onClick={getReservations}>
-                            reservations
+                            Ver Horas disponibles
                         </button>
-                        
                 </div>
+                {
+                    !!store.doctorReservations &&
+                    <div>
+                        <ul className="list-group">
+                            {
+                                store.doctorReservations.map((reservation,index)=>{
+                                    return(
+                                        <>
+                                            <li 
+                                            className="list-group-item " 
+                                            aria-current="true"
+                                            key={index}
+                                            >{reservation.date_start}</li>
+                                        </>
+                                    )
+                                })
+                            }
+                            
+                        </ul>
+                    </div>
+                }
             </div>
         </div>
     )

@@ -56,7 +56,7 @@ const Userprofiledetail = () => {
 
     return (<>
         {
-            !!token !== null ? (
+            !!localStorage.getItem("petvaToken")  ? (
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
