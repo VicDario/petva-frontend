@@ -800,7 +800,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("There has been an error" + error)
                 }
             },
-            getDoctorReservations : async(clinic_id,doctor_id)=>{
+            bookAppointment : async(clinic_id,doctor_id)=>{
                 const actions = getActions();
                 const store = getStore();
                 const opt = {
@@ -813,7 +813,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const response = await fetch(`${store.baseUrl}api/user/clinics/${clinic_id}/doctor/${doctor_id}/reservations`, opt)
                     if (response.status !== 200)
                     {
-                        console.error("There has been some error in get list of reservations")
+                        console.error("There has been some error in get list of doctors")
                     }
                     const data = await response.json();
                     console.log(data);

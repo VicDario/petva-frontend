@@ -7,13 +7,26 @@
   font-family: 'Catamaran', sans-serif;
   font-weight: 800;
   margin: 20px 15px;
+  background-image: url("../images/logo_cat_medium.png");
+  background-size: cover;
+  height:70vh
 }
 .error-container > span {
   display: inline-block;
-  line-height: 0.7;
+  line-height: 0;
   position: relative;
   color: #FFB485;
+  font-size: 116px;
+  margin-top: 103px;
 }
+/* .error-container > span> span {
+    display: inline-block;
+  line-height: 0;
+  position: relative;
+  color: #FFB485;
+  font-size: 116px;
+  margin-top: 100px;
+} */
 .error-container > span {
   display: inline-block;
   position: relative;
@@ -28,9 +41,11 @@
   animation: colordancing2 4s infinite;
 }
 .error-container > span:nth-of-type(2) {
-  width: 120px;
-  height: 120px;
+  width: 65px;
+  height: 65px;
   border-radius: 999px;
+  margin-left:14px;
+  margin-right: 13px;
 }
 .error-container > span:nth-of-type(2):before,
 .error-container > span:nth-of-type(2):after {
@@ -39,7 +54,7 @@
 	position: absolute;
 	top: 0; left: 0;
 	width: inherit; height: inherit;
-  border-radius: 999px;
+  border-radius: 25px;
 	box-shadow: inset 30px 0 0 rgba(209, 242, 165, 0.4),
 				inset 0 30px 0 rgba(239, 250, 180, 0.4),
 				inset -30px 0 0 rgba(255, 196, 140, 0.4),	
@@ -126,7 +141,7 @@
 
 
 .error-404{
-    background-color: rgb(94, 180, 219);
+    background-color: rgb(255, 255, 255);
 }
 
 .link-container {
