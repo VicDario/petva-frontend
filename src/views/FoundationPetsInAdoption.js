@@ -16,7 +16,7 @@ const FoundationPetsInAdoption = () => {
     return (
         <>
             {
-                !!store.token &&
+                !!localStorage.getItem("petvaToken") &&
                 <div className="container">
                     <div className="row my-4">
                         <div className="col-12 text-center">

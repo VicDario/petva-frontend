@@ -1,0 +1,20 @@
+.fc {
+    margin-top: 15px;
+}
+
+.fixed {
+    position: fixed;
+    right: 20px;
+    bottom: 10px;
+    z-index: 1030;
+    background: transparent;
+}
+
+.btn--help {
+    width: 30px;
+    height: 30px;
+}
+
+.btn.btn-primary.fixed {
+    padding: 0;
+}

@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 
 const FoundationProfileDetail = () => {
     const { actions, store } = useContext(Context);
-    const { token } = store;
     const history = useHistory();
 
     useEffect(() => {

@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 
 const Userprofiledetail = () => {
     const { actions, store } = useContext(Context);
-    const {token}=store;
     const history = useHistory();
     const [save, setSave] = useState("off");
     const [updates, setUpdates] = useState({
@@ -39,7 +38,8 @@ const Userprofiledetail = () => {
             updates.lastname !== "" && updates.lastname !== null &&
             updates.email !== "" && updates.email !== null
         ){
-            actions.updateUserDetail(updates.email,updates.name,updates.lastname,updates.phone,updates.password,store.auxPicture);
+            
+            actions.updateUserDetail(updates.email,updates.name,updates.lastname,updates.phone,validarVacio(updates.password),validarVacio(store.auxPicture));
             Swal.fire({
                 icon: "success",
                 title: "Usuario Actualizado",
@@ -53,6 +53,16 @@ const Userprofiledetail = () => {
         let file = e.target.files[0]; // load the picture (just one file)
         actions.convertImgToBase64(file); //Save picture in base64 format at store in auxPicture
     }
+
+    const validarVacio = (dato)=>{
+        if(dato === ""){
+            dato = null
+        }
+        return dato
+    }
+
+    let nombre = "asd"
+    console.log("Tu nombre es: "+ validarVacio(nombre));
 
     return (<>
         {
