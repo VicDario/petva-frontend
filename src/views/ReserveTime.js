@@ -1,7 +1,4 @@
-
-import { useContext } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { FaCat, FaDog, FaUser } from "react-icons/fa";
 

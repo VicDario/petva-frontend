@@ -17,8 +17,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             petsInAdoption: null,
             historyFoundationPet: null,
             lostPets: null,
-            clinicsList: null,
-            doctorsList: null,
+            hoursReserved: null,
+            clinicsList : null,
+            doctorsList : null,
             clinicDoctor: null,
             doctorReservations: null
         },
@@ -824,8 +825,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error in update" + error)
                 }
             },
-            getClinicsList: async () => {
-                const actions = getActions();
+            getClinicsList : async() => {
                 const store = getStore();
                 const opt = {
                     headers: {
@@ -842,17 +842,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
                     console.log(data);
                     //aquí setear lista de clinicas
-                    setStore({ clinicsList: data })
-
-
-
+                    setStore({clinicsList : data})
                 } catch (error)
                 {
                     console.error("There has been an error" + error)
                 }
             },
             getDoctorsList: async (clinic_id) => {
-                const actions = getActions();
                 const store = getStore();
                 const opt = {
                     headers: {
@@ -870,8 +866,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log(data);
                     //aquí setear lista de clinicas
                     setStore({ doctorsList: data })
-
-
 
                 } catch (error)
                 {
@@ -977,8 +971,27 @@ const getState = ({ getStore, getActions, setStore }) => {
                 {
                     console.error("Error: " + error)
                 }
-            }
+            },
 
+            getHoursReserved: async () => {
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try {
+                    const response = await fetch(`${store.baseUrl}api/clinic/check/reservations`, opt)
+                    if (response.status !== 200) {
+                        throw new Error("There has been some error in get hours reserved")
+                    }
+                    const data = await response.json();
+                    setStore({ hoursReserved: data })
+                    return data;
+                } catch (error) {
+                    console.error(error + "There has been an error in get hours reserved")
+                }
+            },
         }
     };
 }
