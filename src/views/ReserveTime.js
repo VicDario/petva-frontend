@@ -17,24 +17,27 @@ const Reservetime = () => {
     });
     const [mascota, setPet] = useState({
         id: null
-
     });
-
-
     useEffect(() => {
         actions.getMascotasUser();
         actions.getClinicsList();
+        if (clinic.id !== "0" || doctor.id !== "0")
+        {
+            if (clinic.id !== null && doctor.id !== null)
+            {
+
+                actions.getDoctorReservations(clinic.id, doctor.id)
+            }
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const giveValueClinic = (e) => {
         setClinic({
             ...clinic,
             id: e.target.value,
-
         });
         if (e.target.value !== "0")
         {
-
             actions.getDoctorsList(e.target.value);
         }
     }
@@ -42,29 +45,22 @@ const Reservetime = () => {
         setDoctor({
             ...doctor,
             id: e.target.value
-
         });
         if (e.target.value !== "0")
         {
-
             actions.getDoctorReservations(clinic.id, e.target.value);
         }
 
     }
-    /* const giveValueToReservation = () => {
-        setReservation({
-            ...reservation,
-            id:   
-        })
-    } */
-
     const postReservation = () => {
         if (mascota.id !== null && mascota.id !== "" && reservation.id !== null && reservation.id !== "" &&
             clinic.id !== null && clinic.id !== "" && doctor.id !== null && doctor.id !== "")
         {
-
             actions.bookAppointment(mascota.id, reservation.id, clinic.id, doctor.id);
-            
+            setClinic({ ...clinic, id: null, });
+            setDoctor({ ...doctor, id: null });
+            setReservation({ ...reservation, id: null })
+            setPet({ ...mascota, id: null })
         }
     }
 
@@ -149,7 +145,7 @@ const Reservetime = () => {
                 <div className="col-md-8 mx-auto col-12">
 
                     {
-                        !!store.doctorReservations &&
+                        !!store.doctorReservations && clinic.id !== "0" && doctor.id !== null &&
                         <>
                             <div>
                                 <h4>
@@ -163,14 +159,14 @@ const Reservetime = () => {
                                             return (
                                                 <>
                                                     <li
+                                                        key={index}
                                                         className="list-group-item "
                                                         aria-current="true"
-                                                        key={index}
                                                         value={reservation.id}
-                                                    >{reservation.date_start}</li>
-                                                    
-                                                    {/* Button trigger modal */}
+                                                    >{reservation.date_start}
+                                                    </li>
                                                     <button
+
                                                         type="button"
                                                         className="btn btn-primary"
                                                         data-bs-toggle="modal"
@@ -188,7 +184,7 @@ const Reservetime = () => {
                         </>
                     }
                 </div>
-               
+
             </div>
             {/* Modal Para confirmar Hora */}
             <div
@@ -220,7 +216,7 @@ const Reservetime = () => {
                             </div>
                             <div className="d-flex">
                                 {
-                                    !!store.pets && !!store.doctorReservations && !!store.doctorsList && 
+                                    !!store.pets && !!store.doctorReservations && !!store.doctorsList && clinic.id !== 0 &&
                                     store.pets.map((pet, index) => {
                                         return (
                                             <>
@@ -277,7 +273,7 @@ const Reservetime = () => {
                                 type="button"
                                 className="btn btn-secondary"
                                 data-bs-dismiss="modal"
-                                onClick={()=>{setPet({...mascota,id:null})}}
+                                onClick={() => { setPet({ ...mascota, id: null }) }}
 
                             >
                                 Cancelar

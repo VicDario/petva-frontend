@@ -21,7 +21,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             clinicsList: null,
             doctorsList: null,
             clinicDoctor: null,
-            doctorReservations: null
+            doctorReservations: null,
+            doctorDetail: null,
+            userReservations: null
         },
         actions: {
             registerClinica: async (email, name, address, phone, password) => {
@@ -163,7 +165,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("There has been some error")
                     }
                     const data = await response.json();
-                    console.log(data);
+                    /* console.log(data); */
                     setStore({ pets: data })
 
                 } catch (error) {
@@ -933,8 +935,96 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const data = await response.json();
                 console.log(data);
                 return data;
+            },
+            loginDoctor: async (email, password, history) => {
+                const store = getStore();
+                const actions = getActions();
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                }
+                const response = await fetch(`${store.baseUrl}api/doctor/login`, opt);
+                if (response.status === 401) {
+                    return response;
+                }
+                const data = await response.json();
+                if (data.access_token) {
+                    localStorage.setItem("petvaToken", data.access_token);
+                    localStorage.setItem("petvaUser", "doctor")
+                    setStore({ userType: "doctor" });
+                    setStore({ token: data.access_token });
+                    actions.getDoctorDetail();
+                    history.push("/doctor");
+                }
+            },
+            userGetReservations: async () => {
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try {
+                    const response = await fetch(`${store.baseUrl}api/user/reservations`, opt)
+                    if (response.status !== 200) {
+                        throw new Error("There has been some error in get hours reserved")
+                    }
+                    const data = await response.json();
+                    setStore({ userReservations: data })
+                    return data;
+                } catch (error) {
+                    console.error(error + "There has been an error in get hours reserved")
+                }
+            },
+            userCancelReservation: async (id_reservation) => {
+                const store = getStore();
+                const actions = getActions();
+                const opt = {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try {
+                    const response = await fetch(`${store.baseUrl}api/user/reservations/${id_reservation}/cancel`, opt)
+                    if (response.status !== 200) {
+                        console.error("There has been some error in delete reservation")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    actions.userGetReservations();
+
+                } catch (error) {
+                    console.error("Error: " + error)
+                }
+            },
+            getDoctorDetail: async () => {
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try {
+                    const response = await fetch(`${store.baseUrl}api/doctor/info`, opt)
+                    if (response.status !== 200) {
+                        console.error("There has been some error in get doctor detail")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    setStore({ doctorDetail: data })
+                } catch (error) {
+                    console.error(error);
+                }
             }
         }
-    };
-}
+    }
+};
+
 export default getState;
