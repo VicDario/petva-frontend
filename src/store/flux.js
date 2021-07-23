@@ -788,7 +788,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
             getDoctorReservations: async (clinic_id, doctor_id) => {
-                const actions = getActions();
                 const store = getStore();
                 const opt = {
                     headers: {
