@@ -950,6 +950,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             bookAppointment: async (pet_id, reservation_id, clinic_id, doctor_id) => {
                 const store = getStore();
+                const actions = getActions();
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -971,6 +972,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
                     console.log(data);
                     setStore({ clinicDoctor: data })
+                    actions.getDoctorReservations(clinic_id, doctor_id)
                 } catch (error)
                 {
                     console.error("Error: " + error)
