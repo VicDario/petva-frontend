@@ -8,6 +8,10 @@ const ClinicDoctor = () => {
         actions.getClinicDoctor();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    const handleDelete = (doctor_id) => {
+        console.log(doctor_id);
+        actions.deleteDoctor(doctor_id);
+    };
     return (
         <>
             {
@@ -48,7 +52,7 @@ const ClinicDoctor = () => {
                                                         </div>
                                                     </div>
                                                     <div className="card-footer d-flex justify-content-center">
-                                                    <button type="button" class="btn btn-outline-danger">Eliminar</button>
+                                                        <button type="button" onClick={(e)=>handleDelete(doctor.id)} class="btn btn-outline-danger">Eliminar</button>
                                                     </div>
                                                 </div>
                                             </div>

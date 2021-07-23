@@ -871,7 +871,27 @@ const getState = ({ getStore, getActions, setStore }) => {
                 if (response.status !== 201) throw new Error(response.status, "error");
                 const data = await response.json();
                 return data;
-            }
+            },
+            deleteDoctor: async(doctor_id)=>{
+                const actions= getActions();
+                const store = getStore();
+                const opt = {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                const response = await fetch(`${store.baseUrl}api/clinic/doctor/${doctor_id}`, opt)
+                console.log(response);
+                //if (response.status !== 200) throw new Error(response.status, "error");
+                const data = await response.json();
+                console.log(data);
+                
+                if(data){
+                  actions.getClinicDoctor();
+                }
+                return data;
+            },
 
         }
     };
