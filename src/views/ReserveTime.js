@@ -1,9 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { FaCat, FaDog } from "react-icons/fa";
+import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
+
 
 const Reservetime = () => {
     const { store, actions } = useContext(Context);
+    const history = useHistory();
     const [clinic, setClinic] = useState({
         name: null,
         id: "0"
@@ -61,6 +65,14 @@ const Reservetime = () => {
             setDoctor({ ...doctor, id: null });
             setReservation({ ...reservation, id: null })
             setPet({ ...mascota, id: null })
+            Swal.fire({
+                icon: "success",
+                title: "Cita Agendada con Éxito",
+                text: "Gracias por utilizar petVA",
+                showConfirmButton: false,
+                timer: 1800
+            })
+            history.push("/user")
         }
     }
 
