@@ -1,42 +1,32 @@
-import { useContext } from "react";
+
 import { Link, useHistory } from "react-router-dom";
-import { Context } from "../store/appContext";
+import {FcOvertime} from "react-icons/fc"
+ 
 
 
 const HomeUser = () => {
-    const { store } = useContext(Context);
-    let { token } = store;
+    
+    
     const history = useHistory()
 
     return (
         <> 
         {
-            !!token !== null ?
+            !!localStorage.getItem("petvatoken") !== null ?
                 <div className="container">
                     <div className="text-center my-4">
                         <h2 className="display-1">Bienvenido Usuario</h2>
                     </div>
                     <div className="row">
                         <div className="col-12 col-md-6 d-flex justify-content-center">
-                            <Link to="/user/profile" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                Mis Datos
+                            <Link to="/user/reserve" 
+                            className="btn btn-primary fs-2 fw-bold ">
+                                <span className="fs-1 m-0"><FcOvertime/></span>
+                                <p>Reservar</p>
+                                <p>Hora Veterinaria</p>
                             </Link >
                         </div>
-                        <div className="col-12 col-md-6 text-center">
-                            <button className="btn btn-secondary btn-lg fs-2 my-3  item texto-borde fw-bold ">
-                                Perdidos y Encontrados
-                            </button>
-                        </div>
-                        <div className="col-12 col-md-6 d-flex justify-content-center">
-                            <Link to="/user/pets" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                Mis Mascotas
-                            </Link >
-                        </div>
-                        <div className="col-12 col-md-6 d-flex justify-content-center">
-                            <Link to="/services" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                Servicios
-                            </Link >
-                        </div>
+                       
                     </div>
                 </div>
             :
