@@ -64,7 +64,7 @@ const Reservetime = () => {
         {
 
             actions.bookAppointment(mascota.id, reservation.id, clinic.id, doctor.id);
-            console.log("Mascota añadida");
+            
         }
     }
 
