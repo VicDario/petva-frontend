@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 
 const Userprofiledetail = () => {
     const { actions, store } = useContext(Context);
-    const {token}=store;
     const history = useHistory();
     const [save, setSave] = useState("off");
     const [updates, setUpdates] = useState({

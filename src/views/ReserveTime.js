@@ -1,7 +1,4 @@
-
-import { useContext } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 
 const Reservetime = ()=>{
@@ -11,13 +8,12 @@ const Reservetime = ()=>{
         id : "0"
     });
     const [doctor, setDoctor] = useState({
-        
         id: null
     });
     
     useEffect(()=>{
         actions.getClinicsList();
-        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
     const giveValueClinic = (e)=>{
         setClinic({
