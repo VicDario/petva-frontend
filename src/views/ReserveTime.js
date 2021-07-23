@@ -18,7 +18,11 @@ const Reservetime = () => {
     const [reservation, setReservation] = useState({
         id: null
     });
-    console.log(reservation.id);
+    const [mascota, setPet] = useState({
+        id: null
+
+    });
+
 
     useEffect(() => {
         actions.getMascotasUser();
@@ -40,7 +44,7 @@ const Reservetime = () => {
     const giveValueDoctor = (e) => {
         setDoctor({
             ...doctor,
-            id: e.target.value,
+            id: e.target.value
 
         });
         if (e.target.value !== "0")
@@ -57,10 +61,16 @@ const Reservetime = () => {
         })
     } */
 
-    const postReservation = ()=>{
-        /* actions.bookAppointment(pet_id, reservation_id, clinic.id, doctor.id); */
+    const postReservation = () => {
+        if (mascota.id !== null && mascota.id !== "" && reservation.id !== null && reservation.id !== "" &&
+            clinic.id !== null && clinic.id !== "" && doctor.id !== null && doctor.id !== "")
+        {
+
+            actions.bookAppointment(mascota.id, reservation.id, clinic.id, doctor.id);
+            console.log("Mascota añadida");
+        }
     }
-    
+
 
 
     return (
@@ -68,47 +78,6 @@ const Reservetime = () => {
             <div className="row">
                 <div className="col-12">
                     <h1>RESERVAR HORA MEDICA</h1>
-                </div>
-                <div className="col-12 col-md-8 mx-auto">
-                    <div className="text-center">
-                        <h5>Conoce el id de tus Mascotas</h5>
-                        
-                    </div>
-                    <div>
-                        {
-                            !!store.pets &&
-                                store.pets.length > 0 ?
-                                <div className="d-flex">
-                                    {
-                                        store.pets.map((pet, index) => {
-                                            return (
-                                                <>
-                                                    <div
-                                                        
-                                                        key={index}
-                                                        className="card-title fs-3 me-2 d-flex flex-column border">
-                                                        <span>
-                                                            {pet.name} 
-                                                        </span>
-                                                        <span
-                                                            className="text-center"
-                                                        >{/* {pet.specie === 'cat' ? (<FaCat
-                                                            className="align-top ms-1" />) : <FaDog
-                                                            className="align-top ms-1" />} */}
-                                                            {pet.id}
-                                                        </span>
-
-                                                    </div>
-
-                                                </>
-                                            )
-                                        })
-                                    }
-                                </div>
-                                :
-                                <p>No tienes mascotas inscritas</p>
-                        }
-                    </div>
                 </div>
                 <div className="col-12 col-md-8 mx-auto ">
                     <div>
@@ -202,10 +171,16 @@ const Reservetime = () => {
                                                         key={index}
                                                         value={reservation.id}
                                                     >{reservation.date_start}</li>
+                                                    
+                                                    {/* Button trigger modal */}
                                                     <button
-                                                    onClick={()=>{setReservation({...reservation,id:reservation.id})}}
+                                                        type="button"
+                                                        className="btn btn-primary"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal"
+                                                        onClick={() => { setReservation({ ...reservation, id: reservation.id }) }}
                                                     >
-                                                        Tomar hora
+                                                        Reservar Hora
                                                     </button>
                                                 </>
                                             )
@@ -216,21 +191,111 @@ const Reservetime = () => {
                         </>
                     }
                 </div>
-                {
-                    reservation.id !== null &&
-                    <div className="col-12">
-                    <h3>Confirmar datos</h3>
-                    <div></div>
-                    <div>
-                        <button>
-                            Confirmar Hora
-                        </button>
-                        <button>
-                            Cancelar
-                        </button>
+               
+            </div>
+            {/* Modal Para confirmar Hora */}
+            <div
+                className="modal fade"
+                id="exampleModal"
+                tabIndex={-1}
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+            >
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">
+                                Modal title
+                            </h5>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            />
+                        </div>
+                        <div className="modal-body">
+                            {/* body */}
+                            <div>
+                                <h3>
+                                    Selecciona para que mascota es la consulta veterinaria
+                                </h3>
+                            </div>
+                            <div className="d-flex">
+                                {
+                                    !!store.pets && !!store.doctorReservations && !!store.doctorsList && 
+                                    store.pets.map((pet, index) => {
+                                        return (
+                                            <>
+                                                <div
+
+                                                    key={index}
+                                                    className="card-title fs-3 me-2 d-flex flex-column border">
+                                                    <button
+                                                        onClick={() => { setPet({ ...mascota, id: pet.id, name: pet.name }) }}
+                                                    >
+                                                        {pet.name}
+                                                    </button>
+                                                    <span
+
+                                                        className="text-center"
+                                                    > {pet.specie === 'cat' ? (<FaCat
+                                                        className="align-top ms-1" />) : <FaDog
+                                                        className="align-top ms-1" />}
+
+                                                    </span>
+
+                                                </div>
+
+                                            </>
+                                        )
+                                    })
+                                }
+                            </div>
+                            <div>
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Mascota</th>
+                                            <th scope="col">Veterinario</th>
+                                            <th scope="col">Clinica</th>
+                                            <th scope="col">Hora Inicio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{mascota.id}</td>
+                                            <td>{doctor.id}</td>
+                                            <td>{clinic.id}</td>
+                                            <td>{reservation.date_start}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+                        <div className="modal-footer">
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                                onClick={()=>{setPet({...mascota,id:null})}}
+
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                type="button"
+                                className="btn btn-primary"
+                                onClick={postReservation}
+                                data-bs-dismiss="modal"
+                            >
+                                Confirmar y reservar
+                            </button>
+                        </div>
                     </div>
                 </div>
-                }
             </div>
         </div>
     )
