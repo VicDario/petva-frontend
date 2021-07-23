@@ -10,7 +10,7 @@ const HomeClinic = ()=>{
     return (
         <>
         {
-            !!token !==null ?
+            !!localStorage.getItem("petvaToken") ?
                 (
                     <div className="container">
                         <div className="text-center my-4">

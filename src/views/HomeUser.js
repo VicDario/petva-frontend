@@ -12,7 +12,7 @@ const HomeUser = () => {
     return (
         <> 
         {
-            !!localStorage.getItem("petvatoken") !== null ?
+            !!localStorage.getItem("petvaToken") ?
                 <div className="container">
                     <div className="text-center my-4">
                         <h2 className="display-1">Bienvenido Usuario</h2>
