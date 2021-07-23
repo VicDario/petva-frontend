@@ -28,6 +28,9 @@ import Custom404 from './views/404';
 import Reservetime from './views/ReserveTime';
 import DoctorRegister from './views/DoctorRegister';
 import ClinicDoctor from './views/ClinicDoctor';
+import LoginDoctor from './views/LoginDoctor';
+import HomeDoctor from './views/HomeDoctor';
+import DoctorProfileDetail from './views/DoctorProfileDetail';
 
 function App() {
   return (
@@ -61,6 +64,9 @@ function App() {
           <Route exact path="/user/reserve" component={Reservetime}/>
           <Route exact path="/clinic/doctor/register" component={DoctorRegister}/>
           <Route exact path="/clinic/doctor" component={ClinicDoctor}/>
+          <Route exact path="/doctor/login" component={LoginDoctor}/>
+          <Route exact path="/doctor" component={HomeDoctor}/>
+          <Route exact path="/doctor/profile" component={DoctorProfileDetail}/>
           <Route component={Custom404}/>
         </Switch>
       </BrowserRouter>
