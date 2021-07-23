@@ -14,8 +14,6 @@ const Navbar = () => {
     const history = useHistory();
 
     useEffect(() => {
-
-
         if (localStorage.getItem("petvaToken") !== null) store.token = localStorage.getItem("petvaToken");
         else store.token = false;
         store.userType = localStorage.getItem("petvaUser")
@@ -104,7 +102,7 @@ const Navbar = () => {
                                 </div>
                             </div>
                         </div>
-                        :
+                    :
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
                                 <div className="text-end">

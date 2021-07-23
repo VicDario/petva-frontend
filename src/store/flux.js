@@ -16,7 +16,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             petsWithOwner: null,
             petsInAdoption: null,
             historyFoundationPet: null,
-            lostPets: null
+            lostPets: null,
+            hoursReserved: null,
         },
         actions: {
             registerClinica: async (email, name, address, phone, password) => {
@@ -710,8 +711,26 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
 
                 return "Años: " + edad + "  Meses: " + diferenciaMeses
+            },
+            getHoursReserved: async () => {
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try {
+                    const response = await fetch(`${store.baseUrl}api/clinic/check/reservations`, opt)
+                    if (response.status !== 200) {
+                        throw new Error("There has been some error in get hours reserved")
+                    }
+                    const data = await response.json();
+                    setStore({ hoursReserved: data })
+                    return data;
+                } catch (error) {
+                    console.error(error + "There has been an error in get hours reserved")
+                }
             }
-
         }
     };
 }
