@@ -19,6 +19,14 @@ const HomeUser = () => {
                                     <p>Hora Veterinaria</p>
                                 </Link >
                             </div>
+                            <div className="col-12 col-md-6 d-flex justify-content-center">
+                                <Link to="/user/reservations"
+                                    className="btn btn-primary fs-2 fw-bold ">
+                                    <span className="fs-1 m-0"><FcOvertime /></span>
+                                    <p>Ver y editar</p>
+                                    <p>mis horas veterinarias</p>
+                                </Link >
+                            </div>
 
                         </div>
                     </div>

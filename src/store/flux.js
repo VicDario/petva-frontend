@@ -22,7 +22,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             doctorsList: null,
             clinicDoctor: null,
             doctorReservations: null,
-            doctorDetail:null
+            doctorDetail: null,
+            userReservations: null
         },
         actions: {
             registerClinica: async (email, name, address, phone, password) => {
@@ -164,7 +165,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("There has been some error")
                     }
                     const data = await response.json();
-                    console.log(data);
+                    /* console.log(data); */
                     setStore({ pets: data })
 
                 } catch (error) {
@@ -789,7 +790,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
             getDoctorReservations: async (clinic_id, doctor_id) => {
-                const actions = getActions();
                 const store = getStore();
                 const opt = {
                     headers: {
@@ -945,6 +945,47 @@ const getState = ({ getStore, getActions, setStore }) => {
                     history.push("/doctor");
                 }
             },
+            userGetReservations: async () => {
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try {
+                    const response = await fetch(`${store.baseUrl}api/user/reservations`, opt)
+                    if (response.status !== 200) {
+                        throw new Error("There has been some error in get hours reserved")
+                    }
+                    const data = await response.json();
+                    setStore({ userReservations: data })
+                    return data;
+                } catch (error) {
+                    console.error(error + "There has been an error in get hours reserved")
+                }
+            },
+            userCancelReservation: async (id_reservation) => {
+                const store = getStore();
+                const actions = getActions();
+                const opt = {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try {
+                    const response = await fetch(`${store.baseUrl}api/user/reservations/${id_reservation}/cancel`, opt)
+                    if (response.status !== 200) {
+                        console.error("There has been some error in delete reservation")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    actions.userGetReservations();
+
+                } catch (error) {
+                    console.error("Error: " + error)
+                }
+            },
             getDoctorDetail: async () => {
                 const store = getStore();
                 const opt = {
@@ -963,7 +1004,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 } catch (error) {
                     console.error(error);
                 }
-            },
+            }
         }
     }
 };
