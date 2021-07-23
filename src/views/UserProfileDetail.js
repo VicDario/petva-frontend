@@ -61,8 +61,7 @@ const Userprofiledetail = () => {
         return dato
     }
 
-    let nombre = "asd"
-    console.log("Tu nombre es: "+ validarVacio(nombre));
+  
 
     return (<>
         {

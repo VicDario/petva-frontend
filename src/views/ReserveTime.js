@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { FaCat, FaDog, FaUser } from "react-icons/fa";
+import { FaCat, FaDog } from "react-icons/fa";
 
 const Reservetime = () => {
     const { store, actions } = useContext(Context);
