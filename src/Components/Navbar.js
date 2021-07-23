@@ -110,7 +110,7 @@ const Navbar = () => {
                                         localStorage.getItem("petvaUser") === "normal" &&
                                         <Link
                                             to="/user"
-                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4"
+                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5" style={{width:"60px"}}
                                         >
                                             <AiOutlineHome className="navbar__button--icon" />
                                         </Link>
@@ -118,7 +118,7 @@ const Navbar = () => {
                                         localStorage.getItem("petvaUser") === "foundation" &&
                                         <Link
                                             to="/foundation"
-                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4"
+                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5" style={{width:"60px"}}
                                         >
                                             <AiOutlineHome className="navbar__button--icon" />
                                         </Link>
@@ -126,7 +126,7 @@ const Navbar = () => {
                                         localStorage.getItem("petvaUser") === "clinic" &&
                                         <Link
                                             to="/clinic"
-                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4"
+                                            className="navbar__button text-decoration-none badge rounded-circle bg-dark px-3 py-3 me-1 fs-5" style={{width:"60px"}}
                                         >
                                             <AiOutlineHome className="navbar__button--icon" />
                                         </Link>

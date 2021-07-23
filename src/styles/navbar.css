@@ -4,9 +4,10 @@
   }
 
 .navbar__button--icon {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 .navbar__button {
-  height: 60px
+  height: 60px;
+  
 }

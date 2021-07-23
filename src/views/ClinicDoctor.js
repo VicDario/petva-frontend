@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import LoadingSpiner from "../Components/LoadingSpinner";
+import { Link } from "react-router-dom";
 const ClinicDoctor = () => {
     const { actions, store } = useContext(Context);
 
@@ -8,6 +9,10 @@ const ClinicDoctor = () => {
         actions.getClinicDoctor();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    const handleDelete = (doctor_id) => {
+        console.log(doctor_id);
+        actions.deleteDoctor(doctor_id);
+    };
     return (
         <>
             {
@@ -47,6 +52,9 @@ const ClinicDoctor = () => {
                                                             <span>{doctor.specialty}</span>
                                                         </div>
                                                     </div>
+                                                    <div className="card-footer d-flex justify-content-center">
+                                                        <button type="button" onClick={(e) => handleDelete(doctor.id)} class="btn btn-outline-danger">Eliminar</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         )
@@ -57,6 +65,13 @@ const ClinicDoctor = () => {
                                             </h3>
                                         </div>) : <LoadingSpiner />
                         }
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-12 d-flex justify-content-center">
+                            <Link to="/clinic/doctor/register" className="text-decoration-none badge rounded-pill bg-success p-3 m-1 fs-4">
+                                Registrar un nuevo medico
+                            </Link>
+                        </div>
                     </div>
                 </div>
             }
