@@ -97,6 +97,11 @@ const Navbar = () => {
                                                     Clínica
                                                 </Link>
                                             </li>
+                                            <li>
+                                                <Link className="dropdown-item" to="/doctor/login">
+                                                    Médico
+                                                </Link>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
