@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
+import Swal from "sweetalert2";
+
 
 const UserReservations = () => {
     const { store, actions } = useContext(Context);
@@ -15,6 +17,13 @@ const UserReservations = () => {
         console.log(reserv);
         if(reserv>0 && reserv!==null){
             actions.userCancelReservation(reserv);
+            Swal.fire({
+                icon: "success",
+                title: "Cita Eliminada Con Éxito",
+                text: "Gracias por utilizar petVA",
+                showConfirmButton: false,
+                timer: 1800
+            })
         }
         
     };

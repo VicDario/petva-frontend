@@ -658,8 +658,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     /* const data = await response.json(); */
                     //aqií cargar lista de mascotas perdidas
                     actions.getMascotasUser();
-                    actions.getHistoryUserPet(pet_id);
                     actions.getLostPets();
+                    actions.getHistoryUserPet(pet_id);
+                    actions.getSinglePetFromUser(pet_id);
                 } catch (error) {
                     console.error("There has been an error in report lost")
                 }
@@ -696,8 +697,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     actions.getMascotasUser();
                     actions.getHistoryUserPet(pet_id);
                     actions.getLostPets();
-
-
+                    actions.getSinglePetFromUser(pet_id);
                 } catch (error) {
                     console.error("There has been an error in report founded")
                 }
@@ -1004,7 +1004,68 @@ const getState = ({ getStore, getActions, setStore }) => {
                 } catch (error) {
                     console.error(error);
                 }
-            }
+            },
+            userPutPet : async(name,code_chip,breed,picture,pet_id)=>{
+                const store = getStore()
+                const actions = getActions();
+                const opt = {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        name: name,
+                        code_chip: code_chip,
+                        breed: breed,
+                        picture: picture
+                        
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}`, opt)
+                    if (response.status !== 202)
+                    {
+                        console.error("There is a some error in update pet")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    actions.getSinglePetFromUser(pet_id);
+                    
+                    
+                } catch (error)
+                {
+                    console.error("Error in update" + error)
+                }
+            },
+            userDeletePet: async (pet_id,history) => {
+                const store = getStore();
+                const actions = getActions();
+                const opt = {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}`, opt)
+                    if (response.status !== 203)
+                    {
+                        console.error("There has been some error in delete pet")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    actions.getMascotasUser();
+                    history.push("/user/pets")
+                    
+
+                } catch (error)
+                {
+                    console.error("Error: " + error)
+                }
+            },
         }
     }
 };
