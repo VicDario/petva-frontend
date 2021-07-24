@@ -41,7 +41,7 @@ const AddPet = ({ history }) => {
                 showConfirmButton: false,
                 timer: 1500
             })
-            history.push("/foundation/pets");
+            history.push("/foundation/pets/adoption");
         }
         actions.resetAuxPicture(); // reset aux picture to null
     }
