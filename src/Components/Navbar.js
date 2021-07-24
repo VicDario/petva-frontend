@@ -53,8 +53,14 @@ const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
             <div className="container-fluid ">
+                <div className="d-flex align-items-center">
                 <Link className="text-decoration-none" to="/">
-                    <img className="img-fluid logo" src="/images/logo_cat_small.png" alt="logo" /></Link>
+                    <img className="img-fluid logo" src="/images/logo_cat_small.png" alt="logo" />
+                </Link>
+                    <h2 className="display-5 fst-italic">
+                        PetVA
+                    </h2>
+                </div>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -69,7 +75,16 @@ const Navbar = () => {
                 {
                     localStorage.getItem("petvaToken") === null ?
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
-                            <div className="navbar-nav">
+                            <div className="navbar-nav ">
+                                <div className="d-flex align-items-center border-end border-4 border-dark">
+                                    <h3 className="me-2">
+                                        Nosotros
+                                    </h3>
+                                    <h3 className="me-2">
+                                        Contáctanos
+                                    </h3>
+                                    
+                                </div>
                                 <div className="text-end" >
                                     <Link to="/register" className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">
                                         Registrarse <MdPets className="navbar__button--icon" />
@@ -115,6 +130,14 @@ const Navbar = () => {
                         :
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
+                                <div>
+                                    <h2>
+                                        Nosotros
+                                    </h2>
+                                    <h2>
+                                        Contáctanos
+                                    </h2>
+                                </div>
                                 <div className="text-end">
                                     {
                                         localStorage.getItem("petvaUser") === "normal" &&
