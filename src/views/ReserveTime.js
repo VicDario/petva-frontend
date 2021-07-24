@@ -9,12 +9,12 @@ const Reservetime = () => {
     const { store, actions } = useContext(Context);
     const history = useHistory();
     const [clinic, setClinic] = useState({
-        name: null,
-        id: "0"
+        id: "0",
+        aux: null
     });
     const [doctor, setDoctor] = useState({
 
-        id: null
+        id: "0"
     });
     const [reservation, setReservation] = useState({
         id: null
@@ -22,10 +22,13 @@ const Reservetime = () => {
     const [mascota, setPet] = useState({
         id: null
     });
+    if(clinic.id===0){
+        setDoctor({id:"0"});
+    }
     useEffect(() => {
         actions.getMascotasUser();
         actions.getClinicsList();
-        if (clinic.id !== "0" || doctor.id !== "0")
+        if (clinic.id !== "0" && doctor.id !== "0")
         {
             if (clinic.id !== null && doctor.id !== null)
             {
@@ -33,16 +36,28 @@ const Reservetime = () => {
                 actions.getDoctorReservations(clinic.id, doctor.id)
             }
         }
+        if(clinic.aux !== clinic.id){
+            if (clinic.id !== null && doctor.id !== null && clinic.id !== "0" && doctor.id !== "0")
+            {
+
+                actions.getDoctorReservations(clinic.id, doctor.id)
+            }
+        }
+        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const giveValueClinic = (e) => {
         setClinic({
             ...clinic,
             id: e.target.value,
+            aux: e.target.value
         });
         if (e.target.value !== "0")
         {
             actions.getDoctorsList(e.target.value);
+            if(doctor.id!=="0" && doctor.id!==null){
+                actions.getDoctorReservations(clinic.id, e.target.value);
+            }
         }
     }
     const giveValueDoctor = (e) => {
@@ -56,6 +71,7 @@ const Reservetime = () => {
         }
 
     }
+    
     const postReservation = () => {
         if (mascota.id !== null && mascota.id !== "" && reservation.id !== null && reservation.id !== "" &&
             clinic.id !== null && clinic.id !== "" && doctor.id !== null && doctor.id !== "")
@@ -131,7 +147,7 @@ const Reservetime = () => {
 
 
                                         >
-                                            <option value="null">Veterinarios</option>
+                                            <option value="0">Veterinarios</option>
                                             {store.doctorsList.map((doctor, index) => {
                                                 return (
                                                     <option
@@ -157,7 +173,7 @@ const Reservetime = () => {
                 <div className="col-md-8 mx-auto col-12">
 
                     {
-                        !!store.doctorReservations && clinic.id !== "0" && doctor.id !== null &&
+                        !!store.doctorReservations && clinic.id !== "0" && doctor.id !== "0" &&
                         <>
                             <div>
                                 <h4>
@@ -167,6 +183,7 @@ const Reservetime = () => {
                             <div>
                                 <ul className="list-group my-3">
                                     {
+                                        store.doctorReservations.length > 0 && doctor.id >0 ?
                                         store.doctorReservations.map((reservation, index) => {
                                             return (
                                                 <>
@@ -190,6 +207,8 @@ const Reservetime = () => {
                                                 </>
                                             )
                                         })
+                                        :
+                                        <p>No Hay Horas Disponibles </p>
                                     }
                                 </ul>
                             </div>
