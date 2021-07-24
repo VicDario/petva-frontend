@@ -49,6 +49,12 @@ const Navbar = () => {
 
         }
     }
+    const toRegister = ()=>{
+        history.push("/register")
+    }
+    const toServices = ()=>{
+        history.push("/services")
+    }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
@@ -76,30 +82,38 @@ const Navbar = () => {
                     localStorage.getItem("petvaToken") === null ?
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                             <div className="navbar-nav ">
-                                <div className="d-flex align-items-center border-end border-4 border-dark">
-                                    <h3 className="me-2">
-                                        Nosotros
-                                    </h3>
-                                    <h3 className="me-2">
+                                <div className="d-flex align-items-center border-end border-4 border-dark me-2">
+                                    <h4 className="me-2"
+                                    onClick={toServices}
+                                    >
+                                        Servicios
+                                    </h4>
+                                    <h4 className="me-2">
                                         Contáctanos
-                                    </h3>
+                                    </h4>
                                     
                                 </div>
-                                <div className="text-end" >
-                                    <Link to="/register" className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">
+                                <div className="text-end d-flex align-items-center m-2" >
+                                    <button
+                                        className="text-dark fs-5 text-decoration-none badge rounded-pill bg-light"
+                                        onClick={toRegister}
+                                    >
+                                    {/* <Link to="/register" className="text-decoration-none">
                                         Registrarse <MdPets className="navbar__button--icon" />
-                                    </Link>
+                                    </Link> */}
+                                        Registrarse
+                                    </button>
 
                                 </div>
-                                <div className="text-end">
+                                <div className="text-end d-flex align-items-center">
                                     <div className="dropdown">
                                         <button
-                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4 dropdown-toggle"
+                                            className="text-dark fs-5 text-decoration-none badge rounded-pill bg-light dropdown-toggle"
                                             id="dropdownMenuLink"
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         >
-                                            Iniciar sesión <IoLogInOutline className="navbar__button--icon" />
+                                            Iniciar sesión {/* <IoLogInOutline className="navbar__button--icon" /> */}
                                         </button>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <li>
@@ -130,13 +144,16 @@ const Navbar = () => {
                         :
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
-                                <div>
-                                    <h2>
-                                        Nosotros
-                                    </h2>
-                                    <h2>
+                                <div className="d-flex align-items-center border-end border-4 border-dark me-2">
+                                    <h4 className="me-2"
+                                        onClick={toServices}
+                                    >
+                                        Servicios
+                                    </h4>
+                                    <h4 className="me-2">
                                         Contáctanos
-                                    </h2>
+                                    </h4>
+
                                 </div>
                                 <div className="text-end">
                                     {
