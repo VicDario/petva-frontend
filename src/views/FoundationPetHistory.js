@@ -180,7 +180,7 @@ const FoundationPetHistory = () => {
                             </h2>
                         </div>
                         {!!store.historyFoundationPet &&
-                            store.historyFoundationPet.History.vaccines.map((vacuna, index) => {
+                            store.historyFoundationPet.vaccines.map((vacuna, index) => {
                                 return (
                                     <>
                                         <div className="accordion" id="Vacuna">
@@ -244,7 +244,7 @@ const FoundationPetHistory = () => {
                             </h2>
                         </div>
                         {!!store.historyFoundationPet &&
-                            store.historyFoundationPet.History.diagnostics.map((diag, index) => {
+                            store.historyFoundationPet.diagnostics.map((diag, index) => {
                                 return (
                                     <>
                                         <div className="accordion" id="accordionExample">
@@ -316,7 +316,7 @@ const FoundationPetHistory = () => {
                             </h2>
                         </div>
                         {!!store.historyFoundationPet &&
-                            store.historyFoundationPet.History.surgeries.map((cirugia, index) => {
+                            store.historyFoundationPet.surgeries.map((cirugia, index) => {
                                 return (
                                     <>
                                         <div className="accordion" id="Cirugia">
