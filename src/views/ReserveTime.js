@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { FaCat, FaDog } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 
 const Reservetime = () => {
@@ -22,8 +22,9 @@ const Reservetime = () => {
     const [mascota, setPet] = useState({
         id: null
     });
-    if(clinic.id===0){
-        setDoctor({id:"0"});
+    if (clinic.id === 0)
+    {
+        setDoctor({ id: "0" });
     }
     useEffect(() => {
         actions.getMascotasUser();
@@ -36,14 +37,15 @@ const Reservetime = () => {
                 actions.getDoctorReservations(clinic.id, doctor.id)
             }
         }
-        if(clinic.aux !== clinic.id){
+        if (clinic.aux !== clinic.id)
+        {
             if (clinic.id !== null && doctor.id !== null && clinic.id !== "0" && doctor.id !== "0")
             {
 
                 actions.getDoctorReservations(clinic.id, doctor.id)
             }
         }
-        
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const giveValueClinic = (e) => {
@@ -55,7 +57,8 @@ const Reservetime = () => {
         if (e.target.value !== "0")
         {
             actions.getDoctorsList(e.target.value);
-            if(doctor.id!=="0" && doctor.id!==null){
+            if (doctor.id !== "0" && doctor.id !== null)
+            {
                 actions.getDoctorReservations(clinic.id, e.target.value);
             }
         }
@@ -71,7 +74,7 @@ const Reservetime = () => {
         }
 
     }
-    
+
     const postReservation = () => {
         if (mascota.id !== null && mascota.id !== "" && reservation.id !== null && reservation.id !== "" &&
             clinic.id !== null && clinic.id !== "" && doctor.id !== null && doctor.id !== "")
@@ -183,32 +186,32 @@ const Reservetime = () => {
                             <div>
                                 <ul className="list-group my-3">
                                     {
-                                        store.doctorReservations.length > 0 && doctor.id >0 ?
-                                        store.doctorReservations.map((reservation, index) => {
-                                            return (
-                                                <>
-                                                    <li
-                                                        key={index}
-                                                        className="list-group-item "
-                                                        aria-current="true"
-                                                        value={reservation.id}
-                                                    >{reservation.date_start}
-                                                    </li>
-                                                    <button
+                                        store.doctorReservations.length > 0 && doctor.id > 0 ?
+                                            store.doctorReservations.map((reservation, index) => {
+                                                return (
+                                                    <>
+                                                        <li
+                                                            key={index}
+                                                            className="list-group-item "
+                                                            aria-current="true"
+                                                            value={reservation.id}
+                                                        >{reservation.date_start}
+                                                        </li>
+                                                        <button
 
-                                                        type="button"
-                                                        className="btn btn-primary"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal"
-                                                        onClick={() => { setReservation({ ...reservation, id: reservation.id }) }}
-                                                    >
-                                                        Reservar Hora
-                                                    </button>
-                                                </>
-                                            )
-                                        })
-                                        :
-                                        <p>No Hay Horas Disponibles </p>
+                                                            type="button"
+                                                            className="btn btn-primary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModal"
+                                                            onClick={() => { setReservation({ ...reservation, id: reservation.id }) }}
+                                                        >
+                                                            Reservar Hora
+                                                        </button>
+                                                    </>
+                                                )
+                                            })
+                                            :
+                                            <p>No Hay Horas Disponibles </p>
                                     }
                                 </ul>
                             </div>
@@ -217,7 +220,7 @@ const Reservetime = () => {
                 </div>
 
             </div>
-            {/* Modal Para confirmar Hora */}
+            
             <div
                 className="modal fade"
                 id="exampleModal"
@@ -229,7 +232,7 @@ const Reservetime = () => {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">
-                                Modal title
+                                Reservar Hora
                             </h5>
                             <button
                                 type="button"
@@ -238,8 +241,9 @@ const Reservetime = () => {
                                 aria-label="Close"
                             />
                         </div>
+
                         <div className="modal-body">
-                            {/* body */}
+
                             <div>
                                 <h3>
                                     Selecciona para que mascota es la consulta veterinaria
@@ -250,9 +254,9 @@ const Reservetime = () => {
                                     !!store.pets && !!store.doctorReservations && !!store.doctorsList && clinic.id !== 0 &&
                                     store.pets.map((pet, index) => {
                                         return (
-                                            <>
+                                            <>{
+                                                pet.state === "owned" &&
                                                 <div
-
                                                     key={index}
                                                     className="card-title fs-3 me-2 d-flex flex-column border">
                                                     <button
@@ -261,16 +265,13 @@ const Reservetime = () => {
                                                         {pet.name}
                                                     </button>
                                                     <span
-
                                                         className="text-center"
                                                     > {pet.specie === 'cat' ? (<FaCat
                                                         className="align-top ms-1" />) : <FaDog
                                                         className="align-top ms-1" />}
-
                                                     </span>
-
                                                 </div>
-
+                                            }
                                             </>
                                         )
                                     })
@@ -296,28 +297,28 @@ const Reservetime = () => {
                                     </tbody>
                                 </table>
                             </div>
-
-
                         </div>
-                        <div className="modal-footer">
-                            <button
-                                type="button"
-                                className="btn btn-secondary"
-                                data-bs-dismiss="modal"
-                                onClick={() => { setPet({ ...mascota, id: null }) }}
-
-                            >
-                                Cancelar
-                            </button>
-                            <button
-                                type="button"
-                                className="btn btn-primary"
-                                onClick={postReservation}
-                                data-bs-dismiss="modal"
-                            >
-                                Confirmar y reservar
-                            </button>
-                        </div>
+                        {
+                            !!store.pets && store.pets.lenght > 0 &&
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                    onClick={() => { setPet({ ...mascota, id: null }) }}
+                                >
+                                    Cancelar
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-primary"
+                                    onClick={postReservation}
+                                    data-bs-dismiss="modal"
+                                >
+                                    Confirmar y reservar
+                                </button>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
