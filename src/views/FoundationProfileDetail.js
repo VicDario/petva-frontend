@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useEffect } from "react";
-import { MdPets } from "react-icons/md"
+import {  MdPets, MdTrackChanges } from "react-icons/md"
 import { FaCat, FaDog, FaUser } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
+import { IoLocationSharp } from "react-icons/io5";
 
 const FoundationProfileDetail = () => {
     const { actions, store } = useContext(Context);
@@ -13,9 +14,10 @@ const FoundationProfileDetail = () => {
     const [updates, setUpdates] = useState({
         email: null,
         name: null,
-        lastname: null,
+        address: null,
         phone: null,
-        password: null
+        password: null,
+
     });
 
     useEffect(() => {
@@ -43,8 +45,8 @@ const FoundationProfileDetail = () => {
         )
         {
 
-            actions.updateUserDetail(updates.email, updates.name, updates.lastname, updates.phone, 
-                validarVacio(store.auxPicture), validarVacio(updates.password));
+            actions.foundationPutInfo(updates.name, updates.address, updates.phone, updates.email,
+                validarVacio(store.auxPicture), validarVacio(updates.password))
 
             Swal.fire({
                 icon: "success",
@@ -93,14 +95,24 @@ const FoundationProfileDetail = () => {
 
                                             </div>
                                             <div className="my-2">
+                                                <div
+
+                                                    className="fs-5 text-secondary me-3">
+                                                    <span
+                                                        className="me-1 align-top">
+                                                        <IoLocationSharp />
+                                                    </span>{store.foundationDetail.address}
+                                                </div>
                                                 <span
-                                                    className="text-white me-3">
-                                                    {store.foundationDetail.name}
-                                                </span>
-                                                <span
-                                                    className="text-secondary align-top"><MdPets /></span><span
+                                                    className="fs-3 text-secondary align-top"><MdPets /></span><span
                                                         className="text-secondary align-middle">{!!store.pets.length > 0 ?
                                                             store.pets.length
+                                                            : "0"}
+                                                </span>
+                                                <span
+                                                    className="fs-3 text-secondary align-top ms-2"><MdTrackChanges /></span><span
+                                                        className="text-secondary align-middle">{!!store.petsWithOwner.length > 0 ?
+                                                            store.petsWithOwner.length
                                                             : "0"}
                                                 </span>
                                             </div>
@@ -134,12 +146,38 @@ const FoundationProfileDetail = () => {
                                                         <div
                                                             className="m-2  p-1 rounded text-center bg-secondary text-white">
                                                             <h4>
-                                                                Mascotas ({!!store.pets.length > 0 ? store.pets.length : "0"})
+                                                                Mascotas en Adopción
                                                             </h4>
                                                             <div>
                                                                 {
                                                                     !!store.pets.length > 0 ?
                                                                         store.pets.map((pet, index) => {
+                                                                            return (
+                                                                                <span
+                                                                                    key={index}
+                                                                                    className="card-title fs-3 ">{pet.specie === 'cat' ? <FaCat
+                                                                                        className="align-top ms-1" /> : <FaDog
+                                                                                        className="align-top ms-1" />}
+                                                                                </span>
+                                                                            )
+                                                                        })
+                                                                        :
+                                                                        <p>No tienes mascotas inscritas</p>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        className="col-8 mx-auto">
+                                                        <div
+                                                            className="m-2  p-1 rounded text-center bg-secondary text-white">
+                                                            <h4>
+                                                                Mascotas en seguimiento
+                                                            </h4>
+                                                            <div>
+                                                                {
+                                                                    !!store.petsWithOwner.length > 0 ?
+                                                                        store.petsWithOwner.map((pet, index) => {
                                                                             return (
                                                                                 <span
                                                                                     key={index}
@@ -204,13 +242,13 @@ const FoundationProfileDetail = () => {
                                                 </div>
                                                 <div className="">
                                                     <label className="form-label" htmlFor="">
-                                                        Apellido
+                                                        Dirección
                                                     </label>
                                                     <input
                                                         className="form-control text-white bg-dark"
                                                         type="text"
-                                                        placeholder="Apellido"
-                                                        onChange={(e) => { setUpdates({ ...updates, lastname: e.target.value }) }}
+                                                        placeholder="Direccion"
+                                                        onChange={(e) => { setUpdates({ ...updates, address: e.target.value }) }}
                                                     />
                                                 </div>
                                                 <div
