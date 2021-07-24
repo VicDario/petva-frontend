@@ -298,8 +298,6 @@ const Reservetime = () => {
                                 </table>
                             </div>
                         </div>
-                        {
-                            !!store.pets && store.pets.lenght > 0 &&
                             <div className="modal-footer">
                                 <button
                                     type="button"
@@ -318,7 +316,6 @@ const Reservetime = () => {
                                     Confirmar y reservar
                                 </button>
                             </div>
-                        }
                     </div>
                 </div>
             </div>
