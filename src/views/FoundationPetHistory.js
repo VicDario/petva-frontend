@@ -113,6 +113,12 @@ const FoundationPetHistory = () => {
             alert("Debes llenar todos los campos para agregar cirugía");
         }
     };
+    const formatDateB = (date) => {
+
+        let event = new Date(date)
+        event = event.toLocaleDateString()
+        return event
+    }
 
     return (
         <>
@@ -209,13 +215,25 @@ const FoundationPetHistory = () => {
                                                                 <ul className="list-group mt-1">
                                                                     <li className="list-group-item">
                                                                         <strong>Fecha:</strong>{" "}
-                                                                        {vacuna.date}
+                                                                        {formatDateB(vacuna.date)}
                                                                     </li>
                                                                     <li className="list-group-item">
                                                                         <strong>
                                                                             Laboratorio:
                                                                         </strong>{" "}
                                                                         {vacuna.laboratory}
+                                                                    </li>
+                                                                    <li className="list-group-item">
+                                                                        <strong>
+                                                                            Lote:
+                                                                        </strong>{" "}
+                                                                        {vacuna.lot}
+                                                                    </li>
+                                                                    <li className="list-group-item">
+                                                                        <strong>
+                                                                            Lote:
+                                                                        </strong>{" "}
+                                                                        {vacuna.name}
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -275,7 +293,7 @@ const FoundationPetHistory = () => {
                                                                         <strong>
                                                                             Fecha Consulta:
                                                                         </strong>{" "}
-                                                                        {diag.date}
+                                                                        {formatDateB(diag.date)}
                                                                     </li>
                                                                     <li className="list-group-item">
                                                                         <strong>
@@ -345,11 +363,11 @@ const FoundationPetHistory = () => {
                                                                 <ul className="list-group mt-1">
                                                                     <li className="list-group-item">
                                                                         <strong>Fecha:</strong>{" "}
-                                                                        {cirugia.date}
+                                                                        {formatDateB(cirugia.date)}
                                                                     </li>
                                                                     <li className="list-group-item">
                                                                         <strong>
-                                                                            Laboratorio:
+                                                                            Descripción:
                                                                         </strong>{" "}
                                                                         {cirugia.description}
                                                                     </li>
