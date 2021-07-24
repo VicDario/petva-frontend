@@ -381,7 +381,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("there is some error in transfer a pet")
                     }
 
-                    history.push("/foundation/pets")
+                    history.push("/foundation/pets/tracking")
                 } catch (error) {
                     console.error("the has been some error in transfer")
                 }
