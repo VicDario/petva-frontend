@@ -87,11 +87,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const data = await response.json();
                 /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
                 if (data.access_token) {
+                    actions.getUserDetail();
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "normal")
                     setStore({ userType: "normal" });
                     setStore({ token: data.access_token });
-                    actions.getUserDetail();
                     history.push("/user");
                 }
 
@@ -116,11 +116,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const data = await response.json();
                 if (data.access_token) {
+                    actions.getFoundationDetail();
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "foundation")
                     setStore({ userType: "foundation" });
                     setStore({ token: data.access_token });
-                    actions.getFoundationDetail();
                     history.push("/foundation");
                 }
             },
@@ -144,11 +144,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const data = await response.json();
                 if (data.access_token) {
+                    actions.getClinicDetail();
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "clinic")
                     setStore({ userType: "clinic" });
                     setStore({ token: data.access_token });
-                    actions.getClinicDetail();
                     history.push("/clinic");
                 }
             },
@@ -955,11 +955,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const data = await response.json();
                 if (data.access_token) {
+                    actions.getDoctorDetail();
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "doctor")
                     setStore({ userType: "doctor" });
                     setStore({ token: data.access_token });
-                    actions.getDoctorDetail();
                     history.push("/doctor");
                 }
             },

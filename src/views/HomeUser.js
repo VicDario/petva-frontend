@@ -1,15 +1,21 @@
 import { Link, useHistory } from "react-router-dom";
 import { FcOvertime } from "react-icons/fc"
+import { useContext } from "react";
+import { Context } from "../store/appContext";
 const HomeUser = () => {
-    const history = useHistory()
+    const history = useHistory();
+    const {store} = useContext(Context);
     return (
         <>
             {
                 !!localStorage.getItem("petvaToken") ?
                     <div className="container">
+                        {
+                            !!store.userDetail &&
                         <div className="text-center my-4">
-                            <h2 className="display-1">Bienvenido Usuario</h2>
+                            <h2 className="display-1">Bienvenido {store.userDetail.name}</h2>
                         </div>
+                        }
                         <div className="row">
                             <div className="col-12 col-md-6 d-flex justify-content-center">
                                 <Link to="/user/reserve"
