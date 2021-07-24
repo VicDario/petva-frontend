@@ -918,6 +918,24 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 return data;
             },
+            changeReservation: async (reservation_id, status) => {
+                ///clinic/reservations/<int:id_reservation>/change
+                const store = getStore();
+                const opt = {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        status,
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                const response = await fetch(`${store.baseUrl}api/clinic/reservations/${reservation_id}/change`, opt)
+                const data = await response.json();
+                console.log(data);
+                return data;
+            },
             loginDoctor: async (email, password, history) => {
                 const store = getStore();
                 const actions = getActions();

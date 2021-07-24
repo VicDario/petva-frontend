@@ -50,6 +50,7 @@ function App() {
           <Route exact path="/user/pets/add" component={AddPet}/>
           <Route exact path="/user/pet/history/:pet_id" component={UserPetHistory}/>
           <Route exact path="/user/profile" component={UserProfileDetail} />
+          <Route exact path="/user/reserve" component={Reservetime}/>
           <Route exact path="/foundation/login" component={LoginFoundation}/>
           <Route exact path="/foundation" component={HomeFoundation}/>
           <Route exact path="/foundation/profile" component={FoundationProfileDetail} />
@@ -62,7 +63,6 @@ function App() {
           <Route exact path="/clinic" component={HomeClinic}/>
           <Route exact path="/clinic/calendar" component={ClinicCalendar} />
           <Route exact path="/clinic/profile" component={ClinicProfileDetail}/>
-          <Route exact path="/user/reserve" component={Reservetime}/>
           <Route exact path="/clinic/doctor/register" component={DoctorRegister}/>
           <Route exact path="/clinic/doctor" component={ClinicDoctor}/>
           <Route exact path="/doctor/login" component={LoginDoctor}/>
