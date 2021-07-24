@@ -23,7 +23,8 @@ const Navbar = () => {
         } else if (store.userType === "foundation")
         {
             actions.getFoundationDetail();
-        } else if (store.userType === "clinic"){
+        } else if (store.userType === "clinic")
+        {
             actions.getClinicDetail();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,14 +43,30 @@ const Navbar = () => {
         {
             history.push("/clinic/profile");
 
+        } else if (store.userType === "doctor")
+        {
+            history.push("/doctor/profile");
+
         }
+    }
+    const toRegister = ()=>{
+        history.push("/register")
+    }
+    const toServices = ()=>{
+        history.push("/services")
     }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
             <div className="container-fluid ">
+                <div className="d-flex align-items-center">
                 <Link className="text-decoration-none" to="/">
-                    <img className="img-fluid logo" src="/images/logo_cat_small.png" alt="logo" /></Link>
+                    <img className="img-fluid logo" src="/images/logo_cat_small.png" alt="logo" />
+                </Link>
+                    <h2 className="display-5 fst-italic">
+                        PetVA
+                    </h2>
+                </div>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -64,22 +81,39 @@ const Navbar = () => {
                 {
                     localStorage.getItem("petvaToken") === null ?
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
-                            <div className="navbar-nav">
-                                <div className="text-end" >
-                                    <Link to="/register" className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4">
+                            <div className="navbar-nav ">
+                                <div className="d-flex align-items-center border-end border-4 border-dark me-2">
+                                    <h4 className="me-2"
+                                    onClick={toServices}
+                                    >
+                                        Servicios
+                                    </h4>
+                                    <h4 className="me-2">
+                                        Contáctanos
+                                    </h4>
+                                    
+                                </div>
+                                <div className="text-end d-flex align-items-center m-2" >
+                                    <button
+                                        className="text-dark fs-5 text-decoration-none badge rounded-pill bg-light"
+                                        onClick={toRegister}
+                                    >
+                                    {/* <Link to="/register" className="text-decoration-none">
                                         Registrarse <MdPets className="navbar__button--icon" />
-                                    </Link>
+                                    </Link> */}
+                                        Registrarse
+                                    </button>
 
                                 </div>
-                                <div className="text-end">
+                                <div className="text-end d-flex align-items-center">
                                     <div className="dropdown">
                                         <button
-                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 m-1 fs-4 dropdown-toggle"
+                                            className="text-dark fs-5 text-decoration-none badge rounded-pill bg-light dropdown-toggle"
                                             id="dropdownMenuLink"
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         >
-                                            Iniciar sesión <IoLogInOutline className="navbar__button--icon" />
+                                            Iniciar sesión {/* <IoLogInOutline className="navbar__button--icon" /> */}
                                         </button>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <li>
@@ -107,15 +141,27 @@ const Navbar = () => {
                                 </div>
                             </div>
                         </div>
-                    :
+                        :
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
+                                <div className="d-flex align-items-center border-end border-4 border-dark me-2">
+                                    <h4 className="me-2"
+                                        onClick={toServices}
+                                    >
+                                        Servicios
+                                    </h4>
+                                    <h4 className="me-2">
+                                        Contáctanos
+                                    </h4>
+
+                                </div>
                                 <div className="text-end">
                                     {
                                         localStorage.getItem("petvaUser") === "normal" &&
                                         <Link
                                             to="/user"
-                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5" style={{width:"60px"}}
+                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5"
+                                            style={{ width: "60px" }}
                                         >
                                             <AiOutlineHome className="navbar__button--icon" />
                                         </Link>
@@ -123,7 +169,8 @@ const Navbar = () => {
                                         localStorage.getItem("petvaUser") === "foundation" &&
                                         <Link
                                             to="/foundation"
-                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5" style={{width:"60px"}}
+                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5"
+                                            style={{ width: "60px" }}
                                         >
                                             <AiOutlineHome className="navbar__button--icon" />
                                         </Link>
@@ -131,7 +178,17 @@ const Navbar = () => {
                                         localStorage.getItem("petvaUser") === "clinic" &&
                                         <Link
                                             to="/clinic"
-                                            className="navbar__button text-decoration-none badge rounded-circle bg-dark px-3 py-3 me-1 fs-5" style={{width:"60px"}}
+                                            className="navbar__button text-decoration-none badge rounded-circle bg-dark px-3 py-3 me-1 fs-5"
+                                            style={{ width: "60px" }}
+                                        >
+                                            <AiOutlineHome className="navbar__button--icon" />
+                                        </Link>
+                                    }{
+                                        localStorage.getItem("petvaUser") === "doctor" &&
+                                        <Link
+                                            to="/doctor"
+                                            className="navbar__button text-decoration-none badge rounded-circle bg-dark px-3 py-3 me-1 fs-5"
+                                            style={{ width: "60px" }}
                                         >
                                             <AiOutlineHome className="navbar__button--icon" />
                                         </Link>
@@ -177,6 +234,16 @@ const Navbar = () => {
 
                                             />
                                         }
+                                        {
+                                            store.userType === "doctor" &&
+                                            !!store.doctorDetail &&
+                                            <Avatar
+                                                alt={store.doctorDetail.name}
+                                                src={store.doctorDetail.picture}
+                                                sx={{ width: 60, height: 60 }}
+
+                                            />
+                                        }
                                     </span>
                                     <ul className="dropdown-menu dropdown-menu-left " aria-labelledby="dropdownMenuButton1">
 
@@ -206,6 +273,16 @@ const Navbar = () => {
                                                     <Avatar
                                                         alt={store.clinicDetail.name}
                                                         src={store.clinicDetail.picture}
+                                                        sx={{ width: 45, height: 45 }}
+
+                                                    />
+                                                }
+                                                {
+                                                    store.userType === "doctor" &&
+                                                    !!store.doctorDetail &&
+                                                    <Avatar
+                                                        alt={store.doctorDetail.name}
+                                                        src={store.doctorDetail.picture}
                                                         sx={{ width: 45, height: 45 }}
 
                                                     />
@@ -241,10 +318,22 @@ const Navbar = () => {
                                                     !!store.clinicDetail &&
                                                     <>
                                                         <h5>
-                                                            {store.clinicDetail.name} 
+                                                            {store.clinicDetail.name}
                                                         </h5>
                                                         <span>
                                                             {store.clinicDetail.email}
+                                                        </span>
+                                                    </>
+                                                }
+                                                {
+                                                    store.userType === "doctor" &&
+                                                    !!store.doctorDetail &&
+                                                    <>
+                                                        <h5>
+                                                            {store.doctorDetail.name}
+                                                        </h5>
+                                                        <span>
+                                                            {store.doctorDetail.email}
                                                         </span>
                                                     </>
                                                 }
@@ -254,13 +343,45 @@ const Navbar = () => {
                                                     Gestionar cuenta
                                                 </button>
                                             </div>
-                                            <div className="row border text-center">
-                                                <Link
-                                                    to="/user/pets"
-                                                    className=""
-                                                >
-                                                    Mis Mascotas
-                                                </Link>
+                                            <div className="row text-center">
+                                                {
+
+                                                    store.userType === "foundation" &&
+                                                    <>
+                                                        <div className="">
+                                                            <Link
+                                                                to="/foundation/pets/adoption"
+                                                                className=" rounded-pill  text-dark"
+                                                            >
+                                                                Mascotas En Adopción
+                                                            </Link>
+                                                        </div>
+                                                        <div>
+                                                            <Link
+                                                                to="/foundation/pets/tracking"
+                                                                className=" rounded-pill  text-dark"
+                                                            >
+                                                                Mascotas Con dueño
+                                                            </Link>
+                                                        </div>
+                                                    </>
+                                                }
+                                                {
+
+                                                    store.userType === "normal" &&
+                                                    <>
+                                                        <div className="">
+                                                            <Link
+                                                                to="/user/pets"
+                                                                className=" rounded-pill  text-dark"
+                                                            >
+                                                                Mis Mascotas
+                                                            </Link>
+                                                        </div>
+                                                        
+                                                    </>
+                                                }
+
                                             </div>
                                             <div className="row border text-center my-1">
                                                 <Link

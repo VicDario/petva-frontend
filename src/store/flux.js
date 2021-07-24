@@ -381,7 +381,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("there is some error in transfer a pet")
                     }
 
-                    history.push("/foundation/pets")
+                    history.push("/foundation/pets/tracking")
                 } catch (error) {
                     console.error("the has been some error in transfer")
                 }
@@ -1064,6 +1064,42 @@ const getState = ({ getStore, getActions, setStore }) => {
                 } catch (error)
                 {
                     console.error("Error: " + error)
+                }
+            },
+            foundationPutInfo: async (name, address, phone, email, picture, password) => {
+                const store = getStore()
+                const actions = getActions();
+                const opt = {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        name: name,
+                        address: address,
+                        phone: phone,
+                        email:email,
+                        picture: picture,
+                        password: password
+
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/foundation/info`, opt)
+                    if (response.status !== 202)
+                    {
+                        console.error("There is a some error in update pet")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    actions.getFoundationDetail();
+
+
+                } catch (error)
+                {
+                    console.error("Error in update" + error)
                 }
             },
         }
