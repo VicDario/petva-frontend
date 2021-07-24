@@ -3,9 +3,9 @@ import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 
 import { AiOutlineHome } from 'react-icons/ai';
-import { IoLogInOutline } from 'react-icons/io5';
-import { MdPets } from "react-icons/md";
 import { Avatar } from "@material-ui/core";
+//import { IoLogInOutline } from 'react-icons/io5';
+//import { MdPets } from "react-icons/md";
 
 
 const Navbar = () => {
