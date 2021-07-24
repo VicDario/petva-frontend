@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { FaCat, FaDog } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 
 const Reservetime = () => {
