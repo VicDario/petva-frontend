@@ -17,29 +17,24 @@ const Navbar = () => {
         if (localStorage.getItem("petvaToken") !== null) store.token = localStorage.getItem("petvaToken");
         else store.token = false;
         store.userType = localStorage.getItem("petvaUser")
-        if (store.userType === "normal")
-        {
+        if (store.userType === "normal") {
             actions.getUserDetail();
-        } else if (store.userType === "foundation")
-        {
+        } else if (store.userType === "foundation") {
             actions.getFoundationDetail();
-        } else if (store.userType === "clinic"){
+        } else if (store.userType === "clinic") {
             actions.getClinicDetail();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); //Si exite token recupera la sesion
 
     const toUserDetails = () => {
-        if (store.userType === "normal")
-        {
+        if (store.userType === "normal") {
 
             history.push("/user/profile");
-        } else if (store.userType === "foundation")
-        {
+        } else if (store.userType === "foundation") {
             history.push("/foundation/profile");
 
-        } else if (store.userType === "clinic")
-        {
+        } else if (store.userType === "clinic") {
             history.push("/clinic/profile");
 
         }
@@ -107,7 +102,7 @@ const Navbar = () => {
                                 </div>
                             </div>
                         </div>
-                    :
+                        :
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
                                 <div className="text-end">
@@ -115,7 +110,7 @@ const Navbar = () => {
                                         localStorage.getItem("petvaUser") === "normal" &&
                                         <Link
                                             to="/user"
-                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5" style={{width:"60px"}}
+                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5" style={{ width: "60px" }}
                                         >
                                             <AiOutlineHome className="navbar__button--icon" />
                                         </Link>
@@ -123,7 +118,7 @@ const Navbar = () => {
                                         localStorage.getItem("petvaUser") === "foundation" &&
                                         <Link
                                             to="/foundation"
-                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5" style={{width:"60px"}}
+                                            className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5" style={{ width: "60px" }}
                                         >
                                             <AiOutlineHome className="navbar__button--icon" />
                                         </Link>
@@ -131,7 +126,15 @@ const Navbar = () => {
                                         localStorage.getItem("petvaUser") === "clinic" &&
                                         <Link
                                             to="/clinic"
-                                            className="navbar__button text-decoration-none badge rounded-circle bg-dark px-3 py-3 me-1 fs-5" style={{width:"60px"}}
+                                            className="navbar__button text-decoration-none badge rounded-circle bg-dark px-3 py-3 me-1 fs-5" style={{ width: "60px" }}
+                                        >
+                                            <AiOutlineHome className="navbar__button--icon" />
+                                        </Link>
+                                    }{
+                                        localStorage.getItem("petvaUser") === "doctor" &&
+                                        <Link
+                                            to="/doctor"
+                                            className="navbar__button text-decoration-none badge rounded-circle bg-dark px-3 py-3 me-1 fs-5" style={{ width: "60px" }}
                                         >
                                             <AiOutlineHome className="navbar__button--icon" />
                                         </Link>
@@ -177,6 +180,15 @@ const Navbar = () => {
 
                                             />
                                         }
+                                        {
+                                            store.userType === "doctor" &&
+                                            !!store.doctorDetail &&
+                                            <Avatar
+                                                alt={store.doctorDetail.name}
+                                                src={store.doctorDetail.picture}
+                                                sx={{ width: 60, height: 60 }}
+                                            />
+                                        }
                                     </span>
                                     <ul className="dropdown-menu dropdown-menu-left " aria-labelledby="dropdownMenuButton1">
 
@@ -209,6 +221,14 @@ const Navbar = () => {
                                                         sx={{ width: 45, height: 45 }}
 
                                                     />
+                                                }{
+                                                    store.userType === "doctor" &&
+                                                    !!store.doctorDetail &&
+                                                    <Avatar
+                                                        alt={store.doctorDetail.name}
+                                                        src={store.doctorDetail.picture}
+                                                        sx={{ width: 45, height: 45 }}
+                                                        />
                                                 }
                                             </div>
                                             <div className="text-center">
@@ -241,10 +261,21 @@ const Navbar = () => {
                                                     !!store.clinicDetail &&
                                                     <>
                                                         <h5>
-                                                            {store.clinicDetail.name} 
+                                                            {store.clinicDetail.name}
                                                         </h5>
                                                         <span>
                                                             {store.clinicDetail.email}
+                                                        </span>
+                                                    </>
+                                                }{
+                                                    store.userType === "doctor" &&
+                                                    !!store.doctorDetail &&
+                                                    <>
+                                                        <h5>
+                                                            {store.doctorDetail.name}
+                                                        </h5>
+                                                        <span>
+                                                            {store.doctorDetail.email}
                                                         </span>
                                                     </>
                                                 }
