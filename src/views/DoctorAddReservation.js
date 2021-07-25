@@ -1,6 +1,10 @@
 import { useContext } from "react";
 import { useState } from "react";
 import { Context } from "../store/appContext";
+import Swal from "sweetalert2";
+import { useRef } from "react";
+import moment from "moment";
+
 
 const DoctorAddReservation = () => {
     const { actions } = useContext(Context);
@@ -9,6 +13,8 @@ const DoctorAddReservation = () => {
         timeFinal: null,
         timeStart: null
     });
+    const dateR = useRef(null);
+    const timeR = useRef(null);
     const [hour, setHour] = useState({
         hour_start: null,
         hour_end: null
@@ -27,11 +33,48 @@ const DoctorAddReservation = () => {
         timeF = time.substring(0, 2) + ":" + timeF.toString()+":00"
         setGenerate({ ...generate, timeFinal: timeF, timeStart: timeS })
     }
+    const generateTimeFinal = (date)=>{
+        let dateM = new Date(date)
+        const mediaHora = "00:30:00"
+        dateM= moment(dateM).add(moment.duration(mediaHora))
+        console.log(moment(dateM).format("hh:mm:ss"));
+        return moment(dateM).format("HH:mm:ss")
+    }
 
     const generateReservation = () => {
-        actions.doctorAddReservation((generate.date+generate.timeStart),(generate.date+generate.timeFinal))
-        console.log(generate.date + generate.timeStart);
-        console.log(generate.date + generate.timeFinal);
+        if(generate.date !== "" && generate.timeStart !=="" && generate.timeFinal !== "" &&
+            generate.date !== null && generate.timeStart !== null && generate.timeFinal !== null){
+
+            actions.doctorAddReservation((generate.date+generate.timeStart),(generate.date+generate.timeFinal))
+            /* console.log(generate.date + generate.timeStart);
+            console.log(generate.date + generate.timeFinal); */
+            Swal.fire({
+                icon: "success",
+                title: "Hora Generada con Éxito",
+                text: "Gracias por utilizar petVA",
+                showConfirmButton: false,
+                timer: 1800
+            })
+            setGenerate({
+                date: null,
+                timeFinal: null,
+                timeStart: null})
+            dateR.current.value = null;
+            timeR.current.value = null;
+
+        }else{
+            Swal.fire({
+                icon: "error",
+                title: "No se puede generar Hora",
+                text: "Revisa que Fecha y hora sean correctos",
+                showConfirmButton: false,
+                timer: 1800
+            })
+        }
+    }
+    const testGetReserved = ()=>{
+        /* actions.doctorGetReservationsReserved(); */
+        console.log((generate.date + generateTimeFinal(generate.date + generate.timeStart)))
     }
 
 
@@ -50,6 +93,7 @@ const DoctorAddReservation = () => {
                             <label className="form-label" htmlFor="">Selecciona Fecha</label>
                             <input className="form-control" type="date"
                                 onChange={(e) => { generateDateforSend(e.target.value) }}
+                                ref={dateR}
 
                             />
                             {generate.date}
@@ -59,6 +103,7 @@ const DoctorAddReservation = () => {
                             <input className="form-control" type="time"
                                 max="22:30:00" min="06:00:00"
                                 onChange={(e) => { generateTimeforSend(e.target.value) }}
+                                ref={timeR}
                             />
                         </div>
                         <div>
@@ -79,6 +124,13 @@ const DoctorAddReservation = () => {
                     <h1>
                         Horas Reservadas
                     </h1>
+                    <div>
+                        <button
+                            onClick={testGetReserved}
+                        >
+                            Ver reservadas
+                        </button>
+                    </div>
                 </div>
 
             </div>

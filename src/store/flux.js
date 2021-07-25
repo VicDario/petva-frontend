@@ -23,7 +23,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             clinicDoctor: null,
             doctorReservations: null,
             doctorDetail: null,
-            userReservations: null
+            userReservations: null,
+            doctorReservationsReserved: null
         },
         actions: {
             registerClinica: async (email, name, address, phone, password) => {
@@ -1153,6 +1154,28 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const data = await response.json();
                 console.log(data);
+            },
+            doctorGetReservationsReserved : async()=>{
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/doctor/reservations/reserved`, opt)
+                    if (response.status !== 200)
+                    {
+                        console.error("There has been some error in get doctor reservations")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    setStore({ doctorReservationsReserved: data })
+                } catch (error)
+                {
+                    console.error(error);
+                }
             }
         },
         
