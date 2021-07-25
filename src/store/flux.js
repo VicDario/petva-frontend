@@ -299,6 +299,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("There is a some error in get user detail")
                     }
                     const data = await response.json();
+                    console.log(data)
                     setStore({ userDetail: data })
                 } catch (error) {
                     console.error("Error in get detail user")
@@ -1131,8 +1132,30 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const opt ={timeZone : "UTC"}
                 event = event.toLocaleTimeString('es-CL',opt,{ hour:"2-digit", minute : "2-digit" })
                 return event
+            },
+            doctorAddReservation: async (hour_start,hour_end) => {
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        hour_start: hour_start,
+                        hour_end: hour_end
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                const response = await fetch(`${store.baseUrl}api/doctor/reservations/add`, opt);
+                if (response.status === 401)
+                {
+                    return response;
+                }
+                const data = await response.json();
+                console.log(data);
             }
         },
+        
     }
 };
 
