@@ -2,9 +2,14 @@ import { Link, useHistory } from "react-router-dom";
 import { FcOvertime } from "react-icons/fc"
 import { useContext } from "react";
 import { Context } from "../store/appContext";
+import { useEffect } from "react";
 const HomeUser = () => {
     const history = useHistory();
-    const {store} = useContext(Context);
+    const {store,actions} = useContext(Context);
+    useEffect(()=>{
+        actions.getUserDetail();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
     return (
         <>
             {

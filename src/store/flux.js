@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             loginUser: async (email, password, history) => {
                 const store = getStore();
-                const actions = getActions();
+                
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -87,7 +87,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const data = await response.json();
                 /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
                 if (data.access_token) {
-                    actions.getUserDetail();
+                    
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "normal")
                     setStore({ userType: "normal" });
@@ -299,7 +299,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("There is a some error in get user detail")
                     }
                     const data = await response.json();
-                    if (data) setStore({ userDetail: data })
+                    setStore({ userDetail: data })
                 } catch (error) {
                     console.error("Error in get detail user")
                 }
@@ -1120,7 +1120,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error in update" + error)
                 }
             },
-        }
+            formatDateB : (date) => {
+
+                let event = new Date(date)
+                event = event.toLocaleDateString()
+                return event
+            },
+            formatTime : (date)=>{
+                let event = new Date(date)
+                const opt ={timeZone : "UTC"}
+                event = event.toLocaleTimeString('es-CL',opt,{ hour:"2-digit", minute : "2-digit" })
+                return event
+            }
+        },
     }
 };
 
