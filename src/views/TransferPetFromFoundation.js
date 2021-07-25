@@ -10,7 +10,7 @@ const TransferPetFromFoundation = () => {
     const { actions, store } = useContext(Context);
     const [mailUser, setMailUser] = useState();
     const { pet_id } = useParams()
-    console.log(pet_id);
+    
     const history = useHistory();
 
      useEffect(() => {
@@ -21,10 +21,16 @@ const TransferPetFromFoundation = () => {
     const makeTransfer = () => {
         actions.transferPetFromFundation(mailUser, pet_id, history);
     }
+    const toBack = ()=>{
+        history.goBack();
+    }
     return (
         <div className="container">
             <div className="text-center">
-                <h1>Tranferir Mascota({pet_id}) a Usuario </h1>
+                {
+                    !!store.foundationPet &&
+                <h1>Tranferir {store.foundationPet.name} a Usuario </h1>
+                }
             </div>
             <div className="row my-4">
                 <div className="col-12 col-md-5">
@@ -84,6 +90,9 @@ const TransferPetFromFoundation = () => {
                     </div>
                     <div className="text-center my-5">
                         <button onClick={makeTransfer} className="btn btn-success btn-lg">TRANSFERIR</button>
+                    </div>
+                    <div className="text-center my-5">
+                        <button onClick={toBack} className="btn btn-danger btn-lg">Cancelar</button>
                     </div>
                 </div>
             </div>

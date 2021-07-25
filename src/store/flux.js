@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             loginUser: async (email, password, history) => {
                 const store = getStore();
-                const actions = getActions();
+                
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -87,11 +87,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const data = await response.json();
                 /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
                 if (data.access_token) {
+                    
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "normal")
                     setStore({ userType: "normal" });
                     setStore({ token: data.access_token });
-                    actions.getUserDetail();
                     history.push("/user");
                 }
 
@@ -116,11 +116,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const data = await response.json();
                 if (data.access_token) {
+                    actions.getFoundationDetail();
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "foundation")
                     setStore({ userType: "foundation" });
                     setStore({ token: data.access_token });
-                    actions.getFoundationDetail();
                     history.push("/foundation");
                 }
             },
@@ -144,11 +144,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const data = await response.json();
                 if (data.access_token) {
+                    actions.getClinicDetail();
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "clinic")
                     setStore({ userType: "clinic" });
                     setStore({ token: data.access_token });
-                    actions.getClinicDetail();
                     history.push("/clinic");
                 }
             },
@@ -299,7 +299,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("There is a some error in get user detail")
                     }
                     const data = await response.json();
-                    if (data) setStore({ userDetail: data })
+                    setStore({ userDetail: data })
                 } catch (error) {
                     console.error("Error in get detail user")
                 }
@@ -955,11 +955,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const data = await response.json();
                 if (data.access_token) {
+                    actions.getDoctorDetail();
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "doctor")
                     setStore({ userType: "doctor" });
                     setStore({ token: data.access_token });
-                    actions.getDoctorDetail();
                     history.push("/doctor");
                 }
             },
@@ -1120,7 +1120,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error in update" + error)
                 }
             },
-        }
+            formatDateB : (date) => {
+
+                let event = new Date(date)
+                event = event.toLocaleDateString()
+                return event
+            },
+            formatTime : (date)=>{
+                let event = new Date(date)
+                const opt ={timeZone : "UTC"}
+                event = event.toLocaleTimeString('es-CL',opt,{ hour:"2-digit", minute : "2-digit" })
+                return event
+            }
+        },
     }
 };
 

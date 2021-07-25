@@ -42,11 +42,11 @@ const FoundationPetsForTracking = () => {
                                                                     className="card-text">{pet.specie === 'cat' ? "Gato" : "Perro"}
                                                                 </p>
                                                                 <p
-                                                                    className="card-text">{!!pet.birth_date ? pet.birth_date :
+                                                                    className="card-text">{!!pet.birth_date ? actions.getEdad(pet.birth_date) :
                                                                         "No registra fecha de nacimiento"}
                                                                 </p>
                                                                 <p
-                                                                    className="card-text">{!!pet.chip_code ? pet.code_chip :
+                                                                    className="card-text">{!!pet.code_chip ? pet.code_chip :
                                                                         "No registra codigo de chip"}
                                                                 </p>
                                                                 <p

@@ -3,6 +3,8 @@ import { Context } from "../store/appContext";
 import { FaCat, FaDog } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
+import moment from "moment";
+import 'moment/locale/es';
 
 
 const Reservetime = () => {
@@ -195,7 +197,7 @@ const Reservetime = () => {
                                                             className="list-group-item "
                                                             aria-current="true"
                                                             value={reservation.id}
-                                                        >{reservation.date_start}
+                                                        >{moment(reservation.date_start).locale("es").utc().format("LLLL")}
                                                         </li>
                                                         <button
 
@@ -203,6 +205,7 @@ const Reservetime = () => {
                                                             className="btn btn-primary"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#exampleModal"
+                                                            
                                                             onClick={() => { setReservation({ ...reservation, id: reservation.id }) }}
                                                         >
                                                             Reservar Hora

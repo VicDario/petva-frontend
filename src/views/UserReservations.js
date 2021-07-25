@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Swal from "sweetalert2";
+import moment from "moment";
 
 
 const UserReservations = () => {
@@ -45,12 +46,30 @@ const UserReservations = () => {
                                                 className="d-flex "
                                                 key={index}
                                                 >
-                                                    <li
-                                                        className="list-group-item m-2"
-                                                        style={{width:"300px"}}
-                                                    >
-                                                        {reservation.date_start} {reservation.info_pet.name}
-                                                    </li>
+                                                    <table className="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Paciente</th>
+                                                                <th scope="col">Veterinario</th>
+                                                                <th scope="col">Clinica</th>
+                                                                <th scope="col">Fecha</th>
+                                                                <th scope="col">Hora</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>{reservation.info_pet.name}</td>
+                                                                <td>{reservation.doctor_name}</td>
+                                                                <td>{reservation.id_clinic}</td>
+                                                                <td>{moment(reservation.date_start).utc().format("L")}</td>
+                                                                <td>{moment(reservation.date_start).utc().format("LT")}</td>
+
+
+
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                     <button 
                                                         onClick={(e) => handleDelete(reservation.id)}
                                                     className="btn btn-danger m-2">

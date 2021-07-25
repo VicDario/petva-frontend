@@ -1,9 +1,9 @@
 import { Link, useHistory } from "react-router-dom";
-/* import { useContext } from "react";
-import { Context } from "../store/appContext"; */
+import { useContext } from "react";
+import { Context } from "../store/appContext";
 
 const HomeFoundation = () => {
-    //const { store } = useContext(Context);
+    const { store } = useContext(Context);
     //let { token } = store;
     const history = useHistory();
 
@@ -13,9 +13,13 @@ const HomeFoundation = () => {
                 !!localStorage.getItem("petvaToken") ?
                     (
                         <div className="container">
+                            {
+                                !!store.foundationDetail &&
+
                             <div className="text-center my-4">
-                                <h2 className="display-1">Bienvenido Fundación</h2>
+                                <h2 className="display-1">Bienvenido {store.foundationDetail.name}</h2>
                             </div>
+                            }
                             <div className="row">
                                 <div className="col-12 col-md-6 d-flex justify-content-center">
                                     <Link to="/foundation/profile" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">

@@ -160,6 +160,14 @@ const UserPetHistory = () => {
         let file = e.target.files[0]; // load the picture (just one file)
         actions.convertImgToBase64(file); //Save picture in base64 format at store in auxPicture
     }
+    const formatDateB = (date)=>{
+
+        let event = new Date(date)
+        event = event.toLocaleDateString()
+        return event
+    }
+
+    
 
     return (
         <div className="container">
@@ -337,6 +345,7 @@ const UserPetHistory = () => {
                         store.historyUserPet.History.vaccines.map((vacuna, index) => {
                             return (
                                 <div
+                                    key={index}
                                     className="accordion" id="Vacuna">
                                     <div
                                         className="accordion-item mb-4"
@@ -371,11 +380,19 @@ const UserPetHistory = () => {
                                                             className="list-group mt-1">
                                                             <li
                                                                 className="list-group-item">
-                                                                <strong>Fecha:</strong> {vacuna.date}
+                                                                <strong>Fecha:</strong> {formatDateB(vacuna.date)}
                                                             </li>
                                                             <li
                                                                 className="list-group-item"><strong>
                                                                     Laboratorio:</strong> {vacuna.laboratory}
+                                                            </li>
+                                                            <li
+                                                                className="list-group-item"><strong>
+                                                                    Lote:</strong> {vacuna.lot}
+                                                            </li>
+                                                            <li
+                                                                className="list-group-item"><strong>
+                                                                    Nombre:</strong> {vacuna.name}
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -407,6 +424,7 @@ const UserPetHistory = () => {
                         store.historyUserPet.History.diagnostics.map((diag, index) => {
                             return (
                                 <div
+                                    key={index}
                                     className="accordion"
                                     id="accordionExample">
                                     <div
@@ -427,6 +445,7 @@ const UserPetHistory = () => {
                                             </button>
                                         </h2>
                                         <div
+                                            
                                             id={"collapse" + index}
                                             className="accordion-collapse collapse"
                                             aria-labelledby="headingOne"
@@ -444,7 +463,7 @@ const UserPetHistory = () => {
                                                                 className="list-group-item">
                                                                 <strong>
                                                                     Fecha Consulta:
-                                                                </strong> {diag.date}
+                                                                </strong> {formatDateB(diag.date)}
                                                             </li>
                                                             <li
                                                                 className="list-group-item">
@@ -509,6 +528,7 @@ const UserPetHistory = () => {
                                         </h2>
                                         <div
                                             id={"cir" + index}
+                                            key={index}
                                             className="accordion-collapse collapse"
                                             aria-labelledby="cirugiaOne"
                                             data-bs-parent="#Cirugia"
@@ -524,13 +544,14 @@ const UserPetHistory = () => {
                                                             <li
                                                                 className="list-group-item">
                                                                 <strong>
-                                                                    Fecha:</strong> {cirugia.date}
+                                                                    Fecha:</strong> {formatDateB(cirugia.date)}
                                                             </li>
                                                             <li
                                                                 className="list-group-item">
                                                                 <strong>
-                                                                    Laboratorio:</strong> {cirugia.description}
+                                                                    Descripción:</strong> {cirugia.description}
                                                             </li>
+                                                            
                                                             <li
                                                                 className="list-group-item">
                                                                 <strong>
