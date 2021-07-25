@@ -918,7 +918,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 return data;
             },
-            changeReservation: async (reservation_id, status) => {
+            updateReservation: async (reservation_id, status) => {
                 ///clinic/reservations/<int:id_reservation>/change
                 const store = getStore();
                 const opt = {
@@ -934,7 +934,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const response = await fetch(`${store.baseUrl}api/clinic/reservations/${reservation_id}/change`, opt)
                 const data = await response.json();
                 console.log(data);
-                return data;
+                return response;
             },
             loginDoctor: async (email, password, history) => {
                 const store = getStore();

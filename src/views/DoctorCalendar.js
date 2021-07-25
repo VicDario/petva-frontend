@@ -7,7 +7,7 @@ import moment from 'moment';
 import { IoHelpCircle } from "react-icons/io5";
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
 
-const ClinicCalendar = (props) => {
+const DoctorCalendar = (props) => {
     const { actions } = useContext(Context);
     let calendar = useRef(null);
     let [title, setTitle] = useState('');
@@ -207,7 +207,7 @@ const ClinicCalendar = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="modal fade" id="modalReserved" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id="modalConfirmed" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                     <div className="modal-header">
@@ -251,4 +251,4 @@ const ClinicCalendar = (props) => {
     )
 }
 
-export default ClinicCalendar;
+export default DoctorCalendar;
