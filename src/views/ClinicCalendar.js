@@ -11,6 +11,7 @@ const ClinicCalendar = (props) => {
     const { actions } = useContext(Context);
     let calendar = useRef(null);
     let [title, setTitle] = useState('');
+    let id = '';
 
     let syncEvens = async () => {
         let events = await actions.getHoursReserved();
@@ -22,12 +23,26 @@ const ClinicCalendar = (props) => {
         for (let i = 0; i < events.length; i++) {
             let title = "";
             let backgroundColor = "";
+            console.log(events[i].status)
             if (events[i].status === 'available'){
                 title=`Dr. ${events[i].doctor_name} Disponible`;
                 backgroundColor = "#3474d9";
             }else if (events[i].status === 'reserved'){
                 title = `Dr. ${events[i].doctor_name}, Paciente: ${events[i].info_pet.name}, Telefono: ${events[i].phone}, Email: ${events[i].email_customer}`;
                 backgroundColor = "#c29e29";
+            }else if(events[i].status === 'canceled'){
+                if(events[i].info_pet === null){
+                    title = `Cita de Dr. ${events[i].doctor_name}, Sin informacion de paciente`;
+                }else{
+                    title = `Dr. ${events[i].doctor_name}, Paciente: ${events[i].info_pet.name}, Telefono: ${events[i].phone}, Email: ${events[i].email_customer} Cancelada`;
+                }
+                backgroundColor = "#db4b3d";
+            }else if(events[i].status === 'confirmed'){
+                title = `Dr. ${events[i].doctor_name}, Paciente: ${events[i].info_pet.name} Confirmada`;
+                backgroundColor = "#359c33";
+            }else if(events[i].status === 'finished'){
+                title = `Cita de Dr. ${events[i].doctor_name} Finalizada`;
+                backgroundColor = "#2444b5";
             }
             let start = moment.parseZone(events[i].date_start).format();
             let end = moment.parseZone(events[i].date_end).format();
@@ -46,6 +61,7 @@ const ClinicCalendar = (props) => {
 
     const handleEventClick = (arg) => {
         let status = arg.event.extendedProps.status;
+        id = arg.event.id;
         setTitle(arg.event.title);
         if (status === 'reserved'){
             let modal = new bootstrap.Modal(document.getElementById('modalReserved'));
@@ -59,6 +75,15 @@ const ClinicCalendar = (props) => {
             let modal = new bootstrap.Modal(document.getElementById('modalCanceled'));
             modal.show();
         } 
+    }
+
+    const handleChangeEvent = async (status) => {
+        let resp = await actions.updateReservation(id, status);
+        if (resp.ok){
+            let api = calendar.current.getApi();
+            api.removeAllEvents();
+            syncEvens()
+        }
     }
     useEffect(() => {
         let api = calendar.current.getApi();
@@ -131,8 +156,22 @@ const ClinicCalendar = (props) => {
                         {title}
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-warning" data-bs-dismiss="modal">Perdida</button>
-                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button 
+                            type="button" 
+                            className="btn btn-warning" 
+                            data-bs-dismiss="modal"
+                            onClick={() => handleChangeEvent('missed')}
+                        >
+                            Perdida
+                        </button>
+                        <button 
+                        type="button" 
+                        className="btn btn-danger" 
+                        data-bs-dismiss="modal"
+                        onClick={() => handleChangeEvent('canceled')}
+                        >
+                            Cancelar
+                        </button>
                     </div>
                     </div>
                 </div>
@@ -148,8 +187,22 @@ const ClinicCalendar = (props) => {
                         {title}
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-success" data-bs-dismiss="modal">Disponible</button>
-                        <button type="button" className="btn btn-warning" data-bs-dismiss="modal">Perdida</button>
+                        <button 
+                        type="button" 
+                        className="btn btn-primary" 
+                        data-bs-dismiss="modal"
+                        onClick={() => handleChangeEvent('available')}
+                        >
+                            Disponible
+                        </button>
+                        <button 
+                        type="button" 
+                        className="btn btn-warning" 
+                        data-bs-dismiss="modal"
+                        onClick={() => handleChangeEvent('missed')}
+                        >
+                            Perdida
+                        </button>
                     </div>
                     </div>
                 </div>
@@ -165,9 +218,30 @@ const ClinicCalendar = (props) => {
                         {title}
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-success" data-bs-dismiss="modal">Confirmar Asistencia</button>
-                        <button type="button" className="btn btn-warning" data-bs-dismiss="modal">Perdida</button>
-                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button
+                            type="button"   
+                            className="btn btn-success"
+                            data-bs-dismiss="modal"
+                            onClick={() => handleChangeEvent('confirmed')}
+                        >
+                            Confirmar Asistencia
+                        </button>
+                        <button 
+                        type="button" 
+                        className="btn btn-warning" 
+                        data-bs-dismiss="modal"
+                        onClick={() => handleChangeEvent('missed')}
+                        >
+                            Perdida
+                        </button>
+                        <button 
+                        type="button" 
+                        className="btn btn-danger" 
+                        data-bs-dismiss="modal"
+                        onClick={() => handleChangeEvent('canceled')}
+                        >
+                            Cancelar
+                        </button>
                     </div>
                     </div>
                 </div>
