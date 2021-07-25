@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             loginUser: async (email, password, history) => {
                 const store = getStore();
-                const actions = getActions();
+                
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -87,11 +87,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const data = await response.json();
                 /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
                 if (data.access_token) {
+                    
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "normal")
                     setStore({ userType: "normal" });
                     setStore({ token: data.access_token });
-                    actions.getUserDetail();
                     history.push("/user");
                 }
 
@@ -116,11 +116,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const data = await response.json();
                 if (data.access_token) {
+                    actions.getFoundationDetail();
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "foundation")
                     setStore({ userType: "foundation" });
                     setStore({ token: data.access_token });
-                    actions.getFoundationDetail();
                     history.push("/foundation");
                 }
             },
@@ -144,11 +144,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const data = await response.json();
                 if (data.access_token) {
+                    actions.getClinicDetail();
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "clinic")
                     setStore({ userType: "clinic" });
                     setStore({ token: data.access_token });
-                    actions.getClinicDetail();
                     history.push("/clinic");
                 }
             },
@@ -299,7 +299,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("There is a some error in get user detail")
                     }
                     const data = await response.json();
-                    if (data) setStore({ userDetail: data })
+                    setStore({ userDetail: data })
                 } catch (error) {
                     console.error("Error in get detail user")
                 }
@@ -381,7 +381,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("there is some error in transfer a pet")
                     }
 
-                    history.push("/foundation/pets")
+                    history.push("/foundation/pets/tracking")
                 } catch (error) {
                     console.error("the has been some error in transfer")
                 }
@@ -658,8 +658,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     /* const data = await response.json(); */
                     //aqií cargar lista de mascotas perdidas
                     actions.getMascotasUser();
-                    actions.getHistoryUserPet(pet_id);
                     actions.getLostPets();
+                    actions.getHistoryUserPet(pet_id);
+                    actions.getSinglePetFromUser(pet_id);
                 } catch (error) {
                     console.error("There has been an error in report lost")
                 }
@@ -696,8 +697,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     actions.getMascotasUser();
                     actions.getHistoryUserPet(pet_id);
                     actions.getLostPets();
-
-
+                    actions.getSinglePetFromUser(pet_id);
                 } catch (error) {
                     console.error("There has been an error in report founded")
                 }
@@ -918,6 +918,24 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 return data;
             },
+            updateReservation: async (reservation_id, status) => {
+                ///clinic/reservations/<int:id_reservation>/change
+                const store = getStore();
+                const opt = {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        status,
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                const response = await fetch(`${store.baseUrl}api/clinic/reservations/${reservation_id}/change`, opt)
+                const data = await response.json();
+                console.log(data);
+                return response;
+            },
             loginDoctor: async (email, password, history) => {
                 const store = getStore();
                 const actions = getActions();
@@ -937,11 +955,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const data = await response.json();
                 if (data.access_token) {
+                    actions.getDoctorDetail();
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "doctor")
                     setStore({ userType: "doctor" });
                     setStore({ token: data.access_token });
-                    actions.getDoctorDetail();
                     history.push("/doctor");
                 }
             },
@@ -1004,8 +1022,117 @@ const getState = ({ getStore, getActions, setStore }) => {
                 } catch (error) {
                     console.error(error);
                 }
+            },
+            userPutPet : async(name,code_chip,breed,picture,pet_id)=>{
+                const store = getStore()
+                const actions = getActions();
+                const opt = {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        name: name,
+                        code_chip: code_chip,
+                        breed: breed,
+                        picture: picture
+                        
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}`, opt)
+                    if (response.status !== 202)
+                    {
+                        console.error("There is a some error in update pet")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    actions.getSinglePetFromUser(pet_id);
+                    
+                    
+                } catch (error)
+                {
+                    console.error("Error in update" + error)
+                }
+            },
+            userDeletePet: async (pet_id,history) => {
+                const store = getStore();
+                const actions = getActions();
+                const opt = {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}`, opt)
+                    if (response.status !== 203)
+                    {
+                        console.error("There has been some error in delete pet")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    actions.getMascotasUser();
+                    history.push("/user/pets")
+                    
+
+                } catch (error)
+                {
+                    console.error("Error: " + error)
+                }
+            },
+            foundationPutInfo: async (name, address, phone, email, picture, password) => {
+                const store = getStore()
+                const actions = getActions();
+                const opt = {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        name: name,
+                        address: address,
+                        phone: phone,
+                        email:email,
+                        picture: picture,
+                        password: password
+
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/foundation/info`, opt)
+                    if (response.status !== 202)
+                    {
+                        console.error("There is a some error in update pet")
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    actions.getFoundationDetail();
+
+
+                } catch (error)
+                {
+                    console.error("Error in update" + error)
+                }
+            },
+            formatDateB : (date) => {
+
+                let event = new Date(date)
+                event = event.toLocaleDateString()
+                return event
+            },
+            formatTime : (date)=>{
+                let event = new Date(date)
+                const opt ={timeZone : "UTC"}
+                event = event.toLocaleTimeString('es-CL',opt,{ hour:"2-digit", minute : "2-digit" })
+                return event
             }
-        }
+        },
     }
 };
 

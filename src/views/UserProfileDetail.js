@@ -39,7 +39,9 @@ const Userprofiledetail = () => {
             updates.email !== "" && updates.email !== null
         ){
             
-            actions.updateUserDetail(updates.email,updates.name,updates.lastname,updates.phone,validarVacio(updates.password),validarVacio(store.auxPicture));
+            actions.updateUserDetail(updates.email, updates.name, updates.lastname, updates.phone, 
+                validarVacio(store.auxPicture),validarVacio(updates.password));
+            
             Swal.fire({
                 icon: "success",
                 title: "Usuario Actualizado",
