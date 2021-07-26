@@ -72,6 +72,7 @@ function App() {
           <Route exact path="/doctor" component={HomeDoctor}/>
           <Route exact path="/doctor/profile" component={DoctorProfileDetail}/>
           <Route exact path="/doctor/calendar" component={DoctorCalendar} />
+          <Route exact path="/doctor/attending/:reservation_id/:pet_id" component={DoctorAttending} />
           <Route component={Custom404}/>
         </Switch>
         <Footer/>
