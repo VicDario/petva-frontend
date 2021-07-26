@@ -287,15 +287,17 @@ const Reservetime = () => {
                                             <th scope="col">Mascota</th>
                                             <th scope="col">Veterinario</th>
                                             <th scope="col">Clinica</th>
-                                            <th scope="col">Hora Inicio</th>
+                                            <th scope="col">Fecha</th>
+                                            <th scope="col">Hora</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{mascota.id}</td>
-                                            <td>{doctor.id}</td>
-                                            <td>{clinic.id}</td>
-                                            <td>{reservation.date_start}</td>
+                                            <td>{mascota.name}</td>
+                                            <td>{reservation.doctor_name}</td>
+                                            <td>{reservation.clinic_name}</td>
+                                            <td>{moment(reservation.date_start).format("DD/MM/YYYY")}</td>
+                                            <td>{moment(reservation.date_start).format("HH:mm")}</td>
                                         </tr>
                                     </tbody>
                                 </table>
