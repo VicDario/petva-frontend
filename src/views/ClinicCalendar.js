@@ -38,13 +38,13 @@ const ClinicCalendar = (props) => {
                 }
                 backgroundColor = "#db4b3d";
             }else if(events[i].status === 'confirmed'){
-                title = `Dr. ${events[i].doctor_name}, Paciente: ${events[i].info_pet.name} Confirmada`;
+                title = `Dr. ${events[i].doctor_name}, Paciente: ${events[i].info_pet.name}. Cita confirmada`;
                 backgroundColor = "#359c33";
             }else if(events[i].status === 'finished'){
-                title = `Cita de Dr. ${events[i].doctor_name} Finalizada`;
+                title = `Cita de Dr. ${events[i].doctor_name}. Atendida`;
                 backgroundColor = "#2444b5";
             }else if(events[i].status === 'missed'){
-                title = `Cita de Dr. ${events[i].doctor_name} Perdida`;
+                title = `Cita de Dr. ${events[i].doctor_name}. Perdida`;
                 backgroundColor = "#c24725";
             }
             let start = moment.parseZone(events[i].date_start).format();
