@@ -11,11 +11,12 @@ const ClinicCalendar = (props) => {
     const { actions } = useContext(Context);
     let calendar = useRef(null);
     let [title, setTitle] = useState('');
-    let id = '';
+    let [id, setId] = useState('');
 
     let syncEvens = async () => {
         let events = await actions.getHoursReserved();
         let api = calendar.current.getApi();
+        api.removeAllEvents();
         if (events === undefined ){
             props.history.push("/clinic/login");
             return
@@ -23,7 +24,6 @@ const ClinicCalendar = (props) => {
         for (let i = 0; i < events.length; i++) {
             let title = "";
             let backgroundColor = "";
-            console.log(events[i].status)
             if (events[i].status === 'available'){
                 title=`Dr. ${events[i].doctor_name} Disponible`;
                 backgroundColor = "#3474d9";
@@ -43,6 +43,9 @@ const ClinicCalendar = (props) => {
             }else if(events[i].status === 'finished'){
                 title = `Cita de Dr. ${events[i].doctor_name} Finalizada`;
                 backgroundColor = "#2444b5";
+            }else if(events[i].status === 'missed'){
+                title = `Cita de Dr. ${events[i].doctor_name} Perdida`;
+                backgroundColor = "#c24725";
             }
             let start = moment.parseZone(events[i].date_start).format();
             let end = moment.parseZone(events[i].date_end).format();
@@ -61,7 +64,7 @@ const ClinicCalendar = (props) => {
 
     const handleEventClick = (arg) => {
         let status = arg.event.extendedProps.status;
-        id = arg.event.id;
+        setId(arg.event.id);
         setTitle(arg.event.title);
         if (status === 'reserved'){
             let modal = new bootstrap.Modal(document.getElementById('modalReserved'));
@@ -74,21 +77,15 @@ const ClinicCalendar = (props) => {
         if (status === 'canceled'){
             let modal = new bootstrap.Modal(document.getElementById('modalCanceled'));
             modal.show();
-        } 
+        }
     }
 
     const handleChangeEvent = async (status) => {
         let resp = await actions.updateReservation(id, status);
-        if (resp.ok){
-            let api = calendar.current.getApi();
-            api.removeAllEvents();
-            syncEvens()
-        }
+        if (resp.ok)    syncEvens();
     }
     useEffect(() => {
-        let api = calendar.current.getApi();
-        api.removeAllEvents();
-        syncEvens()
+        syncEvens();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -116,11 +113,7 @@ const ClinicCalendar = (props) => {
                 customButtons={{
                     addEventButton: {
                     text: 'Actualizar Calendario',
-                    click: function() {
-                        let api = calendar.current.getApi();
-                        api.removeAllEvents();
-                        syncEvens()
-                    }
+                    click: e => syncEvens()
                 }}}
             />
 

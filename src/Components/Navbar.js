@@ -54,13 +54,13 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
-            <div className="container-fluid ">
-                <div className="d-flex align-items-center">
-                <Link className="text-decoration-none" to="/">
-                    <img className="img-fluid logo" src="/images/logo_cat_small.png" alt="logo" />
-                </Link>
-                    <h2 className="display-5 fst-italic">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
+            <div className="container-fluid">
+                <div className="d-flex align-items-end">
+                    <Link className="text-decoration-none" to="/">
+                        <img className="img-fluid logo" src="/images/logo_cat_small.png" alt="logo" />
+                    </Link>
+                    <h2 className="logo-text ps-1">
                         PetVA
                     </h2>
                 </div>
@@ -138,7 +138,7 @@ const Navbar = () => {
                                 </div>
                             </div>
                         </div>
-                        :
+                    :
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
                                 <div className="d-flex align-items-center border-end border-4 border-dark me-2">

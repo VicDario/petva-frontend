@@ -32,6 +32,7 @@ import LoginDoctor from './views/LoginDoctor';
 import HomeDoctor from './views/HomeDoctor';
 import DoctorProfileDetail from './views/DoctorProfileDetail';
 import UserReservations from './views/UserReservations';
+import DoctorCalendar from './views/DoctorCalendar';
 import DoctorAddReservation from './views/DoctorAddReservation';
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
           <Route exact path="/user/pet/history/:pet_id" component={UserPetHistory}/>
           <Route exact path="/user/profile" component={UserProfileDetail} />
           <Route exact path="/user/reserve" component={Reservetime}/>
+          <Route exact path="/user/reservations" component={UserReservations} />
           <Route exact path="/foundation/login" component={LoginFoundation}/>
           <Route exact path="/foundation" component={HomeFoundation}/>
           <Route exact path="/foundation/profile" component={FoundationProfileDetail} />
@@ -65,12 +67,11 @@ function App() {
           <Route exact path="/clinic/calendar" component={ClinicCalendar} />
           <Route exact path="/clinic/profile" component={ClinicProfileDetail}/>
           <Route exact path="/clinic/doctor/register" component={DoctorRegister}/>
-          <Route exact path="/clinic/doctor" component={ClinicDoctor}/>
+          <Route exact path="/clinic/doctor" component={ClinicDoctor} />
           <Route exact path="/doctor/login" component={LoginDoctor}/>
           <Route exact path="/doctor" component={HomeDoctor}/>
           <Route exact path="/doctor/profile" component={DoctorProfileDetail}/>
-          <Route exact path="/clinic/doctor" component={ClinicDoctor} />
-          <Route exact path="/user/reservations" component={UserReservations} />
+          <Route exact path="/doctor/calendar" component={DoctorCalendar} />
           <Route exact path="/doctor/add/reservation" component={DoctorAddReservation}/>
           <Route component={Custom404}/>
         </Switch>

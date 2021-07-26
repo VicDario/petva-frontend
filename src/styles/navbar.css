@@ -1,7 +1,12 @@
 .logo{
-    width: 75px;
-    height: 75px;
-  }
+  width: 60px;
+  height: 60px;
+}
+
+html body #root .navbar .logo-text {
+  font-family: 'Sulphur Point', sans-serif;
+  margin-bottom: 5px;
+}
 
 .navbar__button--icon {
   width: 25px;
@@ -9,5 +14,34 @@
 }
 .navbar__button {
   height: 60px;
-  
+}
+
+.navbar {
+  height: 80px;
+}
+
+@media (max-width: 991px) {
+  .logo{
+    max-width: 50px;
+    max-height: 50px;
+  }
+  .navbar {
+    height: 70px;
+  }
+  html body #root .navbar .logo-text {
+    margin-bottom: 3px;
+  }
+}
+
+@media (max-width: 767px) {
+  .logo{
+    max-width: 40px;
+    max-height: 40px;
+  }
+  .navbar {
+    height: 60px;
+  }
+  html body #root .navbar .logo-text {
+    margin-bottom: 0;
+  }
 }
