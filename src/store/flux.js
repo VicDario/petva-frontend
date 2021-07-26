@@ -47,7 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const data = await response.json();
                 return data;
             },
-            registerUser: async (email, name, lastname, password) => {
+            registerUser: async (email, name, lastname, phone, password) => {
                 const store = getStore();
                 const opt = {
                     method: "POST",
@@ -55,6 +55,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         email: email,
                         name: name,
                         lastname: lastname,
+                        phone: phone,
                         password: password
                     }),
                     headers: {

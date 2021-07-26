@@ -27,14 +27,15 @@ const DoctorAddReservation = () => {
     const generateTimeforSend = (time) => {
         let timeF = parseInt(time.substring(3));
         let timeS = time+":00";
-        timeF += 30;
+        timeF += 29;
         timeF = time.substring(0, 2) + ":" + timeF.toString()+":00"
         setGenerate({ ...generate, timeFinal: timeF, timeStart: timeS })
     }
     const generateTimeFinal = (date)=>{
         let dateM = new Date(date)
-        const mediaHora = "00:30:00"
-        dateM= moment(dateM).add(moment.duration(mediaHora))
+        const mediaHora = "00:28:30"
+        dateM= moment(dateM).add(30,'minutes').format("hh:mm:ss")
+        console.log("estoy aqui");
         console.log(moment(dateM).format("hh:mm:ss"));
         return moment(dateM).format("HH:mm:ss")
     }
@@ -42,10 +43,11 @@ const DoctorAddReservation = () => {
     const generateReservation = () => {
         if(generate.date !== "" && generate.timeStart !=="" && generate.timeFinal !== "" &&
             generate.date !== null && generate.timeStart !== null && generate.timeFinal !== null){
+                console.log(generate.date + generate.timeStart);
+                console.log(generate.date + generate.timeFinal); 
+                actions.doctorAddReservation((generate.date+generate.timeStart),(generate.date+generate.timeFinal))
 
-            actions.doctorAddReservation((generate.date+generate.timeStart),(generate.date+generate.timeFinal))
-            /* console.log(generate.date + generate.timeStart);
-            console.log(generate.date + generate.timeFinal); */
+            
             Swal.fire({
                 icon: "success",
                 title: "Hora Generada con Éxito",
