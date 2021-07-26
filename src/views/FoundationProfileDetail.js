@@ -96,7 +96,6 @@ const FoundationProfileDetail = () => {
                                             </div>
                                             <div className="my-2">
                                                 <div
-
                                                     className="fs-5 text-secondary me-3">
                                                     <span
                                                         className="me-1 align-top">
@@ -111,8 +110,8 @@ const FoundationProfileDetail = () => {
                                                 </span>
                                                 <span
                                                     className="fs-3 text-secondary align-top ms-2"><MdTrackChanges /></span><span
-                                                        className="text-secondary align-middle">{!!store.petsWithOwner.length > 0 ?
-                                                            store.petsWithOwner.length
+                                                        className="text-secondary align-middle">{!!store.petsWithOwner.length >0 ?
+                                                        store.petsWithOwner.length
                                                             : "0"}
                                                 </span>
                                             </div>
@@ -225,8 +224,6 @@ const FoundationProfileDetail = () => {
                                         </div>
                                         {
                                             save === "on" &&
-
-
                                             <div className="col-md-7 col-12 bg-secondary text-white p-3 mx-auto">
                                                 <div>
                                                     <label
