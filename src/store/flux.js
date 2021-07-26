@@ -81,9 +81,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const response = await fetch(`${store.baseUrl}api/user/login`, opt);
                 console.log(response.status);
-                if (response.status === 401) {
-                    return response;
-                }
                 //if (response.status !== 201) throw new Error(response.status, "error");
                 const data = await response.json();
                 /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
@@ -95,7 +92,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     setStore({ token: data.access_token });
                     history.push("/user");
                 }
-
+                return response;
             },
             loginFoundation: async (email, password, history) => {
                 const store = getStore();
@@ -112,9 +109,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const response = await fetch(`${store.baseUrl}api/foundation/login`, opt);
                 //if (response.status !== 200) throw new Error(response.status, "error");
-                if (response.status === 401) {
-                    return response;
-                }
                 const data = await response.json();
                 if (data.access_token) {
                     localStorage.setItem("petvaToken", data.access_token);
@@ -124,6 +118,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     actions.getFoundationDetail();
                     history.push("/foundation");
                 }
+                return response;
             },
             loginClinic: async (email, password, history) => {
                 const store = getStore();
@@ -140,18 +135,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const response = await fetch(`${store.baseUrl}api/clinic/login`, opt);
                 //if (response.status !== 200) throw new Error(response.status, "error");
-                if (response.status === 401) {
-                    return response;
-                }
                 const data = await response.json();
                 if (data.access_token) {
-                    actions.getClinicDetail();
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "clinic")
                     setStore({ userType: "clinic" });
                     setStore({ token: data.access_token });
+                    actions.getClinicDetail();
                     history.push("/clinic");
                 }
+                return response;
             },
             getMascotasUser: async () => {
                 const store = getStore();
@@ -952,18 +945,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 const response = await fetch(`${store.baseUrl}api/doctor/login`, opt);
-                if (response.status === 401) {
-                    return response;
-                }
                 const data = await response.json();
                 if (data.access_token) {
-                    actions.getDoctorDetail();
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "doctor")
                     setStore({ userType: "doctor" });
                     setStore({ token: data.access_token });
+                    actions.getDoctorDetail();
                     history.push("/doctor");
                 }
+                return response;
             },
             userGetReservations: async () => {
                 const store = getStore();
@@ -1019,7 +1010,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.error("There has been some error in get doctor detail")
                     }
                     const data = await response.json();
-                    console.log(data);
                     setStore({ doctorDetail: data })
                 } catch (error) {
                     console.error(error);
