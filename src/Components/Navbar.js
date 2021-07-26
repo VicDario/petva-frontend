@@ -26,6 +26,8 @@ const Navbar = () => {
         } else if (store.userType === "clinic")
         {
             actions.getClinicDetail();
+        } else if (store.userType=== "doctor"){
+            actions.getDoctorDetail();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); //Si exite token recupera la sesion

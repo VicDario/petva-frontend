@@ -19,7 +19,7 @@ const DoctorProfileDetail = ()=>{
                         <div className="col-12">
                             <h1>Mis Datos</h1>
                         </div>
-                        <div>
+                         <div>
                             {
                                 !!store.doctorDetail &&
                                 <div className="card mb-3" style={{ maxWidth: 540 }}>
@@ -38,10 +38,7 @@ const DoctorProfileDetail = ()=>{
                                                     <span className="me-1">Detalles de la fundación:</span>
                                                     <span className="ms-1">{store.doctorDetail.specialty}</span>
                                                 </p>
-                                                <p className="card-text">
-                                                    <span className="me-1">Dirección de la fundación:</span>
-                                                    <span className="ms-1">{store.doctorDetail}</span>
-                                                </p>
+                                                
                                                 <p className="card-text">
                                                     <small className="text-muted">Numero de Mascotas actuales: </small>
                                                 </p>
@@ -50,11 +47,12 @@ const DoctorProfileDetail = ()=>{
                                     </div>
                                 </div>
                             }
-                        </div>
+                        </div> 
+                        
                     </div>
                 </div>
             ) : (
-                history.push("/foundation/login")
+                history.push("/doctor/login")
             )
         }
     </>
