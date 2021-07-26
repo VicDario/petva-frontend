@@ -281,16 +281,7 @@ const Navbar = () => {
                                                         sx={{ width: 45, height: 45 }}
                                                         />
                                                 }
-                                                {
-                                                    store.userType === "doctor" &&
-                                                    !!store.doctorDetail &&
-                                                    <Avatar
-                                                        alt={store.doctorDetail.name}
-                                                        src={store.doctorDetail.picture}
-                                                        sx={{ width: 45, height: 45 }}
-
-                                                    />
-                                                }
+                                                
                                             </div>
                                             <div className="text-center">
                                                 {//user detalle navbar
@@ -340,18 +331,7 @@ const Navbar = () => {
                                                         </span>
                                                     </>
                                                 }
-                                                {
-                                                    store.userType === "doctor" &&
-                                                    !!store.doctorDetail &&
-                                                    <>
-                                                        <h5>
-                                                            {store.doctorDetail.name}
-                                                        </h5>
-                                                        <span>
-                                                            {store.doctorDetail.email}
-                                                        </span>
-                                                    </>
-                                                }
+                                                
                                             </div>
                                             <div className="text-center my-3">
                                                 <button onClick={toUserDetails} className="badge rounded-pill  text-dark">
