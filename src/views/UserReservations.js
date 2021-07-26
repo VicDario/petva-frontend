@@ -4,24 +4,34 @@ import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Swal from "sweetalert2";
 import moment from "moment";
+import { useState } from "react";
 
 
 const UserReservations = () => {
     const { store, actions } = useContext(Context);
     const history = useHistory();
+    const [reservId, setReservId] = useState();
     useEffect(() => {
         actions.userGetReservations();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
-    const handleDelete = (reserv) => {
-        console.log(reserv);
-        if(reserv>0 && reserv!==null){
-            actions.userCancelReservation(reserv);
+    const handleDelete = () => {
+        console.log(reservId);
+        if (reservId > 0 && reservId!==null){
+            actions.userCancelReservation(reservId);
             Swal.fire({
                 icon: "success",
                 title: "Cita Eliminada Con Éxito",
                 text: "Gracias por utilizar petVA",
+                showConfirmButton: false,
+                timer: 1800
+            })
+        }else{
+            Swal.fire({
+                icon: "error",
+                title: "No se pudo eliminar cita",
+                text: "Debe haber algún problema",
                 showConfirmButton: false,
                 timer: 1800
             })
@@ -71,8 +81,11 @@ const UserReservations = () => {
                                                         </tbody>
                                                     </table>
                                                     <button 
-                                                        onClick={(e) => handleDelete(reservation.id)}
-                                                    className="btn btn-danger m-2">
+                                                        onClick={(e) => setReservId(reservation.id)}
+                                                        className="btn btn-danger m-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal"
+                                                        >
                                                         Cancelar Cita
                                                     </button>
                                                 </div>
@@ -92,6 +105,52 @@ const UserReservations = () => {
                             : history.push("/")
                     }
 
+                </div>
+            </div>
+            {/* Modal para verificar eliminación*/}
+            <div
+                className="modal fade"
+                id="exampleModal"
+                tabIndex={-1}
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+            >
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">
+                                Cancelar cita
+                            </h5>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                                
+                            />
+                        </div>
+                        <div className="modal-body">
+                            <h4>
+                                ¿Estás Seguro que deseas cancelar tu cita?
+                            </h4>
+                        </div>
+                        <div className="modal-footer">
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                            >
+                                Cancelar
+                            </button>
+                            <button type="button"
+                                className="btn btn-danger"
+                                onClick={() => handleDelete()} 
+                                data-bs-dismiss="modal"
+                            >
+                                Confirmar
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
