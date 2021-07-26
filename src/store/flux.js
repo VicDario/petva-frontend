@@ -117,11 +117,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const data = await response.json();
                 if (data.access_token) {
-                    actions.getFoundationDetail();
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "foundation")
                     setStore({ userType: "foundation" });
                     setStore({ token: data.access_token });
+                    actions.getFoundationDetail();
                     history.push("/foundation");
                 }
             },
