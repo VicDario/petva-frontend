@@ -23,7 +23,6 @@ const Login = () => {
         e.preventDefault();
         try{
         let res = await actions.loginUser(inputEmail.current.value, inputPassword.current.value, history);
-        console.log(res);
         if (res.status===401){
         Swal.fire({
             icon: "error",
