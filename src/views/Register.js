@@ -25,7 +25,7 @@ const Register = () => {
             //alert("Debe seleccionar tipo de Usuario")
         }
         if (user === "Usuario") {
-            if (name === "" || lastname === "" || email === "" || password === "") {
+            if (name === "" || lastname === "" || email === "" || phone==="" || password === "") {
                 Swal.fire("Error!", "Debe rellenar todos los campos!", "error");
                 console.log(`${name} ${lastname} ${email} ${password}`)
                 //alert("Debe rellenar todos los campos")
@@ -33,7 +33,7 @@ const Register = () => {
                 if (!validatePassword(password)) return
                 if (!validateEmail(email)) return
                 if (password === confirmPassword) {
-                    actions.registerUser(email, name, lastname, password)
+                    actions.registerUser(email, name, lastname,phone, password)
                         .then(response => {
                             Swal.fire("Bienvenido!", "Te has registrado! Ahora solo te falta iniciar sesión.", "success");
                             setIsRegister(true);
@@ -159,83 +159,90 @@ const Register = () => {
                                         user === 'Clinica' &&
                                         <>
                                             <div className="text-start">
-                                                <span 
-                                                    className="input-group-text d-block text-start fs-4" 
+                                                <span
+                                                    className="input-group-text d-block text-start fs-4"
                                                     htmlFor="email"
                                                 >
-                                                    Dirección 
+                                                    Dirección
                                                 </span>
-                                                <input 
-                                                    className="form-control fs-5" 
-                                                    type="text" 
-                                                    id="direccion" 
-                                                    name="direccion" 
-                                                    onChange={e => setAddress(e.target.value)} 
-                                                    required 
+                                                <input
+                                                    className="form-control fs-5"
+                                                    type="text"
+                                                    id="direccion"
+                                                    name="direccion"
+                                                    onChange={e => setAddress(e.target.value)}
+                                                    required
                                                 />
                                             </div>
                                             <div className="text-start">
-                                                <span 
-                                                    className="input-group-text d-block text-start fs-4" 
+                                                <span
+                                                    className="input-group-text d-block text-start fs-4"
                                                     htmlFor="phone"
                                                 >
                                                     Número de Telefono
                                                 </span>
-                                                <input 
-                                                    className="form-control fs-5" 
-                                                    type="text" 
-                                                    id="phone" 
-                                                    onChange={e => setPhone(e.target.value)} 
-                                                    required 
+                                                <input
+                                                    className="form-control fs-5"
+                                                    type="text"
+                                                    id="phone"
+                                                    onChange={e => setPhone(e.target.value)}
+                                                    required
                                                 />
                                             </div>
                                         </>
                                     }
+                                    {
+                                        user === 'Usuario' &&                                   
+                                        <div className="text-start">
+                                            <span className="input-group-text d-block text-start fs-4" htmlFor="lastname">Telefono </span>
+                                            <input className="form-control fs-5" type="text" id="lastname" onChange={e => setPhone(e.target.value)} required />
+                                        </div>
+                                        }
                                     <div className="text-start">
                                         <label className="input-group-text d-block text-start fs-4" htmlFor="password">
                                             Contraseña
                                             {
-                                            isRevealPwd ? 
-                                                <FaEyeSlash className="ms-2" title="Show password" 
-                                                onClick={changeVisibilityPassword} 
-                                                /> 
-                                            :
-                                                <FaEye className="ms-2" title="Hide password" 
-                                                onClick={changeVisibilityPassword} 
-                                                />
+                                                isRevealPwd ?
+                                                    <FaEyeSlash className="ms-2" title="Show password"
+                                                        onClick={changeVisibilityPassword}
+                                                    />
+                                                    :
+                                                    <FaEye className="ms-2" title="Hide password"
+                                                        onClick={changeVisibilityPassword}
+                                                    />
                                             }
                                         </label>
-                                        <input 
-                                            className="form-control fs-5" 
-                                            type={isRevealPwd ? "text" : "password"} 
+                                        <input
+                                            className="form-control fs-5"
+                                            type={isRevealPwd ? "text" : "password"}
                                             id="id_password"
-                                            placeholder="Ingrese Contraseña" 
-                                            required 
-                                            title="Contraseña" 
-                                            onChange={e => setPassword(e.target.value)} 
+                                            placeholder="Ingrese Contraseña"
+                                            required
+                                            title="Contraseña"
+                                            onChange={e => setPassword(e.target.value)}
                                         />
                                     </div>
                                     <div className="text-start">
                                         <label className="input-group-text d-block text-start fs-4" htmlFor="password">
                                             Confirmar Contraseña
                                             {
-                                            isRevealPwd ? 
-                                                <FaEyeSlash className="ms-2" title="Show password" 
-                                                onClick={changeVisibilityPassword} 
-                                                /> 
-                                            :
-                                                <FaEye className="ms-2" title="Hide password" 
-                                                onClick={changeVisibilityPassword} 
-                                                />
+                                                isRevealPwd ?
+                                                    <FaEyeSlash className="ms-2" title="Show password"
+                                                        onClick={changeVisibilityPassword}
+                                                    />
+                                                    :
+                                                    <FaEye className="ms-2" title="Hide password"
+                                                        onClick={changeVisibilityPassword}
+                                                    />
                                             }
                                         </label>
-                                        <input 
-                                            className="form-control fs-5" 
-                                            type={isRevealPwd ? "text" : "password"} 
+                                        <input
+                                            className="form-control fs-5"
+                                            type={isRevealPwd ? "text" : "password"}
                                             id="id_passwordC"
-                                            placeholder="Confirme Contraseña" 
-                                            required 
-                                            onChange={e => setConfirmPassword(e.target.value)} 
+                                            placeholder="Confirme Contraseña"
+                                            required
+                                            onChange={e => setConfirmPassword(e.target.value)}
                                         />
                                     </div>
                                     <div className="text-center">
