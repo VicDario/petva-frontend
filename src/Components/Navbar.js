@@ -17,11 +17,9 @@ const Navbar = () => {
         if (localStorage.getItem("petvaToken") !== null) store.token = localStorage.getItem("petvaToken");
         else store.token = false;
         store.userType = localStorage.getItem("petvaUser")
-        if (store.userType === "normal")
-        {
+        if (store.userType === "normal") {
             actions.getUserDetail();
-        } else if (store.userType === "foundation")
-        {
+        } else if (store.userType === "foundation") {
             actions.getFoundationDetail();
         } else if (store.userType === "clinic")
         {
@@ -33,16 +31,13 @@ const Navbar = () => {
     }, []); //Si exite token recupera la sesion
 
     const toUserDetails = () => {
-        if (store.userType === "normal")
-        {
+        if (store.userType === "normal") {
 
             history.push("/user/profile");
-        } else if (store.userType === "foundation")
-        {
+        } else if (store.userType === "foundation") {
             history.push("/foundation/profile");
 
-        } else if (store.userType === "clinic")
-        {
+        } else if (store.userType === "clinic") {
             history.push("/clinic/profile");
 
         } else if (store.userType === "doctor")
@@ -243,7 +238,6 @@ const Navbar = () => {
                                                 alt={store.doctorDetail.name}
                                                 src={store.doctorDetail.picture}
                                                 sx={{ width: 60, height: 60 }}
-
                                             />
                                         }
                                     </span>
@@ -278,6 +272,14 @@ const Navbar = () => {
                                                         sx={{ width: 45, height: 45 }}
 
                                                     />
+                                                }{
+                                                    store.userType === "doctor" &&
+                                                    !!store.doctorDetail &&
+                                                    <Avatar
+                                                        alt={store.doctorDetail.name}
+                                                        src={store.doctorDetail.picture}
+                                                        sx={{ width: 45, height: 45 }}
+                                                        />
                                                 }
                                                 {
                                                     store.userType === "doctor" &&
@@ -324,6 +326,17 @@ const Navbar = () => {
                                                         </h5>
                                                         <span>
                                                             {store.clinicDetail.email}
+                                                        </span>
+                                                    </>
+                                                }{
+                                                    store.userType === "doctor" &&
+                                                    !!store.doctorDetail &&
+                                                    <>
+                                                        <h5>
+                                                            {store.doctorDetail.name}
+                                                        </h5>
+                                                        <span>
+                                                            {store.doctorDetail.email}
                                                         </span>
                                                     </>
                                                 }
