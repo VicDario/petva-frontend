@@ -17,11 +17,6 @@ const HomeDoctor = () => {
                         </div>
                         }
                         <div className="row">
-                            <div className="col-12 col-md-6 d-flex justify-content-center">
-                                <Link to="/doctor/add/reservation" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                    Generar hora para reserva
-                                </Link >
-                            </div>
                             <div className="col-12 col-md-6 text-center d-flex justify-content-center">
                                 <Link to="/doctor" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
                                     Ver mis medicos
@@ -32,7 +27,6 @@ const HomeDoctor = () => {
                                     Calendario
                                 </Link >
                             </div>
-
                             <div className="col-12 col-md-6 d-flex justify-content-center">
                                 <Link to="/services" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
                                     Servicios

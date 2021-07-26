@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 
 const DoctorAddReservation = () => {
-    const { store,actions } = useContext(Context);
+    const { store, actions } = useContext(Context);
     const [generate, setGenerate] = useState({
         date: null,
         timeFinal: null,
@@ -27,24 +27,25 @@ const DoctorAddReservation = () => {
     }
     const generateTimeforSend = (time) => {
         let timeF = parseInt(time.substring(3));
-        let timeS = time+":00";
+        let timeS = time + ":00";
         timeF += 30;
-        timeF = time.substring(0, 2) + ":" + timeF.toString()+":00"
+        timeF = time.substring(0, 2) + ":" + timeF.toString() + ":00"
         setGenerate({ ...generate, timeFinal: timeF, timeStart: timeS })
     }
-    const generateTimeFinal = (date)=>{
+    const generateTimeFinal = (date) => {
         let dateM = new Date(date)
         const mediaHora = "00:30:00"
-        dateM= moment(dateM).add(moment.duration(mediaHora))
+        dateM = moment(dateM).add(moment.duration(mediaHora))
         console.log(moment(dateM).format("hh:mm:ss"));
         return moment(dateM).format("HH:mm:ss")
     }
 
     const generateReservation = () => {
-        if(generate.date !== "" && generate.timeStart !=="" && generate.timeFinal !== "" &&
-            generate.date !== null && generate.timeStart !== null && generate.timeFinal !== null){
+        if (generate.date !== "" && generate.timeStart !== "" && generate.timeFinal !== "" &&
+            generate.date !== null && generate.timeStart !== null && generate.timeFinal !== null)
+        {
 
-            actions.doctorAddReservation((generate.date+generate.timeStart),(generate.date+generate.timeFinal))
+            actions.doctorAddReservation((generate.date + generate.timeStart), (generate.date + generate.timeFinal))
             /* console.log(generate.date + generate.timeStart);
             console.log(generate.date + generate.timeFinal); */
             Swal.fire({
@@ -57,11 +58,13 @@ const DoctorAddReservation = () => {
             setGenerate({
                 date: null,
                 timeFinal: null,
-                timeStart: null})
+                timeStart: null
+            })
             dateR.current.value = null;
             timeR.current.value = null;
 
-        }else{
+        } else
+        {
             Swal.fire({
                 icon: "error",
                 title: "No se puede generar Hora",
@@ -71,11 +74,11 @@ const DoctorAddReservation = () => {
             })
         }
     }
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         actions.doctorGetReservationsReserved();
 
-    },[])
+    }, [])
 
 
 
@@ -121,22 +124,22 @@ const DoctorAddReservation = () => {
                     </h1>
                     <div>
                         <ul>
-                        {
-                            !!store.doctorReservations &&
-                            store.doctorReservations.map((reservation,index)=>{
-                                return(
-                                    
-                                    <>{
-                                        reservation.status === "available" &&
-                                        <li
-                                        key={index}>
-                                            {reservation.date_start}
-                                        </li>
-                                    }</>
-                                    
-                                )
-                            })
-                        }
+                            {
+                                !!store.doctorReservations &&
+                                store.doctorReservations.map((reservation, index) => {
+                                    return (
+
+                                        <>{
+                                            reservation.status === "available" &&
+                                            <li
+                                                key={index}>
+                                                {reservation.date_start}
+                                            </li>
+                                        }</>
+
+                                    )
+                                })
+                            }
                         </ul>
                     </div>
                 </div>
@@ -154,7 +157,7 @@ const DoctorAddReservation = () => {
                                         <>{
                                             reservation.status === "reserved" &&
                                             <li
-                                                key={reservation.id*9}>
+                                                key={reservation.id * 9}>
                                                 {reservation.date_start}
                                             </li>
                                         }</>

@@ -23,8 +23,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             clinicDoctor: null,
             doctorReservations: null,
             doctorDetail: null,
-            userReservations: null
-            
+            userReservations: null,
+            doctorReservationsReserved: null,
+            doctorHours: null,
         },
         actions: {
             registerClinica: async (email, name, address, phone, password) => {
@@ -47,7 +48,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const data = await response.json();
                 return data;
             },
-            registerUser: async (email, name, lastname, password) => {
+            registerUser: async (email, name, lastname, phone, password) => {
                 const store = getStore();
                 const opt = {
                     method: "POST",
@@ -55,6 +56,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         email: email,
                         name: name,
                         lastname: lastname,
+                        phone: phone,
                         password: password
                     }),
                     headers: {
@@ -874,7 +876,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error: " + error)
                 }
             },
-            getHoursReserved: async () => {
+            getHoursReservations: async () => {
                 const store = getStore();
                 const opt = {
                     headers: {
@@ -1124,7 +1126,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 event = event.toLocaleTimeString('es-CL',opt,{ hour:"2-digit", minute : "2-digit" })
                 return event
             },
-            doctorAddReservation: async (hour_start,hour_end) => {
+            doctorAddReservation: async (hour_start, hour_end) => {
                 const store = getStore();
                 const actions = getActions();
                 const opt = {
@@ -1164,6 +1166,28 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
                     console.log(data);
                     setStore({ doctorReservations: data })
+                } catch (error)
+                {
+                    console.error(error);
+                }
+            },
+            doctorGetReservations : async () => {
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/doctor/reservations`, opt)
+                    if (response.status !== 200)
+                    {
+                        console.error("There has been some error in get doctor reservations")
+                    }
+                    const data = await response.json();
+                    setStore({ doctorHours: data })
+                    return data
                 } catch (error)
                 {
                     console.error(error);

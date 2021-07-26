@@ -25,7 +25,7 @@ import HomeClinic from './views/HomeClinic';
 import ClinicProfileDetail from './views/ClinicProfileDetail';
 import ClinicCalendar from './views/ClinicCalendar';
 import Custom404 from './views/404';
-import Reservetime from './views/ReserveTime';
+import ReserveTime from './views/ReserveTime';
 import DoctorRegister from './views/DoctorRegister';
 import ClinicDoctor from './views/ClinicDoctor';
 import LoginDoctor from './views/LoginDoctor';
@@ -33,7 +33,7 @@ import HomeDoctor from './views/HomeDoctor';
 import DoctorProfileDetail from './views/DoctorProfileDetail';
 import UserReservations from './views/UserReservations';
 import DoctorCalendar from './views/DoctorCalendar';
-import DoctorAddReservation from './views/DoctorAddReservation';
+import Footer from './Components/Footer';
 
 function App() {
   return (
@@ -52,7 +52,7 @@ function App() {
           <Route exact path="/user/pets/add" component={AddPet}/>
           <Route exact path="/user/pet/history/:pet_id" component={UserPetHistory}/>
           <Route exact path="/user/profile" component={UserProfileDetail} />
-          <Route exact path="/user/reserve" component={Reservetime}/>
+          <Route exact path="/user/reserve" component={ReserveTime}/>
           <Route exact path="/user/reservations" component={UserReservations} />
           <Route exact path="/foundation/login" component={LoginFoundation}/>
           <Route exact path="/foundation" component={HomeFoundation}/>
@@ -72,9 +72,9 @@ function App() {
           <Route exact path="/doctor" component={HomeDoctor}/>
           <Route exact path="/doctor/profile" component={DoctorProfileDetail}/>
           <Route exact path="/doctor/calendar" component={DoctorCalendar} />
-          <Route exact path="/doctor/add/reservation" component={DoctorAddReservation}/>
           <Route component={Custom404}/>
         </Switch>
+        <Footer/>
       </BrowserRouter>
     </>
   );
