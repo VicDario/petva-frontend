@@ -26,8 +26,8 @@ const UserPetHistory = () => {
     const [save, setSave] = useState("off");
     const [updates, setUpdates] = useState({
         name: null,
-        code_chip : null,
-        breed : null
+        code_chip: null,
+        breed: null
     });
     const register = () => {
         if (save === "off")
@@ -45,20 +45,22 @@ const UserPetHistory = () => {
         actions.getHistoryUserPet(pet_id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    
+
     const reportLost = () => {
         actions.userReportPetLost(pet_id, last_location);
         console.log(last_location)
     }
     const reportFounded = () => {
-        if(pet_id!==null){
+        if (pet_id !== null)
+        {
             actions.userReportPetFounded(pet_id);
-            
+
         }
     }
     const deletePet = () => {
-        if(pet_id!==null){
-            actions.userDeletePet(pet_id,history);
+        if (pet_id !== null)
+        {
+            actions.userDeletePet(pet_id, history);
             Swal.fire({
                 icon: "success",
                 title: "Mascota Eliminada :(",
@@ -68,12 +70,12 @@ const UserPetHistory = () => {
         }
     }
     const update = () => {
-        if (userPet!== null
+        if (userPet !== null
         )
         {
 
             actions.userPutPet(updates.name, updates.code_chip, updates.breed,
-                 validarVacio(store.auxPicture),userPet.id);
+                validarVacio(store.auxPicture), userPet.id);
             Swal.fire({
                 icon: "success",
                 title: "Usuario Actualizado",
@@ -94,14 +96,14 @@ const UserPetHistory = () => {
         let file = e.target.files[0]; // load the picture (just one file)
         actions.convertImgToBase64(file); //Save picture in base64 format at store in auxPicture
     }
-    const formatDateB = (date)=>{
+    const formatDateB = (date) => {
 
         let event = new Date(date)
         event = event.toLocaleDateString()
         return event
     }
 
-    
+
 
     return (
         <div className="container">
@@ -122,13 +124,16 @@ const UserPetHistory = () => {
                                 <FiEdit />
                             </span>
                             <span
-                                onClick={deletePet}
+
                                 className="text-danger fs-3"
                                 type="button"
                                 title="Eliminar Mascota"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"
                             >
                                 <FaTrash />
                             </span>
+
                         </div>
                     }
                     {
@@ -208,7 +213,7 @@ const UserPetHistory = () => {
                                 <input
                                     placeholder={userPet.name}
                                     className="form-control text-white bg-dark"
-                                    type="text" 
+                                    type="text"
                                     onChange={(e) => { setUpdates({ ...updates, name: e.target.value }) }}
                                 />
                             </div>
@@ -220,7 +225,7 @@ const UserPetHistory = () => {
                                 <input
                                     placeholder={userPet.code_chip}
                                     className="form-control text-white bg-dark"
-                                    type="text" 
+                                    type="text"
                                     onChange={(e) => { setUpdates({ ...updates, code_chip: e.target.value }) }}
                                 />
                             </div>
@@ -242,14 +247,14 @@ const UserPetHistory = () => {
                                 <input className="form-control text-white bg-dark"
                                     type="file"
                                     placeholder="Foto Mascota"
-                                 onChange={e => handleLoad(e)} accept="image/png, .jpg, .jpeg" 
+                                    onChange={e => handleLoad(e)} accept="image/png, .jpg, .jpeg"
                                 />
                             </div>
                             <div
                                 className="d-flex justify-content-around my-3">
                                 <button
                                     className="btn btn-success"
-                                     onClick={update} >
+                                    onClick={update} >
                                     Guardar Cambios
                                 </button>
                                 <button
@@ -267,8 +272,8 @@ const UserPetHistory = () => {
                             <span
                                 title="Agregar Vacuna"
                                 className="text-success"
-                                >
-                                
+                            >
+
                             </span>
                         </h2>
                     </div>
@@ -344,7 +349,7 @@ const UserPetHistory = () => {
                             <span
                                 title="Agregar consulta"
                                 className="text-success"
-                                >
+                            >
                             </span>
                         </h2>
                     </div>
@@ -374,7 +379,7 @@ const UserPetHistory = () => {
                                             </button>
                                         </h2>
                                         <div
-                                            
+
                                             id={"collapse" + index}
                                             className="accordion-collapse collapse"
                                             aria-labelledby="headingOne"
@@ -477,7 +482,7 @@ const UserPetHistory = () => {
                                                                 <strong>
                                                                     Descripción:</strong> {cirugia.description}
                                                             </li>
-                                                            
+
                                                             <li
                                                                 className="list-group-item">
                                                                 <strong>
@@ -600,6 +605,51 @@ const UserPetHistory = () => {
                                 data-bs-dismiss="modal"
                             >
                                 Cambiar estado
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* Modal para verificar eliminación*/}
+            <div
+                className="modal fade"
+                id="exampleModal"
+                tabIndex={-1}
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+            >
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">
+                                Eliminar Mascota
+                            </h5>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            />
+                        </div>
+                        <div className="modal-body">
+                            <h4>
+                                ¿Estás Seguro que deseas eliminar tu mascota?
+                            </h4>
+                        </div>
+                        <div className="modal-footer">
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                            >
+                                Cancelar
+                            </button>
+                            <button type="button"
+                                className="btn btn-danger"
+                                onClick={deletePet}
+                                data-bs-dismiss="modal"
+                            >
+                                Confirmar
                             </button>
                         </div>
                     </div>

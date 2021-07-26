@@ -297,7 +297,7 @@ const Reservetime = () => {
                                             <td>{reservation.doctor_name}</td>
                                             <td>{reservation.clinic_name}</td>
                                             <td>{moment(reservation.date_start).format("DD/MM/YYYY")}</td>
-                                            <td>{moment(reservation.date_start).format("HH:mm")}</td>
+                                            <td>{moment(reservation.date_start).utc().format("HH:mm")}</td>
                                         </tr>
                                     </tbody>
                                 </table>
