@@ -32,6 +32,7 @@ import LoginDoctor from './views/LoginDoctor';
 import HomeDoctor from './views/HomeDoctor';
 import DoctorProfileDetail from './views/DoctorProfileDetail';
 import UserReservations from './views/UserReservations';
+import DoctorAddReservation from './views/DoctorAddReservation';
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
           <Route exact path="/doctor/profile" component={DoctorProfileDetail}/>
           <Route exact path="/clinic/doctor" component={ClinicDoctor} />
           <Route exact path="/user/reservations" component={UserReservations} />
+          <Route exact path="/doctor/add/reservation" component={DoctorAddReservation}/>
           <Route component={Custom404}/>
         </Switch>
       </BrowserRouter>
