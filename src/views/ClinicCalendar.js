@@ -14,7 +14,7 @@ const ClinicCalendar = (props) => {
     let [id, setId] = useState('');
 
     let syncEvens = async () => {
-        let events = await actions.getHoursReserved();
+        let events = await actions.getHoursReservations();
         let api = calendar.current.getApi();
         api.removeAllEvents();
         if (events === undefined ){

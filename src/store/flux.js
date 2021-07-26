@@ -874,7 +874,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error: " + error)
                 }
             },
-            getHoursReserved: async () => {
+            getHoursReservations: async () => {
                 const store = getStore();
                 const opt = {
                     headers: {
