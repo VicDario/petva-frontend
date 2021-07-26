@@ -2,10 +2,11 @@ import { useContext, useState, useRef } from "react";
 import { Context } from "../store/appContext";
 import moment from "moment";
 import Swal from "sweetalert2";
+import { useEffect } from "react";
 
 
 const DoctorAddReservation = () => {
-    const { actions } = useContext(Context);
+    const { store,actions } = useContext(Context);
     const [generate, setGenerate] = useState({
         date: null,
         timeFinal: null,
@@ -70,10 +71,11 @@ const DoctorAddReservation = () => {
             })
         }
     }
-    const testGetReserved = ()=>{
-        /* actions.doctorGetReservationsReserved(); */
-        console.log((generate.date + generateTimeFinal(generate.date + generate.timeStart)))
-    }
+    
+    useEffect(()=>{
+        actions.doctorGetReservationsReserved();
+
+    },[])
 
 
 
@@ -117,17 +119,50 @@ const DoctorAddReservation = () => {
                     <h1>
                         Horas Disponibles para Reserva
                     </h1>
+                    <div>
+                        <ul>
+                        {
+                            !!store.doctorReservations &&
+                            store.doctorReservations.map((reservation,index)=>{
+                                return(
+                                    
+                                    <>{
+                                        reservation.status === "available" &&
+                                        <li
+                                        key={index}>
+                                            {reservation.date_start}
+                                        </li>
+                                    }</>
+                                    
+                                )
+                            })
+                        }
+                        </ul>
+                    </div>
                 </div>
                 <div className="col-md-4 col-12">
                     <h1>
                         Horas Reservadas
                     </h1>
                     <div>
-                        <button
-                            onClick={testGetReserved}
-                        >
-                            Ver reservadas
-                        </button>
+                        <ul>
+                            {
+                                !!store.doctorReservations &&
+                                store.doctorReservations.map((reservation, index) => {
+                                    return (
+
+                                        <>{
+                                            reservation.status === "reserved" &&
+                                            <li
+                                                key={reservation.id*9}>
+                                                {reservation.date_start}
+                                            </li>
+                                        }</>
+
+                                    )
+                                })
+                            }
+                        </ul>
                     </div>
                 </div>
 

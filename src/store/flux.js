@@ -23,8 +23,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             clinicDoctor: null,
             doctorReservations: null,
             doctorDetail: null,
-            userReservations: null,
-            doctorReservationsReserved: null
+            userReservations: null
+            
         },
         actions: {
             registerClinica: async (email, name, address, phone, password) => {
@@ -1126,6 +1126,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             doctorAddReservation: async (hour_start,hour_end) => {
                 const store = getStore();
+                const actions = getActions();
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -1144,6 +1145,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 const data = await response.json();
                 console.log(data);
+                actions.doctorGetReservationsReserved();
             },
             doctorGetReservationsReserved : async()=>{
                 const store = getStore();
@@ -1154,14 +1156,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 try
                 {
-                    const response = await fetch(`${store.baseUrl}api/doctor/reservations/reserved`, opt)
+                    const response = await fetch(`${store.baseUrl}api/doctor/reservations`, opt)
                     if (response.status !== 200)
                     {
                         console.error("There has been some error in get doctor reservations")
                     }
                     const data = await response.json();
                     console.log(data);
-                    setStore({ doctorReservationsReserved: data })
+                    setStore({ doctorReservations: data })
                 } catch (error)
                 {
                     console.error(error);
