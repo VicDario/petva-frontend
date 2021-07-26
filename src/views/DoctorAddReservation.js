@@ -1,9 +1,7 @@
-import { useContext } from "react";
-import { useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { Context } from "../store/appContext";
-import Swal from "sweetalert2";
-import { useRef } from "react";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 
 const DoctorAddReservation = () => {
@@ -15,10 +13,10 @@ const DoctorAddReservation = () => {
     });
     const dateR = useRef(null);
     const timeR = useRef(null);
-    const [hour, setHour] = useState({
+    /* const [hour, setHour] = useState({
         hour_start: null,
         hour_end: null
-    });
+    }); */
     const generateDateforSend = (date, time) => {
         let dateF = date.split("-");
         dateF = dateF.reverse()
