@@ -7,7 +7,7 @@ import moment from "moment";
 import 'moment/locale/es';
 
 
-const Reservetime = () => {
+const ReserveTime = () => {
     const { store, actions } = useContext(Context);
     const history = useHistory();
     const [clinic, setClinic] = useState({
@@ -326,4 +326,4 @@ const Reservetime = () => {
     )
 }
 
-export default Reservetime;
+export default ReserveTime;

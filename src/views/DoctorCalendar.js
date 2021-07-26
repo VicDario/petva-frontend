@@ -11,41 +11,47 @@ const DoctorCalendar = (props) => {
     const { actions } = useContext(Context);
     let calendar = useRef(null);
     let [title, setTitle] = useState('');
-    let id = '';
+    let [id, setId] = useState('');
+    let [idPet, setIdPet] = useState('');
+    let [dateStart, setDateStart] = useState('');
+    let [dateEnd, setDateEnd] = useState('');
 
     let syncEvens = async () => {
-        let events = await actions.getHoursReserved();
+        let events = await actions.doctorGetReservations();
         let api = calendar.current.getApi();
+        api.removeAllEvents();
         if (events === undefined ){
-            props.history.push("/clinic/login");
+            actions.logOut();
+            props.history.push("/doctor/login");
             return
         }
         for (let i = 0; i < events.length; i++) {
             let title = "";
             let backgroundColor = "";
-            console.log(events[i].status)
             if (events[i].status === 'available'){
-                title=`Dr. ${events[i].doctor_name} Disponible`;
+                title=`Hora disponible`;
                 backgroundColor = "#3474d9";
             }else if (events[i].status === 'reserved'){
-                title = `Dr. ${events[i].doctor_name}, Paciente: ${events[i].info_pet.name}, Telefono: ${events[i].phone}, Email: ${events[i].email_customer}`;
+                title = `Paciente: ${events[i].info_pet.name}, Telefono: ${events[i].phone}, Email: ${events[i].email_customer}. Cita reservada`;
                 backgroundColor = "#c29e29";
             }else if(events[i].status === 'canceled'){
                 if(events[i].info_pet === null){
-                    title = `Cita de Dr. ${events[i].doctor_name}, Sin informacion de paciente`;
+                    title = `Cita cancelada, Sin informacion de paciente`;
                 }else{
-                    title = `Dr. ${events[i].doctor_name}, Paciente: ${events[i].info_pet.name}, Telefono: ${events[i].phone}, Email: ${events[i].email_customer} Cancelada`;
+                    title = `Paciente: ${events[i].info_pet.name}, Telefono: ${events[i].phone}, Email: ${events[i].email_customer} Cancelada`;
                 }
                 backgroundColor = "#db4b3d";
             }else if(events[i].status === 'confirmed'){
-                title = `Dr. ${events[i].doctor_name}, Paciente: ${events[i].info_pet.name} Confirmada`;
+                title = `Paciente: ${events[i].info_pet.name}. En espera para consulta`;
                 backgroundColor = "#359c33";
             }else if(events[i].status === 'finished'){
-                title = `Cita de Dr. ${events[i].doctor_name} Finalizada`;
+                title = `Cita Atendida`;
                 backgroundColor = "#2444b5";
             }
             let start = moment.parseZone(events[i].date_start).format();
             let end = moment.parseZone(events[i].date_end).format();
+            let idPet = null
+            if (events[i].info_pet !== null)    idPet = events[i].info_pet.id;
             
             api.addEvent({
                 title,
@@ -54,19 +60,17 @@ const DoctorCalendar = (props) => {
                 allDay: false,
                 id: events[i].id,
                 backgroundColor,
-                status: events[i].status
+                status: events[i].status,
+                idPet
             })
         }
     }
 
     const handleEventClick = (arg) => {
         let status = arg.event.extendedProps.status;
-        id = arg.event.id;
+        setId(arg.event.id);
         setTitle(arg.event.title);
-        if (status === 'reserved'){
-            let modal = new bootstrap.Modal(document.getElementById('modalReserved'));
-            modal.show();
-        }
+        setIdPet(arg.event.extendedProps.idPet);
         if (status === 'available'){
             let modal = new bootstrap.Modal(document.getElementById('modalAvailable'));
             modal.show();
@@ -74,20 +78,40 @@ const DoctorCalendar = (props) => {
         if (status === 'canceled'){
             let modal = new bootstrap.Modal(document.getElementById('modalCanceled'));
             modal.show();
-        } 
+        }
+        if(status === 'confirmed'){
+            let modal = new bootstrap.Modal(document.getElementById('modalConfirmed'));
+            modal.show();
+        }
     }
 
     const handleChangeEvent = async (status) => {
         let resp = await actions.updateReservation(id, status);
         if (resp.ok){
-            let api = calendar.current.getApi();
-            api.removeAllEvents();
             syncEvens()
         }
     }
+
+    const handleDayClick =(arg) => {
+        let init = moment(arg.dateStr).format('DD/MM/YYYY HH:mm:ss');
+        let end = moment(arg.dateStr).add(30, 'minutes').format('DD/MM/YYYY HH:mm:ss');
+        setDateStart(String(init))
+        setDateEnd(String(end))
+        setTitle(`Desea abrir consulta ${init}?`)
+        let modal = new bootstrap.Modal(document.getElementById('modalCreateHour'));
+        modal.show();
+    }
+
+    const openHour = async () => {
+        let resp = await actions.doctorAddReservation(dateStart, dateEnd);
+        if (resp.ok){
+            syncEvens();
+        }
+    }
+    const goToAttention = () => {
+        props.history.push(`/doctor/attention/${id}/${idPet}`);
+    }
     useEffect(() => {
-        let api = calendar.current.getApi();
-        api.removeAllEvents();
         syncEvens()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -112,6 +136,7 @@ const DoctorCalendar = (props) => {
                 }}
                 slotDuration={"00:30"}
                 eventClick={handleEventClick}
+                dateClick={handleDayClick}
                 height={"84vh"}
                 customButtons={{
                     addEventButton: {
@@ -170,7 +195,38 @@ const DoctorCalendar = (props) => {
                         data-bs-dismiss="modal"
                         onClick={() => handleChangeEvent('canceled')}
                         >
-                            Cancelar
+                            Cancelar hora
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div className="modal fade" id="modalCanceled" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Hora Cancelada</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        {title}
+                    </div>
+                    <div className="modal-footer">
+                        <button 
+                        type="button" 
+                        className="btn btn-primary" 
+                        data-bs-dismiss="modal"
+                        onClick={() => handleChangeEvent('available')}
+                        >
+                            Disponible
+                        </button>
+                        <button 
+                        type="button" 
+                        className="btn btn-warning" 
+                        data-bs-dismiss="modal"
+                        onClick={() => handleChangeEvent('missed')}
+                        >
+                            Perdida
                         </button>
                     </div>
                     </div>
@@ -211,7 +267,7 @@ const DoctorCalendar = (props) => {
                 <div className="modal-dialog">
                     <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Hora Reservada</h5>
+                        <h5 className="modal-title" id="exampleModalLabel">Paciente en espera:</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
@@ -222,23 +278,37 @@ const DoctorCalendar = (props) => {
                             type="button"   
                             className="btn btn-success"
                             data-bs-dismiss="modal"
-                            onClick={() => handleChangeEvent('confirmed')}
+                            onClick={() => goToAttention()}
                         >
-                            Confirmar Asistencia
+                            Atender
                         </button>
-                        <button 
-                        type="button" 
-                        className="btn btn-warning" 
-                        data-bs-dismiss="modal"
-                        onClick={() => handleChangeEvent('missed')}
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div className="modal fade" id="modalCreateHour" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Paciente en espera:</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        {title}
+                    </div>
+                    <div className="modal-footer">
+                        <button
+                            type="button"   
+                            className="btn btn-success"
+                            data-bs-dismiss="modal"
+                            onClick={() => openHour()}
                         >
-                            Perdida
+                            Crear hora
                         </button>
-                        <button 
-                        type="button" 
-                        className="btn btn-danger" 
-                        data-bs-dismiss="modal"
-                        onClick={() => handleChangeEvent('canceled')}
+                        <button
+                            type="button"   
+                            className="btn btn-secondary"
+                            data-bs-dismiss="modal"
                         >
                             Cancelar
                         </button>
