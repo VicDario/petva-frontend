@@ -34,6 +34,7 @@ import DoctorProfileDetail from './views/DoctorProfileDetail';
 import UserReservations from './views/UserReservations';
 import DoctorCalendar from './views/DoctorCalendar';
 import DoctorAddReservation from './views/DoctorAddReservation';
+import Footer from './Components/Footer';
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
           <Route exact path="/doctor/add/reservation" component={DoctorAddReservation}/>
           <Route component={Custom404}/>
         </Switch>
+        <Footer/>
       </BrowserRouter>
     </>
   );
