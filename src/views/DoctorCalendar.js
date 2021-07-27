@@ -86,7 +86,7 @@ const DoctorCalendar = (props) => {
     }
 
     const handleChangeEvent = async (status) => {
-        let resp = await actions.updateReservation(id, status);
+        let resp = await actions.doctorUpdateReservation(id, status);
         if (resp.ok){
             syncEvens()
         }
