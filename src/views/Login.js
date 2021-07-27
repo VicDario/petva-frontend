@@ -2,6 +2,7 @@ import { useContext, useRef } from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router";
 import Swal from "sweetalert2";
+
 const Login = () => {
     const { actions } = useContext(Context);
     const inputEmail = useRef();

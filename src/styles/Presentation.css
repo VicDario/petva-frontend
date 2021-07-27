@@ -1,0 +1,74 @@
+.section-one {
+    background-color: #E4DBD9;
+}
+.section-three {
+    background-color: #CDE4B5;
+}
+.section-five {
+    background-color: #E4DBD9;
+    min-height: 300px;
+}
+.dog-landing-img {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+}
+.cat-landing-img {
+    width: 100%;
+    height: auto;
+}
+.foundation-landing-img {
+    width: 100%;
+    height: auto;
+}
+.landing-square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    background-color: #c4c4c4ac;
+    border-radius: 30px;
+}
+
+.link-landing {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    padding: 5px 40px;
+    background-color: #63A583;
+    border-radius: 25px;
+}
+.link-landing:hover, .link-landing-two:hover {
+    background-color: #47765e;
+    color: white;
+}
+.link-landing:focus, .link-landing-two:focus{
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #58a67e61;
+}
+
+.link-landing-two{
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    padding: 5px 40px;
+    background-color: transparent;
+    border-radius: 25px;
+    border: #47765e solid 3px;
+}
+
+.link-landing-two:focus{
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #58a67e61;
+}
+
+.relative {
+    position: absolute;
+}
+
+@media (max-width: 768px) {
+    .landing-square {
+        margin-top: 20px;
+    }
+}

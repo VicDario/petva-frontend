@@ -149,8 +149,6 @@ const ReserveTime = () => {
                                             className="form-select form-select-lg mb-3"
                                             aria-label=".form-select-lg example"
                                             onChange={(e) => { giveValueDoctor(e) }}
-
-
                                         >
                                             <option value="0">Veterinarios</option>
                                             {store.doctorsList.map((doctor, index) => {
@@ -189,31 +187,35 @@ const ReserveTime = () => {
                                 <ul className="list-group my-3">
                                     {
                                         store.doctorReservations.length > 0 && doctor.id > 0 ?
-                                            store.doctorReservations.map((reservation, index) => {
-                                                return (
-                                                    <>
-                                                        <li
-                                                            key={index}
-                                                            className="list-group-item "
-                                                            aria-current="true"
-                                                            value={reservation.id}
-                                                        >{moment(reservation.date_start).locale("es").utc().format("LLLL")}
-                                                        </li>
-                                                        <button
+                                            <ul>
+                                            {
+                                                store.doctorReservations.map((reservation, index) => {
+                                                    return (
+                                                        <>
+                                                            <li
+                                                                key={index}
+                                                                className="list-group-item "
+                                                                aria-current="true"
+                                                                value={reservation.id}
+                                                            >{moment(reservation.date_start).locale("es").utc().format("LLLL")}
+                                                            </li>
+                                                            <button
 
-                                                            type="button"
-                                                            className="btn btn-primary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal"
-                                                            
-                                                            onClick={() => { setReservation({ ...reservation, id: reservation.id }) }}
-                                                        >
-                                                            Reservar Hora
-                                                        </button>
-                                                    </>
-                                                )
-                                            })
-                                            :
+                                                                type="button"
+                                                                className="btn btn-primary"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModal"
+                                                                
+                                                                onClick={() => { setReservation({ ...reservation, id: reservation.id }) }}
+                                                            >
+                                                                Reservar Hora
+                                                            </button>
+                                                        </>
+                                                    )
+                                                })
+                                            }
+                                            </ul>
+                                        :
                                             <p>No Hay Horas Disponibles </p>
                                     }
                                 </ul>
