@@ -2,7 +2,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import { FaPlusCircle, FaTrash } from "react-icons/fa"
+import { FaTrash } from "react-icons/fa"
 import { FaCat, FaDog } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import Swal from "sweetalert2";
@@ -15,30 +15,30 @@ const UserPetHistory = () => {
     const [last_location, setLastLocation] = useState();
     const history = useHistory();
 
-    const [newVaccine, setNewVaccine] = useState({
+   /* const [newVaccine, setNewVaccine] = useState({
         date: null,
         lot: null,
         name: null,
         laboratory: null
-    });
-    const [newDiagnostic, setNewDiagnostic] = useState({
+    });*/
+   /* const [newDiagnostic, setNewDiagnostic] = useState({
         date: null,
         diagnostic: null,
         doctor_name: null
-    })
-    const [newSurgery, setNewSurgery] = useState({
+    })*/
+   /* const [newSurgery, setNewSurgery] = useState({
         date: null,
         description: null,
         doctor_name: null
-    })
-    const formatDate = (date) => {
+    })*/
+   /* const formatDate = (date) => {
         let newdate = date.split("-")
         newdate = newdate.reverse()
         newdate = newdate.join("/")
         console.log(newdate)
 
         return newdate
-    }
+    }*/
     const [save, setSave] = useState("off");
     const [updates, setUpdates] = useState({
         name: null,
@@ -59,6 +59,9 @@ const UserPetHistory = () => {
         actions.getHistoryUserPet(pet_id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+
+  /*
     const addVaccine = () => {
         if (newVaccine.date !== null && newVaccine.lot !== null && newVaccine.name !== null && newVaccine.laboratory !== null) {
             actions.addVaccinetoPetUser(formatDate(newVaccine.date), newVaccine.lot, newVaccine.name, newVaccine.laboratory, pet_id)
@@ -69,12 +72,14 @@ const UserPetHistory = () => {
                 name: null,
                 laboratory: null
             })
-            /* actions.getHistoryUserPet(pet_id); */
+            // actions.getHistoryUserPet(pet_id);
         } else {
             console.log("Vacuna no agregada");
             alert("Debes llenar todos los campos para agregar vacuna");
         }
     }
+    */
+  /*
     const addDiagnostic = () => {
         if (newDiagnostic.date !== null && newDiagnostic.diagnostic !== null && newDiagnostic.doctor_name !== null) {
             actions.addDiagnostictoPetUser(formatDate(newDiagnostic.date), newDiagnostic.diagnostic, newDiagnostic.doctor_name, pet_id)
@@ -89,6 +94,8 @@ const UserPetHistory = () => {
             alert("Debes llenar todos los campos para agregar diagnóstico");
         }
     }
+    */
+  /*
     const addSurgery = () => {
         if (newSurgery.date !== null && newSurgery.description !== null && newSurgery.doctor_name !== null) {
             actions.addSurgerytoPetUser(formatDate(newSurgery.date), newSurgery.description, newSurgery.doctor_name, pet_id)
@@ -103,6 +110,7 @@ const UserPetHistory = () => {
             alert("Debes llenar todos los campos para agregar cirugía");
         }
     }
+   */
     const reportLost = () => {
         actions.userReportPetLost(pet_id, last_location);
         console.log(last_location)

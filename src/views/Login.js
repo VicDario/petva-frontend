@@ -51,16 +51,16 @@ const Login = () => {
                                 <input type="password" ref={inputPassword} className="form-control" placeholder="********" id="password" />
                                 <label htmlFor="password">Password</label>
                             </div>
-                            <div className="checkbox mb-2">
+                            {/*<div className="checkbox mb-2">
                                 <label>
                                     <input type="checkbox" className="me-1" value="remember-me" />
                                     Recuerdame
                                 </label>
-                            </div>
-                            <button className="w-50 btn btn-primary" type="submit">Iniciar Sesión</button>
-                            <div className="mt-1">
+                            </div>*/}
+                            <button className="w-50 btn btn-primary mt-3" type="submit">Iniciar Sesión</button>
+                            {/*<div className="mt-1">
                                 <span className="text-muted">¿Has olvidado tu contraseña?</span>
-                            </div>
+                            </div>*/}
                         </form>
                     </main>
                 </div>
