@@ -21,35 +21,18 @@ const Navbar = () => {
             actions.getUserDetail();
         } else if (store.userType === "foundation") {
             actions.getFoundationDetail();
-        } else if (store.userType === "clinic")
-        {
+        } else if (store.userType === "clinic") {
             actions.getClinicDetail();
-        } else if (store.userType=== "doctor"){
+        } else if (store.userType === "doctor") {
             actions.getDoctorDetail();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); //Si exite token recupera la sesion
 
-    const toUserDetails = () => {
-        if (store.userType === "normal") {
-
-            history.push("/user/profile");
-        } else if (store.userType === "foundation") {
-            history.push("/foundation/profile");
-
-        } else if (store.userType === "clinic") {
-            history.push("/clinic/profile");
-
-        } else if (store.userType === "doctor")
-        {
-            history.push("/doctor/profile");
-
-        }
-    }
-    const toRegister = ()=>{
+    const toRegister = () => {
         history.push("/register")
     }
-    const toServices = ()=>{
+    const toServices = () => {
         history.push("/services")
     }
 
@@ -81,22 +64,22 @@ const Navbar = () => {
                             <div className="navbar-nav ">
                                 <div className="d-flex align-items-center border-end border-4 border-dark me-2">
                                     <h4 className="me-2"
-                                    onClick={toServices}
+                                        onClick={toServices}
                                     >
                                         Servicios
                                     </h4>
                                     <h4 className="me-2">
                                         Contáctanos
                                     </h4>
-                                    
+
                                 </div>
                                 <div className="text-end d-flex align-items-center m-2" >
                                     <button
                                         className="text-dark fs-5 text-decoration-none badge rounded-pill bg-light"
                                         onClick={toRegister}
                                     >
-                                    {/* <Link to="/register" className="text-decoration-none">
-                                        Registrarse <MdPets className="navbar__button--icon" />
+                                        {/* <Link to="/register" className="text-decoration-none">
+                                        Registrarse <MdPets className="navbar__button--icon text-decoration-none" />
                                     </Link> */}
                                         Registrarse
                                     </button>
@@ -110,7 +93,7 @@ const Navbar = () => {
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         >
-                                            Iniciar sesión {/* <IoLogInOutline className="navbar__button--icon" /> */}
+                                            Iniciar sesión {/* <IoLogInOutline className="navbar__button--icon text-decoration-none" /> */}
                                         </button>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <li>
@@ -138,7 +121,7 @@ const Navbar = () => {
                                 </div>
                             </div>
                         </div>
-                    :
+                        :
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
                                 <div className="text-end">
@@ -149,7 +132,7 @@ const Navbar = () => {
                                             className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5"
                                             style={{ width: "60px" }}
                                         >
-                                            <AiOutlineHome className="navbar__button--icon" />
+                                            <AiOutlineHome className="navbar__button--icon text-decoration-none " />
                                         </Link>
                                     }{
                                         localStorage.getItem("petvaUser") === "foundation" &&
@@ -158,7 +141,7 @@ const Navbar = () => {
                                             className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5"
                                             style={{ width: "60px" }}
                                         >
-                                            <AiOutlineHome className="navbar__button--icon" />
+                                            <AiOutlineHome className="navbar__button--icon text-decoration-none" />
                                         </Link>
                                     }{
                                         localStorage.getItem("petvaUser") === "clinic" &&
@@ -167,7 +150,7 @@ const Navbar = () => {
                                             className="navbar__button text-decoration-none badge rounded-circle bg-dark px-3 py-3 me-1 fs-5"
                                             style={{ width: "60px" }}
                                         >
-                                            <AiOutlineHome className="navbar__button--icon" />
+                                            <AiOutlineHome className="navbar__button--icon text-decoration-none" />
                                         </Link>
                                     }{
                                         localStorage.getItem("petvaUser") === "doctor" &&
@@ -176,7 +159,7 @@ const Navbar = () => {
                                             className="navbar__button text-decoration-none badge rounded-circle bg-dark px-3 py-3 me-1 fs-5"
                                             style={{ width: "60px" }}
                                         >
-                                            <AiOutlineHome className="navbar__button--icon" />
+                                            <AiOutlineHome className="navbar__button--icon text-decoration-none" />
                                         </Link>
                                     }
                                 </div>
@@ -230,58 +213,90 @@ const Navbar = () => {
                                             />
                                         }
                                     </span>
-                                    <ul className="dropdown-menu dropdown-menu-left " aria-labelledby="dropdownMenuButton1">
+                                    <ul className="dropdown-menu dropdown-menu-left dropdown-avatar" aria-labelledby="dropdownMenuButton1">
 
-                                        <div className="container px-5">
-                                            <div className="d-flex justify-content-center">
+                                        <div className="container px-1">
+                                            <div className="d-flex justify-content-center me-5 pe-5 ms-2 pt-1">
                                                 {
                                                     store.userType === "foundation" &&
                                                     !!store.foundationDetail &&
-                                                    <Avatar
-                                                        alt={store.foundationDetail.name}
-                                                        src={store.foundationDetail.picture}
-                                                        sx={{ width: 45, height: 45 }}
+                                                    <>
+                                                        <Avatar
+                                                            alt={store.foundationDetail.name}
+                                                            src={store.foundationDetail.picture}
+                                                            sx={{ width: 45, height: 45 }}
 
-                                                    />
+                                                        />
+                                                        <h5 className="my-auto ms-2">{store.foundationDetail.name}</h5>
+                                                    </>
                                                 }{
                                                     store.userType === "normal" &&
                                                     !!store.userDetail &&
-                                                    <Avatar
-                                                        alt={store.userDetail.name}
-                                                        src={store.userDetail.picture}
-                                                        sx={{ width: 45, height: 45 }}
+                                                    <>
+                                                        <Avatar
+                                                            alt={store.userDetail.name}
+                                                            src={store.userDetail.picture}
+                                                            sx={{ width: 45, height: 45 }}
 
-                                                    />
+                                                        />
+                                                        <h5 className="my-auto ms-2">{store.userDetail.name}</h5>
+                                                    </>
                                                 }{
                                                     store.userType === "clinic" &&
                                                     !!store.clinicDetail &&
-                                                    <Avatar
-                                                        alt={store.clinicDetail.name}
-                                                        src={store.clinicDetail.picture}
-                                                        sx={{ width: 45, height: 45 }}
+                                                    <>
+                                                        <Avatar
+                                                            alt={store.clinicDetail.name}
+                                                            src={store.clinicDetail.picture}
+                                                            sx={{ width: 45, height: 45 }}
 
-                                                    />
+                                                        />
+                                                        <h5 className="my-auto ms-2">{store.clinicDetail.name}</h5>
+                                                    </>
                                                 }{
                                                     store.userType === "doctor" &&
                                                     !!store.doctorDetail &&
-                                                    <Avatar
-                                                        alt={store.doctorDetail.name}
-                                                        src={store.doctorDetail.picture}
-                                                        sx={{ width: 45, height: 45 }}
+                                                    <>
+                                                        <Avatar
+                                                            alt={store.doctorDetail.name}
+                                                            src={store.doctorDetail.picture}
+                                                            sx={{ width: 45, height: 45 }}
                                                         />
+                                                        <h5 className="my-auto ms-2">{store.doctorDetail.name} </h5>
+                                                    </>
                                                 }
                                             </div>
-                                            <div className="text-center">
+                                            <div className="text-center d-grid">
                                                 {//user detalle navbar
                                                     store.userType === "normal" &&
                                                     !!store.userDetail &&
                                                     <>
-                                                        <h5>
-                                                            {store.userDetail.name} {store.userDetail.lastname}
-                                                        </h5>
-                                                        <span>
-                                                            {store.userDetail.email}
+                                                        <hr />
+                                                        <Link to="/user/profile" className="justify-content-start d-flex ms-2 text-decoration-none text-dark">
+                                                            Perfil
+                                                        </Link>
+                                                        <span className="justify-content-start d-flex ms-2">
+                                                            Ajustes
                                                         </span>
+                                                        <Link
+                                                            to="/user/pets"
+                                                            className="justify-content-start d-flex ms-2 text-decoration-none text-dark"
+                                                        >
+                                                            Mis Mascotas
+                                                        </Link>
+                                                        <span className="justify-content-start d-flex ms-2">
+                                                            Ayuda
+                                                        </span>
+                                                        <hr className="my-1" />
+                                                        <div className="row">
+                                                            <Link
+                                                                to="/"
+                                                                onClick={actions.logOut}
+                                                                className="justify-content-start d-flex ms-2 text-decoration-none text-dark"
+                                                            >
+                                                                Cerrar Sesión
+                                                            </Link>
+                                                        </div>
                                                     </>
                                                 }
                                                 {
@@ -289,90 +304,96 @@ const Navbar = () => {
                                                     store.userType === "foundation" &&
                                                     !!store.foundationDetail &&
                                                     <>
-                                                        <h5>
-                                                            {store.foundationDetail.name}
-                                                        </h5>
-                                                        <span>
-                                                            {store.foundationDetail.email}
+                                                        <hr />
+                                                        <Link to="/foundation/profile" className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark">
+                                                            Perfil
+                                                        </Link>
+                                                        <span className="justify-content-start d-flex ms-2 mb-1">
+                                                            Ajustes
                                                         </span>
+                                                        <Link
+                                                            to="/foundation/pets/adoption"
+                                                            className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark"
+                                                        >
+                                                            Mascotas en adopción
+                                                        </Link>
+                                                        <span className="justify-content-start d-flex ms-2 mb-1">
+                                                            Ayuda
+                                                        </span>
+                                                        <hr className="my-1" />
+                                                        <div className="row">
+                                                            <Link
+                                                                to="/"
+                                                                onClick={actions.logOut}
+                                                                className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark"
+                                                            >
+                                                                Cerrar Sesión
+                                                            </Link>
+                                                        </div>
                                                     </>
                                                 }{
                                                     store.userType === "clinic" &&
                                                     !!store.clinicDetail &&
                                                     <>
-                                                        <h5>
-                                                            {store.clinicDetail.name}
-                                                        </h5>
-                                                        <span>
-                                                            {store.clinicDetail.email}
+                                                        <hr />
+                                                        <Link to="/clinic/profile" className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark">
+                                                            Perfil
+                                                        </Link>
+                                                        <span className="justify-content-start d-flex ms-2 mb-1">
+                                                            Ajustes
                                                         </span>
+                                                        <Link
+                                                            to="/clinic/doctor"
+                                                            className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark"
+                                                        >
+                                                            Mis Medicos
+                                                        </Link>
+                                                        <span className="justify-content-start d-flex ms-2 mb-1">
+                                                            Ayuda
+                                                        </span>
+                                                        <hr className="my-1" />
+                                                        <div className="row">
+                                                            <Link
+                                                                to="/"
+                                                                onClick={actions.logOut}
+                                                                className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark"
+                                                            >
+                                                                Cerrar Sesión
+                                                            </Link>
+                                                        </div>
                                                     </>
                                                 }{
                                                     store.userType === "doctor" &&
                                                     !!store.doctorDetail &&
                                                     <>
-                                                        <h5>
-                                                            {store.doctorDetail.name}
-                                                        </h5>
-                                                        <span>
-                                                            {store.doctorDetail.email}
+                                                        <hr />
+                                                        <Link to="/doctor/profile" className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark">
+                                                            Perfil
+                                                        </Link>
+                                                        <span className="justify-content-start d-flex ms-2 mb-1">
+                                                            Ajustes
                                                         </span>
-                                                    </>
-                                                }
-                                            </div>
-                                            <div className="text-center my-3">
-                                                <button onClick={toUserDetails} className="badge rounded-pill  text-dark">
-                                                    Gestionar cuenta
-                                                </button>
-                                            </div>
-                                            <div className="row text-center">
-                                                {
-
-                                                    store.userType === "foundation" &&
-                                                    <>
-                                                        <div className="">
+                                                        <Link
+                                                            to="/doctor/calendar"
+                                                            className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark"
+                                                        >
+                                                            Calendario
+                                                        </Link>
+                                                        <span className="justify-content-start d-flex ms-2 mb-1">
+                                                            Ayuda
+                                                        </span>
+                                                        <hr className="my-1" />
+                                                        <div className="row">
                                                             <Link
-                                                                to="/foundation/pets/adoption"
-                                                                className=" rounded-pill  text-dark"
+                                                                to="/"
+                                                                onClick={actions.logOut}
+                                                                className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark"
                                                             >
-                                                                Mascotas En Adopción
-                                                            </Link>
-                                                        </div>
-                                                        <div>
-                                                            <Link
-                                                                to="/foundation/pets/tracking"
-                                                                className=" rounded-pill  text-dark"
-                                                            >
-                                                                Mascotas Con dueño
+                                                                Cerrar Sesión
                                                             </Link>
                                                         </div>
                                                     </>
                                                 }
-                                                {
-
-                                                    store.userType === "normal" &&
-                                                    <>
-                                                        <div className="">
-                                                            <Link
-                                                                to="/user/pets"
-                                                                className=" rounded-pill  text-dark"
-                                                            >
-                                                                Mis Mascotas
-                                                            </Link>
-                                                        </div>
-                                                        
-                                                    </>
-                                                }
-
-                                            </div>
-                                            <div className="row border text-center my-1">
-                                                <Link
-                                                    to="/"
-                                                    onClick={actions.logOut}
-                                                    className=""
-                                                >
-                                                    Cerrar Sesión
-                                                </Link>
                                             </div>
                                         </div>
                                     </ul>
