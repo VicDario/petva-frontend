@@ -35,6 +35,7 @@ import UserReservations from './views/UserReservations';
 import DoctorCalendar from './views/DoctorCalendar';
 import DoctorAttending from './views/DoctorAttending';
 import Footer from './Components/Footer';
+import Contact from './views/Contact';
 
 function App() {
   return (
@@ -74,6 +75,7 @@ function App() {
           <Route exact path="/doctor/profile" component={DoctorProfileDetail}/>
           <Route exact path="/doctor/calendar" component={DoctorCalendar} />
           <Route exact path="/doctor/attending/:reservation_id/:pet_id" component={DoctorAttending} />
+          <Route exact path="/contact" component={Contact}/>
           <Route component={Custom404}/>
         </Switch>
         <Footer/>
