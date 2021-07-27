@@ -27,20 +27,22 @@ const HomeUser = () => {
                             !!store.pets ?
                                 store.pets.length > 0 ?
                                     <div className="row">
-                                        <div className="col-12 col-md-6 d-flex justify-content-center">
+                                        <div className="col-12 col-md-6 my-1 d-flex justify-content-center">
                                             <Link to="/user/reserve"
-                                                className="btn btn-primary fs-2 fw-bold ">
-                                                <span className="fs-1 m-0"><FcOvertime /></span>
-                                                <p>Reservar</p>
-                                                <p>Hora Veterinaria</p>
+                                                className="btn btn-home-user fs-2 fw-bold ">
+                                                <span className="m-0">
+                                                    <img className="" src="/images/calendario.png" alt=""/>
+                                                </span>
+                                                <p>Reservar Cita Veterinaria</p>
                                             </Link >
                                         </div>
-                                        <div className="col-12 col-md-6 d-flex justify-content-center">
+                                        <div className="col-12 col-md-6 my-1 d-flex justify-content-center">
                                             <Link to="/user/reservations"
-                                                className="btn btn-primary fs-2 fw-bold ">
-                                                <span className="fs-1 m-0"><FcOvertime /></span>
-                                                <p>Ver y editar</p>
-                                                <p>mis horas veterinarias</p>
+                                                className="btn btn-home-user fs-2 fw-bold ">
+                                                <span className="fs-1 m-0">
+                                                    <img className="" src="/images/reloj.png" />
+                                                </span>
+                                                <p>Ver mis citas</p>
                                             </Link >
                                         </div>
                                     </div>

@@ -1,11 +1,14 @@
 @import url("./styles/navbar.css"); /* estilos asociados al navbar */
-@import url("./styles/home.css"); /* estilos asociados al home */
+@import url("./styles/home.css"); /* estilos asociados al home general */
+@import url("./styles/homeUser.css"); /* estilos asociados al homeUser */
 @import url("./styles/profiles.css"); /* estilos asociados al perfil */
 @import url("./styles/404.css");/* estilos asociados al 404 */
 @import url("./styles/calendar.css");/* estilos asociados al calendario */
 @import url("./styles/footer.css"); /* estilos asociados al footer */
 @import url("./styles/DoctorAttending.css");
 @import url("./styles/Presentation.css");
+@import url("./styles/login.css"); /* estilos asociados al login */
+@import url("./styles/contact.css"); /* estilos asociados al contacto */
 
 html body #root {
     font-family: 'Roboto', sans-serif !important;
