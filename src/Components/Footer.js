@@ -28,7 +28,7 @@ const Footer = () => {
                             <Link className="text-decoration-none footer-link mx-3 text-muted" to="/">
                                 Contáctanos
                             </Link>
-                            <Link className="text-decoration-none footer-link mx-3 text-muted" to="/">
+                            <Link className="text-decoration-none footer-link mx-3 text-muted" to="/adoption">
                                 Adopción
                             </Link>
                             <Link className="text-decoration-none footer-link mx-3 text-muted" to="/">
