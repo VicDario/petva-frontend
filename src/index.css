@@ -5,7 +5,7 @@
 @import url("./styles/calendar.css");/* estilos asociados al calendario */
 @import url("./styles/footer.css"); /* estilos asociados al footer */
 @import url("./styles/DoctorAttending.css");
-
+@import url("./styles/Presentation.css");
 
 html body #root {
     font-family: 'Roboto', sans-serif !important;
