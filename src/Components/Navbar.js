@@ -96,7 +96,7 @@ const Navbar = () => {
                                         onClick={toRegister}
                                     >
                                     {/* <Link to="/register" className="text-decoration-none">
-                                        Registrarse <MdPets className="navbar__button--icon" />
+                                        Registrarse <MdPets className="navbar__button--icon text-decoration-none" />
                                     </Link> */}
                                         Registrarse
                                     </button>
@@ -110,7 +110,7 @@ const Navbar = () => {
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         >
-                                            Iniciar sesión {/* <IoLogInOutline className="navbar__button--icon" /> */}
+                                            Iniciar sesión {/* <IoLogInOutline className="navbar__button--icon text-decoration-none" /> */}
                                         </button>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <li>
@@ -149,7 +149,7 @@ const Navbar = () => {
                                             className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5"
                                             style={{ width: "60px" }}
                                         >
-                                            <AiOutlineHome className="navbar__button--icon" />
+                                            <AiOutlineHome className="navbar__button--icon text-decoration-none " />
                                         </Link>
                                     }{
                                         localStorage.getItem("petvaUser") === "foundation" &&
@@ -158,7 +158,7 @@ const Navbar = () => {
                                             className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5"
                                             style={{ width: "60px" }}
                                         >
-                                            <AiOutlineHome className="navbar__button--icon" />
+                                            <AiOutlineHome className="navbar__button--icon text-decoration-none" />
                                         </Link>
                                     }{
                                         localStorage.getItem("petvaUser") === "clinic" &&
@@ -167,7 +167,7 @@ const Navbar = () => {
                                             className="navbar__button text-decoration-none badge rounded-circle bg-dark px-3 py-3 me-1 fs-5"
                                             style={{ width: "60px" }}
                                         >
-                                            <AiOutlineHome className="navbar__button--icon" />
+                                            <AiOutlineHome className="navbar__button--icon text-decoration-none" />
                                         </Link>
                                     }{
                                         localStorage.getItem("petvaUser") === "doctor" &&
@@ -176,7 +176,7 @@ const Navbar = () => {
                                             className="navbar__button text-decoration-none badge rounded-circle bg-dark px-3 py-3 me-1 fs-5"
                                             style={{ width: "60px" }}
                                         >
-                                            <AiOutlineHome className="navbar__button--icon" />
+                                            <AiOutlineHome className="navbar__button--icon text-decoration-none" />
                                         </Link>
                                     }
                                 </div>
@@ -321,7 +321,7 @@ const Navbar = () => {
                                                 }
                                             </div>
                                             <div className="text-center my-3">
-                                                <button onClick={toUserDetails} className="badge rounded-pill  text-dark">
+                                                <button onClick={toUserDetails} className="badge rounded-pill text-dark">
                                                     Gestionar cuenta
                                                 </button>
                                             </div>
@@ -330,18 +330,18 @@ const Navbar = () => {
 
                                                     store.userType === "foundation" &&
                                                     <>
-                                                        <div className="">
+                                                        <div className="row mx-auto text-center my-1">
                                                             <Link
                                                                 to="/foundation/pets/adoption"
-                                                                className=" rounded-pill  text-dark"
+                                                                className="text-decoration-none rounded-pill bg-secondary p-1 text-dark"
                                                             >
                                                                 Mascotas En Adopción
                                                             </Link>
                                                         </div>
-                                                        <div>
+                                                        <div className="row mx-auto text-center my-1">
                                                             <Link
                                                                 to="/foundation/pets/tracking"
-                                                                className=" rounded-pill  text-dark"
+                                                                className="text-decoration-none rounded-pill bg-secondary p-1 text-dark"
                                                             >
                                                                 Mascotas Con dueño
                                                             </Link>
@@ -351,25 +351,25 @@ const Navbar = () => {
                                                 {
 
                                                     store.userType === "normal" &&
-                                                    <>
-                                                        <div className="">
+                                                    
+                                                        <div className="row mx-auto text-center my-1">
                                                             <Link
                                                                 to="/user/pets"
-                                                                className=" rounded-pill  text-dark"
+                                                                className="text-decoration-none rounded-pill bg-secondary p-1 text-dark"
                                                             >
                                                                 Mis Mascotas
                                                             </Link>
                                                         </div>
                                                         
-                                                    </>
+                                                    
                                                 }
 
                                             </div>
-                                            <div className="row border text-center my-1">
+                                            <div className="row mx-auto text-center my-1">
                                                 <Link
                                                     to="/"
                                                     onClick={actions.logOut}
-                                                    className=""
+                                                    className="text-decoration-none rounded-pill bg-secondary p-1 text-dark"
                                                 >
                                                     Cerrar Sesión
                                                 </Link>
