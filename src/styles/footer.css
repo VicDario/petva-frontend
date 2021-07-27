@@ -1,5 +1,7 @@
 .footer-separator{
-    font-size: calc(1.9rem + 1.5vw);
+    background-color: black;
+    height: 30px;
+    width: 1px;
 }
 .footer-slogan{
     font-size: calc(0.7rem);
