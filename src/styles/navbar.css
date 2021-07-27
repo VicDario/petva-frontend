@@ -20,6 +20,33 @@ html body #root .navbar .logo-text {
   height: 80px;
 }
 
+.link-green {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  padding: 5px 40px;
+  background-color: #63A583;
+  border-radius: 25px;
+  text-decoration: none;
+}
+.link-green:hover {
+  background-color: #47765e;
+  color: white;
+}
+.link-green:focus{
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem #58a67e61;
+}
+
+.link {
+  text-align: center;
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 5px 40px;
+
+}
+
 @media (max-width: 991px) {
   .logo{
     max-width: 50px;
