@@ -1,3 +1,7 @@
-.btn-home-user {
-    background-color: rgba("63","A5",)
+.btn-home {
+    min-width: 300px;
+}
+
+.title-home {
+    text-decoration: underline;
 }
