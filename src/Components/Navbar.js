@@ -21,10 +21,9 @@ const Navbar = () => {
             actions.getUserDetail();
         } else if (store.userType === "foundation") {
             actions.getFoundationDetail();
-        } else if (store.userType === "clinic")
-        {
+        } else if (store.userType === "clinic") {
             actions.getClinicDetail();
-        } else if (store.userType=== "doctor"){
+        } else if (store.userType === "doctor") {
             actions.getDoctorDetail();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,16 +39,15 @@ const Navbar = () => {
         } else if (store.userType === "clinic") {
             history.push("/clinic/profile");
 
-        } else if (store.userType === "doctor")
-        {
+        } else if (store.userType === "doctor") {
             history.push("/doctor/profile");
 
         }
     }
-    const toRegister = ()=>{
+    const toRegister = () => {
         history.push("/register")
     }
-    const toServices = ()=>{
+    const toServices = () => {
         history.push("/services")
     }
 
@@ -81,21 +79,21 @@ const Navbar = () => {
                             <div className="navbar-nav ">
                                 <div className="d-flex align-items-center border-end border-4 border-dark me-2">
                                     <h4 className="me-2"
-                                    onClick={toServices}
+                                        onClick={toServices}
                                     >
                                         Servicios
                                     </h4>
                                     <h4 className="me-2">
                                         Contáctanos
                                     </h4>
-                                    
+
                                 </div>
                                 <div className="text-end d-flex align-items-center m-2" >
                                     <button
                                         className="text-dark fs-5 text-decoration-none badge rounded-pill bg-light"
                                         onClick={toRegister}
                                     >
-                                    {/* <Link to="/register" className="text-decoration-none">
+                                        {/* <Link to="/register" className="text-decoration-none">
                                         Registrarse <MdPets className="navbar__button--icon text-decoration-none" />
                                     </Link> */}
                                         Registrarse
@@ -138,7 +136,7 @@ const Navbar = () => {
                                 </div>
                             </div>
                         </div>
-                    :
+                        :
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
                                 <div className="text-end">
@@ -230,45 +228,57 @@ const Navbar = () => {
                                             />
                                         }
                                     </span>
-                                    <ul className="dropdown-menu dropdown-menu-left " aria-labelledby="dropdownMenuButton1">
+                                    <ul className="dropdown-menu dropdown-menu-left dropdown-avatar" aria-labelledby="dropdownMenuButton1">
 
                                         <div className="container px-5">
                                             <div className="d-flex justify-content-center">
                                                 {
                                                     store.userType === "foundation" &&
                                                     !!store.foundationDetail &&
-                                                    <Avatar
-                                                        alt={store.foundationDetail.name}
-                                                        src={store.foundationDetail.picture}
-                                                        sx={{ width: 45, height: 45 }}
+                                                    <>
+                                                        <Avatar
+                                                            alt={store.foundationDetail.name}
+                                                            src={store.foundationDetail.picture}
+                                                            sx={{ width: 45, height: 45 }}
 
-                                                    />
+                                                        />
+                                                        <h5>{store.foundationDetail.name}</h5>
+                                                    </>
                                                 }{
                                                     store.userType === "normal" &&
                                                     !!store.userDetail &&
-                                                    <Avatar
-                                                        alt={store.userDetail.name}
-                                                        src={store.userDetail.picture}
-                                                        sx={{ width: 45, height: 45 }}
+                                                    <>
+                                                        <Avatar
+                                                            alt={store.userDetail.name}
+                                                            src={store.userDetail.picture}
+                                                            sx={{ width: 45, height: 45 }}
 
-                                                    />
+                                                        />
+                                                        <h5>{store.userDetail.name}</h5>
+                                                    </>
                                                 }{
                                                     store.userType === "clinic" &&
                                                     !!store.clinicDetail &&
-                                                    <Avatar
-                                                        alt={store.clinicDetail.name}
-                                                        src={store.clinicDetail.picture}
-                                                        sx={{ width: 45, height: 45 }}
+                                                    <>
+                                                        <Avatar
+                                                            alt={store.clinicDetail.name}
+                                                            src={store.clinicDetail.picture}
+                                                            sx={{ width: 45, height: 45 }}
 
-                                                    />
+                                                        />
+                                                        <h5>{store.clinicDetail.name}</h5>
+                                                    </>
                                                 }{
                                                     store.userType === "doctor" &&
                                                     !!store.doctorDetail &&
-                                                    <Avatar
-                                                        alt={store.doctorDetail.name}
-                                                        src={store.doctorDetail.picture}
-                                                        sx={{ width: 45, height: 45 }}
+                                                    <>
+                                                        <Avatar
+                                                            alt={store.doctorDetail.name}
+                                                            src={store.doctorDetail.picture}
+                                                            sx={{ width: 45, height: 45 }}
                                                         />
+                                                        <h5>{store.doctorDetail.name} </h5>
+                                                    </>
                                                 }
                                             </div>
                                             <div className="text-center">
@@ -276,6 +286,7 @@ const Navbar = () => {
                                                     store.userType === "normal" &&
                                                     !!store.userDetail &&
                                                     <>
+                                                        <hr/>
                                                         <h5>
                                                             {store.userDetail.name} {store.userDetail.lastname}
                                                         </h5>
@@ -289,6 +300,7 @@ const Navbar = () => {
                                                     store.userType === "foundation" &&
                                                     !!store.foundationDetail &&
                                                     <>
+                                                        <hr/>
                                                         <h5>
                                                             {store.foundationDetail.name}
                                                         </h5>
@@ -300,6 +312,7 @@ const Navbar = () => {
                                                     store.userType === "clinic" &&
                                                     !!store.clinicDetail &&
                                                     <>
+                                                        <hr/>
                                                         <h5>
                                                             {store.clinicDetail.name}
                                                         </h5>
@@ -311,6 +324,7 @@ const Navbar = () => {
                                                     store.userType === "doctor" &&
                                                     !!store.doctorDetail &&
                                                     <>
+                                                        <hr/>
                                                         <h5>
                                                             {store.doctorDetail.name}
                                                         </h5>
@@ -351,17 +365,17 @@ const Navbar = () => {
                                                 {
 
                                                     store.userType === "normal" &&
-                                                    
-                                                        <div className="row mx-auto text-center my-1">
-                                                            <Link
-                                                                to="/user/pets"
-                                                                className="text-decoration-none rounded-pill bg-secondary p-1 text-dark"
-                                                            >
-                                                                Mis Mascotas
-                                                            </Link>
-                                                        </div>
-                                                        
-                                                    
+
+                                                    <div className="row mx-auto text-center my-1">
+                                                        <Link
+                                                            to="/user/pets"
+                                                            className="text-decoration-none rounded-pill bg-secondary p-1 text-dark"
+                                                        >
+                                                            Mis Mascotas
+                                                        </Link>
+                                                    </div>
+
+
                                                 }
 
                                             </div>

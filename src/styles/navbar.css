@@ -20,6 +20,10 @@ html body #root .navbar .logo-text {
   height: 80px;
 }
 
+.dropdown-avatar{
+  border-radius: 10% !important;
+}
+
 @media (max-width: 991px) {
   .logo{
     max-width: 50px;
