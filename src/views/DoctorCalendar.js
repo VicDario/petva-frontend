@@ -45,7 +45,7 @@ const DoctorCalendar = (props) => {
                 title = `Paciente: ${events[i].info_pet.name}. En espera para consulta`;
                 backgroundColor = "#359c33";
             }else if(events[i].status === 'missed'){
-                title = `Paciente: ${events[i].info_pet.name}. Falta confirmación`;
+                title = `Cita Perdida`;
                 backgroundColor = "#c24725";
             }else if(events[i].status === 'finished'){
                 title = `Cita Atendida`;
