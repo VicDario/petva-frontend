@@ -141,17 +141,6 @@ const Navbar = () => {
                     :
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
-                                <div className="d-flex align-items-center border-end border-4 border-dark me-2">
-                                    <h4 className="me-2"
-                                        onClick={toServices}
-                                    >
-                                        Servicios
-                                    </h4>
-                                    <h4 className="me-2">
-                                        Contáctanos
-                                    </h4>
-
-                                </div>
                                 <div className="text-end">
                                     {
                                         localStorage.getItem("petvaUser") === "normal" &&
