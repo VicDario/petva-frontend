@@ -33,6 +33,7 @@ import HomeDoctor from './views/HomeDoctor';
 import DoctorProfileDetail from './views/DoctorProfileDetail';
 import UserReservations from './views/UserReservations';
 import DoctorCalendar from './views/DoctorCalendar';
+import DoctorAttending from './views/DoctorAttending';
 import Footer from './Components/Footer';
 
 function App() {
