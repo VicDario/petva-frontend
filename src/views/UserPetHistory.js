@@ -89,7 +89,6 @@ const UserPetHistory = () => {
             alert("Debes llenar todos los campos para agregar diagnóstico");
         }
     }
-
     const addSurgery = () => {
         if (newSurgery.date !== null && newSurgery.description !== null && newSurgery.doctor_name !== null) {
             actions.addSurgerytoPetUser(formatDate(newSurgery.date), newSurgery.description, newSurgery.doctor_name, pet_id)
@@ -147,16 +146,28 @@ const UserPetHistory = () => {
     const update = () => {
         if (userPet !== null
         ) {
-
-            actions.userPutPet(updates.name, updates.code_chip, updates.breed,
-                validarVacio(store.auxPicture), userPet.id);
-            Swal.fire({
-                icon: "success",
-                title: "Usuario Actualizado",
-                showConfirmButton: false,
-                timer: 1500
-            });
-            register();
+            if (updates.name === null) {
+                console.log("nombre vacío")
+                setUpdates({ name: userPet.name })
+            }
+            if (updates.code_chip === null) {
+                console.log("code_chip es null");
+                setUpdates({...updates, code_chip: userPet.code_chip })
+            }
+            if (updates.breed === null) {
+                console.log("breed es null");
+                setUpdates({...updates, breed: userPet.breed })
+            }
+            //console.log(updates);
+            //console.log("arriba los update");
+            actions.userPutPet(updates.name, updates.code_chip, updates.breed,validarVacio(store.auxPicture), userPet.id);
+                Swal.fire({
+                    icon: "success",
+                    title: "Mascota actualizada",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                register();
         }
     }
     const validarVacio = (dato) => {
@@ -181,7 +192,7 @@ const UserPetHistory = () => {
     return (
         <div className="container">
             <div className="row">
-                <div className="col-12 col-md-3">
+                <div className="col-sm-12 col-md-3">
                     {
                         !!userPet &&
                         <div className="card mb-3">
@@ -267,73 +278,85 @@ const UserPetHistory = () => {
                 </div>
                 {
                     save === "on" &&
-                    <div className="col-12 col-md-7 mx-auto">
-                        <h4 className="text-center">Edita Tu mascota</h4>
-
-                        <div className="col-md-7 col-12 bg-secondary text-white p-3 mx-auto">
-                            <div>
-                                <label
-                                    className="form-label"
-                                    htmlFor="">
-                                    Nombre
-                                </label>
-                                <input
-                                    placeholder={userPet.name}
-                                    className="form-control text-white bg-dark"
-                                    type="text"
-                                    onChange={(e) => { setUpdates({ ...updates, name: e.target.value }) }}
-                                />
-                            </div>
-                            <div
-                                className="">
-                                <label
-                                    className="form-label"
-                                    htmlFor="">Código Chip</label>
-                                <input
-                                    placeholder={userPet.code_chip}
-                                    className="form-control text-white bg-dark"
-                                    type="text"
-                                    onChange={(e) => { setUpdates({ ...updates, code_chip: e.target.value }) }}
-                                />
-                            </div>
-                            <div className="">
-                                <label
-                                    className="form-label"
-                                    htmlFor="">Raza</label>
-                                <input
-                                    placeholder={userPet.breed}
-                                    className="form-control text-white bg-dark"
-                                    type="text"
-                                    onChange={(e) => { setUpdates({ ...updates, breed: e.target.value }) }}
-                                />
-                            </div>
-                            <div className="">
-                                <label
-                                    className="form-label"
-                                    htmlFor="">Foto(No obligatorio)</label>
-                                <input className="form-control text-white bg-dark"
-                                    type="file"
-                                    placeholder="Foto Mascota"
-                                    onChange={e => handleLoad(e)} accept="image/png, .jpg, .jpeg"
-                                />
-                            </div>
-                            <div
-                                className="d-flex justify-content-around my-3">
-                                <button
-                                    className="btn btn-success"
-                                    onClick={update} >
-                                    Guardar Cambios
-                                </button>
-                                <button
-                                    className="btn btn-dark"
-                                    onClick={register} >
-                                    Cancelar
-                                </button>
+                        <div className="col-sm-12 col-md-7 mx-auto">
+                            <h4 className="text-center">Edita Tu mascota</h4>
+                            <div className="col-md-7 col-sm-12 bg-secondary text-white p-3 mx-auto">
+                                <div>
+                                    <label
+                                        className="form-label"
+                                        htmlFor="">
+                                        Nombre
+                                    </label>
+                                    <input
+                                        placeholder={userPet.name}
+                                        className="form-control text-white bg-dark"
+                                        type="text"
+                                        onChange={(e) => {
+                                            e.target.value === "" ?
+                                                setUpdates({ ...updates, name: userPet.name }) :
+                                                setUpdates({ ...updates, name: e.target.value })
+                                        }}
+                                    />
+                                </div>
+                                <div
+                                    className="">
+                                    <label
+                                        className="form-label"
+                                        htmlFor="">Código Chip</label>
+                                    <input
+                                        placeholder={userPet.code_chip}
+                                        className="form-control text-white bg-dark"
+                                        type="text"
+                                        onChange={(e) => {
+                                            e.target.value === "" ?
+                                                setUpdates({ ...updates, code_chip: userPet.code_chip }) :
+                                                setUpdates({ ...updates, code_chip: e.target.value })
+                                        }
+                                        }
+                                    />
+                                </div>
+                                <div className="">
+                                    <label
+                                        className="form-label"
+                                        htmlFor="">Raza</label>
+                                    <input
+                                        placeholder={userPet.breed}
+                                        className="form-control text-white bg-dark"
+                                        type="text"
+                                        onChange={(e) => {
+                                            e.target.value === "" ?
+                                                setUpdates({ ...updates, breed: userPet.breed }) :
+                                                setUpdates({ ...updates, breed: e.target.value })
+                                        }}
+                                    />
+                                </div>
+                                <div className="">
+                                    <label
+                                        className="form-label"
+                                        htmlFor="">Foto(No obligatorio)</label>
+                                    <input className="form-control text-white bg-dark"
+                                        type="file"
+                                        placeholder="Foto Mascota"
+                                        onChange={e => handleLoad(e)} accept="image/png, .jpg, .jpeg"
+                                    />
+                                </div>
+                                <div
+                                    className="d-flex justify-content-around my-3">
+                                    <button
+                                        className="btn btn-success"
+                                        onClick={update} >
+                                        Guardar Cambios
+                                    </button>
+                                    <button
+                                        className="btn btn-dark"
+                                        onClick={register} >
+                                        Cancelar
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 }
-                <div className="col-12 col-md-3">
+                <div className="col-sm-12 col-md-3">
                     <div className="text-center">
                         <h2>Vacunas
                             {/*<span
@@ -411,7 +434,7 @@ const UserPetHistory = () => {
                         })
                     }
                 </div>
-                <div className="col-12 col-md-3">
+                <div className="col-sm-12 col-md-3">
                     <div className="text-center">
                         <h2>
                             Consultas
@@ -495,7 +518,7 @@ const UserPetHistory = () => {
                     }
                 </div>
                 <div
-                    className="col-12 col-md-3">
+                    className="col-sm-12 col-md-3">
                     <div
                         className="text-center">
                         <h2>Cirugías
