@@ -8,6 +8,7 @@
 @import url("./styles/DoctorAttending.css");
 @import url("./styles/Presentation.css");
 @import url("./styles/login.css"); /* estilos asociados al login */
+@import url("./styles/contact.css"); /* estilos asociados al contacto */
 
 html body #root {
     font-family: 'Roboto', sans-serif !important;
