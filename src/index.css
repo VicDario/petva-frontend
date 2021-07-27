@@ -10,3 +10,9 @@
 html body #root {
     font-family: 'Roboto', sans-serif !important;
 }
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
