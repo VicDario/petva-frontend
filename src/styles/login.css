@@ -1,0 +1,22 @@
+.container-login{
+    background-color: #e5e5e5;
+    height: 380px;
+}
+.bg-login{
+    background-color: #fff;
+    border-radius: 8%;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.44);
+    -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.44);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.44);
+}
+.login-input{
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.44);
+    -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.44);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.44);
+}
+.btn-login{
+    background-color:#63A583 !important;
+    color: white !important;
+    border-radius: 15px !important;
+}

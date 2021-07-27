@@ -7,6 +7,7 @@
 @import url("./styles/footer.css"); /* estilos asociados al footer */
 @import url("./styles/DoctorAttending.css");
 @import url("./styles/Presentation.css");
+@import url("./styles/login.css"); /* estilos asociados al login */
 
 html body #root {
     font-family: 'Roboto', sans-serif !important;
