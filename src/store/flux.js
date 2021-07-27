@@ -26,6 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             userReservations: null,
             doctorReservationsReserved: null,
             doctorHours: null,
+            infoPet: null,
         },
         actions: {
             registerClinica: async (email, name, address, phone, password) => {
@@ -1128,7 +1129,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             doctorAddReservation: async (hour_start, hour_end) => {
                 const store = getStore();
-                console.log(hour_start, hour_end)
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -1182,6 +1182,27 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
                     setStore({ doctorHours: data })
                     return data
+                } catch (error)
+                {
+                    console.error(error);
+                }
+            },
+            getInfoPetForDoctor : async(pet_id)=>{
+                const store = getStore();
+                const opt = {
+                    headers: {
+                        "Authorization": "Bearer " + store.token
+                    }
+                }
+                try
+                {
+                    const response = await fetch(`${store.baseUrl}api/doctor/attending/${pet_id}`, opt)
+                    if (!response.ok)
+                    {
+                        console.error("There has been some error in get doctor reservations")
+                    }
+                    const data = await response.json();
+                    setStore({ infoPet: data })
                 } catch (error)
                 {
                     console.error(error);

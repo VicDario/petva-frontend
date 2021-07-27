@@ -109,7 +109,7 @@ const DoctorCalendar = (props) => {
         }
     }
     const goToAttention = () => {
-        props.history.push(`/doctor/attention/${id}/${idPet}`);
+        props.history.push(`/doctor/attending/${id}/${idPet}`);
     }
     useEffect(() => {
         syncEvens()
