@@ -1,13 +1,18 @@
 import { Link, useHistory } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 //import { useEffect } from "react";
 
 
 const HomeFoundation = () => {
-    const { store } = useContext(Context);
+    const { store, actions } = useContext(Context);
     //let { token } = store;
     const history = useHistory();
+    useEffect(() => {
+        actions.getFoundationDetail();
+        actions.getPetsFoundationWithOwner();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     return (
         <>
             {
