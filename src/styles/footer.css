@@ -7,3 +7,9 @@
 .footer-link:hover{
     color: black !important;
 }
+
+@media screen and (max-width: 575px) {
+    .wrap-xs {
+        flex-wrap: wrap;
+    }
+}

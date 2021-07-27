@@ -5,7 +5,7 @@ const Footer = () => {
         <footer className="footer mt-auto py-3 bg-light">
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-6 col-sm-6 d-flex align-items-end">
+                    <div className="col-lg-5 col-sm-7 col-xs-12 d-flex align-items-end">
                             <Link className="text-decoration-none ps-2" to="/">
                                 <img className="logo" src="/images/logo_cat_small.png" alt="logo" />
                             </Link>
@@ -24,7 +24,7 @@ const Footer = () => {
                                 </span>
                             </span>
                     </div>
-                    <div className="col-lg-6 col-sm-6 d-flex align-items-center justify-content-around">
+                    <div className="col-lg-7 col-sm-12 col-xs-6 d-flex align-items-center justify-content-around wrap-xs">
                             <Link className="text-decoration-none footer-link mx-3 text-muted" to="/">
                                 Contáctanos
                             </Link>
