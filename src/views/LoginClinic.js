@@ -28,7 +28,7 @@ const handleSubmit = async (e) => {
     }
 }
 return (
-    <div className="container">
+    <div className="container container-login">
         <div className="row">
                 <div className="col-md-6 col-sm-10 mx-auto my-3 text-center">
                     <main className="form-sigin bg-login p-4 mt-3">
