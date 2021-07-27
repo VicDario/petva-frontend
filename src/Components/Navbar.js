@@ -97,22 +97,22 @@ const Navbar = () => {
                                         </button>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <li>
-                                                <Link className="dropdown-item" to="/user/login">
+                                                <Link className="dropdown-item link-green" to="/user/login">
                                                     Usuario
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link className="dropdown-item" to="/foundation/login">
+                                                <Link className="dropdown-item link-green" to="/foundation/login">
                                                     Fundación
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link className="dropdown-item" to="/clinic/login">
+                                                <Link className="dropdown-item link-green" to="/clinic/login">
                                                     Clínica
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link className="dropdown-item" to="/doctor/login">
+                                                <Link className="dropdown-item link-green" to="/doctor/login">
                                                     Médico
                                                 </Link>
                                             </li>
@@ -249,7 +249,6 @@ const Navbar = () => {
                                                             alt={store.clinicDetail.name}
                                                             src={store.clinicDetail.picture}
                                                             sx={{ width: 45, height: 45 }}
-
                                                         />
                                                         <h5 className="my-auto ms-2">{store.clinicDetail.name}</h5>
                                                     </>
