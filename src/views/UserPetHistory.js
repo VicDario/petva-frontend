@@ -42,16 +42,14 @@ const UserPetHistory = () => {
     const [save, setSave] = useState("off");
     const [updates, setUpdates] = useState({
         name: null,
-        code_chip : null,
-        breed : null
+        code_chip: null,
+        breed: null
     });
     const register = () => {
-        if (save === "off")
-        {
+        if (save === "off") {
 
             setSave("on")
-        } else
-        {
+        } else {
             setSave("off")
 
         }
@@ -62,8 +60,7 @@ const UserPetHistory = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const addVaccine = () => {
-        if (newVaccine.date !== null && newVaccine.lot !== null && newVaccine.name !== null && newVaccine.laboratory !== null)
-        {
+        if (newVaccine.date !== null && newVaccine.lot !== null && newVaccine.name !== null && newVaccine.laboratory !== null) {
             actions.addVaccinetoPetUser(formatDate(newVaccine.date), newVaccine.lot, newVaccine.name, newVaccine.laboratory, pet_id)
             console.log("Vacuna agregada");
             setNewVaccine({
@@ -73,15 +70,13 @@ const UserPetHistory = () => {
                 laboratory: null
             })
             /* actions.getHistoryUserPet(pet_id); */
-        } else
-        {
+        } else {
             console.log("Vacuna no agregada");
             alert("Debes llenar todos los campos para agregar vacuna");
         }
     }
     const addDiagnostic = () => {
-        if (newDiagnostic.date !== null && newDiagnostic.diagnostic !== null && newDiagnostic.doctor_name !== null)
-        {
+        if (newDiagnostic.date !== null && newDiagnostic.diagnostic !== null && newDiagnostic.doctor_name !== null) {
             actions.addDiagnostictoPetUser(formatDate(newDiagnostic.date), newDiagnostic.diagnostic, newDiagnostic.doctor_name, pet_id)
             console.log("Diagnóstico agregado");
             setNewDiagnostic({
@@ -89,16 +84,13 @@ const UserPetHistory = () => {
                 diagnostic: null,
                 doctor_name: null
             })
-        } else
-        {
+        } else {
             console.log("diagnóstico no agregado");
             alert("Debes llenar todos los campos para agregar diagnóstico");
         }
     }
-
     const addSurgery = () => {
-        if (newSurgery.date !== null && newSurgery.description !== null && newSurgery.doctor_name !== null)
-        {
+        if (newSurgery.date !== null && newSurgery.description !== null && newSurgery.doctor_name !== null) {
             actions.addSurgerytoPetUser(formatDate(newSurgery.date), newSurgery.description, newSurgery.doctor_name, pet_id)
             console.log("Cirugia agregada");
             setNewSurgery({
@@ -106,8 +98,7 @@ const UserPetHistory = () => {
                 description: null,
                 doctor_name: null
             })
-        } else
-        {
+        } else {
             console.log("cirugía no agregada");
             alert("Debes llenar todos los campos para agregar cirugía");
         }
@@ -117,41 +108,70 @@ const UserPetHistory = () => {
         console.log(last_location)
     }
     const reportFounded = () => {
-        if(pet_id!==null){
+        if (pet_id !== null) {
             actions.userReportPetFounded(pet_id);
-            
+
         }
     }
     const deletePet = () => {
-        if(pet_id!==null){
-            actions.userDeletePet(pet_id,history);
-            Swal.fire({
-                icon: "success",
-                title: "Mascota Eliminada :(",
-                showConfirmButton: false,
-                timer: 1500
+        if (pet_id !== null) {
+            const swalConfirm = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-danger ms-3',
+                    cancelButton: 'btn btn-secondary'
+                },
+                buttonsStyling: false
             });
+            swalConfirm.fire({
+                icon: "warning",
+                title: "¿Estás seguro que quieres eliminar esta mascota?",
+                text: "No podrás recuperarla a menos que la vuelvas a registrar",
+                showCancelButton: true,
+                cancelButtonText: "No quiero borrarla.",
+                confirmButtonText: "Si, quiero borrarla!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    actions.userDeletePet(pet_id, history);
+                    swalConfirm.fire({
+                        icon: "success",
+                        title: "Mascota eliminada",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
         }
     }
     const update = () => {
-        if (userPet!== null
-        )
-        {
-
-            actions.userPutPet(updates.name, updates.code_chip, updates.breed,
-                 validarVacio(store.auxPicture),userPet.id);
-            Swal.fire({
-                icon: "success",
-                title: "Usuario Actualizado",
-                showConfirmButton: false,
-                timer: 1500
-            });
-            register();
+        if (userPet !== null
+        ) {
+            if (updates.name === null) {
+                console.log("nombre vacío")
+                setUpdates({ name: userPet.name })
+            }
+            if (updates.code_chip === null) {
+                console.log("code_chip es null");
+                setUpdates({...updates, code_chip: userPet.code_chip })
+            }
+            if (updates.breed === null) {
+                console.log("breed es null");
+                setUpdates({...updates, breed: userPet.breed })
+            }
+            //console.log(updates);
+            //console.log("arriba los update");
+            actions.userPutPet(updates.name, updates.code_chip, updates.breed,validarVacio(store.auxPicture), userPet.id);
+                Swal.fire({
+                    icon: "success",
+                    title: "Mascota actualizada",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                register();
         }
     }
     const validarVacio = (dato) => {
-        if (dato === "")
-        {
+        if (dato === "") {
             dato = null
         }
         return dato
@@ -160,54 +180,33 @@ const UserPetHistory = () => {
         let file = e.target.files[0]; // load the picture (just one file)
         actions.convertImgToBase64(file); //Save picture in base64 format at store in auxPicture
     }
-    const formatDateB = (date)=>{
+    const formatDateB = (date) => {
 
         let event = new Date(date)
         event = event.toLocaleDateString()
         return event
     }
 
-    
+
 
     return (
         <div className="container">
             <div className="row">
-                <div className="col-12 col-md-3">
-                    {
-                        !!userPet &&
-                        <div className="d-flex justify-content-around">
-                            <h1>
-                                {userPet.name}
-                            </h1>
-                            <span
-                                className="text-primary fs-3"
-                                type="button"
-                                title="Editar Mascota"
-                                onClick={register}
-                            >
-                                <FiEdit />
-                            </span>
-                            <span
-                                onClick={deletePet}
-                                className="text-danger fs-3"
-                                type="button"
-                                title="Eliminar Mascota"
-                            >
-                                <FaTrash />
-                            </span>
-                        </div>
-                    }
+                <div className="col-sm-12 col-md-3">
                     {
                         !!userPet &&
                         <div className="card mb-3">
                             <img
                                 src={!!userPet.picture ? userPet.picture : "/images/default.jpg"}
                                 className="card-img-top" alt="petname" />
+                            <h1 className="card-title">
+                                {userPet.name}
+                            </h1>
                             <div
                                 className="card-body">
                                 {/* <h5 className="card-title">{userPet.name}</h5> */}
                                 <span
-                                    className="card-title fs-3 ">{userPet.specie === 'cat'
+                                    className="card-text fs-3 ">{userPet.specie === 'cat'
                                         ? <FaCat className="align-middle ms-1" />
                                         : <FaDog className="align-middle ms-1" />}
                                 </span>
@@ -226,6 +225,24 @@ const UserPetHistory = () => {
                                     className="card-text">N°Chip: {!!userPet.code_chip ? userPet.code_chip
                                         : "No registra codigo de chip"}
                                 </p>
+                                <div className="d-flex justify-content-around">
+                                    <span
+                                        className="text-primary fs-3"
+                                        type="button"
+                                        title="Editar Mascota"
+                                        onClick={register}
+                                    >
+                                        <FiEdit />
+                                    </span>
+                                    <span
+                                        onClick={deletePet}
+                                        className="text-danger fs-3"
+                                        type="button"
+                                        title="Eliminar Mascota"
+                                    >
+                                        <FaTrash />
+                                    </span>
+                                </div>
                                 <div>
                                     <Link to="/user/pets">
                                         <button className="btn btn-success my-3">
@@ -261,83 +278,95 @@ const UserPetHistory = () => {
                 </div>
                 {
                     save === "on" &&
-                    <div className="col-12 col-md-7 mx-auto">
-                        <h4 className="text-center">Edita Tu mascota</h4>
-
-                        <div className="col-md-7 col-12 bg-secondary text-white p-3 mx-auto">
-                            <div>
-                                <label
-                                    className="form-label"
-                                    htmlFor="">
-                                    Nombre
-                                </label>
-                                <input
-                                    placeholder={userPet.name}
-                                    className="form-control text-white bg-dark"
-                                    type="text" 
-                                    onChange={(e) => { setUpdates({ ...updates, name: e.target.value }) }}
-                                />
-                            </div>
-                            <div
-                                className="">
-                                <label
-                                    className="form-label"
-                                    htmlFor="">Código Chip</label>
-                                <input
-                                    placeholder={userPet.code_chip}
-                                    className="form-control text-white bg-dark"
-                                    type="text" 
-                                    onChange={(e) => { setUpdates({ ...updates, code_chip: e.target.value }) }}
-                                />
-                            </div>
-                            <div className="">
-                                <label
-                                    className="form-label"
-                                    htmlFor="">Raza</label>
-                                <input
-                                    placeholder={userPet.breed}
-                                    className="form-control text-white bg-dark"
-                                    type="text"
-                                    onChange={(e) => { setUpdates({ ...updates, breed: e.target.value }) }}
-                                />
-                            </div>
-                            <div className="">
-                                <label
-                                    className="form-label"
-                                    htmlFor="">Foto(No obligatorio)</label>
-                                <input className="form-control text-white bg-dark"
-                                    type="file"
-                                    placeholder="Foto Mascota"
-                                 onChange={e => handleLoad(e)} accept="image/png, .jpg, .jpeg" 
-                                />
-                            </div>
-                            <div
-                                className="d-flex justify-content-around my-3">
-                                <button
-                                    className="btn btn-success"
-                                     onClick={update} >
-                                    Guardar Cambios
-                                </button>
-                                <button
-                                    className="btn btn-dark"
-                                    onClick={register} >
-                                    Cancelar
-                                </button>
+                        <div className="col-sm-12 col-md-7 mx-auto">
+                            <h4 className="text-center">Edita Tu mascota</h4>
+                            <div className="col-md-7 col-sm-12 bg-secondary text-white p-3 mx-auto">
+                                <div>
+                                    <label
+                                        className="form-label"
+                                        htmlFor="">
+                                        Nombre
+                                    </label>
+                                    <input
+                                        placeholder={userPet.name}
+                                        className="form-control text-white bg-dark"
+                                        type="text"
+                                        onChange={(e) => {
+                                            e.target.value === "" ?
+                                                setUpdates({ ...updates, name: userPet.name }) :
+                                                setUpdates({ ...updates, name: e.target.value })
+                                        }}
+                                    />
+                                </div>
+                                <div
+                                    className="">
+                                    <label
+                                        className="form-label"
+                                        htmlFor="">Código Chip</label>
+                                    <input
+                                        placeholder={userPet.code_chip}
+                                        className="form-control text-white bg-dark"
+                                        type="text"
+                                        onChange={(e) => {
+                                            e.target.value === "" ?
+                                                setUpdates({ ...updates, code_chip: userPet.code_chip }) :
+                                                setUpdates({ ...updates, code_chip: e.target.value })
+                                        }
+                                        }
+                                    />
+                                </div>
+                                <div className="">
+                                    <label
+                                        className="form-label"
+                                        htmlFor="">Raza</label>
+                                    <input
+                                        placeholder={userPet.breed}
+                                        className="form-control text-white bg-dark"
+                                        type="text"
+                                        onChange={(e) => {
+                                            e.target.value === "" ?
+                                                setUpdates({ ...updates, breed: userPet.breed }) :
+                                                setUpdates({ ...updates, breed: e.target.value })
+                                        }}
+                                    />
+                                </div>
+                                <div className="">
+                                    <label
+                                        className="form-label"
+                                        htmlFor="">Foto(No obligatorio)</label>
+                                    <input className="form-control text-white bg-dark"
+                                        type="file"
+                                        placeholder="Foto Mascota"
+                                        onChange={e => handleLoad(e)} accept="image/png, .jpg, .jpeg"
+                                    />
+                                </div>
+                                <div
+                                    className="d-flex justify-content-around my-3">
+                                    <button
+                                        className="btn btn-success"
+                                        onClick={update} >
+                                        Guardar Cambios
+                                    </button>
+                                    <button
+                                        className="btn btn-dark"
+                                        onClick={register} >
+                                        Cancelar
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 }
-                <div className="col-12 col-md-3">
+                <div className="col-sm-12 col-md-3">
                     <div className="text-center">
                         <h2>Vacunas
-                            <span
+                            {/*<span
                                 title="Agregar Vacuna"
                                 className="text-success"
                                 type="button"
                                 data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 <FaPlusCircle />
-                            </span>
+                            </span>*/}
                         </h2>
                     </div>
                     {
@@ -405,18 +434,18 @@ const UserPetHistory = () => {
                         })
                     }
                 </div>
-                <div className="col-12 col-md-3">
+                <div className="col-sm-12 col-md-3">
                     <div className="text-center">
                         <h2>
                             Consultas
-                            <span
+                            {/*<span
                                 title="Agregar consulta"
                                 className="text-success"
                                 type="button"
                                 data-bs-toggle="modal"
                                 data-bs-target="#diagnostico">
                                 <FaPlusCircle />
-                            </span>
+                            </span>*/}
                         </h2>
                     </div>
                     {
@@ -445,7 +474,7 @@ const UserPetHistory = () => {
                                             </button>
                                         </h2>
                                         <div
-                                            
+
                                             id={"collapse" + index}
                                             className="accordion-collapse collapse"
                                             aria-labelledby="headingOne"
@@ -489,16 +518,17 @@ const UserPetHistory = () => {
                     }
                 </div>
                 <div
-                    className="col-12 col-md-3">
+                    className="col-sm-12 col-md-3">
                     <div
                         className="text-center">
-                        <h2>Cirugías <span
+                        <h2>Cirugías
+                            {/*<span
                             title="Agregar Cirugía"
                             className="text-success" type="button"
                             data-bs-toggle="modal"
                             data-bs-target="#cirugia">
                             <FaPlusCircle />
-                        </span>
+                            </span>*/}
                         </h2>
                     </div>
                     {
@@ -551,7 +581,7 @@ const UserPetHistory = () => {
                                                                 <strong>
                                                                     Descripción:</strong> {cirugia.description}
                                                             </li>
-                                                            
+
                                                             <li
                                                                 className="list-group-item">
                                                                 <strong>
@@ -571,7 +601,7 @@ const UserPetHistory = () => {
 
             </div>
             {/* Modal  agregar Vacuna*/}
-            <div
+            {/*<div
                 className="modal fade"
                 id="exampleModal"
                 tabIndex={-1}
@@ -656,9 +686,9 @@ const UserPetHistory = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+                                </div>*/}
             {/* Modal agregar Diagnostico */}
-            <div
+            {/*<div
                 className="modal fade"
                 id="diagnostico"
                 tabIndex={-1}
@@ -739,9 +769,9 @@ const UserPetHistory = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*/}
             {/* Modal agregar Cirugía */}
-            <div
+            {/*<div
                 className="modal fade"
                 id="cirugia"
                 tabIndex={-1}
@@ -827,7 +857,7 @@ const UserPetHistory = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*/}
             {/* Modal Para mascota perdida */}
             <div
                 className="modal fade"

@@ -17,22 +17,17 @@ const HomeClinic = () => {
                             </div>
                             }
                             <div className="row">
-                                <div className="col-12 col-md-6 d-flex justify-content-center">
+                                <div className="col-sm-12 col-md-4 d-flex justify-content-center">
                                     <Link to="/clinic/doctor/register" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
                                         Registrar un medico
                                     </Link >
                                 </div>
-                                <div className="col-12 col-md-6 text-center d-flex justify-content-center">
+                                <div className="col-sm-12 col-md-4 text-center d-flex justify-content-center">
                                     <Link to="/clinic/doctor" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
                                         Ver mis medicos
                                     </Link>
                                 </div>
-                                <div className="col-12 col-md-6 d-flex justify-content-center">
-                                    <Link to="/clinic" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                        Lorem ipsum dolor sit amet
-                                    </Link >
-                                </div>
-                                <div className="col-12 col-md-6 d-flex justify-content-center">
+                                <div className="col-sm-12 col-md-4 d-flex justify-content-center">
                                     <Link to="/clinic/calendar" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
                                         Calendario
                                     </Link >

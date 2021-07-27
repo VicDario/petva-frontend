@@ -1037,6 +1037,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 try
                 {
+                    //fundacionconsole.log(opt);
+                    //console.log("arriba lo que se manda")
                     const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}`, opt)
                     if (response.status !== 202)
                     {
@@ -1045,7 +1047,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const data = await response.json();
                     console.log(data);
                     actions.getSinglePetFromUser(pet_id);
-                    
+                    // eslintconsole.log(response);
+                    //console.log("arriba esta el response");
+                    return response
                     
                 } catch (error)
                 {
