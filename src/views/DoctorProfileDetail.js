@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useEffect } from "react";
 import { FaUser } from "react-icons/fa";
