@@ -22,27 +22,39 @@ const UserPets = ({ history }) => {
                         className="row my-4">
                         <div
                             className="col-12 text-center">
-                            <div>
-                                <h2
-                                    className="display-1">
-                                    Mis Mascotas
-                                </h2>
+                            <div className="row">
+                                <div className="col-lg-6 col-md-12 col-sm-12">
+                                    <h2
+                                        className="display-1 text-start mb-0">
+                                        Mis Mascotas
+                                    </h2>
+                                    <hr className="hr-user-pets mt-0 mb-4" />
+                                </div>
+                                <div className="col-lg-6 col-md-12 col-sm-12">
+                                    <div
+                                        className=" d-flex justify-content-end me-3">
+                                        <Link
+                                            to="/user/pets/add"
+                                            className="text-decoration-none badge rounded-pill btn-user-pets p-3 m-1 fs-4">
+                                            Agregar Mascota
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                             <div
-                                className="row justify-content-center">
+                                className="row justify-content-center mt-4">
                                 {
                                     !!store.pets ?
                                         store.pets.length > 0 ?
                                             store.pets.map((pet, index) => {
                                                 return (
                                                     <div
-                                                        className="col-sm-6 col-md-4" key={index}>
+                                                        className="col-lg-4 col-md-6 col-sm-12" key={index}>
                                                         <div
-                                                            className="card mb-3">
+                                                            className="card card-pet mb-3 pt-3 align-items-center">
                                                             <img
                                                                 src={!!pet.picture ? pet.picture : "/images/default.jpg"}
-                                                                className="card-img-top" alt={pet.name}
-                                                                style={{ height: "50vh" }}
+                                                                className="card-img-top img-pet mt-2" alt={pet.name}
                                                             />
                                                             <div
                                                                 className="card-body">
@@ -64,21 +76,21 @@ const UserPets = ({ history }) => {
                                                                     {!!pet.code_chip ? "Codigo Chip: " + pet.code_chip
                                                                         : "No registra codigo de chip"}
                                                                 </p>
-                                                                {
-                                                                    pet.state === "lost" &&
-                                                                    <p
-                                                                        className="card-text badge rounded-pill bg-danger fs-3">
-                                                                        Perdida
-                                                                    </p>
-                                                                }
                                                                 <div
-                                                                    className="d-flex justify-content-around">
+                                                                    className="d-flex justify-content-around my-3">
                                                                     <Link
                                                                         to={"/user/pet/history/" + pet.id}
-                                                                        className="btn btn-primary">
+                                                                        className="btn btn-user-pets rounded-pill px-5 py-0 fs-4">
                                                                         Historial
                                                                     </Link>
                                                                 </div>
+                                                                {
+                                                                    pet.state === "lost" &&
+                                                                    <p
+                                                                        className="card-text badge rounded-pill bg-danger fs-5">
+                                                                        Perdida
+                                                                    </p>
+                                                                }
                                                             </div>
                                                         </div>
                                                     </div>
@@ -95,14 +107,6 @@ const UserPets = ({ history }) => {
                                         :
                                         <LoadingSpiner />
                                 }
-                            </div>
-                            <div
-                                className="my-5">
-                                <Link
-                                    to="/user/pets/add"
-                                    className="text-decoration-none badge rounded-pill bg-success p-3 m-1 fs-4">
-                                    Agregar Mascota
-                                </Link>
                             </div>
                         </div>
                     </div>
