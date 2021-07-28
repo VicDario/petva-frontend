@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 
@@ -9,9 +9,7 @@ import { Avatar } from "@material-ui/core";
 
 
 const Navbar = () => {
-
     const { store, actions } = useContext(Context);
-    const history = useHistory();
 
     useEffect(() => {
         if (localStorage.getItem("petvaToken") !== null) store.token = localStorage.getItem("petvaToken");
@@ -28,13 +26,6 @@ const Navbar = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); //Si exite token recupera la sesion
-
-    const toRegister = () => {
-        history.push("/register")
-    }
-    const toServices = () => {
-        history.push("/services")
-    }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
@@ -63,15 +54,15 @@ const Navbar = () => {
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                             <div className="navbar-nav ">
                                 <div className="text-end d-flex align-items-center m-2" >
-                                    <button
-                                        className="text-dark fs-5 text-decoration-none badge rounded-pill bg-light"
-                                        onClick={toRegister}
+                                    <Link
+                                        className="link-green"
+                                        to="/register"
                                     >
                                         {/* <Link to="/register" className="text-decoration-none">
                                         Registrarse <MdPets className="navbar__button--icon text-decoration-none" />
                                     </Link> */}
                                         Registrarse
-                                    </button>
+                                    </Link>
 
                                 </div>
                                 <div className="text-end d-flex align-items-center">
