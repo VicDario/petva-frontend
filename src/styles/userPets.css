@@ -15,6 +15,12 @@
     height: 10rem !important;
     border-radius: 100px !important;
 }
+.img-pet-profile{
+    width: 12rem !important;
+    height: 12rem !important;
+    border-radius: 100px !important;
+}
+
 .btn-user-pets{
     background-color: #63A583 !important;
     color:white !important;
