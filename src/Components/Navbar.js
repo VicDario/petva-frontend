@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 
@@ -10,7 +10,10 @@ import { Avatar } from "@material-ui/core";
 
 const Navbar = () => {
     const { store, actions } = useContext(Context);
-
+    const history = useHistory();
+    const toRegister = () => {
+        history.push("/register")
+    }
     useEffect(() => {
         if (localStorage.getItem("petvaToken") !== null) store.token = localStorage.getItem("petvaToken");
         else store.token = false;
