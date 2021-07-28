@@ -1,6 +1,8 @@
 .image-pet {
     max-width: 100%;
     height: auto;
+    max-height: 300px;
+    object-fit: cover;
 }
 .button-finished {
     position: relative;
