@@ -1,17 +1,19 @@
-import { useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useContext } from "react";
 import { Context } from "../store/appContext";
+import { useEffect } from "react";
+import { FaUser } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 
-const DoctorProfileDetail = ()=>{
+
+const DoctorProfileDetail = () => {
     const { actions, store } = useContext(Context);
     const history = useHistory();
     useEffect(() => {
-        //deberia estar el get mascotas foundation
         actions.getDoctorDetail();
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    return(
-        <>
+    return (<>
         {
             !!localStorage.getItem("petvaToken") ? (
                 <div className="container">
@@ -19,43 +21,87 @@ const DoctorProfileDetail = ()=>{
                         <div className="col-12">
                             <h1>Mis Datos</h1>
                         </div>
-                         <div>
+                        <div>
                             {
                                 !!store.doctorDetail &&
-                                <div className="card mb-3" style={{ maxWidth: 540 }}>
+                                <div className="card mb-3" >
                                     <div className="row g-0">
-                                        <div className="col-md-4">
-                                            <img src={store.doctorDetail.picture} className="img-fluid rounded-start" alt="Imagen Fundación" />
+                                        <div className="col-12 col-md-4 bg-dark text-center">
+                                            <div className="mb-2">
+                                                <img
+                                                    src={!!store.doctorDetail.picture ? store.doctorDetail.picture
+                                                        : "/images/default.jpg"}
+                                                    className="imgRedondaA img-fluid"
+                                                    alt="Imagen Perfil" />
+
+                                            </div>
+                                            <div className="my-2">
+                                                <span
+                                                    className="text-white me-3">
+                                                    {store.doctorDetail.name} {store.doctorDetail.lastname}
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div className="col-md-8">
-                                            <div className="card-body">
-                                                <h5 className="card-title">{store.doctorDetail.name}</h5>
-                                                <p className="card-text">
-                                                    <span className="me-1">Correo de contacto:</span>
-                                                    <span className="ms-1">{store.doctorDetail.email}</span>
-                                                </p>
-                                                <p className="card-text">
-                                                    <span className="me-1">Detalles de la fundación:</span>
-                                                    <span className="ms-1">{store.doctorDetail.specialty}</span>
-                                                </p>
-                                                
-                                                <p className="card-text">
-                                                    <small className="text-muted">Numero de Mascotas actuales: </small>
-                                                </p>
+                                        <div className="col-12 col-md-8 bg-dark">
+
+                                            <div>
+                                                <div className="row">
+                                                    <div className="col-8 ms-3 text-white">
+                                                        <h3>
+                                                            <span className="me-2">
+                                                                <FaUser />
+                                                            </span>
+                                                            <span className="me-2">
+                                                                {store.doctorDetail.name}
+                                                            </span>
+                                                            <span>
+                                                                {store.doctorDetail.lastname}
+                                                            </span>
+                                                        </h3>
+                                                    </div>
+                                                    <div
+                                                        className="col-8 mx-auto">
+                                                        <div
+                                                            className="m-2  p-1 rounded text-center bg-secondary text-white">
+                                                            <h4 >Especialidad </h4>
+                                                            <div>
+                                                                <p>
+                                                                    {!!store.doctorDetail.specialty ?
+                                                                        store.doctorDetail.specialty : "No tienes especialidad registrada"}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        className="col-8 mx-auto">
+                                                        <div
+                                                            className="m-2  p-1 rounded text-center bg-secondary text-white">
+                                                            <h4>
+                                                                Email
+                                                            </h4>
+                                                            <div>
+                                                                <p>{!!store.doctorDetail.email ?
+                                                                    store.doctorDetail.email :
+                                                                    "No tienes email registrado"}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             }
-                        </div> 
-                        
+                        </div>
+
                     </div>
                 </div>
             ) : (
-                history.push("/doctor/login")
+                history.push('/user/login')
             )
         }
     </>
-    )
+    );
 }
+
 export default DoctorProfileDetail;
