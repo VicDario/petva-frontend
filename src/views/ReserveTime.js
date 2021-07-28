@@ -144,7 +144,6 @@ const ReserveTime = () => {
                                 <div>
                                     {
                                         !!store.doctorsList &&
-
                                         <select
                                             className="form-select form-select-lg mb-3"
                                             aria-label=".form-select-lg example"
@@ -186,14 +185,11 @@ const ReserveTime = () => {
                             <div>
                                 <ul className="list-group my-3">
                                     {
-                                        store.doctorReservations.length > 0 && doctor.id > 0 ?
-                                            <ul>
-                                            {
+                                        store.doctorReservations.length > 0 && doctor.id > 0 ?                                      
                                                 store.doctorReservations.map((reservation, index) => {
                                                     return (
-                                                        <>
+                                                        <div key={index}>
                                                             <li
-                                                                key={index}
                                                                 className="list-group-item "
                                                                 aria-current="true"
                                                                 value={reservation.id}
@@ -210,11 +206,9 @@ const ReserveTime = () => {
                                                             >
                                                                 Reservar Hora
                                                             </button>
-                                                        </>
+                                                        </div>
                                                     )
                                                 })
-                                            }
-                                            </ul>
                                         :
                                             <p>No Hay Horas Disponibles </p>
                                     }
