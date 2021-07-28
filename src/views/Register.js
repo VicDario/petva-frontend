@@ -152,7 +152,7 @@ const Register = () => {
                                             </div>
                                             <div className="text-start">
                                                 <span className="input-group-text d-block text-start fs-4" htmlFor="phone">Número de Telefono </span>
-                                                <input className="form-control fs-5" type="text" id="phone" onChange={e => setPhone(e.target.value)} required />
+                                                <input className="form-control fs-5" type="tel" id="phone" onChange={e => setPhone(e.target.value)} required />
                                             </div>
                                         </>
                                     }{
@@ -183,7 +183,7 @@ const Register = () => {
                                                 </span>
                                                 <input
                                                     className="form-control fs-5"
-                                                    type="text"
+                                                    type="tel"
                                                     id="phone"
                                                     onChange={e => setPhone(e.target.value)}
                                                     required

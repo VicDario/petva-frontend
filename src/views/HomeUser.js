@@ -1,5 +1,4 @@
 import { Link, useHistory } from "react-router-dom";
-import { FcOvertime } from "react-icons/fc"
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useEffect } from "react";
@@ -16,45 +15,43 @@ const HomeUser = () => {
         <>
             {
                 !!localStorage.getItem("petvaToken") ?
-                    <div className="container">
+                    <div className="container-fluid">
                         {
-                            !!store.userDetail &&
-                            <div className="text-center my-4">
-                                <h2 className="display-1">Bienvenido {store.userDetail.name}</h2>
-                            </div>
-                        }
-                        {
-                            !!store.pets ?
+                            !!store.userDetail && !!store.pets ?
                                 store.pets.length > 0 ?
                                     <div className="row">
-                                        <div className="col-12 col-md-6 my-1 d-flex justify-content-center">
+                                        <div className="col-md-6 col-sm-12 my-1 d-flex justify-content-center align-items-center flex-column">
+                                            <h2 className="text-center my-4 title-home">Bienvenido, {store.userDetail.name}</h2>
                                             <Link to="/user/reserve"
-                                                className="btn btn-home-user fs-2 fw-bold ">
+                                                className="btn-home link-green d-flex justify-content-between align-items-center my-4">
                                                 <span className="m-0">
-                                                    <img className="" src="/images/calendario.png" alt=""/>
+                                                    <img className="" src="/images/calendario.png" alt="Calendario"/>
                                                 </span>
                                                 <p>Reservar Cita Veterinaria</p>
                                             </Link >
-                                        </div>
-                                        <div className="col-12 col-md-6 my-1 d-flex justify-content-center">
                                             <Link to="/user/reservations"
-                                                className="btn btn-home-user fs-2 fw-bold ">
+                                                className="btn-home link-green d-flex justify-content-between align-items-center my-4">
                                                 <span className="fs-1 m-0">
-                                                    <img className="" src="/images/reloj.png" />
+                                                    <img className="" src="/images/reloj.png" alt="Reloj" />
                                                 </span>
                                                 <p>Ver mis citas</p>
                                             </Link >
                                         </div>
+                                        <div className="col-md-6 col-sm-12 my-1 d-flex justify-content-center">
+                                            <img src="/images/dog_home.png" className="image-home" alt="Perro"/>
+                                        </div>
                                     </div>
-                                    :
+                                :
                                     <div
-                                        className="col-sm-12 py-4 d-flex justify-content-center">
+                                        className="col-sm-12 py-4 d-flex justify-content-center"
+                                    >
                                         <Link to="/user/pets/add"
                                             className="btn btn-success btn-lg text-center">
                                             Comencemos agregando tu mascota
                                         </Link>
                                     </div>
-                                : <LoadingSpiner />
+                            : 
+                            <LoadingSpiner />
                         }
                     </div>
                     :

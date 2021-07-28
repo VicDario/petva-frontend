@@ -112,7 +112,7 @@ const DoctorAttending = (props) => {
                     <div className="container mt-2">
                         <div className="row">
                             <div className="col-md-12 d-flex justify-content-end my-2">
-                            <button type="button" class="button-finished btn btn-danger" onClick={FinishAttending}>Terminar Consulta</button>
+                            <button type="button" className="button-finished btn btn-danger" onClick={FinishAttending}>Terminar Consulta</button>
                             </div>
                             <div className="col-md-6 d-flex justify-content-center">
                                 <img 
@@ -268,16 +268,16 @@ const DoctorAttending = (props) => {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <div class="form-floating">
+                        <div className="form-floating">
                             <textarea
                                 ref={diagnosticDescription}
-                                class="form-control" 
+                                className="form-control" 
                                 placeholder="Leave a description about diagnostic here..." 
                                 id="floatingTextarea2" 
                                 style={{height: "100px"}}
                             >
                             </textarea>
-                            <label for="floatingTextarea2">Diagnostic:</label>
+                            <label htmlFor="floatingTextarea2">Diagnostic:</label>
                         </div>
                         <div className="input-group mb-3">
                             <input ref={diagnosticDate} type="date" className="form-control" placeholder="Fecha" aria-label="Fecha" aria-describedby="basic-addon1" />
@@ -304,16 +304,16 @@ const DoctorAttending = (props) => {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <div class="form-floating">
+                        <div className="form-floating">
                             <textarea
                                 ref={surgeryDescription}
-                                class="form-control" 
+                                className="form-control" 
                                 placeholder="Leave a description about surgery here..." 
                                 id="floatingTextarea2" 
                                 style={{height: "100px"}}
                             >
                             </textarea>
-                            <label for="floatingTextarea2">Surgery:</label>
+                            <label htmlFor="floatingTextarea2">Surgery:</label>
                         </div>
                         <div className="input-group mb-3">
                             <input ref={surgeryDate} type="date" className="form-control" placeholder="Fecha" aria-label="Fecha" aria-describedby="basic-addon1" />
