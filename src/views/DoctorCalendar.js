@@ -192,14 +192,6 @@ const DoctorCalendar = (props) => {
                         >
                             Perdida
                         </button>
-                        <button 
-                        type="button" 
-                        className="btn btn-danger" 
-                        data-bs-dismiss="modal"
-                        onClick={() => handleChangeEvent('canceled')}
-                        >
-                            Cancelar hora
-                        </button>
                     </div>
                     </div>
                 </div>
@@ -215,45 +207,6 @@ const DoctorCalendar = (props) => {
                         {title}
                     </div>
                     <div className="modal-footer">
-                        <button 
-                        type="button" 
-                        className="btn btn-primary" 
-                        data-bs-dismiss="modal"
-                        onClick={() => handleChangeEvent('available')}
-                        >
-                            Disponible
-                        </button>
-                        <button 
-                        type="button" 
-                        className="btn btn-warning" 
-                        data-bs-dismiss="modal"
-                        onClick={() => handleChangeEvent('missed')}
-                        >
-                            Perdida
-                        </button>
-                    </div>
-                    </div>
-                </div>
-            </div>
-            <div className="modal fade" id="modalCanceled" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Hora Cancelada</h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div className="modal-body">
-                        {title}
-                    </div>
-                    <div className="modal-footer">
-                        <button 
-                        type="button" 
-                        className="btn btn-primary" 
-                        data-bs-dismiss="modal"
-                        onClick={() => handleChangeEvent('available')}
-                        >
-                            Disponible
-                        </button>
                         <button 
                         type="button" 
                         className="btn btn-warning" 
@@ -293,7 +246,7 @@ const DoctorCalendar = (props) => {
                 <div className="modal-dialog">
                     <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Paciente en espera:</h5>
+                        <h5 className="modal-title" id="exampleModalLabel">Abrir hora para consulta:</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
