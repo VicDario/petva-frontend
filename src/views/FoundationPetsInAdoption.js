@@ -27,7 +27,7 @@ const FoundationPetsInAdoption = () => {
                                 </div>
                                 <div className="col-lg-6 col-md-12 col-sm-12">
                                     <div className="d-flex justify-content-end me-3">
-                                        <Link to="/foundation/pets/add" className="text-decoration-none badge rounded-pill btn-foundation-pets p-3 m-1 fs-4">
+                                        <Link to="/foundation/pets/add" className="text-decoration-none badge rounded-pill btn-foundation-pets p-3 m-1 fs-4 ">
                                             Agregar Mascota
                                         </Link>
                                     </div>
