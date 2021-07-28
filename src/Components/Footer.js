@@ -24,7 +24,7 @@ const Footer = () => {
                             </div>
                     </div>
                     <div className="col-lg-7 col-sm-12 col-xs-6 d-flex align-items-center justify-content-around wrap-xs">
-                            <Link className="text-decoration-none footer-link mx-3 text-muted" to="/">
+                            <Link className="text-decoration-none footer-link mx-3 text-muted" to="/contact">
                                 Contáctanos
                             </Link>
                             <Link className="text-decoration-none footer-link mx-3 text-muted" to="/adoption">
@@ -36,7 +36,7 @@ const Footer = () => {
                             <Link className="text-decoration-none footer-link mx-3 text-muted" to="/">
                                 Fundaciones
                             </Link>
-                            <Link className="text-decoration-none footer-link mx-3 me-5 text-muted" to="/">
+                            <Link className="text-decoration-none footer-link mx-3 me-5 text-muted" to="/services">
                                 Servicios
                             </Link>
                     </div>

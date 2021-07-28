@@ -37,20 +37,36 @@ const HomeUser = () => {
                                     <div className="row">
                                         <div className="col-md-6 my-1 d-flex justify-content-center pb-3">
                                             <Link to="/user/reserve"
+<<<<<<< HEAD
                                                 className="link-green btn-home">
                                                 <span className="fs-1 m-0"><FcOvertime /></span>
                                                 <p>Reservar</p>
                                                 <p>Hora Veterinaria</p>
+=======
+                                                className="btn btn-home-user fs-2 fw-bold ">
+                                                <span className="m-0">
+                                                    <img className="" src="/images/calendario.png" alt=""/>
+                                                </span>
+                                                <p>Reservar Cita Veterinaria</p>
+>>>>>>> dev
                                             </Link >
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6 my-1 d-flex justify-content-center">
                                             <Link to="/user/reservations"
+<<<<<<< HEAD
                                                 className="link-green btn-home">
                                                 <span className="fs-1 m-0"><FcOvertime /></span>
                                                 <p>Ver y editar</p>
                                                 <p>mis horas veterinarias</p>
+=======
+                                                className="btn btn-home-user fs-2 fw-bold ">
+                                                <span className="fs-1 m-0">
+                                                    <img className="" src="/images/reloj.png" />
+                                                </span>
+                                                <p>Ver mis citas</p>
+>>>>>>> dev
                                             </Link >
                                         </div>
                                     </div>
