@@ -62,17 +62,6 @@ const Navbar = () => {
                     localStorage.getItem("petvaToken") === null ?
                         <div className="collapse navbar-collapse  justify-content-md-end" id="navbarNavAltMarkup">
                             <div className="navbar-nav ">
-                                <div className="d-flex align-items-center border-end border-4 border-dark me-2">
-                                    <h4 className="me-2"
-                                        onClick={toServices}
-                                    >
-                                        Servicios
-                                    </h4>
-                                    <h4 className="me-2">
-                                        Contáctanos
-                                    </h4>
-
-                                </div>
                                 <div className="text-end d-flex align-items-center m-2" >
                                     <button
                                         className="text-dark fs-5 text-decoration-none badge rounded-pill bg-light"
