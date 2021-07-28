@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
-import Swal from "sweetalert2";
+
 
 const DoctorProfileDetail = () => {
     const { actions, store } = useContext(Context);
