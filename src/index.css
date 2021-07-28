@@ -11,7 +11,7 @@
 @import url("./styles/contact.css"); /* estilos asociados al contacto */
 @import url("./styles/userPets.css"); /* estilos asociados a mascotas de usuario */
 @import url("./styles/foundationPetsInAdoption.css"); /* estilos asociados a mascotas en adopción */
-
+@import url("./styles/ClinicDoctor.css"); /* estilos asociados al clinic doctor */ 
 html body #root {
     font-family: 'Roboto', sans-serif !important;
 }
