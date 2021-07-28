@@ -24,18 +24,18 @@ const DoctorAttending = (props) => {
     }, []);
 
     const calculateAge = (birth_date) => {
-        const today = moment().format('YYYY-MM');
         const birthDate = moment(birth_date).format('YYYY-MM');
-        let age = moment(today).diff(birthDate, 'months');
-        age = age / 12;
-        age = Math.floor(age);
-        let months = age % 12;
-        months = Math.floor(months);
-        return `${age} Años ${months} Meses`;
+        let months = moment().diff(birthDate, 'months');
+        let years = moment().diff(birthDate, 'years');
+        if (years < 1)  return `${months} Meses`;
+        if (months % 12 === 0)    return `${years} Años`;
+        return `${years} Años ${months % 12} Meses`;
     }
 
     const formatDate = (date) => {
-        return moment(date).format('DD-MM-YYYY');
+        console.log(date)
+        let formatDate = moment(date).add(1, 'days').format('DD-MM-YYYY')
+        return formatDate;
     }
 
     const vaccineToSend = async () => {
@@ -45,6 +45,7 @@ const DoctorAttending = (props) => {
             date: moment(vaccineDate.current.value).format('DD/MM/YYYY'),
             laboratory: vaccineLaboratory.current.value
         };
+        console.log(vaccine)
         let resp = await actions.addVaccineToPet(params.pet_id, vaccine);
         if (resp.ok) {
             actions.getInfoPetForDoctor(params.pet_id)
@@ -127,6 +128,7 @@ const DoctorAttending = (props) => {
                                     <p>Edad: {calculateAge(store.infoPet.Pet.birth_date)}</p>
                                     <p>Especie: {store.infoPet.Pet.specie === 'cat' ? 'Felina' : 'Canina' }</p>
                                     <p>Raza: {!!store.infoPet.Pet.breed ? store.infoPet.Pet.breed : 'No registra raza'}</p>
+                                    <p>Codigo de chip: {!!store.infoPet.Pet.code_chip ? store.infoPet.Pet.code_chip : "No registra codigo de chip"}</p>
                                 </div>
                             </div>
                             <div className="row mt-2">
