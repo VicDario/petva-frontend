@@ -61,7 +61,7 @@ const UserReservations = () => {
                                                             <tr>
                                                                 <td>{reservation.info_pet.name}</td>
                                                                 <td>{reservation.doctor_name}</td>
-                                                                <td>{reservation.id_clinic}</td>
+                                                                <td>{reservation.clinic_name}</td>
                                                                 <td>{moment(reservation.date_start).utc().format("L")}</td>
                                                                 <td>{moment(reservation.date_start).utc().format("LT")}</td>
 
