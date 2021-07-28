@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 
@@ -9,9 +9,7 @@ import { Avatar } from "@material-ui/core";
 
 
 const Navbar = () => {
-
     const { store, actions } = useContext(Context);
-    const history = useHistory();
 
     useEffect(() => {
         if (localStorage.getItem("petvaToken") !== null) store.token = localStorage.getItem("petvaToken");
@@ -28,13 +26,6 @@ const Navbar = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); //Si exite token recupera la sesion
-
-    const toRegister = () => {
-        history.push("/register")
-    }
-    const toServices = () => {
-        history.push("/services")
-    }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
@@ -62,7 +53,6 @@ const Navbar = () => {
                                     </Link> */}
                                             Registrarse
                                         </button>
-
                                     </div>
                                     <div className="text-end d-flex align-items-center justify-content-end">
                                         <div className="dropdown">
