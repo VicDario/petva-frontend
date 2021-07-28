@@ -1,5 +1,4 @@
 import { Link, useHistory } from "react-router-dom";
-import { FcOvertime } from "react-icons/fc"
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useEffect } from "react";
@@ -26,14 +25,14 @@ const HomeUser = () => {
                                             <Link to="/user/reserve"
                                                 className="btn-home link-green d-flex justify-content-between align-items-center my-4">
                                                 <span className="m-0">
-                                                    <img className="" src="/images/calendario.png" alt=""/>
+                                                    <img className="" src="/images/calendario.png" alt="Calendario"/>
                                                 </span>
                                                 <p>Reservar Cita Veterinaria</p>
                                             </Link >
                                             <Link to="/user/reservations"
                                                 className="btn-home link-green d-flex justify-content-between align-items-center my-4">
                                                 <span className="fs-1 m-0">
-                                                    <img className="" src="/images/reloj.png" />
+                                                    <img className="" src="/images/reloj.png" alt="Reloj" />
                                                 </span>
                                                 <p>Ver mis citas</p>
                                             </Link >
