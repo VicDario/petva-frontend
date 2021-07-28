@@ -1,7 +1,17 @@
 .btn-home {
-    min-width: 300px;
+    width: 310px;
+    height: 140px;
+    font-size: 1.5rem;
+}
+
+.image-home {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
 }
 
 .title-home {
-    text-decoration: underline;
+    border-bottom: 2px solid black;
+    font-size: 2.5rem;
+    font-weight: 600;
 }
