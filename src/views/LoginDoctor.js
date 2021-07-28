@@ -28,10 +28,10 @@ const LoginDoctor = () => {
     }
     return (
         <div className="container container-login">
-            <div className="row">
-                <div className="col-md-6 col-sm-10 mx-auto my-3 text-center">
-                    <main className="form-sigin bg-login p-4 mt-3">
-                        <form className="px-3" onSubmit={(e) => handleSubmit(e)}>
+            <div className="row login-menu">
+                <div className="col-md-12 col-sm-12 mx-auto my-4 d-flex flex-column justify-content-around align-items-center">
+                    <main className="form-sigin bg-login p-4 mt-3 d-flex flex-column justify-content-around align-items-center login">
+                        <form className="px-3 login d-flex flex-column justify-content-around align-items-center" onSubmit={(e) => handleSubmit(e)}>
                             <h1 className="h2 mb-4">Iniciar como Doctor</h1>
                             <div className="form-floating login-input my-3 w-80">
                                 <input type="email" ref={inputEmail} className="form-control" id="email" placeholder="name@example.com" />
@@ -41,16 +41,7 @@ const LoginDoctor = () => {
                                 <input type="password" ref={inputPassword} className="form-control" placeholder="********" id="password" />
                                 <label htmlFor="password">Password</label>
                             </div>
-                            {/*<div className="checkbox mb-2">
-                                <label>
-                                    <input type="checkbox" className="me-1" value="remember-me" />
-                                    Recuerdame
-                                </label>
-                            </div>*/}
                             <button className="btn btn-login mt-3 px-5" type="submit">Iniciar Sesión</button>
-                            {/*<div className="mt-1">
-                                <span className="text-muted">¿Has olvidado tu contraseña?</span>
-                            </div>*/}
                         </form>
                     </main>
                 </div>
