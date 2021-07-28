@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import LoadingSpiner from "../Components/LoadingSpinner";
 import { Context } from "../store/appContext";
+import { FaCat, FaDog } from "react-icons/fa";
 
 const FoundationPetsForTracking = () => {
     const { actions, store } = useContext(Context);
@@ -18,8 +19,11 @@ const FoundationPetsForTracking = () => {
                 <div className="container">
                     <div className="row my-4">
                         <div className="col-12 text-center">
-                            <div>
-                                <h2 className="display-1">Mascotas con Dueño</h2>
+                            <div className="row mb-2">
+                                <div className="col-lg-9 col-md-12 col-sm-12">
+                                    <h2 className="display-1 text-start mb-0">Mascotas con Dueño</h2>
+                                    <hr className="hr-foundation-adoption mt-0 mb-4" />
+                                </div>
                             </div>
                             <div className="row justify-content-center">
                                 {
@@ -27,20 +31,21 @@ const FoundationPetsForTracking = () => {
                                         store.petsWithOwner.length > 0 ?
                                             store.petsWithOwner.map((pet, index) => {
                                                 return (
-                                                    <div className="col-sm-6 col-md-4" key={index}>
-                                                        <div
-                                                            className="card mb-3">
+                                                    <div className="col-lg-4 col-md-6 col-sm-6" key={index}>
+                                                        <div className="card card-pet mb-3 pt-3 align-items-center">
                                                             <img
                                                                 src={!!pet.picture ? pet.picture : "/images/default.jpg"}
-                                                                className="card-img-top" alt={pet.name}
-                                                                style={{ height: "50vh" }}
+                                                                className="card-img-top img-pet" alt={pet.name}
                                                             />
                                                             <div className="card-body">
-                                                                <h5
-                                                                    className="card-title">{pet.name}</h5>
-                                                                <p
-                                                                    className="card-text">{pet.specie === 'cat' ? "Gato" : "Perro"}
-                                                                </p>
+                                                                <div className="d-flex justify-content-center">
+                                                                    <h2
+                                                                        className="h3 card-title">{pet.name}
+                                                                    </h2>
+                                                                    <span className="card-title fs-3">
+                                                                        {pet.specie === 'cat' ? <FaCat className="align-top ms-1" /> : <FaDog className="align-top ms-1" />}
+                                                                    </span>
+                                                                </div>
                                                                 <p
                                                                     className="card-text">{!!pet.birth_date ? actions.getEdad(pet.birth_date) :
                                                                         "No registra fecha de nacimiento"}
@@ -49,18 +54,18 @@ const FoundationPetsForTracking = () => {
                                                                     className="card-text">{!!pet.code_chip ? pet.code_chip :
                                                                         "No registra codigo de chip"}
                                                                 </p>
-                                                                <p
-                                                                    className="card-text badge rounded-pill bg-success fs-3">
-                                                                    {pet.state === "owned" ? "Con Dueño" : "En adopción"}
-                                                                </p>
-                                                                <div>
+                                                                <div className="d-flex justify-content-around mt-3 mb-2">
                                                                     <Link to={"/foundation/pet/history/" + pet.id}
-                                                                        className="btn btn-primary">
+                                                                        className="btn btn-foundation-pets rounded-pill px-5 py-0 fs-4">
                                                                         Historial
                                                                     </Link>
                                                                 </div>
-
-
+                                                                <div className="row mt-3 d-flex justify-content-center">
+                                                                    <div
+                                                                        className="col-lg-12 col-md-12 col-sm-12 card-text my-1 badge rounded-pill bg-success fs-5 px-0">
+                                                                        {pet.state === "owned" ? "Con Dueño" : "En adopción"}
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -78,11 +83,7 @@ const FoundationPetsForTracking = () => {
                                         <LoadingSpiner />
                                 }
                             </div>
-                            <div>
-                                {/* <Link to="/foundation/pets/add" className="text-decoration-none badge rounded-pill bg-success p-3 m-1 fs-4">
-                                    Agregar Mascota
-                                </Link> */}
-                            </div>
+
                         </div>
                     </div>
                 </div>}
