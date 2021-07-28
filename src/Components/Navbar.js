@@ -101,8 +101,8 @@ const Navbar = () => {
                                 </div>
                             </div>
                             :
-                            <div className="justify-content-md-end">
-                                <div className="navbar-nav">
+                            <div className="col-lg-3 col-md-6 col-sm-6">
+                                <div className="d-flex justify-content-end">
                                     <div className="text-end">
                                         {
                                             localStorage.getItem("petvaUser") === "normal" &&
