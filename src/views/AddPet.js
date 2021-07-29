@@ -22,7 +22,7 @@ const AddPet = ({ history }) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(store.userType==="normal"){
+        if (store.userType === "normal") {
             actions.registerPet(pet.name, pet.chip_code, formatDate(pet.birth_date), pet.specie, pet.breed, store.auxPicture);
             Swal.fire({
                 icon: "success",
@@ -32,7 +32,7 @@ const AddPet = ({ history }) => {
             })
             history.push("/user/pets");
         }
-        if(store.userType==="foundation"){
+        if (store.userType === "foundation") {
             console.log("Agrega la mascota como fundación")
             actions.registerPetFundation(pet.name, pet.chip_code, formatDate(pet.birth_date), pet.specie, pet.breed, store.auxPicture)
             Swal.fire({
@@ -46,21 +46,24 @@ const AddPet = ({ history }) => {
         actions.resetAuxPicture(); // reset aux picture to null
     }
 
-    const handleLoad = (e) =>{
+    const handleLoad = (e) => {
         let file = e.target.files[0]; // load the picture (just one file)
         actions.convertImgToBase64(file); //Save picture in base64 format at store in auxPicture
     }
 
     return (
         <div className="container">
-            <div className="row my-4 border border-dark">
+            <div className="row my-4">
                 <div className="col-12 text-center">
-                    <div className="mb-3">
-                        <h1>Agregar Mascota como {store.userType}</h1>
+                    <div className="row">
+                        <div className="col-lg-8 col-md-12 col-sm-12">
+                            <h2 className="display-1 text-start mb-0">Agregar Mascota</h2>
+                            <hr className="hr-add-pet mt-0 mb-4"/>
+                        </div>
                     </div>
                 </div>
-                <div className="col-12 col-md-6 mx-auto">
-                    <form onSubmit={handleSubmit}>
+                <div className="col-lg-10 col-md-12 col-sm-12 mx-auto">
+                    <form onSubmit={handleSubmit} className="form-add-pet p-5">
                         <div className="mb-3 row">
                             <label className="col-sm-3 col-form-label fs-4" htmlFor="petname">Nombre</label>
                             <div className="col-sm-9">
@@ -86,7 +89,7 @@ const AddPet = ({ history }) => {
                         <div className="mb-3 row">
                             <label className="col-sm-3 col-form-label fs-4" htmlFor="breed">Raza</label>
                             <div className="col-sm-9">
-                                <input type="text" onChange={(e) => { setPet({ ...pet, breed: e.target.value })}} className="form-control fs-4" id="breed" />
+                                <input type="text" onChange={(e) => { setPet({ ...pet, breed: e.target.value }) }} className="form-control fs-4" id="breed" />
                             </div>
                         </div>
                         <div className="mb-3 row">
@@ -98,11 +101,11 @@ const AddPet = ({ history }) => {
                         <div className="mb-3 row">
                             <label className="col-sm-3 col-form-label fs-4" htmlFor="birth">Fecha Nacimiento</label>
                             <div className="col-sm-9">
-                                <input  onChange={(e) => { setPet({ ...pet, birth_date: e.target.value }) }} type="date" className="form-control fs-4" id="birth" />
+                                <input onChange={(e) => { setPet({ ...pet, birth_date: e.target.value }) }} type="date" className="form-control fs-4" id="birth" />
                             </div>
                         </div>
                         <div className="d-flex justify-content-end">
-                            <button type="submit" className="btn btn-success btn-lg mb-3 ">
+                            <button type="submit" className="btn btn-add-pet badge rounded-pill p-3 m-1 fs-4">
                                 Agregar Mascota
                             </button>
                         </div>

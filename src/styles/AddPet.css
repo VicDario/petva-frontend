@@ -1,0 +1,20 @@
+.hr-add-pet{
+    opacity: 0.9;
+}
+
+.form-add-pet{
+    background-color:white;
+    min-height: 450px;
+    min-width: 400px;
+    border-radius: 4% !important;
+    -webkit-box-shadow: 0px 3px 4px 3px rgba(0,0,0,0.24);
+    -moz-box-shadow: 0px 3px 4px 3px rgba(0,0,0,0.24);
+    box-shadow: 0px 3px 4px 3px rgba(0,0,0,0.24);
+}
+.btn-add-pet{
+    background-color: #63A583 !important;
+    color:white !important;
+    -webkit-box-shadow: 0px 3px 4px 1px rgba(0,0,0,0.74);
+    -moz-box-shadow: 0px 3px 4px 1px rgba(0,0,0,0.74);
+    box-shadow: 0px 3px 4px 1px rgba(0,0,0,0.74);
+}
