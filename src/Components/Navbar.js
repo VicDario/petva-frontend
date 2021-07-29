@@ -246,18 +246,12 @@ const Navbar = () => {
                                                             <Link to="/user/profile" className="justify-content-start d-flex ms-2 text-decoration-none text-dark">
                                                                 Perfil
                                                             </Link>
-                                                            <span className="justify-content-start d-flex ms-2">
-                                                                Ajustes
-                                                            </span>
                                                             <Link
                                                                 to="/user/pets"
                                                                 className="justify-content-start d-flex ms-2 text-decoration-none text-dark"
                                                             >
                                                                 Mis Mascotas
                                                             </Link>
-                                                            <span className="justify-content-start d-flex ms-2">
-                                                                Ayuda
-                                                            </span>
                                                             <hr className="my-1" />
                                                             <div className="row">
                                                                 <Link
@@ -279,9 +273,6 @@ const Navbar = () => {
                                                             <Link to="/foundation/profile" className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark">
                                                                 Perfil
                                                             </Link>
-                                                            <span className="justify-content-start d-flex ms-2 mb-1">
-                                                                Ajustes
-                                                            </span>
                                                             <Link
                                                                 to="/foundation/pets/adoption"
                                                                 className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark"
@@ -293,9 +284,6 @@ const Navbar = () => {
                                                                 className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark">
                                                                 Mascotas adoptadas
                                                             </Link>
-                                                            <span className="justify-content-start d-flex ms-2 mb-1">
-                                                                Ayuda
-                                                            </span>
                                                             <hr className="my-1" />
                                                             <div className="row">
                                                                 <Link
@@ -315,18 +303,12 @@ const Navbar = () => {
                                                             <Link to="/clinic/profile" className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark">
                                                                 Perfil
                                                             </Link>
-                                                            <span className="justify-content-start d-flex ms-2 mb-1">
-                                                                Ajustes
-                                                            </span>
                                                             <Link
                                                                 to="/clinic/doctor"
                                                                 className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark"
                                                             >
                                                                 Mis Medicos
                                                             </Link>
-                                                            <span className="justify-content-start d-flex ms-2 mb-1">
-                                                                Ayuda
-                                                            </span>
                                                             <hr className="my-1" />
                                                             <div className="row">
                                                                 <Link
@@ -346,18 +328,12 @@ const Navbar = () => {
                                                             <Link to="/doctor/profile" className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark">
                                                                 Perfil
                                                             </Link>
-                                                            <span className="justify-content-start d-flex ms-2 mb-1">
-                                                                Ajustes
-                                                            </span>
                                                             <Link
                                                                 to="/doctor/calendar"
                                                                 className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark"
                                                             >
                                                                 Calendario
                                                             </Link>
-                                                            <span className="justify-content-start d-flex ms-2 mb-1">
-                                                                Ayuda
-                                                            </span>
                                                             <hr className="my-1" />
                                                             <div className="row">
                                                                 <Link
