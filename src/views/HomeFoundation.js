@@ -10,6 +10,7 @@ const HomeFoundation = () => {
     const history = useHistory();
     useEffect(() => {
         actions.getFoundationDetail();
+        actions.getPetsFoundation();
         actions.getPetsFoundationWithOwner();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

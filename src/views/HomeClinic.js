@@ -1,9 +1,14 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 const HomeClinic = () => {
     const history = useHistory();
-    const {store} = useContext(Context)
+    const {store, actions} = useContext(Context)
+    useEffect(() => {
+        actions.getClinicDetail();
+        actions.getClinicDoctor();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
     return (
         <>
             {

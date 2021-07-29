@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useEffect } from "react";
-import {  MdPets, MdTrackChanges } from "react-icons/md"
-import { FaCat, FaDog, FaUser } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import { IoLocationSharp } from "react-icons/io5";
+import { HiMail } from "react-icons/hi";
+import { ImMobile } from "react-icons/im";
+import { AiFillSetting } from "react-icons/ai";
 
 const FoundationProfileDetail = () => {
     const { actions, store } = useContext(Context);
@@ -69,253 +70,195 @@ const FoundationProfileDetail = () => {
         }
         return dato
     }
+    const toAdoptionPets = ()=>{
+        history.push("/foundation/pets/adoption")
+    }
+    const toTrackingnPets = () => {
+        history.push("/foundation/pets/tracking")
+    }
 
 
 
-    return (<>
-        {
-            !!localStorage.getItem("petvaToken") ? (
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <h1>Mis Datos</h1>
-                        </div>
-                        <div>
+    return (
+        <>
+            {
+                !!localStorage.getItem("petvaToken") ?
+                    <div className="container">
+                        <div className="row my-5 align-items-center px-3">
                             {
-                                !!store.foundationDetail && !!store.pets &&
-                                <div className="card mb-3" >
-                                    <div className="row g-0">
-                                        <div className="col-12 col-md-4 bg-dark text-center">
-                                            <div className="mb-2">
-                                                <img
-                                                    src={!!store.foundationDetail.picture ? store.foundationDetail.picture
-                                                        : "/images/default.jpg"}
-                                                    className="imgRedondaA img-fluid"
-                                                    alt="Imagen Perfil" />
+                                !!store.foundationDetail &&
+                                <>
+                                    <div className="col-12 col-md-3  d-flex justify-content-md-end justify-content-sm-center
+                                      justify-content-center mx-auto mb-4">
+                                        <img
+                                            src={!!store.foundationDetail.picture ? store.foundationDetail.picture
+                                                : "/images/default.jpg"}
+                                            className="img-pet-profile img-fluid"
+                                            alt="Imagen Perfil" />
+                                    </div>
+                                    <div className="col-12 col-md-4 d-flex align-items-center justify-content-center
+                                      justify-content-md-center mb-4">
+                                        <div className="">
+                                            <h1
+                                                className="border-bottom border-4 border-dark"
+                                            ><span className="me-2">
+                                                    {store.foundationDetail.name}
+                                                </span>
 
-                                            </div>
-                                            <div className="my-2">
-                                                <div
-                                                    className="fs-5 text-secondary me-3">
-                                                    <span
-                                                        className="me-1 align-top">
-                                                        <IoLocationSharp />
-                                                    </span>{store.foundationDetail.address}
-                                                </div>
+                                            </h1>
+                                            <h5
+                                                className="fs-6">
                                                 <span
-                                                    className="fs-3 text-secondary align-top"><MdPets /></span><span
-                                                        className="text-secondary align-middle">{!!store.pets.length > 0 ?
-                                                            store.pets.length
-                                                            : "0"}
-                                                </span>
+                                                    className="text-success me-1"
+                                                ><HiMail /></span>
+                                                {store.foundationDetail.email}
+                                            </h5>
+                                            <h5
+                                                className="fs-6">
                                                 <span
-                                                    className="fs-3 text-secondary align-top ms-2"><MdTrackChanges /></span><span
-                                                        className="text-secondary align-middle">{!!store.petsWithOwner.length >0 ?
-                                                        store.petsWithOwner.length
-                                                            : "0"}
-                                                </span>
-                                            </div>
+                                                    className="text-success me-1"
+                                                ><IoLocationSharp /></span>
+                                                {store.foundationDetail.address}
+                                            </h5>
+                                            <h5
+                                                className="fs-6">
+                                                <span
+                                                    className="text-success me-1"
+                                                ><ImMobile /></span>
+                                                {store.foundationDetail.phone}
+                                            </h5>
+
+                                        </div>
+                                    </div>
+                                    <div
+                                        className="col-12 col-md-5 d-flex align-items-top d-flex 
+                                        justify-content-md-start justify-content-center"
+                                    >
+                                        <div className="mx-2">
+                                            <button
+                                                onClick={register}
+                                                className="btn btn-user-pets rounded-pill fs-6">
+                                                <span className="text-white"
+                                                ><AiFillSetting /></span> Editar Perfil
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                    <div className="col-12  d-flex justify-content-md-start 
+                                    justify-content-center my-3">
+                                        <h3 className="lead fs-4">
+                                            ¿Qué quieres consultar?
+                                        </h3>
+                                    </div>
+                                    <div className="col-12 d-flex ">
+                                        <div className="me-4">
+                                            <h3 className="lead fs-5 border-bottom hhover"
+                                                onClick={toAdoptionPets}
+                                            >
+                                                Mascotas en adopción ({!!store.pets.length > 0 ? store.pets.length:"0"})
+                                            </h3>
+                                        </div>
+                                        <div>
+                                            <h3 className="lead fs-5 border-bottom hhover"
+                                            onClick={toTrackingnPets}
+                                            >
+                                                Mascotas en seguimiento ({!!store.petsWithOwner.length > 0 ? store.petsWithOwner.length:"0"})
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    {
+                                        save === "on" &&
+
+
+                                        <div className="col-12 bg-secondary text-white p-3 mx-auto">
+                                            <h3>Ingresa Tus nuevos Datos</h3>
                                             <div>
+                                                <label
+                                                    className="form-label"
+                                                    htmlFor="">
+                                                    Nombre
+                                                </label>
+                                                <input
+                                                    className="form-control text-white bg-dark"
+                                                    type="text" placeholder="Nombre"
+                                                    onChange={(e) => { setUpdates({ ...updates, name: e.target.value }) }}
+                                                />
+                                            </div>
+                                            <div className="">
+                                                <label className="form-label" htmlFor="">
+                                                    Dirección
+                                                </label>
+                                                <input
+                                                    className="form-control text-white bg-dark"
+                                                    type="text"
+                                                    placeholder="Dirección"
+                                                    onChange={(e) => { setUpdates({ ...updates, address: e.target.value }) }}
+                                                />
+                                            </div>
+                                            <div
+                                                className="">
+                                                <label
+                                                    className="form-label"
+                                                    htmlFor="">Teléfono</label>
+                                                <input
+                                                    className="form-control text-white bg-dark"
+                                                    type="text" placeholder="Teléfono"
+                                                    onChange={(e) => { setUpdates({ ...updates, phone: e.target.value }) }}
+                                                />
+                                            </div>
+                                            <div className="">
+                                                <label
+                                                    className="form-label"
+                                                    htmlFor="">Email</label>
+                                                <input className="form-control text-white bg-dark"
+                                                    type="email"
+                                                    placeholder="Email"
+                                                    onChange={(e) => { setUpdates({ ...updates, email: e.target.value }) }}
+                                                />
+                                            </div>
+                                            <div className="">
+                                                <label
+                                                    className="form-label"
+                                                    htmlFor="">Contraseña</label>
+                                                <input className="form-control text-white bg-dark"
+                                                    type="text"
+                                                    placeholder="Contraseña"
+                                                    onChange={(e) => { setUpdates({ ...updates, password: e.target.value }) }}
+                                                />
+                                            </div>
+                                            <div className="">
+                                                <label
+                                                    className="form-label"
+                                                    htmlFor="">Foto de Perfil</label>
+                                                <input className="form-control text-white bg-dark"
+                                                    type="file"
+                                                    placeholder="Foto perfil"
+                                                    onChange={e => handleLoad(e)} accept="image/png, .jpg, .jpeg"
+                                                />
+                                            </div>
+                                            <div
+                                                className="d-flex justify-content-around my-3">
                                                 <button
-                                                    onClick={register}
-                                                    className="badge rounded-pill bg-secondary mb-1 w70 fs-6">
-                                                    Editar Perfil
+                                                    className="btn btn-success"
+                                                    onClick={update} >
+                                                    Guardar Cambios
+                                                </button>
+                                                <button
+                                                    className="btn btn-dark"
+                                                    onClick={register} >
+                                                    Cancelar
                                                 </button>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-md-8 bg-dark">
-
-                                            <div>
-                                                <div className="row">
-                                                    <div className="col-8 ms-3 text-white">
-                                                        <h3>
-                                                            <span className="me-2">
-                                                                <FaUser />
-                                                            </span>
-                                                            <span className="me-2">
-                                                                {store.foundationDetail.name}
-                                                            </span>
-                                                            <span>
-                                                                {store.foundationDetail.lastname}
-                                                            </span>
-                                                        </h3>
-                                                    </div>
-                                                    <div
-                                                        className="col-8 mx-auto">
-                                                        <div
-                                                            className="m-2  p-1 rounded text-center bg-secondary text-white">
-                                                            <h4>
-                                                                Mascotas en Adopción
-                                                            </h4>
-                                                            <div>
-                                                                {
-                                                                    !!store.pets.length > 0 ?
-                                                                        store.pets.map((pet, index) => {
-                                                                            return (
-                                                                                <span
-                                                                                    key={index}
-                                                                                    className="card-title fs-3 ">{pet.specie === 'cat' ? <FaCat
-                                                                                        className="align-top ms-1" /> : <FaDog
-                                                                                        className="align-top ms-1" />}
-                                                                                </span>
-                                                                            )
-                                                                        })
-                                                                        :
-                                                                        <p>No tienes mascotas inscritas</p>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        className="col-8 mx-auto">
-                                                        <div
-                                                            className="m-2  p-1 rounded text-center bg-secondary text-white">
-                                                            <h4>
-                                                                Mascotas en seguimiento
-                                                            </h4>
-                                                            <div>
-                                                                {
-                                                                    !!store.petsWithOwner.length > 0 ?
-                                                                        store.petsWithOwner.map((pet, index) => {
-                                                                            return (
-                                                                                <span
-                                                                                    key={index}
-                                                                                    className="card-title fs-3 ">{pet.specie === 'cat' ? <FaCat
-                                                                                        className="align-top ms-1" /> : <FaDog
-                                                                                        className="align-top ms-1" />}
-                                                                                </span>
-                                                                            )
-                                                                        })
-                                                                        :
-                                                                        <p>No tienes mascotas inscritas</p>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        className="col-8 mx-auto">
-                                                        <div
-                                                            className="m-2  p-1 rounded text-center bg-secondary text-white">
-                                                            <h4 >Teléfono </h4>
-                                                            <div>
-                                                                <p>
-                                                                    {!!store.foundationDetail.phone ?
-                                                                        store.foundationDetail.phone : "No tienes teléfono registrado"}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        className="col-8 mx-auto">
-                                                        <div
-                                                            className="m-2  p-1 rounded text-center bg-secondary text-white">
-                                                            <h4>
-                                                                Email
-                                                            </h4>
-                                                            <div>
-                                                                <p>{!!store.foundationDetail.email ?
-                                                                    store.foundationDetail.email :
-                                                                    "No tienes email registrado"}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {
-                                            save === "on" &&
-                                            <div className="col-md-7 col-12 bg-secondary text-white p-3 mx-auto">
-                                                <div>
-                                                    <label
-                                                        className="form-label"
-                                                        htmlFor="">
-                                                        Nombre
-                                                    </label>
-                                                    <input
-                                                        className="form-control text-white bg-dark"
-                                                        type="text" placeholder="Nombre"
-                                                        onChange={(e) => { setUpdates({ ...updates, name: e.target.value }) }}
-                                                    />
-                                                </div>
-                                                <div className="">
-                                                    <label className="form-label" htmlFor="">
-                                                        Dirección
-                                                    </label>
-                                                    <input
-                                                        className="form-control text-white bg-dark"
-                                                        type="text"
-                                                        placeholder="Direccion"
-                                                        onChange={(e) => { setUpdates({ ...updates, address: e.target.value }) }}
-                                                    />
-                                                </div>
-                                                <div
-                                                    className="">
-                                                    <label
-                                                        className="form-label"
-                                                        htmlFor="">Teléfono</label>
-                                                    <input
-                                                        className="form-control text-white bg-dark"
-                                                        type="text" placeholder="Teléfono"
-                                                        onChange={(e) => { setUpdates({ ...updates, phone: e.target.value }) }}
-                                                    />
-                                                </div>
-                                                <div className="">
-                                                    <label
-                                                        className="form-label"
-                                                        htmlFor="">Email</label>
-                                                    <input className="form-control text-white bg-dark"
-                                                        type="email"
-                                                        placeholder="Email"
-                                                        onChange={(e) => { setUpdates({ ...updates, email: e.target.value }) }}
-                                                    />
-                                                </div>
-                                                <div className="">
-                                                    <label
-                                                        className="form-label"
-                                                        htmlFor="">Contraseña</label>
-                                                    <input className="form-control text-white bg-dark"
-                                                        type="text"
-                                                        placeholder="Contraseña"
-                                                        onChange={(e) => { setUpdates({ ...updates, password: e.target.value }) }}
-                                                    />
-                                                </div>
-                                                <div className="">
-                                                    <label
-                                                        className="form-label"
-                                                        htmlFor="">Foto de Perfil</label>
-                                                    <input className="form-control text-white bg-dark"
-                                                        type="file"
-                                                        placeholder="Foto perfil"
-                                                        onChange={e => handleLoad(e)} accept="image/png, .jpg, .jpeg"
-                                                    />
-                                                </div>
-                                                <div
-                                                    className="d-flex justify-content-around my-3">
-                                                    <button
-                                                        className="btn btn-success"
-                                                        onClick={update} >
-                                                        Guardar Cambios
-                                                    </button>
-                                                    <button
-                                                        className="btn btn-dark"
-                                                        onClick={register} >
-                                                        Cancelar
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
+                                    }
+                                </>
                             }
                         </div>
-
                     </div>
-                </div>
-            ) : (
-                history.push('/foundation/login')
-            )
-        }
-    </>
+                    :
+                    history.push("foundation/login")
+            }
+        </>
     );
 }
 
