@@ -50,30 +50,35 @@ const DoctorRegister = () => {
                 });
             } else {
                 actions.registerDoctor(email, name, lastname, specialty, password)
-                .then((response) => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Registrado!',
-                        text: 'Medico registrado con éxito.'
-                    });
-                    history.push('/clinic');
-                })
-                .catch((error) => Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: "Ya existe un medico registrado con ese email"
-                }))
+                    .then((response) => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Registrado!',
+                            text: 'Medico registrado con éxito.'
+                        });
+                        history.push('/clinic');
+                    })
+                    .catch((error) => Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: "Ya existe un medico registrado con ese email"
+                    }))
             }
         }
     }
     return (
         <>
             <div className="container">
-                <div className="row">
-                    <div className="col-md-6 col-sm-10 mx-auto my-2 text-center">
-                        <main className="form-sigin bg-white rounded-3 p-4">
-                            <form className="px-3" onSubmit={(e) => handleSubmit(e)}>
-                                <h1 className="h2 mb-4">Registro de médico</h1>
+                <div className="row my-4">
+                    <div className="col-12 text-center">
+                        <div className="row">
+                            <div className="col-lg-8 col-md-12 col-sm-12">
+                                <h2 className="display-1 text-start mb-0">Registro de médico</h2>
+                                <hr className="hr-add-doctor mt-0 mb-4" />
+                            </div>
+                        </div>
+                        <div className="col-lg-10 col-md-12 col-sm-12 mx-auto">
+                            <form onSubmit={(e) => handleSubmit(e)} className="form-add-doctor p-5">
                                 <div className="form-floating my-3 w-80">
                                     <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control" id="email" placeholder="name@example.com" />
                                     <label htmlFor="email">Email</label>
@@ -98,9 +103,9 @@ const DoctorRegister = () => {
                                     <input onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="form-control" placeholder="********" id="password_confirm" />
                                     <label htmlFor="password">Confirmar contraseña</label>
                                 </div>
-                                <button className="w-50 mt-2 btn btn-success" type="submit">Registrar Doctor</button>
+                                <button className="btn btn-add-doctor badge rounded-pill p-3 m-1 fs-4" type="submit">Registrar Doctor</button>
                             </form>
-                        </main>
+                        </div>
                     </div>
                 </div>
             </div>
