@@ -21,7 +21,7 @@ const FoundationPetsInAdoption = () => {
                     <div className="row my-4">
                         <div className="col-12 text-center">
                             <div className="row mb-2">
-                                <div className="col-lg-6 col-lg-6 col-md-12 col-sm-12">
+                                <div className="col-lg-6 col-md-12 col-sm-12">
                                     <h2 className="display-1 text-start mb-0">Mascotas en Adopción</h2>
                                     <hr classname="hr-foundation-adoption mt-0 mb-4" />
                                 </div>

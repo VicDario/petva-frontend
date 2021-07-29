@@ -95,7 +95,7 @@ const DoctorRegister = () => {
                                     <label htmlFor="password">Contraseña</label>
                                 </div>
                                 <div className="form-floating mt-3 mb-2">
-                                    <input onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="form-control" placeholder="********" id="password" />
+                                    <input onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="form-control" placeholder="********" id="password_confirm" />
                                     <label htmlFor="password">Confirmar contraseña</label>
                                 </div>
                                 <button className="w-50 mt-2 btn btn-success" type="submit">Registrar Doctor</button>
