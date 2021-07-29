@@ -104,7 +104,7 @@ const AddPet = ({ history }) => {
                                 <input onChange={(e) => { setPet({ ...pet, birth_date: e.target.value }) }} type="date" className="form-control fs-4" id="birth" />
                             </div>
                         </div>
-                        <div className="d-flex justify-content-end">
+                        <div className="d-flex justify-content-center">
                             <button type="submit" className="btn btn-add-pet badge rounded-pill p-3 m-1 fs-4">
                                 Agregar Mascota
                             </button>
