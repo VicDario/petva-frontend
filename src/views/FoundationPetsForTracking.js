@@ -62,8 +62,8 @@ const FoundationPetsForTracking = () => {
                                                                 </div>
                                                                 <div className="row mt-3 d-flex justify-content-center">
                                                                     <div
-                                                                        className="col-lg-12 col-md-12 col-sm-12 card-text my-1 badge rounded-pill bg-success fs-5 px-0">
-                                                                        {pet.state === "owned" ? "Con Dueño" : "En adopción"}
+                                                                        className="col-lg-12 col-md-12 col-sm-12 card-text my-1 badge rounded-pill bg-warning fs-5 px-0">
+                                                                        {pet.state === "owned" ? "En seguimiento" : "En adopción"}
                                                                     </div>
                                                                 </div>
                                                             </div>
