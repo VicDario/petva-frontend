@@ -20,30 +20,38 @@ const ClinicDoctor = () => {
                 <div className="container">
                     <div className="row my-4">
                         <div className="col-12 text-center">
-                            <h2 className="display-1">Mis Doctores</h2>
+                            <div className="row">
+                                <div className="col-lg-6 col-md-12 col-sm-12">
+                                    <h2 className="display-1">Mis Doctores</h2>
+                                    <hr className="hr-clinic-doctor mt-0 mb-4" />
+                                </div>
+                                <div className="col-lg-6 col-md-12 col-sm-12 ">
+                                    <div className="d-flex justify-content-end">
+                                        <Link to="/clinic/doctor/register" className="text-decoration-none badge rounded-pill btn-clinic-doctor p-3 m-1 fs-4 ">
+                                            Registrar un nuevo medico
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center mt-4">
                         {
                             !!store.clinicDoctor ?
                                 store.clinicDoctor.length > 0 ?
                                     store.clinicDoctor.map((doctor, index) => {
                                         return (
-                                            <div className="col-sm-6 col-md-4" key={index}>
-                                                <div className="card mb-3">
+                                            <div className="col-lg-4 col-md-6 col-sm-12" key={index}>
+                                                <div className="card card-doctor mb-3 align-items-center">
                                                     <img
                                                         src={!!doctor.picture ? doctor.picture : "/images/default-doctor.jpg"}
-                                                        className="card-img-top" alt={doctor.name}
-                                                        style={{ height: "50vh" }}
+                                                        className="card-img-top img-doctor" alt={doctor.name}
                                                     />
-                                                    <div className="card-title">
-                                                        <div className="d-flex justify-content-center mt-2">
-                                                            <h2 className="h2">{doctor.name}</h2>
-                                                        </div>
+                                                    <div className="">
                                                     </div>
                                                     <div className="card-body">
-                                                        <div className="d-flex justify-content-center mt-2">
-                                                            <span>{doctor.name} {doctor.lastname}</span>
+                                                        <div className="card-title d-flex justify-content-center mt-2">
+                                                            <h2 className="h3 text-center">Dr. {doctor.name} {doctor.lastname}</h2>
                                                         </div>
                                                         <div className="d-flex justify-content-center mt-2">
                                                             <span>{doctor.email}</span>
@@ -51,9 +59,9 @@ const ClinicDoctor = () => {
                                                         <div className="d-flex justify-content-center mt-2">
                                                             <span>{doctor.specialty}</span>
                                                         </div>
-                                                    </div>
-                                                    <div className="card-footer d-flex justify-content-center">
-                                                        <button type="button" onClick={(e) => handleDelete(doctor.id)} className="btn btn-outline-danger">Eliminar</button>
+                                                        <div className="d-flex justify-content-center mt-2">
+                                                            <button type="button" onClick={(e) => handleDelete(doctor.id)} className="btn btn-outline-danger">Eliminar</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -66,13 +74,7 @@ const ClinicDoctor = () => {
                                         </div>) : <LoadingSpiner />
                         }
                     </div>
-                    <div className="row">
-                        <div className="col-sm-12 d-flex justify-content-center">
-                            <Link to="/clinic/doctor/register" className="text-decoration-none badge rounded-pill bg-success p-3 m-1 fs-4">
-                                Registrar un nuevo medico
-                            </Link>
-                        </div>
-                    </div>
+
                 </div>
             }
         </>

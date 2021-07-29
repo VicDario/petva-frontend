@@ -288,6 +288,11 @@ const Navbar = () => {
                                                             >
                                                                 Mascotas en adopción
                                                             </Link>
+                                                            <Link
+                                                                to="/foundation/pets/tracking"
+                                                                className="justify-content-start d-flex ms-2 mb-1 text-decoration-none text-dark">
+                                                                Mascotas adoptadas
+                                                            </Link>
                                                             <span className="justify-content-start d-flex ms-2 mb-1">
                                                                 Ayuda
                                                             </span>

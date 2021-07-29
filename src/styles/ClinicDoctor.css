@@ -1,29 +1,21 @@
-.hr-user-pets{
+.hr-clinic-doctor{
     opacity: 0.9;
 }
-.card-pet{
+.card-doctor{
     background-color:white;
     min-height: 450px;
-    min-width: 400px;
+    min-width: 356px;
     border-radius: 4% !important;
     -webkit-box-shadow: 0px 3px 4px 3px rgba(0,0,0,0.24);
     -moz-box-shadow: 0px 3px 4px 3px rgba(0,0,0,0.24);
     box-shadow: 0px 3px 4px 3px rgba(0,0,0,0.24);
 }
-.img-pet{
-    width: 11rem !important;
-    height: 11rem !important;
-    border-radius: 100px !important;
+.img-doctor{
+    border-radius: 4% !important;
 }
-.img-pet-profile{
-    width: 12rem !important;
-    height: 12rem !important;
-    border-radius: 100px !important;
-}
-
-.btn-user-pets{
+.btn-clinic-doctor{
     background-color: #63A583 !important;
-    color:white !important;
+    color: white !important;
     -webkit-box-shadow: 0px 3px 4px 1px rgba(0,0,0,0.74);
     -moz-box-shadow: 0px 3px 4px 1px rgba(0,0,0,0.74);
     box-shadow: 0px 3px 4px 1px rgba(0,0,0,0.74);

@@ -12,48 +12,44 @@ const Petsinadoption = () => {
         <>
             {
                 !!store.petsInAdoption &&
-                <div
-                    className="container">
-                    <div
-                        className="row my-4">
-                        <div
-                            className="col-12 text-center">
-                            <div>
-                                <h2
-                                    className="display-1">Mascotas en Adopción</h2>
+                <div className="container">
+                    <div className="row my-4">
+                        <div className="col-12 text-center">
+                            <div className="row mb-2">
+                                <div className="col-lg-9 col-md-12 col-sm-12">
+                                    <h2 className="display-1 text-start mb-0">
+                                        Mascotas en Adopción
+                                    </h2>
+                                    <hr className="hr-in-adoption mt-0 mb-4" />
+                                </div>
                             </div>
-                            <div
-                                className="row justify-content-center">
+                            <div className="row justify-content-center">
                                 {
                                     !!store.petsInAdoption && store.petsInAdoption[0].length > 0 ?
                                         store.petsInAdoption[0].map((pet, index) => {
                                             return (
                                                 <div
-                                                    className="col-sm-6 col-md-4"
-                                                    key={index}>
-                                                    <div
-                                                        className="card mb-3">
+                                                    className="col-lg-4 col-md-6 col-sm-6" key={index}>
+                                                    <div className="card card-pet mb-3 pt-3 align-items-center">
                                                         <img
                                                             src={!!pet.picture ? pet.picture : "/images/default.jpg"}
-                                                            className="card-img-top" alt={pet.name}
-                                                            style={{ height: "50vh" }}
-                                                            />
-                                                        <div
-                                                            className="card-body">
-                                                            <h5
-                                                                className="card-title">{pet.name}
+                                                            className="card-img-top img-pet" alt={pet.name}
+                                                        />
+                                                        <div className="card-body">
+                                                            <div className="d-flex justify-content-center">
+                                                                <h5 className="card-title">
+                                                                    {pet.name}
+                                                                </h5>
                                                                 <span
                                                                     className="card-title fs-3 ">
                                                                     {
                                                                         pet.specie === 'cat' ?
-                                                                            <FaCat
-                                                                                className="align-top ms-1" />
+                                                                            <FaCat className="align-top ms-1" />
                                                                             :
-                                                                            <FaDog
-                                                                                className="align-top ms-1" />
+                                                                            <FaDog className="align-top ms-1" />
                                                                     }
                                                                 </span>
-                                                            </h5>
+                                                            </div>
                                                             <p
                                                                 className="card-text">{!!pet.birth_date ?
                                                                     actions.getEdad(pet.birth_date)
@@ -81,14 +77,14 @@ const Petsinadoption = () => {
                                             )
                                         })
                                         :
-                                        <div className="col-sm-12 pt-4">
+                                        <div className="col-lg-12 col-md-12 col-sm-12 pt-4">
                                             <h3 className="text-center">No Hay mascotas en Adopción</h3>
                                         </div>
                                 }
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
             }
         </>
     )
