@@ -61,6 +61,9 @@ const UserProfileDetail = () => {
         }
         return dato
     }
+    const toPets = ()=>{
+        history.push("/user/pets")
+    }
     return (
         <>
             {
@@ -121,7 +124,8 @@ const UserProfileDetail = () => {
                                     </div>
                                     <div className="col-12 col-md-3  d-flex justify-content-md-end 
                                     justify-content-center my-5">
-                                        <h3 className="lead fs-4">
+                                        <h3 className="lead fs-4 hhover"
+                                        onClick={toPets}>
                                             Mascotas({!!store.pets.length > 0 ? store.pets.length : "0"})
                                         </h3>
                                     </div>

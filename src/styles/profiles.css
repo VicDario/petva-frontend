@@ -10,3 +10,8 @@
     -webkit-text-stroke: 2px black;
     color: white;
 }
+
+.hhover:hover{
+    cursor: pointer;
+    background-color: rgb(255, 251, 251);
+}
