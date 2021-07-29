@@ -3,9 +3,8 @@ import { Context } from "../store/appContext";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
-import { IoLocationSharp } from "react-icons/io5";
 import { HiMail } from "react-icons/hi";
-import { ImMobile } from "react-icons/im";
+
 
 const ClinicProfileDetail = () => {
     const { actions, store } = useContext(Context);

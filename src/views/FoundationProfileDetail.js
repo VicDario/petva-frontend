@@ -1,8 +1,6 @@
 import { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useEffect } from "react";
-import { MdPets, MdTrackChanges } from "react-icons/md"
-import { FaCat, FaDog, FaUser } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import { IoLocationSharp } from "react-icons/io5";
