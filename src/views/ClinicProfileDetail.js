@@ -131,7 +131,7 @@ const ClinicProfileDetail = () => {
                                     justify-content-center my-5">
                                             <h3 className="lead fs-4 hhover border-bottom border-3"
                                                 onClick={toDoctors}>
-                                                 Ver Veterinarios
+                                                 Ver Veterinarios ({!!store.clinicDoctor.length ? store.clinicDoctor.length : "0"})
                                             </h3>
                                         </div>
                                     
