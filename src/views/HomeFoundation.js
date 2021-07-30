@@ -55,7 +55,7 @@ const HomeFoundation = () => {
                         }
                     </div>
                 :
-                    history.push("/user/login")
+                    history.push("/foundation/login")
             }
         </>
     );
