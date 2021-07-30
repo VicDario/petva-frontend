@@ -652,7 +652,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/user/info", opt)
+                    const response = await fetch(`${store.baseUrl}/api/user/info`, opt)
                     if (response.status !== 202) {
                         console.error("There is a some error in update user")
                     }
