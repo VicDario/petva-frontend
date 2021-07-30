@@ -102,7 +102,7 @@ const LostPets = () => {
                                 !!store.lostPets && (
                                     <Pagination
                                         activePage={activePage}
-                                        itemsCountPerPage={5}
+                                        itemsCountPerPage={10}
                                         totalItemsCount={store.lostPets[0].length}
                                         pageRangeDisplayed={5}
                                         onChange={handlePageChange}

@@ -8,6 +8,7 @@ const Petsinadoption = () => {
     const { actions, store } = useContext(Context);
     const [activePage, setActivePage] = useState(1);
     const handlePageChange = (pageNumber) => {
+        console.log(`active page is ${pageNumber}`);
         actions.getPetsInAdoption(pageNumber);
         setActivePage(pageNumber);
     }
@@ -95,7 +96,7 @@ const Petsinadoption = () => {
                                         !!store.petsInAdoption && (
                                             <Pagination
                                                 activePage={activePage}
-                                                itemsCountPerPage={5}
+                                                itemsCountPerPage={10}
                                                 totalItemsCount={store.petsInAdoption[0].length}
                                                 pageRangeDisplayed={5}
                                                 onChange={handlePageChange}

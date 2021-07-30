@@ -21,7 +21,7 @@ const injectContext = (PassedComponent) => {
             
            /* state.actions.getFoundationDetail(); */
             state.actions.getPetsInAdoption(1);
-            state.actions.getLostPets();
+            state.actions.getLostPets(1);
             // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
 

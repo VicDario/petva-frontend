@@ -580,9 +580,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("There has been an error in report lost")
                 }
             },
-            getLostPets: async () => {
+            getLostPets: async (pageNumber) => {
                 try {
-                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/lost/1")
+                    const response = await fetch(`https://petva-backend-dev.herokuapp.com/api/pets/lost/${pageNumber}`)
                     if (response.status !== 200) {
                         console.log("Error in get pets in adoption")
                     }
