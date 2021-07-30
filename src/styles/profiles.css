@@ -1,0 +1,17 @@
+.fondopata {
+    background-image: url("../images/fondopatas.jpg");
+}
+.item {
+    height: 200px;
+    width: 300px;
+    background-image: url("../images/fondopatas.jpg");
+}
+.texto-borde {
+    -webkit-text-stroke: 2px black;
+    color: white;
+}
+
+.hhover:hover{
+    cursor: pointer;
+    background-color: rgb(255, 251, 251);
+}

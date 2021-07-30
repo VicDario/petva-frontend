@@ -1,13 +1,27 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("./styles/navbar.css"); /* estilos asociados al navbar */
+@import url("./styles/home.css"); /* estilos asociados al home general */
+@import url("./styles/homeUser.css"); /* estilos asociados al homeUser */
+@import url("./styles/profiles.css"); /* estilos asociados al perfil */
+@import url("./styles/404.css");/* estilos asociados al 404 */
+@import url("./styles/calendar.css");/* estilos asociados al calendario */
+@import url("./styles/footer.css"); /* estilos asociados al footer */
+@import url("./styles/DoctorAttending.css");
+@import url("./styles/Presentation.css");
+@import url("./styles/login.css"); /* estilos asociados al login */
+@import url("./styles/contact.css"); /* estilos asociados al contacto */
+@import url("./styles/userPets.css"); /* estilos asociados a mascotas de usuario */
+@import url("./styles/foundationPetsInAdoption.css"); /* estilos asociados a mascotas en adopción */
+@import url("./styles/ClinicDoctor.css"); /* estilos asociados al clinic doctor */
+@import url("./styles/PetsInAdoption.css"); /* estilos asociados a las mascotas en adopción */ 
+@import url("./styles/AddPet.css"); /* estilos asociados a las mascotas en adopción */
+@import url("./styles/DoctorRegister.css"); /* estilos asociados al doctor registrarse */
+
+html body #root {
+    font-family: 'Roboto', sans-serif !important;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }

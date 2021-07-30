@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Catamaran:400,800');
+
+.btn-home{
+  background-color:#63A583 !important;
+  color: white !important;
+  border-radius: 35px !important;
+}
+.span-home{
+  background-color: #63A583 !important;
+  color: white !important;
+  border-radius: 8px !important;
+}
+.error-container {
+  text-align: center;
+  font-size: 180px;
+  font-family: 'Catamaran', sans-serif;
+  font-weight: 800;
+  margin: 20px 15px;
+  width: 500px;
+}
+.img-404{
+  min-width: 310px;
+  width: 100%;
+  height: auto;
+  background-size: cover;
+}
+
+.error-404{
+    background-color: rgb(255, 255, 255);
+}
+
+.link-container {
+    text-align: center;
+}
+.link-container>a{
+    font-family: 'Montserrat', Helvetica, sans-serif;
+    color: #e3e6e7;
+}

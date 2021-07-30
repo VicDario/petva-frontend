@@ -1,0 +1,15 @@
+.imgRedonda {  
+    border-radius:150px;
+  }
+.imgRedondaA {  
+    border-radius:150px;
+    width:300px;
+    height:300px;
+}
+.w70{
+    width: 70%;
+}
+
+.icon-link {
+    width: 70px;
+}

@@ -1,0 +1,20 @@
+.bg-contact{
+    background-color: #fff;
+    border-radius: 8%;
+    -webkit-box-shadow: 0px 3px 4px 3px rgba(0,0,0,0.44);
+    -moz-box-shadow: 0px 3px 4px 3px rgba(0,0,0,0.44);
+    box-shadow: 0px 3px 4px 3px rgba(0,0,0,0.44);
+}
+.contact-input{
+    border-radius: 35px!important;
+}
+.contact-input-group{    
+    border-radius: 35px;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.44);
+    -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.44);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.44);
+}
+
+.contact-textarea{
+    height:100px !important;
+}
