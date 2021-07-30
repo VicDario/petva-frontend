@@ -289,7 +289,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch(`${store.baseUrl}/api/user/info`, opt)
+                    const response = await fetch(`${store.baseUrl}api/user/info`, opt)
                     if (response.status !== 200) {
                         console.error("There is a some error in get user detail")
                     }
@@ -520,7 +520,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             getPetsInAdoption: async (numberPage) => {
                 try {
                     const store=getStore();
-                    const response = await fetch(`${store.baseUrl}/api/pets/in_adoption/${numberPage}`)
+                    const response = await fetch(`${store.baseUrl}api/pets/in_adoption/${numberPage}`)
                     if (response.status !== 200) {
                         //console.log("Error in get pets in adoption")
                     }
@@ -582,7 +582,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             getLostPets: async (pageNumber) => {
                 try {
                     const store=getStore();
-                    const response = await fetch(`${store.baseUrl}/api/pets/lost/${pageNumber}`)
+                    const response = await fetch(`${store.baseUrl}api/pets/lost/${pageNumber}`)
                     if (response.status !== 200) {
                         //console.log("Error in get pets in adoption")
                     }
@@ -650,7 +650,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 try {
-                    const response = await fetch(`${store.baseUrl}/api/user/info`, opt)
+                    const response = await fetch(`${store.baseUrl}api/user/info`, opt)
                     if (response.status !== 202) {
                         console.error("There is a some error in update user")
                     }
