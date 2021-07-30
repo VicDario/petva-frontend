@@ -20,7 +20,7 @@ const ClinicProfileDetail = () => {
     });
     useEffect(() => {
         actions.getClinicDetail();
-        
+        actions.getClinicDoctor();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const register = () => {
@@ -127,18 +127,18 @@ const ClinicProfileDetail = () => {
                                             </button>
 
                                         </div> */}
-                                        <div className="col-12   d-flex justify-content-md-center 
-                                    justify-content-center my-5">
+                                        <div
+                                            className="col-12 d-flex justify-content-md-center justify-content-center my-5"
+                                        >
                                             <h3 className="lead fs-4 hhover border-bottom border-3"
-                                                onClick={toDoctors}>
+                                                onClick={toDoctors}
+                                            >
                                                  Ver Veterinarios ({!!store.clinicDoctor.length ? store.clinicDoctor.length : "0"})
                                             </h3>
                                         </div>
                                     
                                     {
                                         save === "on" &&
-
-
                                         <div className="col-12 bg-secondary text-white p-3 mx-auto">
                                             <h3>Ingresa Tus nuevos Datos</h3>
                                             <div>

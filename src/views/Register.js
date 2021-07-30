@@ -76,9 +76,9 @@ const Register = () => {
     }
 
     const validatePassword = (password) => {
-        let passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        let passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-./]).{8,}$/;
         if (!passwordRegex.test(password)) {
-            Swal.fire("Error!", "La contraseña debe contener al menos un número, una letra mayuscula y una letra minuscula y una longitud de minimo 8 caracteres", "error");
+            Swal.fire("Error!", "La contraseña debe contener al menos:<br/>Un número.<br/> Una letra mayuscula<br/> Una letra minuscula<br/>Un carácter especial<br/>Una longitud de minimo 8 caracteres", "error");
             //alert("La contraseña debe contener al menos un número, una letra mayuscula y una letra minuscula y una longitud de minimo 8 caracteres")
             return false;
         }
