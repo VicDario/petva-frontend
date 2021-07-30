@@ -1,28 +1,40 @@
 import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
+import LoadingSpiner from "../Components/LoadingSpinner";
 
 const HomeDoctor = () => {
     const history = useHistory();
     const {store} = useContext(Context)
+    
     return (
         <>
             {
-                !!localStorage.getItem('petvaToken') ?
-                    <div className="container">
+                !!localStorage.getItem("petvaToken") ?
+                    <div className="container-fluid">
                         {
-                        !!store.doctorDetail &&
-                        <div className="text-center my-4">
-                            <h2 className="display-1">Bienvenido {store.doctorDetail.name}</h2>
-                        </div>
+                            !!store.doctorDetail ?
+                                <div className="row">
+                                    <div className="col-md-6 col-sm-12 my-1 d-flex justify-content-center align-items-center flex-column">
+                                        <h2 className="text-center my-4 title-home">Bienvenido, {store.doctorDetail.name}</h2>
+                                        <Link 
+                                            to="/doctor/calendar"
+                                            className="btn-home link-green d-flex justify-content-between align-items-center my-4"
+                                        >
+                                            <span className="fs-1 m-0">
+                                                <img className="icon-link" src="/images/calendario.png" alt="Calendario" />
+                                            </span>
+                                            <p>Calendario</p>
+                                        </Link>
+                                    </div>
+                                    <div className="col-md-6 col-sm-12 my-1 d-flex justify-content-center">
+                                        <img src="/images/dog_home.png" className="image-home" alt="Perro"/>
+                                    </div>
+                                </div>
+                            
+                            :
+                                <LoadingSpiner />
                         }
-                        <div className="row">
-                            <div className="col-12 col-md-12 d-flex justify-content-center">
-                                <Link to="/doctor/calendar" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                    Calendario
-                                </Link >
-                            </div>
-                        </div>
                     </div>
                 :
                     history.push("/doctor/login")
