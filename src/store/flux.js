@@ -1218,6 +1218,18 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("the has been some error in post surgery")
                 }
             },
+            checkToken: async(token) => {
+                const store = getStore();
+                const opt = {
+                    method: "GET",
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    }
+                }
+                
+                const response = await fetch(`${store.baseUrl}api/check/`, opt)
+                return response;
+            }
         },
     }
 };

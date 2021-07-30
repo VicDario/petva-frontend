@@ -1,6 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import LoadingSpiner from "../Components/LoadingSpinner";
 //import { useEffect } from "react";
 
 
@@ -12,41 +13,48 @@ const HomeFoundation = () => {
         actions.getFoundationDetail();
         actions.getPetsFoundation();
         actions.getPetsFoundationWithOwner();
+        if(localStorage.getItem("petvaUser") !== 'foundation') history.push("/");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <>
             {
                 !!localStorage.getItem("petvaToken") ?
-                    (
-                        <div className="container">
-                            {
-                                !!store.foundationDetail &&
-
-                            <div className="text-center my-4">
-                                <h2 className="display-1">Bienvenido {store.foundationDetail.name}</h2>
-                            </div>
-                            }
-                            <div className="row">
-                                <div className="col-lg-4 col-md-6 text-center">
-                                    <button className="btn btn-secondary btn-lg fs-2 my-3  item texto-borde fw-bold ">
-                                        Perdidos y Encontrados
-                                    </button>
+                    <div className="container-fluid">
+                        {
+                            !!store.foundationDetail ?
+                                <div className="row">
+                                    <div className="col-md-6 col-sm-12 my-1 d-flex justify-content-center align-items-center flex-column">
+                                        <h2 className="text-center my-4 title-home">Bienvenido, {store.foundationDetail.name}</h2>
+                                        <Link 
+                                            to="/foundation/pets/adoption"
+                                            className="btn-home link-green d-flex justify-content-between align-items-center my-4"
+                                        >
+                                            <span className="m-0">
+                                                <img className="icon-link" src="/images/pet.png" alt="pet"/>
+                                            </span>
+                                            <p>Mascotas en adopcion</p>
+                                        </Link>
+                                        <Link 
+                                            to="/foundation/pets/tracking"
+                                            className="btn-home link-green d-flex justify-content-between align-items-center my-4"
+                                        >
+                                            <span className="fs-1 m-0">
+                                                <img className="icon-link" src="/images/dog.png" alt="house" />
+                                            </span>
+                                            <p>Mascotas en seguimiento</p>
+                                        </Link>
+                                    </div>
+                                    <div className="col-md-6 col-sm-12 my-1 d-flex justify-content-center">
+                                        <img src="/images/dog_home.png" className="image-home" alt="Perro"/>
+                                    </div>
                                 </div>
-                                <div className="col-lg-4 col-md-6 d-flex justify-content-center">
-                                    <Link to="/foundation/pets/adoption" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                        Mascotas en Adopción
-                                    </Link >
-                                </div>
-                                <div className="col-lg-4 col-md-6 d-flex justify-content-center">
-                                    <Link to="/foundation/pets/tracking" className="btn btn-secondary btn-lg fs-2 my-3 item texto-borde fw-bold d-flex align-items-center justify-content-center ">
-                                        Mascotas Adoptadas o con dueño
-                                    </Link >
-                                </div>
-                            </div>
-                        </div>
-                    )
-                    :
+                            
+                            :
+                                <LoadingSpiner />
+                        }
+                    </div>
+                :
                     history.push("/foundation/login")
             }
         </>

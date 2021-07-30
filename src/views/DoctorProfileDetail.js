@@ -61,9 +61,7 @@ const ClinicProfileDetail = () => {
         }
         return dato
     }
-    const toDoctors = () => {
-        history.push("/clinic/doctor");
-    }
+    
     return (
         <>
             {

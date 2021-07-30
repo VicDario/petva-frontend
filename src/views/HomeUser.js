@@ -9,6 +9,7 @@ const HomeUser = () => {
     useEffect(() => {
         actions.getUserDetail();
         actions.getMascotasUser();
+        if(localStorage.getItem("petvaUser") !== 'normal') history.push("/");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
@@ -51,10 +52,10 @@ const HomeUser = () => {
                                         </Link>
                                     </div>
                             : 
-                            <LoadingSpiner />
+                                <LoadingSpiner />
                         }
                     </div>
-                    :
+                :
                     history.push("/user/login")
             }
         </>
