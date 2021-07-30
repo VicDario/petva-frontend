@@ -6,7 +6,7 @@ const Presentation = () => {
             <div className="row section-one">
                 <div className="col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
                     <div className="landing-square p-3">
-                        <h1 className="text-center fw-bold">Hola! Bienvenido a PetVA</h1>
+                        <h1 className="text-center fw-bold">Hola, Bienvenido a PetVA</h1>
                         <p className="text-center">Estamos comprometidos en ayudarte a conseguir los mejores servicios para tus mascotas.</p>
                         <Link to="/register" className="link-landing">Ingresa Aquí</Link>
                     </div>

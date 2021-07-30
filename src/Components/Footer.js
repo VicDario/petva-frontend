@@ -36,8 +36,8 @@ const Footer = () => {
                             <Link className="text-decoration-none footer-link mx-3 text-muted" to="/">
                                 Fundaciones
                             </Link>
-                            <Link className="text-decoration-none footer-link mx-3 me-5 text-muted" to="/services">
-                                Servicios
+                            <Link className="text-decoration-none footer-link mx-3 me-5 text-muted" to="/lost">
+                                Mascotas perdidas
                             </Link>
                     </div>
                 </div>
