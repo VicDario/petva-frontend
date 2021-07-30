@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             userDetail: null,
             foundationDetail: null,
             clinicDetail: null,
-            baseUrl: 'https://petva-backend-dev.herokuapp.com/', //https://petva-backend-dev.herokuapp.com/
+            baseUrl: 'https://petva-backend.herokuapp.com/', //https://petva-backend-dev.herokuapp.com/
             foundationPet: null,
             historyUserPet: null,
             userPet: null,
