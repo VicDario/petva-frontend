@@ -519,9 +519,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("There has been an error in get pets WO")
                 }
             },
-            getPetsInAdoption: async () => {
+            getPetsInAdoption: async (numberPage) => {
                 try {
-                    const response = await fetch("https://petva-backend-dev.herokuapp.com/api/pets/in_adoption/1")
+                    const response = await fetch(`https://petva-backend-dev.herokuapp.com/api/pets/in_adoption/${numberPage}`)
                     if (response.status !== 200) {
                         console.log("Error in get pets in adoption")
                     }

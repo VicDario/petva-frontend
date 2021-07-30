@@ -155,14 +155,14 @@ const FoundationProfileDetail = () => {
                                             <h3 className="lead fs-5 border-bottom hhover"
                                                 onClick={toAdoptionPets}
                                             >
-                                                Mascotas en adopción ({!!store.pets.length > 0 ? store.pets.length:"0"})
+                                                Mascotas en adopción ({!!store.pets &&!!store.pets.length > 0 ? store.pets.length:"0"})
                                             </h3>
                                         </div>
                                         <div>
                                             <h3 className="lead fs-5 border-bottom hhover"
                                             onClick={toTrackingnPets}
                                             >
-                                                Mascotas en seguimiento ({!!store.petsWithOwner.length > 0 ? store.petsWithOwner.length:"0"})
+                                                Mascotas en seguimiento ({!!store.petsWithOwner &&!!store.petsWithOwner.length > 0 ? store.petsWithOwner.length:"0"})
                                             </h3>
                                         </div>
                                     </div>
