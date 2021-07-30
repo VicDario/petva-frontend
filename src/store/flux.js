@@ -241,8 +241,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 201) {
                         console.error("there is some error in registerPet")
                     }
-                    const data = await response.json();
-                    //console.log(data);
                     actions.getPetsFoundation();
                     actions.getPetsInAdoption();
 
@@ -608,9 +606,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 200) {
                         console.error("There has been some error in report founded pet")
                     }
-                    const data = await response.json();
-                    //console.log(data);
-                    //aqií cargar lista de mascotas perdidas
+                    //aquí cargar lista de mascotas perdidas
                     actions.getMascotasUser();
                     actions.getHistoryUserPet(pet_id);
                     actions.getLostPets();
@@ -848,8 +844,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }
                 const response = await fetch(`${store.baseUrl}api/clinic/reservations/${reservation_id}/change`, opt)
-                const data = await response.json();
-                //console.log(data);
                 return response;
             },
             loginDoctor: async (email, password, history) => {
@@ -910,8 +904,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (response.status !== 200) {
                         console.error("There has been some error in delete reservation")
                     }
-                    const data = await response.json();
-                    //console.log(data);
                     actions.userGetReservations();
 
                 } catch (error) {
@@ -962,11 +954,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     {
                         console.error("There is a some error in update pet")
                     }
-                    const data = await response.json();
-                    //console.log(data);
                     actions.getSinglePetFromUser(pet_id);
-                    // eslint//console.log(response);
-                    ////console.log("arriba esta el response");
                     return response
                     
                 } catch (error)
@@ -990,12 +978,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     {
                         console.error("There has been some error in delete pet")
                     }
-                    const data = await response.json();
-                    //console.log(data);
                     actions.getMascotasUser();
                     history.push("/user/pets")
                     
-
                 } catch (error)
                 {
                     console.error("Error: " + error)
@@ -1027,11 +1012,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     {
                         console.error("There is a some error in update pet")
                     }
-                    const data = await response.json();
-                    //console.log(data);
                     actions.getFoundationDetail();
-
-
                 } catch (error)
                 {
                     console.error("Error in update" + error)
