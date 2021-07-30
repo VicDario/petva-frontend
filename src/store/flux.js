@@ -521,6 +521,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             getPetsInAdoption: async (numberPage) => {
                 try {
+                    const store=getStore();
                     const response = await fetch(`${store.baseUrl}/api/pets/in_adoption/${numberPage}`)
                     if (response.status !== 200) {
                         //console.log("Error in get pets in adoption")
@@ -582,6 +583,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             getLostPets: async (pageNumber) => {
                 try {
+                    const store=getStore();
                     const response = await fetch(`${store.baseUrl}/api/pets/lost/${pageNumber}`)
                     if (response.status !== 200) {
                         //console.log("Error in get pets in adoption")
