@@ -1,12 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { FaCat, FaDog } from "react-icons/fa";
+import Pagination from "react-js-pagination";
 
 
 const Petsinadoption = () => {
     const { actions, store } = useContext(Context);
-
-
+    const [activePage, setActivePage] = useState(1);
+    const handlePageChange = (pageNumber) => {
+        console.log(`active page is ${pageNumber}`);
+        actions.getPetsInAdoption(pageNumber);
+        setActivePage(pageNumber);
+    }
 
     return (
         <>
@@ -74,6 +79,9 @@ const Petsinadoption = () => {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                //pagination
+                                                
+                                                //Fin pagination
                                             )
                                         })
                                         :
@@ -81,6 +89,24 @@ const Petsinadoption = () => {
                                             <h3 className="text-center">No Hay mascotas en Adopción</h3>
                                         </div>
                                 }
+                            </div>
+                            <div className="row">
+                                <div className="animate__animated animate__fadeInDown col-md-12 py-3 d-flex justify-content-center">
+                                    {
+                                        !!store.petsInAdoption && (
+                                            <Pagination
+                                                activePage={activePage}
+                                                itemsCountPerPage={10}
+                                                totalItemsCount={store.petsInAdoption[0].length}
+                                                pageRangeDisplayed={5}
+                                                onChange={handlePageChange}
+                                                itemClass="page-item"
+                                                linkClass="page-link"
+                                            />
+                                        )
+                                    }
+
+                                </div>
                             </div>
                         </div>
                     </div>

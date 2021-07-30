@@ -1,10 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { FaCat, FaDog } from "react-icons/fa";
+import Pagination from "react-js-pagination";
 
 
 const LostPets = () => {
     const { store, actions } = useContext(Context);
+    const [activePage, setActivePage] = useState(1);
+    const handlePageChange = (pageNumber) => {
+        actions.getPetsInAdoption(pageNumber);
+        setActivePage(pageNumber);
+    }
 
     return (
         <>
@@ -87,6 +93,24 @@ const LostPets = () => {
                                         </div>
                                 }
                             </div>
+
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="animate__animated animate__fadeInDown col-md-12 py-3 d-flex justify-content-center">
+                            {
+                                !!store.lostPets && (
+                                    <Pagination
+                                        activePage={activePage}
+                                        itemsCountPerPage={10}
+                                        totalItemsCount={store.lostPets[0].length}
+                                        pageRangeDisplayed={5}
+                                        onChange={handlePageChange}
+                                        itemClass="page-item"
+                                        linkClass="page-link"
+                                    />
+                                )
+                            }
 
                         </div>
                     </div>
