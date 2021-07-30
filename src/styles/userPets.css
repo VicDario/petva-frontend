@@ -14,6 +14,7 @@
     width: 11rem !important;
     height: 11rem !important;
     border-radius: 100px !important;
+    object-fit: cover;
 }
 .img-pet-profile{
     width: 12rem !important;
