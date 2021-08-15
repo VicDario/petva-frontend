@@ -36,6 +36,7 @@ import DoctorCalendar from './views/DoctorCalendar';
 import DoctorAttending from './views/DoctorAttending';
 import Footer from './Components/Footer';
 import Contact from './views/Contact';
+import ForgetPassword from './views/ForgetPassword';
 
 function App() {
   return (
@@ -76,6 +77,7 @@ function App() {
           <Route exact path="/doctor/calendar" component={DoctorCalendar} />
           <Route exact path="/doctor/attending/:reservation_id/:pet_id" component={DoctorAttending} />
           <Route exact path="/contact" component={Contact}/>
+          <Route exact path="/:user/forget" component={ForgetPassword} />
           <Route component={Custom404}/>
         </Switch>
         <Footer/>
