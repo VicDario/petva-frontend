@@ -1,6 +1,6 @@
 import { useContext, useRef } from "react";
 import { Context } from "../store/appContext";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const LoginClinic = () =>{
@@ -43,6 +43,7 @@ return (
                                 <label htmlFor="password">Password</label>
                             </div>
                             <button className="btn btn-login mt-3 px-5" type="submit">Iniciar Sesión</button>
+                            <Link to="/clinic/forget" className="btn btn-link mt-3 px-5">Olvidaste tu contraseña?</Link>
                         </form>
                     </main>
                 </div>
