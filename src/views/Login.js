@@ -1,6 +1,6 @@
 import { useContext, useRef } from "react";
 import { Context } from "../store/appContext";
-import { useHistory } from "react-router";
+import { useHistory, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Login = () => {
@@ -40,8 +40,8 @@ const Login = () => {
     return (
         <div className="container container-login">
             <div className="row login-menu">
-                <div className="col-md-12 col-sm-12 mx-auto my-4 d-flex flex-column justify-content-around align-items-center">
-                    <main className="form-sigin bg-login p-4 mt-3 d-flex flex-column justify-content-around align-items-center login">
+                <div className="col-md-12 col-sm-12 mx-auto my-2 d-flex flex-column justify-content-around align-items-center">
+                    <main className="bg-login p-4 d-flex flex-column justify-content-around align-items-center login">
                         <form className="px-3 login d-flex flex-column justify-content-around align-items-center" onSubmit={handleSubmit}>
                             <h1 className="h2 mb-4">Inicio de Sesión</h1>
                             <div className="form-floating login-input my-3 w-80">
@@ -53,6 +53,7 @@ const Login = () => {
                                 <label htmlFor="password">Password</label>
                             </div>
                             <button className="btn btn-login mt-3 px-5" type="submit">Iniciar Sesión</button>
+                            <Link to="/user/forget" className="btn btn-link mt-3 px-5">Olvidaste tu contraseña?</Link>
                         </form>
                     </main>
                 </div>
