@@ -88,7 +88,7 @@ const AddPet = ({ history }) => {
                         </div>
                     </div>
                 </div>
-                <div className="col-lg-10 col-md-12 col-sm-12 mx-auto">
+                <div className="col-lg-10 col-md-12 col-sm-12 col-xs-12 mx-auto">
                     <form onSubmit={handleSubmit} className="form-add-pet p-5">
                         <div className="mb-3 row">
                             <label className="col-sm-3 col-form-label fs-4" htmlFor="petname">Nombre</label>
