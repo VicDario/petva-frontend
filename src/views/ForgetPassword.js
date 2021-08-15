@@ -14,7 +14,15 @@ const ForgetPassword = (props) => {
         const email = inputEmail.current.value;
         if (email.length > 0) {
             if (validateEmail(email)) {
+                console.log("email is valid", email);
                 const resp = await actions.forgotPassword(email, params.user);
+                if (resp.success) {
+                    Swal.fire("Success", "Te hemos enviado un correo para que restablezcas tu contraseña", "success");
+                    history.push("/");
+                }else{ 
+                    Swal.fire("Error", "Correo no registrado", "error");
+                    history.push("/");
+                }
             }
         }
     };
@@ -30,37 +38,24 @@ const ForgetPassword = (props) => {
         history.push("/error");
     }
     return (
-        <div classNameName="container">
+        <div className="container">
             <form
                 className="row g-3 p-4"
                 onSubmit={handleForgetPassword}
             >
                 <div className="container">
-                    <div className="row d-flex justify-content-center ">
+                    <div className="row d-flex justify-content-center py-3">
                         <h1>Recuperación de contraseña</h1>
                         <div className="col-sm-6 col-xs-12">
-                            <label for="staticEmail2" className="visually-hidden">
+                            <label htmlFor="inputPassword2" className="visually-hidden">
                                 Email
                             </label>
                             <input
-                                type="text"
-                                readonly
-                                className="form-control-plaintext"
-                                id="staticEmail2"
-                                value="email@example.com"
-                            />
-                        </div>
-                    </div>
-                    <div className="row d-flex justify-content-center py-3">
-                        <div className="col-sm-6 col-xs-12">
-                            <label for="inputPassword2" className="visually-hidden">
-                                Password
-                            </label>
-                            <input
-                                type="password"
+                                ref={inputEmail}
+                                type="email"
                                 className="form-control"
                                 id="inputPassword2"
-                                placeholder="Password"
+                                placeholder="Email"
                             />
                         </div>
                     </div>
