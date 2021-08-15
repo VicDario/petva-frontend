@@ -1212,6 +1212,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                 
                 const response = await fetch(`${store.baseUrl}api/check/`, opt)
                 return response;
+            },
+            forgotPassword: async(email, user) => {
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    body: JSON.stringify({
+                        email
+                    }),
+                }
+                const response = await fetch(`${store.baseUrl}api/${user}/forgot`, opt)
+                return response;
             }
         },
     }
