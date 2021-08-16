@@ -1199,16 +1199,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const store = getStore();
                 const opt = {
                     method: "POST",
-                    mode: "no-cors",
                     headers: {
-                        "Access-Control-Allow-Origin": "*",
+                        "content-type": "application/json"
                     },
                     body: JSON.stringify({
-                        email: email,
+                        'email': email,
                     }),
                 }
-                //console.error(opt);
-                const response = await fetch(`${store.baseUrl}api/${user}/forgot`, opt)
+                const response = await fetch(`${store.baseUrl}api/${user}/forgot`, opt);
                 return response;
             },
             resetPassword: async (token, password) => {
