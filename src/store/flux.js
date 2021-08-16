@@ -1209,16 +1209,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const response = await fetch(`${store.baseUrl}api/${user}/forgot`, opt);
                 return response;
             },
-            resetPassword: async (token, password) => {
+            resetPassword: async (token, password, user) => {
                 const store = getStore();
                 const opt = {
                     method: "POST",
+                    mode: "no-cors",
                     body: JSON.stringify({
                         token: token,
                         password: password
                     }),
                 }
-                const response = await fetch(`${store.baseUrl}api/reset`, opt);
+                const response = await fetch(`${store.baseUrl}api/${user}/reset`, opt);
                 return response;
             }
         },

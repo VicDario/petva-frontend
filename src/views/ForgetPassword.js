@@ -14,7 +14,7 @@ const ForgetPassword = (props) => {
         const email = inputEmail.current.value;
         if (email.length > 0) {
             if (validateEmail(email)) {
-                console.log("email is valid", email);
+                //console.log("email is valid", email);
                 const resp = await actions.forgotPassword(email, params.user);
                 //console.log(resp);
                 if (resp.ok) {
