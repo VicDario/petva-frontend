@@ -16,6 +16,7 @@ const ForgetPassword = (props) => {
             if (validateEmail(email)) {
                 console.log("email is valid", email);
                 const resp = await actions.forgotPassword(email, params.user);
+                //console.log(resp);
                 if (resp.success) {
                     Swal.fire("Success", "Te hemos enviado un correo para que restablezcas tu contraseña", "success");
                     history.push("/");
