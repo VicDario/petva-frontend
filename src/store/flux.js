@@ -1200,7 +1200,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const opt = {
                     method: "POST",
                     headers: {
-                        "content-type": "application/json"
+                        "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
                         'email': email,
@@ -1213,13 +1213,29 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const store = getStore();
                 const opt = {
                     method: "POST",
-                    mode: "no-cors",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                     body: JSON.stringify({
                         token: token,
                         password: password
                     }),
                 }
                 const response = await fetch(`${store.baseUrl}api/${user}/reset`, opt);
+                return response;
+            },
+            confirmAccount: async (token, user) => {
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    headers:{
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        token: token
+                    }),
+                }
+                const response = await fetch(`${store.baseUrl}api/${user}/confirm`, opt);
                 return response;
             }
         },

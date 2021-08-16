@@ -38,6 +38,7 @@ import Footer from './Components/Footer';
 import Contact from './views/Contact';
 import ForgetPassword from './views/ForgetPassword';
 import ResetPassword from './views/ResetPassword';
+import ConfirmAccount from './views/ConfirmAccount';
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
           <Route exact path="/contact" component={Contact}/>
           <Route exact path="/:user/forget" component={ForgetPassword} />
           <Route exact path="/:user/reset/:token" component={ResetPassword} />
+          <Route exact path="/:user/confirm/:token" component={ConfirmAccount} />
           <Route component={Custom404}/>
         </Switch>
         <Footer/>

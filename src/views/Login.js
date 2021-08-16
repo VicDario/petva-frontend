@@ -32,6 +32,14 @@ const Login = () => {
             showConfirmButton: false,
             timer: 1800
         })
+        }if (res.status===409){
+            Swal.fire({
+                icon: "error",
+                title: "Debes confirmar tu correo",
+                text: "Para poder iniciar sesión debes confirmar tu correo.",
+                showConfirmButton: false,
+                timer: 1800
+            })
         }
         }catch(error){
             console.error(error);
