@@ -35,7 +35,12 @@ const Register = () => {
                 if (password === confirmPassword) {
                     actions.registerUser(email, name, lastname,phone, password)
                         .then(response => {
-                            Swal.fire("Bienvenido!", "Te has registrado! Ahora solo te falta iniciar sesión.", "success");
+                            Swal.fire({
+                                title: "Cuenta Confirmada",
+                                text: "Inicia sesión",
+                                type: "success",
+                                timer: 2000,
+                            });
                             setIsRegister(true);
                         })
                         .catch(error => Swal.fire("Error!", "Ya existe un usuario registrado con ese email", "error"))
