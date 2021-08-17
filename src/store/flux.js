@@ -71,7 +71,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             loginUser: async (email, password, history) => {
                 const store = getStore();
-                
+
                 const opt = {
                     method: "POST",
                     body: JSON.stringify({
@@ -88,7 +88,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const data = await response.json();
                 /* if (data.access_token) sessionStorage.setItem("token", data.access_token) */
                 if (data.access_token) {
-                    
+
                     localStorage.setItem("petvaToken", data.access_token);
                     localStorage.setItem("petvaUser", "normal")
                     setStore({ userType: "normal" });
@@ -519,7 +519,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             getPetsInAdoption: async (numberPage) => {
                 try {
-                    const store=getStore();
+                    const store = getStore();
                     const response = await fetch(`${store.baseUrl}api/pets/in_adoption/${numberPage}`)
                     if (response.status !== 200) {
                         //console.log("Error in get pets in adoption")
@@ -581,7 +581,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             getLostPets: async (pageNumber) => {
                 try {
-                    const store=getStore();
+                    const store = getStore();
                     const response = await fetch(`${store.baseUrl}api/pets/lost/${pageNumber}`)
                     if (response.status !== 200) {
                         //console.log("Error in get pets in adoption")
@@ -928,7 +928,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error(error);
                 }
             },
-            userPutPet : async(name,code_chip,breed,picture,pet_id)=>{
+            userPutPet: async (name, code_chip, breed, picture, pet_id) => {
                 const store = getStore()
                 const actions = getActions();
                 const opt = {
@@ -938,31 +938,28 @@ const getState = ({ getStore, getActions, setStore }) => {
                         code_chip: code_chip,
                         breed: breed,
                         picture: picture
-                        
+
                     }),
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     //fundacion//console.log(opt);
                     ////console.log("arriba lo que se manda")
                     const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}`, opt)
-                    if (response.status !== 202)
-                    {
+                    if (response.status !== 202) {
                         console.error("There is a some error in update pet")
                     }
                     actions.getSinglePetFromUser(pet_id);
                     return response
-                    
-                } catch (error)
-                {
+
+                } catch (error) {
                     console.error("Error in update" + error)
                 }
             },
-            userDeletePet: async (pet_id,history) => {
+            userDeletePet: async (pet_id, history) => {
                 const store = getStore();
                 const actions = getActions();
                 const opt = {
@@ -971,18 +968,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/user/pets/${pet_id}`, opt)
-                    if (response.status !== 203)
-                    {
+                    if (response.status !== 203) {
                         console.error("There has been some error in delete pet")
                     }
                     actions.getMascotasUser();
                     history.push("/user/pets")
-                    
-                } catch (error)
-                {
+
+                } catch (error) {
                     console.error("Error: " + error)
                 }
             },
@@ -995,7 +989,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         name: name,
                         address: address,
                         phone: phone,
-                        email:email,
+                        email: email,
                         picture: picture,
                         password: password
 
@@ -1005,29 +999,26 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/foundation/info`, opt)
-                    if (response.status !== 202)
-                    {
+                    if (response.status !== 202) {
                         console.error("There is a some error in update pet")
                     }
                     actions.getFoundationDetail();
-                } catch (error)
-                {
+                } catch (error) {
                     console.error("Error in update" + error)
                 }
             },
-            formatDateB : (date) => {
+            formatDateB: (date) => {
 
                 let event = new Date(date)
                 event = event.toLocaleDateString()
                 return event
             },
-            formatTime : (date)=>{
+            formatTime: (date) => {
                 let event = new Date(date)
-                const opt ={timeZone : "UTC"}
-                event = event.toLocaleTimeString('es-CL',opt,{ hour:"2-digit", minute : "2-digit" })
+                const opt = { timeZone: "UTC" }
+                event = event.toLocaleTimeString('es-CL', opt, { hour: "2-digit", minute: "2-digit" })
                 return event
             },
             doctorAddReservation: async (hour_start, hour_end) => {
@@ -1046,47 +1037,41 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const response = await fetch(`${store.baseUrl}api/doctor/reservations/add`, opt);
                 return response;
             },
-            doctorGetReservationsReserved : async()=>{
+            doctorGetReservationsReserved: async () => {
                 const store = getStore();
                 const opt = {
                     headers: {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/doctor/reservations/reserved`, opt)
-                    if (response.status !== 200)
-                    {
+                    if (response.status !== 200) {
                         console.error("There has been some error in get doctor reservations")
                     }
                     const data = await response.json();
                     //console.log(data);
                     setStore({ doctorReservationsReserved: data })
-                } catch (error)
-                {
+                } catch (error) {
                     console.error(error);
                 }
             },
-            doctorGetReservations : async () => {
+            doctorGetReservations: async () => {
                 const store = getStore();
                 const opt = {
                     headers: {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/doctor/reservations`, opt)
-                    if (response.status !== 200)
-                    {
+                    if (response.status !== 200) {
                         console.error("There has been some error in get doctor reservations")
                     }
                     const data = await response.json();
                     setStore({ doctorHours: data })
                     return data
-                } catch (error)
-                {
+                } catch (error) {
                     console.error(error);
                 }
             },
@@ -1105,24 +1090,21 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const response = await fetch(`${store.baseUrl}api/doctor/reservations/${id_reservation}/change`, opt);
                 return response;
             },
-            getInfoPetForDoctor : async(pet_id)=>{
+            getInfoPetForDoctor: async (pet_id) => {
                 const store = getStore();
                 const opt = {
                     headers: {
                         "Authorization": "Bearer " + store.token
                     }
                 }
-                try
-                {
+                try {
                     const response = await fetch(`${store.baseUrl}api/doctor/attending/${pet_id}`, opt)
-                    if (!response.ok)
-                    {
+                    if (!response.ok) {
                         console.error("There has been some error in get doctor reservations")
                     }
                     const data = await response.json();
                     setStore({ infoPet: data })
-                } catch (error)
-                {
+                } catch (error) {
                     console.error(error);
                 }
             },
@@ -1201,7 +1183,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("the has been some error in post surgery")
                 }
             },
-            checkToken: async(token) => {
+            checkToken: async (token) => {
                 const store = getStore();
                 const opt = {
                     method: "GET",
@@ -1209,8 +1191,51 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + token
                     }
                 }
-                
+
                 const response = await fetch(`${store.baseUrl}api/check/`, opt)
+                return response;
+            },
+            forgotPassword: async (email, user) => {
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        'email': email,
+                    }),
+                }
+                const response = await fetch(`${store.baseUrl}api/${user}/forgot`, opt);
+                return response;
+            },
+            resetPassword: async (token, password, user) => {
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        token: token,
+                        password: password
+                    }),
+                }
+                const response = await fetch(`${store.baseUrl}api/${user}/reset`, opt);
+                return response;
+            },
+            confirmAccount: async (token, user) => {
+                const store = getStore();
+                const opt = {
+                    method: "POST",
+                    headers:{
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        token: token
+                    }),
+                }
+                const response = await fetch(`${store.baseUrl}api/${user}/confirm`, opt);
                 return response;
             }
         },

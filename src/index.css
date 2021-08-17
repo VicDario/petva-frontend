@@ -15,7 +15,7 @@
 @import url("./styles/PetsInAdoption.css"); /* estilos asociados a las mascotas en adopción */ 
 @import url("./styles/AddPet.css"); /* estilos asociados a las mascotas en adopción */
 @import url("./styles/DoctorRegister.css"); /* estilos asociados al doctor registrarse */
-
+@import url("./styles/ResetPassword.css"); /* estilos asociados al resetear contraseña */
 html body #root {
     font-family: 'Roboto', sans-serif !important;
 }
