@@ -26,7 +26,7 @@ const handleSubmit = async (e) => {
         if(res.status === 409){
             Swal.fire({
                 icon: "error",
-                title: "RTu cuenta no esta preparada!",
+                title: "Tu cuenta no esta preparada!",
                 text: "Debes pasar primero por el proceso de verificación",
                 showConfirmButton: false,
                 timer: 3000
