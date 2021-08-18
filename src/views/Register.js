@@ -39,6 +39,7 @@ const Register = () => {
                                 title: "Cuenta creada",
                                 text: "Te has registrado! Debes verificar tu cuenta. Revisa tu correo",
                                 type: "success",
+                                icon: "success",
                                 timer: 2000,
                             });
                             setIsRegister(true);
