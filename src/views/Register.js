@@ -60,14 +60,14 @@ const Register = () => {
                     if (user === "Clinica") {
                         actions.registerClinica(email, name, address, phone, password)
                             .then(response => {
-                                Swal.fire("Bienvenido!", "Te has registrado! Ahora solo te falta iniciar sesión.", "success");
+                                Swal.fire("Bienvenido!", "Te has registrado! Debes verificar tu cuenta. Revisa tu correo electrónico.", "success");
                                 setIsRegister(true);
                             })
                             .catch(err => Swal.fire("Error!", "Ya existe una clinica registrada con ese email", "error"))
                     } else {
                         actions.registerFoundation(email, name, address, phone, password)
                             .then(response => {
-                                Swal.fire("Bienvenido!", "Te has registrado! Ahora solo te falta iniciar sesión.", "success");
+                                Swal.fire("Bienvenido!", "Te has registrado! Debes verificar tu cuenta. Revisa tu correo electrónico.", "success");
                                 setIsRegister(true);
                             })
                             .catch(error => Swal.fire("Error!", "Ya existe una fundacion registrada con ese email", "error"))
