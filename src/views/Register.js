@@ -36,9 +36,10 @@ const Register = () => {
                     actions.registerUser(email, name, lastname,phone, password)
                         .then(response => {
                             Swal.fire({
-                                title: "Cuenta Confirmada",
-                                text: "Inicia sesión",
+                                title: "Cuenta creada",
+                                text: "Te has registrado! Debes verificar tu cuenta. Revisa tu correo",
                                 type: "success",
+                                icon: "success",
                                 timer: 2000,
                             });
                             setIsRegister(true);
