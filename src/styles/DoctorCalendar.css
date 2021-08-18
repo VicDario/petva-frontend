@@ -1,0 +1,25 @@
+.cube-leyend {
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+    margin-right: 5px;
+}
+
+.available {
+    background-color: #82a2d6;
+}
+.reserved {
+    background-color: #2186d4;
+}
+.canceled {
+    background-color: #cf2020;
+}
+.confirmed {
+    background-color: #359c33;
+}
+.missed {
+    background-color: #d44e29;
+}
+.finished {
+    background-color: #16526c;
+}

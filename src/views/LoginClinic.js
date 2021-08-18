@@ -14,13 +14,22 @@ const handleSubmit = async (e) => {
     e.preventDefault();
     try {
         let res = await actions.loginClinic(inputEmail.current.value, inputPassword.current.value, history);
-        if(res.status===401){
+        if(res.status === 401){
             Swal.fire({
                 icon: "error",
                 title: "Revisa tus datos!",
                 text: "El email o la contraseña no son correctos",
                 showConfirmButton: false,
                 timer: 1800
+            })
+        }
+        if(res.status === 409){
+            Swal.fire({
+                icon: "error",
+                title: "RTu cuenta no esta preparada!",
+                text: "Debes pasar primero por el proceso de verificación",
+                showConfirmButton: false,
+                timer: 3000
             })
         }
     }catch(error) {

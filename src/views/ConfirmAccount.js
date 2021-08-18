@@ -10,17 +10,30 @@ const ConfirmAccount = () => {
     const handleConfirm = async () => {
         const response = await actions.confirmAccount(params.token, params.user);
         if (response.ok) {
-            Swal.fire({
-                title: "Cuenta Confirmada",
-                type: "success",
-                timer: 2000,
-            })
+            if (params.user === 'user') {
+                Swal.fire({
+                    icon: 'success',
+                    title: "Cuenta Confirmada",
+                    text: "Inicia sesión",
+                    type: "success",
+                    timer: 5000,
+                })
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: "Correo Confirmado",
+                    html: "Solo te falta un paso.<br/>Revisa tu correo",
+                    type: "success",
+                    timer: 6000,
+                })
+            }
         } else {
             //console.log(response);
             Swal.fire({
+                icon: 'error',
                 title: "Error al confirmar la cuenta",
                 type: "error",
-                timer: 2000,
+                timer: 3000,
             })
         }
         history.push(`/${params.user}/login`)

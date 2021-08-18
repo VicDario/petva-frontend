@@ -5,6 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import moment from 'moment';
 import { IoHelpCircle } from "react-icons/io5";
+import esLocale from '@fullcalendar/core/locales/es';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
 
 const DoctorCalendar = (props) => {
@@ -30,26 +31,26 @@ const DoctorCalendar = (props) => {
             let backgroundColor = "";
             if (events[i].status === 'available'){
                 title=`Hora disponible`;
-                backgroundColor = "#3474d9";
+                backgroundColor = "#82a2d6";
             }else if (events[i].status === 'reserved'){
                 title = `Paciente: ${events[i].info_pet.name}, Telefono: ${events[i].phone}, Email: ${events[i].email_customer}. Cita reservada`;
-                backgroundColor = "#c29e29";
+                backgroundColor = "#2186d4";
             }else if(events[i].status === 'canceled'){
                 if(events[i].info_pet === null){
                     title = `Cita cancelada, Sin informacion de paciente`;
                 }else{
                     title = `Paciente: ${events[i].info_pet.name}, Telefono: ${events[i].phone}, Email: ${events[i].email_customer} Cancelada`;
                 }
-                backgroundColor = "#db4b3d";
+                backgroundColor = "#cf2020";
             }else if(events[i].status === 'confirmed'){
                 title = `Paciente: ${events[i].info_pet.name}. En espera para consulta`;
                 backgroundColor = "#359c33";
             }else if(events[i].status === 'missed'){
                 title = `Cita Perdida`;
-                backgroundColor = "#c24725";
+                backgroundColor = "#d44e29";
             }else if(events[i].status === 'finished'){
                 title = `Cita Atendida`;
-                backgroundColor = "#2444b5";
+                backgroundColor = "#16526c";
             }
             let start = moment.parseZone(events[i].date_start).format();
             let end = moment.parseZone(events[i].date_end).format();
@@ -122,34 +123,36 @@ const DoctorCalendar = (props) => {
     return (
         <>
             <FullCalendar
-                timeZone= 'America/Santiago'
-                ref={calendar}
-                plugins={[ timeGridPlugin, interactionPlugin ]}
-                headerToolbar= {{
+                timeZone = 'America/Santiago'
+                locale = { esLocale }
+                ref = { calendar }
+                plugins = {[ timeGridPlugin, interactionPlugin ]}
+                headerToolbar = {{
                     left: 'prev,next addEventButton',
                     center: 'title',
                     right: 'today timeGridDay,timeGridWeek'
                 }}
-                initialView="timeGridDay"
-                allDaySlot={false}
+                initialView = "timeGridDay"
+                allDaySlot = { false }
                 businessHours={{
                     daysOfWeek: [ 1, 2, 3, 4, 5, 6, 7 ],
                     startTime: '08:00',
                     endTime: '20:00' 
                 }}
-                slotDuration={"00:30"}
-                eventClick={handleEventClick}
-                dateClick={handleDayClick}
-                height={"84vh"}
-                customButtons={{
+                slotDuration = { "00:30" }
+                eventClick = { handleEventClick }
+                dateClick = { handleDayClick }
+                height = { "84vh" }
+                customButtons = {{
                     addEventButton: {
-                    text: 'Actualizar Calendario',
-                    click: function() {
-                        let api = calendar.current.getApi();
-                        api.removeAllEvents();
-                        syncEvens()
+                        text: 'Actualizar Calendario',
+                        click: function() {
+                            let api = calendar.current.getApi();
+                            api.removeAllEvents();
+                            syncEvens()
+                        }
                     }
-                }}}
+                }}
             />
 
             <button type="button" className="btn btn-primary fixed" data-bs-toggle="modal" data-bs-target="#modalHelpCalendarClinic">
@@ -164,8 +167,15 @@ const DoctorCalendar = (props) => {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        - Seleccionar una fecha para ver las horas reservadas y las horas disponibles<br/>
-                        - Puede borrar consultas. Recomendable comunicarse con el cliente antes de cancelar la hora.
+                        <p>- Seleccionar una fecha para ver las horas reservadas y las horas disponibles</p>
+                        <p>- Puede cancelar consultas. Recomendable comunicarse con el cliente antes de cancelar la hora.</p>
+                        <p>- Leyenda:</p>
+                        <div className="d-flex align-items-center"><div className="cube-leyend available"></div><span>Cita abierta/disponible.</span></div>
+                        <div className="d-flex align-items-center"><div className="cube-leyend reserved"></div><span>Cita reservada.</span></div>
+                        <div className="d-flex align-items-center"><div className="cube-leyend canceled"></div><span>Cita cancelada.</span></div>
+                        <div className="d-flex align-items-center"><div className="cube-leyend confirmed"></div><span>Cita confirmada</span></div>
+                        <div className="d-flex align-items-center"><div className="cube-leyend missed"></div><span>Cita perdida.</span></div>
+                        <div className="d-flex align-items-center"><div className="cube-leyend finished"></div><span>Cita finalizada/atendida.</span></div>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

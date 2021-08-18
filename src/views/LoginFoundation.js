@@ -23,6 +23,15 @@ const LoginFoundation = () => {
                     timer: 1800
                 });
             }
+            if(res.status === 409){
+                Swal.fire({
+                    icon: "error",
+                    title: "RTu cuenta no esta preparada!",
+                    text: "Debes pasar primero por el proceso de verificación",
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+            }
         } catch (error) {
             console.error(error);
         }
