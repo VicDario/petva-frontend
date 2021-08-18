@@ -6,6 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import moment from 'moment';
 import { IoHelpCircle } from "react-icons/io5";
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
+import esLocale from '@fullcalendar/core/locales/es';
 
 const ClinicCalendar = (props) => {
     const { actions } = useContext(Context);
@@ -26,26 +27,26 @@ const ClinicCalendar = (props) => {
             let backgroundColor = "";
             if (events[i].status === 'available'){
                 title=`Dr. ${events[i].doctor_name} Disponible`;
-                backgroundColor = "#3474d9";
+                backgroundColor = "#82a2d6";
             }else if (events[i].status === 'reserved'){
                 title = `Dr. ${events[i].doctor_name}, Paciente: ${events[i].info_pet.name}, Telefono: ${events[i].phone}, Email: ${events[i].email_customer}`;
-                backgroundColor = "#c29e29";
+                backgroundColor = "#2186d4";
             }else if(events[i].status === 'canceled'){
                 if(events[i].info_pet === null){
                     title = `Cita de Dr. ${events[i].doctor_name}, Sin informacion de paciente`;
                 }else{
                     title = `Dr. ${events[i].doctor_name}, Paciente: ${events[i].info_pet.name}, Telefono: ${events[i].phone}, Email: ${events[i].email_customer} Cancelada`;
                 }
-                backgroundColor = "#db4b3d";
+                backgroundColor = "#cf2020";
             }else if(events[i].status === 'confirmed'){
                 title = `Dr. ${events[i].doctor_name}, Paciente: ${events[i].info_pet.name}. Cita confirmada`;
                 backgroundColor = "#359c33";
             }else if(events[i].status === 'finished'){
                 title = `Cita de Dr. ${events[i].doctor_name}. Atendida`;
-                backgroundColor = "#2444b5";
+                backgroundColor = "#d44e29";
             }else if(events[i].status === 'missed'){
                 title = `Cita de Dr. ${events[i].doctor_name}. Perdida`;
-                backgroundColor = "#c24725";
+                backgroundColor = "#16526c";
             }
             let start = moment.parseZone(events[i].date_start).format();
             let end = moment.parseZone(events[i].date_end).format();
@@ -92,8 +93,9 @@ const ClinicCalendar = (props) => {
     return (
         <>
             <FullCalendar
-                timeZone= 'America/Santiago'
-                ref={calendar}
+                timeZone = 'America/Santiago'
+                locale = { esLocale }
+                ref = { calendar }
                 plugins={[ timeGridPlugin, interactionPlugin ]}
                 headerToolbar= {{
                     left: 'prev,next addEventButton',
@@ -129,8 +131,15 @@ const ClinicCalendar = (props) => {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        - Seleccionar una fecha para ver las horas reservadas y las horas disponibles<br/>
-                        - Puede borrar consultas. Recomendable comunicarse con el cliente antes de cancelar la hora.
+                    <p>- Seleccionar una fecha para ver las horas reservadas y las horas disponibles</p>
+                        <p>- Puede cancelar consultas. Recomendable comunicarse con el cliente antes de cancelar la hora.</p>
+                        <p>- Leyenda:</p>
+                        <div className="d-flex align-items-center"><div className="cube-leyend available"></div><span>Cita abierta/disponible.</span></div>
+                        <div className="d-flex align-items-center"><div className="cube-leyend reserved"></div><span>Cita reservada.</span></div>
+                        <div className="d-flex align-items-center"><div className="cube-leyend canceled"></div><span>Cita cancelada.</span></div>
+                        <div className="d-flex align-items-center"><div className="cube-leyend confirmed"></div><span>Cita confirmada</span></div>
+                        <div className="d-flex align-items-center"><div className="cube-leyend missed"></div><span>Cita perdida.</span></div>
+                        <div className="d-flex align-items-center"><div className="cube-leyend finished"></div><span>Cita finalizada/atendida.</span></div>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

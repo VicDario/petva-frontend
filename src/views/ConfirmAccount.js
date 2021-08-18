@@ -22,7 +22,7 @@ const ConfirmAccount = () => {
                 Swal.fire({
                     icon: 'success',
                     title: "Correo Confirmado",
-                    text: "Solo te falta un paso.<br/>Revisa tu correo",
+                    html: "Solo te falta un paso.<br/>Revisa tu correo",
                     type: "success",
                     timer: 6000,
                 })
