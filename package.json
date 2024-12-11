@@ -1,56 +1,44 @@
 {
-  "name": "final-project",
+  "name": "petva",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@emotion/react": "^11.4.0",
-    "@emotion/styled": "^11.3.0",
-    "@fullcalendar/core": "^5.8.0",
-    "@fullcalendar/interaction": "^5.8.0",
-    "@fullcalendar/list": "^5.8.0",
-    "@fullcalendar/react": "^5.8.0",
-    "@fullcalendar/timegrid": "^5.8.0",
-    "@material-ui/core": "^5.0.0-beta.1",
-    "@popperjs/core": "^2.9.2",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "bootstrap": "^5.0.2",
-    "moment": "^2.29.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.2.0",
-    "react-js-pagination": "^3.0.3",
-    "react-popper": "^2.2.5",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "sweetalert2": "^11.0.18",
-    "sweetalert2-react-content": "^4.1.0",
-    "web-vitals": "^1.1.2"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "startlinux": "CHOKIDAR_USEPOLLING=true react-scripts start"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@fullcalendar/core": "^6.1.15",
+    "@fullcalendar/interaction": "^6.1.15",
+    "@fullcalendar/list": "^6.1.15",
+    "@fullcalendar/react": "^6.1.15",
+    "@fullcalendar/timegrid": "^6.1.15",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3",
+    "moment": "^2.29.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.4.0",
+    "react-js-pagination": "^3.0.3",
+    "react-popper": "^2.3.0",
+    "react-router-dom": "^7.0.2",
+    "sweetalert2": "^11.14.5",
+    "sweetalert2-react-content": "^5.0.7"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@eslint/js": "^9.16.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.16.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.13.0",
+    "typescript": "5.7.2",
+    "typescript-eslint": "^8.18.0",
+    "vite": "^6.0.3"
   }
 }
