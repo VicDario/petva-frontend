@@ -53,12 +53,12 @@ export function AppRoutes() {
         }
       />
       <Route
-            element={
-              <Suspense fallback={<>...</>}>
-                <Custom404 />
-              </Suspense>
-            }
-          />
+        element={
+          <Suspense fallback={<>...</>}>
+            <Custom404 />
+          </Suspense>
+        }
+      />
     </Routes>
   );
 }
