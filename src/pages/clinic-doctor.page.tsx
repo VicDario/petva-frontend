@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import LoadingSpiner from "../Components/LoadingSpinner";
+import LoadingSpiner from "../Components/loading-spiner.component";
 import { Link } from "react-router-dom";
 const ClinicDoctor = () => {
     const { actions, store } = useContext(Context);

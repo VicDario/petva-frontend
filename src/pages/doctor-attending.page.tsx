@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
-import LoadingSpinner from '../Components/LoadingSpinner';
+import LoadingSpinner from '../Components/loading-spiner.component';
 import moment from 'moment';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
 
@@ -116,10 +116,10 @@ const DoctorAttending = (props) => {
                             <button type="button" className="button-finished btn btn-danger" onClick={FinishAttending}>Terminar Consulta</button>
                             </div>
                             <div className="col-md-6 d-flex justify-content-center">
-                                <img 
-                                    src={!!store.infoPet.Pet.picture ? store.infoPet.Pet.picture : '/images/default.jpg'} 
-                                    className="rounded image-pet" 
-                                    alt={`Foto de ${store.infoPet.Pet.name}`} 
+                                <img
+                                    src={!!store.infoPet.Pet.picture ? store.infoPet.Pet.picture : '/images/default.jpg'}
+                                    className="rounded image-pet"
+                                    alt={`Foto de ${store.infoPet.Pet.name}`}
                                 />
                             </div>
                             <div className="col-md-6 d-flex justify-content-center">
@@ -152,7 +152,7 @@ const DoctorAttending = (props) => {
                                         </div>
                                         <div className="col-md-12 my-3">
                                             <div className="list-group">
-                                            {   
+                                            {
                                                 store.infoPet.History.vaccines.map((vaccine, index) => {
                                                     return (
                                                         <div key={index} className="list-group-item list-group-item-action" aria-current="true">
@@ -178,7 +178,7 @@ const DoctorAttending = (props) => {
                                         </div>
                                         <div className="col-md-12 my-3">
                                             <div className="list-group">
-                                            {   
+                                            {
                                                 store.infoPet.History.diagnostics.map((diagnostic, index) => {
                                                     return (
                                                         <div key={index} className="list-group-item list-group-item-action" aria-current="true">
@@ -203,7 +203,7 @@ const DoctorAttending = (props) => {
                                         </div>
                                         <div className="col-md-12 my-3">
                                             <div className="list-group">
-                                            {   
+                                            {
                                                 store.infoPet.History.surgeries.map((surgery, index) => {
                                                     return (
                                                         <div key={index} className="list-group-item list-group-item-action" aria-current="true">
@@ -223,7 +223,7 @@ const DoctorAttending = (props) => {
                             </div>
                         </div>
                     </div>
-                :   
+                :
                     <LoadingSpinner />
             :
                 <LoadingSpinner />
@@ -251,7 +251,7 @@ const DoctorAttending = (props) => {
                     </div>
                     <div className="modal-footer">
                         <button
-                            type="button"   
+                            type="button"
                             className="btn btn-success"
                             data-bs-dismiss="modal"
                             onClick={() => vaccineToSend()}
@@ -273,9 +273,9 @@ const DoctorAttending = (props) => {
                         <div className="form-floating">
                             <textarea
                                 ref={diagnosticDescription}
-                                className="form-control" 
-                                placeholder="Leave a description about diagnostic here..." 
-                                id="floatingTextarea2" 
+                                className="form-control"
+                                placeholder="Leave a description about diagnostic here..."
+                                id="floatingTextarea2"
                                 style={{height: "100px"}}
                             >
                             </textarea>
@@ -287,7 +287,7 @@ const DoctorAttending = (props) => {
                     </div>
                     <div className="modal-footer">
                         <button
-                            type="button"   
+                            type="button"
                             className="btn btn-success"
                             data-bs-dismiss="modal"
                             onClick={() => diagnosticToSend()}
@@ -309,9 +309,9 @@ const DoctorAttending = (props) => {
                         <div className="form-floating">
                             <textarea
                                 ref={surgeryDescription}
-                                className="form-control" 
-                                placeholder="Leave a description about surgery here..." 
-                                id="floatingTextarea2" 
+                                className="form-control"
+                                placeholder="Leave a description about surgery here..."
+                                id="floatingTextarea2"
                                 style={{height: "100px"}}
                             >
                             </textarea>
@@ -323,7 +323,7 @@ const DoctorAttending = (props) => {
                     </div>
                     <div className="modal-footer">
                         <button
-                            type="button"   
+                            type="button"
                             className="btn btn-success"
                             data-bs-dismiss="modal"
                             onClick={() => surgeryToSend()}

@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
-import LoadingSpiner from "../Components/LoadingSpinner";
+import LoadingSpiner from "../Components/loading-spiner.component";
 
 const HomeClinic = () => {
     const history = useHistory();
@@ -22,7 +22,7 @@ const HomeClinic = () => {
                                 <div className="row">
                                     <div className="col-md-6 col-sm-12 my-1 d-flex justify-content-center align-items-center flex-column">
                                         <h2 className="text-center my-4 title-home">Bienvenido, {store.clinicDetail.name}</h2>
-                                        <Link 
+                                        <Link
                                             to="/clinic/doctor/register"
                                             className="btn-home link-green d-flex justify-content-between align-items-center my-4"
                                         >
@@ -31,7 +31,7 @@ const HomeClinic = () => {
                                             </span>
                                             <p>Registrar Doctor</p>
                                         </Link>
-                                        <Link 
+                                        <Link
                                             to="/clinic/doctor"
                                             className="btn-home link-green d-flex justify-content-between align-items-center my-4"
                                         >
@@ -40,7 +40,7 @@ const HomeClinic = () => {
                                             </span>
                                             <p>Ver Doctores</p>
                                         </Link>
-                                        <Link 
+                                        <Link
                                             to="/clinic/calendar"
                                             className="btn-home link-green d-flex justify-content-between align-items-center my-4"
                                         >
@@ -54,7 +54,7 @@ const HomeClinic = () => {
                                         <img src="/images/dog_home.png" className="image-home" alt="Perro"/>
                                     </div>
                                 </div>
-                            
+
                             :
                                 <LoadingSpiner />
                         }

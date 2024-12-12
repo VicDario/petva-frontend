@@ -2,7 +2,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useEffect } from "react";
-import LoadingSpiner from "../Components/LoadingSpinner";
+import LoadingSpiner from "../Components/loading-spiner.component";
 const HomeUser = () => {
     const history = useHistory();
     const { store, actions } = useContext(Context);
@@ -51,7 +51,7 @@ const HomeUser = () => {
                                             Comencemos agregando tu mascota
                                         </Link>
                                     </div>
-                            : 
+                            :
                                 <LoadingSpiner />
                         }
                     </div>
