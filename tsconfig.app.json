@@ -23,6 +23,7 @@
     "noUncheckedSideEffectImports": true,
     "paths": {
       "@components/*": ["./src/components/*"],
+      "@context/*": ["./src/context/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@pages/*": ["./src/pages/*"]
     }
