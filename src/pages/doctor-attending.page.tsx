@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
-import LoadingSpinner from '../Components/loading-spiner.component';
+import LoadingSpinner from '.@components/loading-spinner/loading-spinner.component';
 import moment from 'moment';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
 

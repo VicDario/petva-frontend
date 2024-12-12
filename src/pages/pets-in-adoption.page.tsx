@@ -4,7 +4,7 @@ import { FaCat, FaDog } from "react-icons/fa";
 import Pagination from "react-js-pagination";
 
 
-const Petsinadoption = () => {
+const PetsInAdoption = () => {
     const { actions, store } = useContext(Context);
     const [activePage, setActivePage] = useState(1);
     const handlePageChange = (pageNumber) => {
@@ -80,7 +80,7 @@ const Petsinadoption = () => {
                                                     </div>
                                                 </div>
                                                 //pagination
-                                                
+
                                                 //Fin pagination
                                             )
                                         })
@@ -116,4 +116,4 @@ const Petsinadoption = () => {
     )
 }
 
-export default Petsinadoption;
+export default PetsInAdoption;

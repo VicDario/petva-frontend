@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import LoadingSpiner from "../Components/loading-spiner.component";
+import LoadingSpiner from ".@components/loading-spinner/loading-spinner.component";
 import { Context } from "../store/appContext";
 import { FaCat, FaDog } from "react-icons/fa";
 

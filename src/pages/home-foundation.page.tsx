@@ -1,7 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import LoadingSpiner from "../Components/loading-spiner.component";
+import LoadingSpiner from ".@components/loading-spinner/loading-spinner.component";
 //import { useEffect } from "react";
 
 

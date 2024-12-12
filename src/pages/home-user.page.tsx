@@ -2,7 +2,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useEffect } from "react";
-import LoadingSpiner from "../Components/loading-spiner.component";
+import LoadingSpiner from ".@components/loading-spinner/loading-spinner.component";
 const HomeUser = () => {
     const history = useHistory();
     const { store, actions } = useContext(Context);

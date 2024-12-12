@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
-import LoadingSpiner from "../Components/loading-spiner.component";
+import LoadingSpiner from ".@components/loading-spinner/loading-spinner.component";
 
 const HomeClinic = () => {
     const history = useHistory();
