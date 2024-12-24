@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { AppState } from '@interfaces/appState';
 
-const initialState = {
-	token: null,
-	user: null,
+const initialState: AppState = {
+	token: undefined,
+	user: undefined,
 };
 
 const useInitialState = () => {
