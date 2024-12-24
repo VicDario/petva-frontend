@@ -1,39 +1,21 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
-import { Context } from "../../store/appContext";
+import { useContext } from "react";
+import { Context } from "@context/appContext";
 
-import { AiOutlineHome } from "react-icons/ai";
+// import { AiOutlineHome } from "react-icons/ai";
 import { Avatar } from "@mui/material";
+import styles from "./navbar.module.css";
 
 const Navbar = () => {
-  const { store, actions } = useContext(Context);
+  const { user } = useContext(Context);
   const navigate = useNavigate();
-  const toRegister = () => navigate("/register");
-  useEffect(() => {
-    if (localStorage.getItem("petvaToken") !== null) {
-      store.token = localStorage.getItem("petvaToken");
-      store.userType = localStorage.getItem("petvaUser");
-      check(localStorage.getItem("petvaToken"));
-    } else store.token = false;
-    if (store.userType === "normal") {
-      actions.getUserDetail();
-    } else if (store.userType === "foundation") {
-      actions.getFoundationDetail();
-    } else if (store.userType === "clinic") {
-      actions.getClinicDetail();
-    } else if (store.userType === "doctor") {
-      actions.getDoctorDetail();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); //Si exite token recupera la sesion
 
-  const check = async (token) => {
-    const resp = await actions.checkToken(token);
-    if (resp.status !== 200) {
-      actions.logOut();
-      navigate("/");
-    }
-  };
+  const logins = [
+    { path: "/user/login", text: "Usuario" },
+    { path: "/doctor/login", text: "Veterinario" },
+    { path: "/clinic/login", text: "Clinica" },
+    { path: "/foundation/login", text: "Fundación" },
+  ];
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
@@ -42,20 +24,20 @@ const Navbar = () => {
           <div className="col-lg-9 col-md-6 col-sm-6 d-flex align-items-end">
             <Link className="text-decoration-none" to="/">
               <img
-                className="logo"
+                className={styles.logo}
                 src="/images/logo_cat_small.png"
                 alt="logo"
               />
             </Link>
-            <h2 className="logo-text ps-1 my-auto">PetVA</h2>
+            <h2 className={`ps-1 my-auto ${styles['logo-text']}`}>PetVA</h2>
           </div>
-          {localStorage.getItem("petvaToken") === null ? (
-            <div className="col-lg-3 col-md-6 col-sm-6 ">
+          {!user ? (
+            <div className="col-lg-3 col-md-6 col-sm-6">
               <div className="d-flex justify-content-center">
                 <div className="text-end d-flex align-items-center justify-content-end m-2">
                   <button
-                    className="btn text-white fs-5 text-decoration-none rounded-pill btn-nav-register"
-                    onClick={toRegister}
+                    className={`btn text-white fs-5 text-decoration-none rounded-pill text-white ${styles['btn-nav-register']}`}
+                    onClick={() => navigate("/register")}
                   >
                     Registrarse
                   </button>
@@ -63,50 +45,25 @@ const Navbar = () => {
                 <div className="text-end d-flex align-items-center justify-content-end">
                   <div className="dropdown">
                     <button
-                      className="btn text-dark fs-5 text-decoration-none rounded-pill btn-nav-login bg-light dropdown-toggle"
-                      id="dropdownMenuLink"
+                      className={`btn text-dark fs-5 text-decoration-none rounded-pill bg-light dropdown-toggle ${styles['btn-nav-login']}`}
+                      id="dropdownLogin"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
+                      type="button"
                     >
-                      Iniciar sesión{" "}
-                      {/* <IoLogInOutline className="navbar__button--icon text-decoration-none" /> */}
+                      Iniciar sesión como
                     </button>
                     <ul
-                      className="dropdown-menu"
-                      aria-labelledby="dropdownMenuLink"
+                      className="dropdown-menu w-100 rounded-4"
+                      aria-labelledby="dropdownLogin"
                     >
-                      <li>
-                        <Link
-                          className="dropdown-item link-green"
-                          to="/user/login"
-                        >
-                          Usuario
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          className="dropdown-item link-green"
-                          to="/foundation/login"
-                        >
-                          Fundación
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          className="dropdown-item link-green"
-                          to="/clinic/login"
-                        >
-                          Clínica
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          className="dropdown-item link-green"
-                          to="/doctor/login"
-                        >
-                          Médico
-                        </Link>
-                      </li>
+                      {logins.map(({ path, text }) => (
+                        <li className="w-100 py-2 px-4">
+                          <Link className={`d-inline-block w-100 p-1 text-decoration-none text-white text-center fs-5 rounded-5 ${styles['link-green']}`} to={path}>
+                            {text}
+                          </Link>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -116,7 +73,7 @@ const Navbar = () => {
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className="d-flex justify-content-end">
                 <div className="text-end">
-                  {localStorage.getItem("petvaUser") === "normal" && (
+                  {/* {localStorage.getItem("petvaUser") === "normal" && (
                     <Link
                       to="/user"
                       className="navbar__button text-decoration-none badge rounded-pill bg-dark p-3 me-1 fs-5"
@@ -151,7 +108,7 @@ const Navbar = () => {
                     >
                       <AiOutlineHome className="navbar__button--icon text-decoration-none" />
                     </Link>
-                  )}
+                  )} */}
                 </div>
 
                 <div className="dropdown dropstart">
@@ -162,96 +119,33 @@ const Navbar = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    {store.userType === "foundation" &&
-                      !!store.foundationDetail && (
-                        <Avatar
-                          alt={store.foundationDetail.name}
-                          src={store.foundationDetail.picture}
-                          sx={{ width: 60, height: 60 }}
-                        />
-                      )}
-                    {store.userType === "normal" && !!store.userDetail && (
+                    {user && (
                       <Avatar
-                        alt={store.userDetail.name}
-                        src={store.userDetail.picture}
-                        sx={{ width: 60, height: 60 }}
-                      />
-                    )}
-                    {store.userType === "clinic" && !!store.clinicDetail && (
-                      <Avatar
-                        alt={store.clinicDetail.name}
-                        src={store.clinicDetail.picture}
-                        sx={{ width: 60, height: 60 }}
-                      />
-                    )}
-                    {store.userType === "doctor" && !!store.doctorDetail && (
-                      <Avatar
-                        alt={store.doctorDetail.name}
-                        src={store.doctorDetail.picture}
+                        alt={user.name}
+                        src={user.picture}
                         sx={{ width: 60, height: 60 }}
                       />
                     )}
                   </button>
                   <ul
-                    className="dropdown-menu dropdown-menu-left dropdown-avatar"
+                    className="dropdown-menu dropdown-menu-left rouned-3"
                     aria-labelledby="dropdownMenuButton1"
                   >
                     <div className="container px-1">
                       <div className="d-flex justify-content-center me-5 pe-5 ms-2 pt-1">
-                        {store.userType === "foundation" &&
-                          !!store.foundationDetail && (
-                            <>
-                              <Avatar
-                                alt={store.foundationDetail.name}
-                                src={store.foundationDetail.picture}
-                                sx={{ width: 45, height: 45 }}
-                              />
-                              <h5 className="my-auto ms-2">
-                                {store.foundationDetail.name}
-                              </h5>
-                            </>
-                          )}
-                        {store.userType === "normal" && !!store.userDetail && (
+                        {user && (
                           <>
                             <Avatar
-                              alt={store.userDetail.name}
-                              src={store.userDetail.picture}
+                              alt={user.name}
+                              src={user.picture}
                               sx={{ width: 45, height: 45 }}
                             />
-                            <h5 className="my-auto ms-2">
-                              {store.userDetail.name}
-                            </h5>
+                            <h5 className="my-auto ms-2">{user.name}</h5>
                           </>
                         )}
-                        {store.userType === "clinic" &&
-                          !!store.clinicDetail && (
-                            <>
-                              <Avatar
-                                alt={store.clinicDetail.name}
-                                src={store.clinicDetail.picture}
-                                sx={{ width: 45, height: 45 }}
-                              />
-                              <h5 className="my-auto ms-2">
-                                {store.clinicDetail.name}
-                              </h5>
-                            </>
-                          )}
-                        {store.userType === "doctor" &&
-                          !!store.doctorDetail && (
-                            <>
-                              <Avatar
-                                alt={store.doctorDetail.name}
-                                src={store.doctorDetail.picture}
-                                sx={{ width: 45, height: 45 }}
-                              />
-                              <h5 className="my-auto ms-2">
-                                {store.doctorDetail.name}{" "}
-                              </h5>
-                            </>
-                          )}
                       </div>
                       <div className="text-center d-grid">
-                        {
+                        {/* {
                           //user detalle navbar
                           store.userType === "normal" && !!store.userDetail && (
                             <>
@@ -391,7 +285,7 @@ const Navbar = () => {
                                 </Link>
                               </div>
                             </>
-                          )}
+                          )} */}
                       </div>
                     </div>
                   </ul>
