@@ -11,8 +11,9 @@ import useInitialState from "@hooks/useInitialState";
 import { AppRoutes } from "./routes/routes";
 
 function App() {
+  const initialState = useInitialState();
   return (
-    <Context.Provider value={useInitialState}>
+    <Context.Provider value={initialState}>
       <BrowserRouter>
         <Navbar />
         <AppRoutes />
