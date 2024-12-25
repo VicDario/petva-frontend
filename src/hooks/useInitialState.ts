@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { AppState } from '@interfaces/appState';
+import type { AppState } from '@interfaces/appState';
+import type { User } from '@interfaces/user.interface';
 
 const initialState: AppState = {
 	token: undefined,
@@ -9,14 +10,14 @@ const initialState: AppState = {
 const useInitialState = () => {
 	const [state, setState] = useState(initialState);
 
-	const setUser = (payload) => {
+	const setUser = (payload: User) => {
 		setState({
 			...state,
 			user: payload,
 		});
 	};
 
-	const setToken = (payload) => {
+	const setToken = (payload: string) => {
 		setState({
 			...state,
 			token: payload,
