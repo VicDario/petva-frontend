@@ -7,15 +7,8 @@ import { Avatar } from "@mui/material";
 import styles from "./navbar.module.css";
 
 const Navbar = () => {
-  const { user } = useContext(Context);
+  const { state } = useContext(Context);
   const navigate = useNavigate();
-
-  const logins = [
-    { path: "/user/login", text: "Usuario" },
-    { path: "/doctor/login", text: "Veterinario" },
-    { path: "/clinic/login", text: "Clinica" },
-    { path: "/foundation/login", text: "Fundación" },
-  ];
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
@@ -29,43 +22,26 @@ const Navbar = () => {
                 alt="logo"
               />
             </Link>
-            <h2 className={`ps-1 my-auto ${styles['logo-text']}`}>PetVA</h2>
+            <h2 className={`ps-1 my-auto ${styles["logo-text"]}`}>PetVA</h2>
           </div>
-          {!user ? (
+          {!state.user ? (
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className="d-flex justify-content-center">
                 <div className="text-end d-flex align-items-center justify-content-end m-2">
                   <button
-                    className={`btn text-white fs-5 text-decoration-none rounded-pill text-white ${styles['btn-nav-register']}`}
+                    className={`btn text-white fs-5 text-decoration-none rounded-pill text-white ${styles["btn-nav-register"]}`}
                     onClick={() => navigate("/register")}
                   >
                     Registrarse
                   </button>
                 </div>
                 <div className="text-end d-flex align-items-center justify-content-end">
-                  <div className="dropdown">
-                    <button
-                      className={`btn text-dark fs-5 text-decoration-none rounded-pill bg-light dropdown-toggle ${styles['btn-nav-login']}`}
-                      id="dropdownLogin"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      type="button"
-                    >
-                      Iniciar sesión como
-                    </button>
-                    <ul
-                      className="dropdown-menu w-100 rounded-4"
-                      aria-labelledby="dropdownLogin"
-                    >
-                      {logins.map(({ path, text }) => (
-                        <li className="w-100 py-2 px-4">
-                          <Link className={`d-inline-block w-100 p-1 text-decoration-none text-white text-center fs-5 rounded-5 ${styles['link-green']}`} to={path}>
-                            {text}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <Link
+                    className={`btn text-dark fs-5 text-decoration-none rounded-pill bg-light ${styles["btn-nav-login"]}`}
+                    to="/login"
+                  >
+                    Iniciar sesión
+                  </Link>
                 </div>
               </div>
             </div>
@@ -119,10 +95,10 @@ const Navbar = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    {user && (
+                    {state.user && (
                       <Avatar
-                        alt={user.name}
-                        src={user.picture}
+                        alt={state.user.name}
+                        src={state.user.picture}
                         sx={{ width: 60, height: 60 }}
                       />
                     )}
@@ -133,20 +109,20 @@ const Navbar = () => {
                   >
                     <div className="container px-1">
                       <div className="d-flex justify-content-center me-5 pe-5 ms-2 pt-1">
-                        {user && (
+                        {state.user && (
                           <>
                             <Avatar
-                              alt={user.name}
-                              src={user.picture}
+                              alt={state.user.name}
+                              src={state.user.picture}
                               sx={{ width: 45, height: 45 }}
                             />
-                            <h5 className="my-auto ms-2">{user.name}</h5>
+                            <h5 className="my-auto ms-2">{state.user.name}</h5>
                           </>
                         )}
                       </div>
                       <div className="text-center d-grid">
                         {/* {
-                          //user detalle navbar
+                          //state.user detalle navbar
                           store.userType === "normal" && !!store.userDetail && (
                             <>
                               <hr />
