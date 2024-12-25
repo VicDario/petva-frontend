@@ -4,8 +4,9 @@ import { Route, Routes } from "react-router-dom";
 const LostPets = lazy(() => import("@pages/lost-pets.page"));
 const PetsInAdoption = lazy(() => import("@pages/pets-in-adoption.page"));
 const Presentation = lazy(() => import("@pages/presentation.page"));
-const Register = lazy(() => import("@pages/register.page"));
+const Register = lazy(() => import("@pages/common/register/register.page"));
 const Services = lazy(() => import("@pages/services.page"));
+const Login = lazy(() => import("@pages/common/login/login.page"));
 
 const Custom404 = lazy(() => import("@pages/not-found.page"));
 
@@ -25,6 +26,14 @@ export function AppRoutes() {
         element={
           <Suspense fallback={<>...</>}>
             <Register />
+          </Suspense>
+        }
+      />
+      <Route
+        path="login"
+        element={
+          <Suspense fallback={<>...</>}>
+            <Login />
           </Suspense>
         }
       />
