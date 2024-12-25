@@ -36,11 +36,8 @@ const Login = () => {
     { name: "Fundación", type: UserType.FOUNDATION },
   ];
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = Object.fromEntries(
-      new FormData(event.target as HTMLFormElement)
-    );
+  const handleSubmit = async (formData: FormData) => {
+    const form = Object.fromEntries(formData);
     try {
       const response = await fetch("/login", {
         method: "POST",
@@ -71,7 +68,7 @@ const Login = () => {
           <main className="form-sigin bg-login p-4 mt-3 d-flex flex-column justify-content-around align-items-center login">
             <form
               className="px-3 login d-flex flex-column justify-content-around align-items-center"
-              onSubmit={handleSubmit}
+              action={handleSubmit}
             >
               <h1 className="h2 mb-4">Inicio de Sesión</h1>
               <div className="form-floating login-input my-3 w-80">
